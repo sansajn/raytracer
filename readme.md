@@ -4,6 +4,8 @@ Ray tracer implementation from the [Ray Tracing from the Ground Up](http://www.r
 
 ## Build & run instructions
 
+Under *Ubuntu 20.04 LTS*
+
 - install dependencies with
 
 ```bash
