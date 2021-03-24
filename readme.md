@@ -26,4 +26,4 @@ command from the project directory and
 ./raytracer
 ```
 
-command
+command.
