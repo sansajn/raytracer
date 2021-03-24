@@ -38,7 +38,7 @@
 
 // build functions
 
-#include "BuildShadedObjects.cpp"
+//#include "BuildShadedObjects.cpp"
 
 
 // -------------------------------------------------------------------- default constructor

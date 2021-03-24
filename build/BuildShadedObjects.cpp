@@ -7,6 +7,37 @@
 // These are in the Chapter 5 download file.
 // The spheres are the same as those in the Chapter 14 page one image. 
 
+// tracers
+
+#include "SingleSphere.h"
+#include "MultipleObjects.h"
+#include "RayCast.h"
+
+// cameras
+
+#include "Pinhole.h"
+
+// lights
+
+#include "Directional.h"
+
+// materials
+
+#include "Matte.h"
+
+// geometric objects
+
+#include "Plane.h"
+
+// utilities
+
+#include "Vector3D.h"
+#include "Point3D.h"
+#include "Normal.h"
+#include "ShadeRec.h"
+#include "Maths.h"
+
+
 void 												
 World::build(void) {
 	int num_samples = 1; 
