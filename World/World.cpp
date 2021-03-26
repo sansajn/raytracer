@@ -1,6 +1,10 @@
 // this file contains the definition of the World class
 
-#include "wxraytracer.h"
+#ifdef USE_TERMINAL
+	#include "terminal.h"
+#else
+	#include "wxraytracer.h"
+#endif
 
 #include "World.h"
 #include "Constants.h"
