@@ -26,7 +26,7 @@ public:
 	PixelRange begin() {return *this;}
 	PixelRange end() {return PixelRange{0, 0};}
 
-	// comparsion for for-each loop
+	// comparison for for-each loop
 	bool operator==(PixelRange const & rhs) const {
 		return _h == _r && rhs._w == 0 && rhs._h == 0;
 	}

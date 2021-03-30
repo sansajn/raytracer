@@ -1,5 +1,7 @@
 # dependencies: libwxgtk3.0-gtk3-dev libmagick++-dev
 
+AddOption('--render-parallel', action='store_true', default=False, dest='render_parallel', help='parallel rendering')
+
 env = Environment(
 	CCFLAGS=['-Wall', '-O0', '-g'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
@@ -7,6 +9,9 @@ env = Environment(
 		'Utilities', 'World'],
 	CPPDEFINES=['USE_TERMINAL']
 )
+
+if GetOption('render_parallel'):
+	env.Append(CPPDEFINES=['RENDER_PARALLEL'])
 
 env.ParseConfig('wx-config --cflags --libs')
 env.ParseConfig('pkg-config --cflags --libs Magick++')
