@@ -2,15 +2,15 @@
 #include <utility>
 #include <cstddef>
 
-class pixel_range {
+class PixelRange {
 public:
-	pixel_range(size_t w, size_t h)
+	PixelRange(size_t w, size_t h)
 		: _w{w}, _h{h}
 	{}
 
 	void operator++() {
 		++_c;
-		if (_c > _w) {  // columns are iterated with `c <= hres` condition
+		if (_c > _w) {  // columns are iterated with `c <= hres` condition (see `World.cpp:render_scene()`)
 			_c = 0;
 
 			++_r;
@@ -23,15 +23,15 @@ public:
 		return {_c, _r};
 	}
 
-	pixel_range begin() {return *this;}
-	pixel_range end() {return pixel_range{0, 0};}
+	PixelRange begin() {return *this;}
+	PixelRange end() {return PixelRange{0, 0};}
 
 	// comparsion for for-each loop
-	bool operator==(pixel_range const & rhs) const {
+	bool operator==(PixelRange const & rhs) const {
 		return _h == _r && rhs._w == 0 && rhs._h == 0;
 	}
 
-	bool operator!=(pixel_range const & rhs) const {
+	bool operator!=(PixelRange const & rhs) const {
 		return !(*this == rhs);
 	}
 
