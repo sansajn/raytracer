@@ -1,4 +1,4 @@
-#include "terminal.h"
+#include "Terminal.h"
 
 RenderThread::RenderThread(World & w, Magick::Image & im)
 	: _w{w}

@@ -1,7 +1,7 @@
 #include <chrono>
 #include <Magick++.h>
 #include "World/World.h"
-#include "UserInterface/terminal.h"
+#include "UserInterface/Terminal.h"
 
 using std::chrono::steady_clock, std::chrono::duration_cast, std::chrono::milliseconds;
 using namespace Magick;

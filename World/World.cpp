@@ -1,7 +1,9 @@
 // this file contains the definition of the World class
 
+#include <cassert>
+
 #ifdef USE_TERMINAL
-	#include "terminal.h"
+	#include "Terminal.h"
 #else
 	#include "wxraytracer.h"
 #endif
@@ -39,6 +41,7 @@
 #include "Normal.h"
 #include "ShadeRec.h"
 #include "Maths.h"
+#include "PixelRange.h"
 
 // build functions
 
@@ -103,12 +106,22 @@ World::render_scene(void) const {
 
 	ray.d = Vector3D(0, 0, -1);
 	
-	for (int r = 0; r < vres; r++)			// up
-		for (int c = 0; c <= hres; c++) {	// across 					
-			ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
-			pixel_color = tracer_ptr->trace_ray(ray);
-			display_pixel(r, c, pixel_color);
-		}	
+//	for (int r = 0; r < vres; r++)			// up
+//		for (int c = 0; c <= hres; c++) {	// across
+//			ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
+//			pixel_color = tracer_ptr->trace_ray(ray);
+//			display_pixel(r, c, pixel_color);
+//		}
+
+
+	assert(hres > 0 && vres > 0);
+	for (pair<size_t, size_t> p : pixel_range(hres, vres)) {
+		int c = p.first,
+			r = p.second;
+		ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
+		pixel_color = tracer_ptr->trace_ray(ray);
+		display_pixel(r, c, pixel_color);
+	}
 }  
 
 

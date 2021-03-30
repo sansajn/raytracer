@@ -25,7 +25,7 @@ env.Program('raytracer', ['main.cpp',
 	Glob('Textures/*.cpp'),
 	Glob('Tracers/*.cpp'),
 	#Glob('UserInterface/*.cpp'),
-	'UserInterface/terminal.cpp',
+	'UserInterface/Terminal.cpp',
 	Glob('Utilities/*.cpp'),
 	Glob('World/*.cpp'),
 ])
