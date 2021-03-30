@@ -3,6 +3,7 @@
 AddOption('--render-parallel', action='store_true', default=False, dest='render_parallel', help='parallel rendering')
 
 env = Environment(
+	CXXFLAGS=['-std=c++17'],
 	CCFLAGS=['-Wall', '-O0', '-g'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 

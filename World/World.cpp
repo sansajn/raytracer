@@ -111,9 +111,7 @@ World::render_scene(void) const {
 
 #ifdef RENDER_PARALLEL
 	assert(hres > 0 && vres > 0);
-	for (pair<size_t, size_t> p : PixelRange(hres, vres)) {
-		int c = p.first,
-			r = p.second;
+	for (auto [c, r] : PixelRange(hres, vres)) {
 		ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
 		pixel_color = tracer_ptr->trace_ray(ray);
 		display_pixel(r, c, pixel_color);
