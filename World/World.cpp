@@ -1,5 +1,8 @@
 // this file contains the definition of the World class
 
+#include <algorithm>
+#include <execution>
+#include <vector>
 #include <cassert>
 
 #ifdef USE_TERMINAL
@@ -50,6 +53,8 @@
 
 //#include "BuildShadedObjects.cpp"
 
+using std::vector;
+using std::transform;
 
 // -------------------------------------------------------------------- default constructor
 
@@ -111,11 +116,26 @@ World::render_scene(void) const {
 
 #ifdef RENDER_PARALLEL
 	assert(hres > 0 && vres > 0);
-	for (auto [c, r] : PixelRange(hres, vres)) {
-		ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
-		pixel_color = tracer_ptr->trace_ray(ray);
-		display_pixel(r, c, pixel_color);
-	}
+
+
+	// note: begin(*paintArea) needs to be Forward Iterator
+
+	auto pixels = PixelRange(hres, vres);
+//	transform(std::execution::seq, begin(pixels), end(pixels), begin(*paintArea),
+	transform(begin(pixels), end(pixels), begin(*paintArea),
+		[hres, vres, zw, &ray, s, this](pair<size_t,size_t> p){
+			auto [c, r] = p;
+			ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
+			RGBColor pixel_color = tracer_ptr->trace_ray(ray);
+//			display_pixel(r, c, pixel_color);
+			return pixel_color;
+		});
+
+//	for (auto [c, r] : PixelRange(hres, vres)) {
+//		ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
+//		pixel_color = tracer_ptr->trace_ray(ray);
+//		display_pixel(r, c, pixel_color);
+//	}
 #else
 	for (int r = 0; r < vres; r++)			// up
 		for (int c = 0; c <= hres; c++) {	// across

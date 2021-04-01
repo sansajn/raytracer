@@ -1,5 +1,12 @@
 #include "Terminal.h"
 
+#ifdef RENDER_PARALLEL
+
+#else
+#include <iostream>
+
+using std::cout;
+
 RenderThread::RenderThread(World & w, Magick::Image & im)
 	: _w{w}
 	, _im{im}
@@ -22,3 +29,5 @@ void RenderThread::setPixel(int x, int y, int red, int green, int blue)
 		cout << e.what() << " for (" << x << ", " << y << ") pixel" << std::endl;
 	}
 }
+
+#endif
