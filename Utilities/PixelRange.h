@@ -10,7 +10,7 @@ public:
 
 	void operator++() {
 		++_c;
-		if (_c > _w) {  // columns are iterated with `c <= hres` condition (see `World.cpp:render_scene()`)
+		if (_c >= _w) {  // note: there is a bug in World::render_scene() when computing row columns with a `c <= hres` condition, later whole additional column is not stored in bitmap
 			_c = 0;
 
 			++_r;

@@ -117,10 +117,11 @@ World::render_scene(void) const {
 #ifdef RENDER_PARALLEL
 	assert(hres > 0 && vres > 0);
 
-
 	// note: begin(*paintArea) needs to be Forward Iterator
 
-	auto pixels = PixelRange(hres, vres);
+	// vygenerocany obrazok nie je ako original, vyrenderovane body ukladam na zle miesto
+
+	auto pixels = PixelRange(hres, vres);  // pixel range generuje indexy v zlom poradi (pre kazdy radok vsetky stlpce)
 //	transform(std::execution::seq, begin(pixels), end(pixels), begin(*paintArea),
 	transform(begin(pixels), end(pixels), begin(*paintArea),
 		[hres, vres, zw, &ray, s, this](pair<size_t,size_t> p){

@@ -1,6 +1,8 @@
 #include <chrono>
 #include <vector>
+#include <filesystem>
 #include <iostream>
+#include <cassert>
 #include <Magick++.h>
 #include "World/World.h"
 #include "UserInterface/Terminal.h"
@@ -8,7 +10,35 @@
 using std::chrono::steady_clock, std::chrono::duration_cast, std::chrono::milliseconds;
 using std::vector;
 using std::cout;
+using std::filesystem::path;
 using namespace Magick;
+
+void save_image(vector<RGBColor> const & pixels, size_t w, size_t h, path const & fname)
+{
+	assert(w*h == size(pixels));
+
+	// first, convert RGBColor to bytes
+	vector<uint8_t> bytes(size(pixels) * 3);
+
+	for (size_t r = 0; r < h; ++r)
+	{
+		for (size_t c = 0; c < w; ++c)
+		{
+			RGBColor const & rgb = pixels[c + (r*w)];
+			size_t x = c;
+			size_t y = h - r - 1;
+			size_t idx = x + (w*y);
+			uint8_t * p = &bytes[idx*3];
+			*p++ = uint8_t(rgb.r * 255);
+			*p++ = uint8_t(rgb.g * 255);
+			*p = uint8_t(rgb.b * 255);
+		}
+	}
+
+	Image im;
+	im.read(w, h, "RGB", StorageType::CharPixel, bytes.data());
+	im.write(fname.string());
+}
 
 int main(int argc, char * argv[])
 {
@@ -31,22 +61,7 @@ int main(int argc, char * argv[])
 	cout << "render takes: " << duration_cast<milliseconds>(dt).count() << "ms\n";
 
 #ifdef RENDER_PARALLEL
-	// TODO: save image data
-
-	// convert RGBColor to bytes
-	vector<uint8_t> bytes(size(pixels) * 3);
-	for (size_t i = 0; i < size(pixels); ++i)
-	{
-		RGBColor const & rgb = pixels[i];
-		uint8_t * p = &bytes[i*3];
-		*p++ = uint8_t(rgb.r * 255);
-		*p++ = uint8_t(rgb.g * 255);
-		*p = uint8_t(rgb.b * 255);
-	}
-
-	Image im;
-	im.read(w.vp.hres, w.vp.vres, "RGB", StorageType::CharPixel, bytes.data());
-	im.write("out.png");
+	save_image(pixels, w.vp.hres, w.vp.vres, "out.png");
 #else
 	im.write("out.png");
 #endif
