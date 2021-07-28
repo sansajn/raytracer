@@ -1,6 +1,8 @@
 # dependencies: libwxgtk3.0-gtk3-dev libmagick++-dev
 
-env = Environment(
+# TODO: implement --with-ui to build against wxwidget as interface
+
+cpp = Environment(
 	CCFLAGS=['-Wall', '-O0', '-g'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
@@ -8,13 +10,17 @@ env = Environment(
 	CPPDEFINES=['USE_TERMINAL']
 )
 
-env.ParseConfig('wx-config --cflags --libs')
-env.ParseConfig('pkg-config --cflags --libs Magick++')
+cpp.ParseConfig('wx-config --cflags --libs')
+cpp.ParseConfig('pkg-config --cflags --libs Magick++')
 
-env.Program('raytracer', ['main.cpp',
+# edit to change rendered scene
+scene = cpp.Object('build/BuildShadedObjects.cpp')
+
+interface = cpp.Object('UserInterface/terminal.cpp')
+
+cpp.Program('raytracer', ['main.cpp',
 	Glob('BRDFs/*.cpp'),
 	Glob('BTDFs/*.cpp'),
-	Glob('build/*.cpp'),
 	Glob('Cameras/*.cpp'),
 	Glob('GeometricObjects/*.cpp'),
 	Glob('Lights/*.cpp'),
@@ -24,8 +30,8 @@ env.Program('raytracer', ['main.cpp',
 	Glob('Samplers/*.cpp'),
 	Glob('Textures/*.cpp'),
 	Glob('Tracers/*.cpp'),
-	#Glob('UserInterface/*.cpp'),
-	'UserInterface/terminal.cpp',
 	Glob('Utilities/*.cpp'),
 	Glob('World/*.cpp'),
+	interface,
+	scene
 ])
