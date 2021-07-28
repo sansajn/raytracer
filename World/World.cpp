@@ -122,13 +122,12 @@ World::render_scene(void) const {
 	// vygenerocany obrazok nie je ako original, vyrenderovane body ukladam na zle miesto
 
 	auto pixels = PixelRange(hres, vres);  // pixel range generuje indexy v zlom poradi (pre kazdy radok vsetky stlpce)
-//	transform(std::execution::seq, begin(pixels), end(pixels), begin(*paintArea),
-	transform(begin(pixels), end(pixels), begin(*paintArea),
+	transform(std::execution::seq, begin(pixels), end(pixels), paintArea->begin(),
+//	transform(begin(pixels), end(pixels), begin(*paintArea),
 		[hres, vres, zw, &ray, s, this](pair<size_t,size_t> p){
 			auto [c, r] = p;
 			ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
 			RGBColor pixel_color = tracer_ptr->trace_ray(ray);
-//			display_pixel(r, c, pixel_color);
 			return pixel_color;
 		});
 
