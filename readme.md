@@ -1,6 +1,6 @@
 # Ray Tracer
 
-Ray tracer implementation from the [Ray Tracing from the Ground Up](http://www.raytracegroundup.com/index.html) book. The code was taken from [`wxraytracer_eclipse_v.1.1.2.zip`](http://www.raytracegroundup.com/downloads/wxraytracer_eclipse_v.1.1.2.zip) package.
+Ray tracer implementation from the [Ray Tracing from the Ground Up](http://www.raytracegroundup.com/index.html) book. The code was taken from [`wxraytracer_eclipse_v.1.1.2.zip`](http://www.raytracegroundup.com/downloads/wxraytracer_eclipse_v.1.1.2.zip) package. Ray tracer implementation is in *Bare-Bones* state as described in chapter 3 *Bare-Bones Ray Tracing*. 
 
 ## Build & run instructions
 
