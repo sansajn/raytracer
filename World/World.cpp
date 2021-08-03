@@ -1,5 +1,10 @@
 // this file contains the definition of the World class
 
+#include <fstream>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+
 #ifdef USE_TERMINAL
 	#include "terminal.h"
 #else
@@ -104,7 +109,7 @@ World::render_scene(void) const {
 	ray.d = Vector3D(0, 0, -1);
 	
 	for (int r = 0; r < vres; r++)			// up
-		for (int c = 0; c <= hres; c++) {	// across 					
+		for (int c = 0; c < hres; c++) {	// across
 			ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
 			pixel_color = tracer_ptr->trace_ray(ray);
 			display_pixel(r, c, pixel_color);
@@ -162,7 +167,8 @@ World::display_pixel(const int row, const int column, const RGBColor& raw_color)
 	
 	if (vp.gamma != 1.0)
 		mapped_color = mapped_color.powc(vp.inv_gamma);
-	
+
+/*
    //have to start from max y coordinate to convert to screen coordinates
    int x = column;
    int y = vp.vres - row - 1;
@@ -170,6 +176,10 @@ World::display_pixel(const int row, const int column, const RGBColor& raw_color)
    paintArea->setPixel(x, y, (int)(mapped_color.r * 255),
                              (int)(mapped_color.g * 255),
                              (int)(mapped_color.b * 255));
+*/
+	pixels.push_back((int)(mapped_color.r * 255));
+	pixels.push_back((int)(mapped_color.g * 255));
+	pixels.push_back((int)(mapped_color.b * 255));
 }
 
 // ----------------------------------------------------------------------------- hit_objects
@@ -203,6 +213,23 @@ World::hit_objects(const Ray& ray) {
 	return(sr);   
 }
 
+//------------------------------------------------------------------ save_to_ppm
+
+void
+World::save_to_ppm(void) const {
+	std::time_t t = std::time(nullptr);
+	std::tm tm = *std::localtime(&t);
+	std::stringstream imageFile;
+	imageFile << "./image_" << std::put_time(&tm, "%Y%m%e%H%M%S") << ".ppm";
+
+	std::ofstream ofs;
+	ofs.open(imageFile.str().c_str(), std::ios::out | std::ios::binary);
+	ofs << "P6\n" << vp.hres << " " << vp.vres << "\n255\n";
+	for (int i : pixels) {
+		ofs << static_cast<unsigned char>(i);
+	}
+	ofs.close();
+}
 
 
 //------------------------------------------------------------------ delete_objects

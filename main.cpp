@@ -11,8 +11,8 @@ int main(int argc, char * argv[])
 	World w;
 	w.build();
 
-	Image im{Geometry{w.vp.hres, w.vp.vres}, ColorRGB{0, 0, 0}};
-	RenderThread t{w, im};
+//	Image im{Geometry{w.vp.hres, w.vp.vres}, ColorRGB{0, 0, 0}};
+//	RenderThread t{w, im};
 
 	auto t0 = steady_clock::now();
 
@@ -21,6 +21,9 @@ int main(int argc, char * argv[])
 	auto dt = steady_clock::now() - t0;
 	cout << "render takes: " << duration_cast<milliseconds>(dt).count() << "ms\n";
 
-	im.write("out.png");
+//	im.write("out.png");
+	
+	w.save_to_ppm();
+	
 	return 0;
 }

@@ -4,11 +4,12 @@ RenderThread::RenderThread(World & w, Magick::Image & im)
 	: _w{w}
 	, _im{im}
 {
-	w.paintArea = this;
+//	w.paintArea = this;
 }
 
 void RenderThread::setPixel(int x, int y, int red, int green, int blue)
 {
+/*	
 	int x_max = _w.vp.hres,
 		y_max = _w.vp.vres-1;
 
@@ -21,4 +22,5 @@ void RenderThread::setPixel(int x, int y, int red, int green, int blue)
 	catch (std::exception & e) {
 		cout << e.what() << " for (" << x << ", " << y << ") pixel" << std::endl;
 	}
+*/	
 }

@@ -44,7 +44,8 @@ class World {
 		vector<GeometricObject*>	objects;		
 		vector<Light*> 				lights;
 		
-		RenderThread* 				paintArea; 	//connection to skeleton - wxRaytracer.h
+//		RenderThread* 				paintArea; 	//connection to skeleton - wxRaytracer.h
+		mutable vector<int> pixels;
 			
 
 	public:
@@ -82,6 +83,9 @@ class World {
 
 		ShadeRec
 		hit_objects(const Ray& ray);
+
+		void
+		save_to_ppm(void) const;
 		
 						
 	private:
