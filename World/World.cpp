@@ -5,11 +5,7 @@
 #include <iomanip>
 #include <sstream>
 
-#ifdef USE_TERMINAL
-	#include "terminal.h"
-#else
-	#include "wxraytracer.h"
-#endif
+#include <Magick++.h>
 
 #include "World.h"
 #include "Constants.h"
@@ -48,6 +44,8 @@
 // build functions
 
 //#include "BuildShadedObjects.cpp"
+
+using namespace Magick;
 
 
 // -------------------------------------------------------------------- default constructor
@@ -213,6 +211,25 @@ World::hit_objects(const Ray& ray) {
 	return(sr);   
 }
 
+ShadeRec
+World::hit_bare_bones_objects(const Ray &ray) {
+	ShadeRec	sr(*this);
+	double		t;
+	double		tmin = kHugeValue;
+	size_t 		num_objects = objects.size();
+
+	for ( size_t j = 0; j < num_objects; j++ ) {
+		if ( objects[j]->hit(ray, t, sr) && (t < tmin) ) {
+			sr.hit_an_object = true;
+			tmin = t;
+			sr.color = objects[j]->get_color();
+		}
+	}
+
+	return(sr);
+}
+
+
 //------------------------------------------------------------------ save_to_ppm
 
 void
@@ -225,10 +242,31 @@ World::save_to_ppm(void) const {
 	std::ofstream ofs;
 	ofs.open(imageFile.str().c_str(), std::ios::out | std::ios::binary);
 	ofs << "P6\n" << vp.hres << " " << vp.vres << "\n255\n";
-	for (int i : pixels) {
-		ofs << static_cast<unsigned char>(i);
+
+	// images are stored from top to bottom so flip pixels
+	for (int r = vp.vres-1; r >= 0; --r) {
+		int idx = r*vp.vres*3;
+		uint8_t * p = pixels.data() + idx;
+		for (int c = 0; c < vp.hres; ++c) {
+			ofs << *(p++);
+			ofs << *(p++);
+			ofs << *(p++);
+		}
 	}
+
 	ofs.close();
+}
+
+void World::save_to_png() const {
+	std::time_t t = std::time(nullptr);
+	std::tm tm = *std::localtime(&t);
+	std::stringstream fname;
+	fname << "./image_" << std::put_time(&tm, "%Y%m%e%H%M%S") << ".png";
+
+	Image im;
+	im.read(vp.hres, vp.vres, "RGB", StorageType::CharPixel, pixels.data());
+	im.flip();  // images are stored from top to bottom
+	im.write(fname.str().c_str());
 }
 
 

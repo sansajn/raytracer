@@ -13,6 +13,7 @@
 
 
 #include <vector>
+#include <cstdint>
 
 #include "ViewPlane.h"
 #include "RGBColor.h"
@@ -44,8 +45,7 @@ class World {
 		vector<GeometricObject*>	objects;		
 		vector<Light*> 				lights;
 		
-//		RenderThread* 				paintArea; 	//connection to skeleton - wxRaytracer.h
-		mutable vector<int> pixels;
+		mutable vector<uint8_t> pixels;
 			
 
 	public:
@@ -84,9 +84,13 @@ class World {
 		ShadeRec
 		hit_objects(const Ray& ray);
 
+		ShadeRec
+		hit_bare_bones_objects(const Ray &ray);
+
 		void
 		save_to_ppm(void) const;
-		
+
+		void save_to_png() const;
 						
 	private:
 		

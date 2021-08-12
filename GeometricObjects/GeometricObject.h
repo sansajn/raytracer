@@ -33,10 +33,14 @@ class GeometricObject {
 		virtual void 							// needs to virtual so that it can be overriden in Compound
 		set_material(Material* mPtr); 			
 
+		RGBColor const & get_color() const;
+		void set_color(RGBColor const & c);
+		void set_color(float r, float g, float b);
 	
 	protected:
 	
 		mutable Material*   material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
+		RGBColor color;
 	
 		GeometricObject&						// assignment operator
 		operator= (const GeometricObject& rhs);

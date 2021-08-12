@@ -3,3 +3,5 @@
 /raytracer
 /raytracer.*
 /out.png
+/image_*.png
+/image_*.ppm

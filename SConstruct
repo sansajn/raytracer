@@ -6,8 +6,7 @@ cpp = Environment(
 	CCFLAGS=['--std=c++17', '-Wall', '-O0', '-g'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
-		'Utilities', 'World', '.'],
-	CPPDEFINES=['USE_TERMINAL']
+		'Utilities', 'World', '.']
 )
 
 cpp.ParseConfig('wx-config --cflags --libs')
@@ -15,10 +14,8 @@ cpp.ParseConfig('pkg-config --cflags --libs Magick++')
 
 # edit to change rendered scene
 #scene = cpp.Object('build/BuildShadedObjects.cpp')
-scene = cpp.Object('build/BuildFigure3_18.cpp')
-
-
-interface = cpp.Object('UserInterface/terminal.cpp')
+#scene = cpp.Object('build/BuildFigure3_18.cpp')
+scene = cpp.Object('build/BuildFigure3_20a.cpp')
 
 cpp.Program('raytracer', ['main.cpp',
 	Glob('BRDFs/*.cpp'),
@@ -34,6 +31,5 @@ cpp.Program('raytracer', ['main.cpp',
 	Glob('Tracers/*.cpp'),
 	Glob('Utilities/*.cpp'),
 	Glob('World/*.cpp'),
-	interface,
 	scene
 ])
