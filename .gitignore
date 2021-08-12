@@ -2,6 +2,12 @@
 /.sconsign.dblite
 /raytracer
 /raytracer.*
+
+# generated images
 /out.png
 /image_*.png
 /image_*.ppm
+
+# binaries
+/fig3_18
+/fig3_20a
