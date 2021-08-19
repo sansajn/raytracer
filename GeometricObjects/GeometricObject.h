@@ -37,13 +37,16 @@ class GeometricObject {
 		void set_color(RGBColor const & c);
 		void set_color(float r, float g, float b);
 	
+
 	protected:
-	
-		mutable Material*   material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
-		RGBColor color;
-	
+
 		GeometricObject&						// assignment operator
 		operator= (const GeometricObject& rhs);
+
+	private:
+
+		mutable Material*   material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
+		RGBColor color;
 };
 
 

@@ -32,6 +32,8 @@ engine = cpp.Object([
 
 fig3_18 = cpp.Object('build/BuildFigure3_18.cpp')
 fig3_20a = cpp.Object('build/BuildFigure3_20a.cpp')
+ch3_title = cpp.Object('build/BuildCh3Title.cpp')  # chapter 3 title image
 
 cpp.Program('fig3_18', ['main.cpp', engine, fig3_18])
 cpp.Program('fig3_20a', ['main.cpp', engine, fig3_20a])
+cpp.Program('ch3_title', ['main.cpp', engine, ch3_title])

@@ -17,7 +17,7 @@
 
 #include "ViewPlane.h"
 #include "RGBColor.h"
-#include "Tracer.h"
+#include "Tracers/MultipleObjects.h"
 #include "GeometricObject.h"
 #include "Sphere.h"
 #include "Ray.h"
@@ -26,6 +26,7 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Ambient.h"
+
 
 
 using namespace std;
@@ -85,7 +86,7 @@ class World {
 		hit_objects(const Ray& ray);
 
 		ShadeRec
-		hit_bare_bones_objects(const Ray &ray);
+		hit_bare_bones_objects(const Ray &ray);  //!< \note the function is only used in chapter 3
 
 		void
 		save_to_ppm(void) const;
