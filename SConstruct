@@ -3,22 +3,16 @@
 # TODO: implement --with-ui to build against wxwidget as interface
 
 cpp = Environment(
-	CCFLAGS=['-Wall', '-O0', '-g'],
+	CCFLAGS=['--std=c++17', '-Wall', '-O0', '-g'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
-		'Utilities', 'World'],
-	CPPDEFINES=['USE_TERMINAL']
+		'Utilities', 'World', '.']
 )
 
 cpp.ParseConfig('wx-config --cflags --libs')
 cpp.ParseConfig('pkg-config --cflags --libs Magick++')
 
-# edit to change rendered scene
-scene = cpp.Object('build/BuildShadedObjects.cpp')
-
-interface = cpp.Object('UserInterface/terminal.cpp')
-
-cpp.Program('raytracer', ['main.cpp',
+engine = cpp.Object([
 	Glob('BRDFs/*.cpp'),
 	Glob('BTDFs/*.cpp'),
 	Glob('Cameras/*.cpp'),
@@ -31,7 +25,15 @@ cpp.Program('raytracer', ['main.cpp',
 	Glob('Textures/*.cpp'),
 	Glob('Tracers/*.cpp'),
 	Glob('Utilities/*.cpp'),
-	Glob('World/*.cpp'),
-	interface,
-	scene
+	Glob('World/*.cpp')
 ])
+
+#shaded_objects = cpp.Object('build/BuildShadedObjects.cpp')
+
+fig3_18 = cpp.Object('build/BuildFigure3_18.cpp')
+fig3_20a = cpp.Object('build/BuildFigure3_20a.cpp')
+ch3_title = cpp.Object('build/BuildCh3Title.cpp')  # chapter 3 title image
+
+cpp.Program('fig3_18', ['main.cpp', engine, fig3_18])
+cpp.Program('fig3_20a', ['main.cpp', engine, fig3_20a])
+cpp.Program('ch3_title', ['main.cpp', engine, ch3_title])

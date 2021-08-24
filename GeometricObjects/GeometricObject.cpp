@@ -58,5 +58,14 @@ GeometricObject::set_material(Material* mPtr) {
 	material_ptr = mPtr;
 }
 
+RGBColor const & GeometricObject::get_color() const {
+	return color;
+}
 
-								
+void GeometricObject::set_color(RGBColor const & c) {
+	color = c;
+}
+
+void GeometricObject::set_color(float r, float g, float b) {
+	color = {r, g, b};
+}

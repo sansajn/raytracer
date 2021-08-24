@@ -13,10 +13,11 @@
 
 
 #include <vector>
+#include <cstdint>
 
 #include "ViewPlane.h"
 #include "RGBColor.h"
-#include "Tracer.h"
+#include "Tracers/MultipleObjects.h"
 #include "GeometricObject.h"
 #include "Sphere.h"
 #include "Ray.h"
@@ -25,6 +26,7 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Ambient.h"
+
 
 
 using namespace std;
@@ -44,7 +46,7 @@ class World {
 		vector<GeometricObject*>	objects;		
 		vector<Light*> 				lights;
 		
-		RenderThread* 				paintArea; 	//connection to skeleton - wxRaytracer.h
+		mutable vector<uint8_t> pixels;
 			
 
 	public:
@@ -69,7 +71,7 @@ class World {
 		build(void);
 
 		void 												
-		render_scene(void) const;
+		render_scene(void) const;  //!< \note it looks like this is only used in case scene doesn't contains camera
 						
 		RGBColor
 		max_to_one(const RGBColor& c) const;
@@ -82,7 +84,14 @@ class World {
 
 		ShadeRec
 		hit_objects(const Ray& ray);
-		
+
+		ShadeRec
+		hit_bare_bones_objects(const Ray &ray);  //!< \note the function is only used in chapter 3
+
+		void
+		save_to_ppm(void) const;
+
+		void save_to_png() const;
 						
 	private:
 		
