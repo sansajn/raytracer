@@ -29,7 +29,7 @@
 
 
 
-using namespace std;
+//using namespace std;
 
 class RenderThread; 	//part of skeleton - wxRaytracer.h
 
@@ -43,10 +43,10 @@ class World {
 		Light*   					ambient_ptr;
 		Camera*						camera_ptr;		
 		Sphere 						sphere;		// for Chapter 3 only
-		vector<GeometricObject*>	objects;		
-		vector<Light*> 				lights;
+		std::vector<GeometricObject*>	objects;
+		std::vector<Light*> 				lights;
 		
-		mutable vector<uint8_t> pixels;
+		mutable std::vector<uint8_t> pixels;
 			
 
 	public:

@@ -71,7 +71,7 @@ Pinhole::get_direction(const Point2D& p) const {
 void 												
 Pinhole::render_scene(const World& w) {
 	RGBColor	L;
-	ViewPlane	vp(w.vp);	 								
+	ViewPlane	vp(w.vp);
 	Ray			ray;
 	int 		depth = 0;  
 	Point2D 	pp;		// sample point on a pixel

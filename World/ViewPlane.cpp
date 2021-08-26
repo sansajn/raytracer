@@ -1,6 +1,10 @@
 // This file contains the definition the ViewPlane class
 
 #include "ViewPlane.h"
+#include "Samplers/Regular.h"
+#include "Samplers/MultiJittered.h"
+
+using std::make_unique;
 	
 // ---------------------------------------------------------------- default constructor	
 						
@@ -24,7 +28,8 @@ ViewPlane::ViewPlane(const ViewPlane& vp)
 		num_samples(vp.num_samples),
 		gamma(vp.gamma),
 		inv_gamma(vp.inv_gamma),
-		show_out_of_gamut(vp.show_out_of_gamut)
+		show_out_of_gamut(vp.show_out_of_gamut),
+		sampler_ptr{vp.sampler_ptr->clone()}
 {}
 
 
@@ -42,6 +47,7 @@ ViewPlane::operator= (const ViewPlane& rhs) {
 	gamma				= rhs.gamma;
 	inv_gamma			= rhs.inv_gamma;
 	show_out_of_gamut	= rhs.show_out_of_gamut;
+	sampler_ptr.reset(rhs.sampler_ptr->clone());
 	
 	return (*this);
 }
@@ -49,7 +55,23 @@ ViewPlane::operator= (const ViewPlane& rhs) {
 
 // -------------------------------------------------------------- destructor
 
-ViewPlane::~ViewPlane(void) {}
+ViewPlane::~ViewPlane(void) {
+}
+
+void ViewPlane::set_samples(const int n) {
+	num_samples = n;
+
+	if (num_samples > 1)
+		sampler_ptr = make_unique<MultiJittered>(num_samples);
+	else
+		sampler_ptr = make_unique<Regular>(1);
+}
+
+void ViewPlane::set_sampler(Sampler * sp) {
+	sampler_ptr.reset(sp);
+	num_samples = sp->get_num_samples();
+}
+
 
 
 
