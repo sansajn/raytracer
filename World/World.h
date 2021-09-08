@@ -12,9 +12,9 @@
 // 	  	Tracer class, the World copy construtor would call itself recursively until we ran out of memory. 
 
 
+#include <memory>
 #include <vector>
 #include <cstdint>
-
 #include "ViewPlane.h"
 #include "RGBColor.h"
 #include "Tracers/MultipleObjects.h"
@@ -22,17 +22,9 @@
 #include "Sphere.h"
 #include "Ray.h"
 #include "SingleSphere.h"
-
 #include "Camera.h"
 #include "Light.h"
 #include "Ambient.h"
-
-
-
-//using namespace std;
-
-class RenderThread; 	//part of skeleton - wxRaytracer.h
-
 
 class World {	
 	public:
@@ -63,8 +55,8 @@ class World {
 		void
 		set_ambient_light(Light* light_ptr);			
 		
-		Camera * camera() const;
-		void set_camera(Camera * c_ptr);
+		Camera * camera() const;  // TODO: should I return unique_ptr& rather then *?
+		void set_camera(std::unique_ptr<Camera> c);
 
 		void 					
 		build(void);
@@ -100,7 +92,7 @@ class World {
 		void 
 		delete_lights(void);
 
-		Camera * _camera;  // TODO: use unique_ptr to make ownership clear
+		std::unique_ptr<Camera> _camera;  // TODO: use unique_ptr to make ownership clear
 };
 
 
@@ -130,9 +122,5 @@ World::set_ambient_light(Light* light_ptr) {
 
 // ------------------------------------------------------------------ set_camera
 
-inline void
-World::set_camera(Camera* c_ptr) {
-	_camera = c_ptr;
-}
 
 #endif

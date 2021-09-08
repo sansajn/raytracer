@@ -7,6 +7,8 @@
 #include "Textures/Checker3D.h"
 #include "Materials/SV_Matte.h"
 
+using std::move, std::make_unique;
+
 void World::build() {
 	constexpr int num_samples = 1;  // use 1 for 4.8(a), 64 for 4.8(b)
 
@@ -26,12 +28,12 @@ void World::build() {
 
 	tracer_ptr = new RayCast{this};
 
-	Pinhole * pinhole_ptr = new Pinhole;
-	pinhole_ptr->set_eye(100, 500, 100);
-	pinhole_ptr->set_lookat(0, 450, 0);
-	pinhole_ptr->set_view_distance(175);
-	pinhole_ptr->compute_uvw();
-	set_camera(pinhole_ptr);
+	auto pinhole = make_unique<Pinhole>();
+	pinhole->set_eye(100, 500, 100);
+	pinhole->set_lookat(0, 450, 0);
+	pinhole->set_view_distance(175);
+	pinhole->compute_uvw();
+	set_camera(move(pinhole));
 
 	// directional light
 	Directional * light_ptr3 = new Directional;

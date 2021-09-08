@@ -45,6 +45,7 @@
 
 //#include "BuildShadedObjects.cpp"
 
+using std::unique_ptr;
 using namespace Magick;
 
 
@@ -59,7 +60,6 @@ World::World()
 	: background_color{black}
 	, tracer_ptr{nullptr}
 	, ambient_ptr{new Ambient}
-	, _camera{nullptr}
 {}
 
 
@@ -77,12 +77,6 @@ World::~World(void) {
 	if (ambient_ptr) {
 		delete ambient_ptr;
 		ambient_ptr = NULL;
-	}
-
-
-	if (_camera) {
-		delete _camera;
-		_camera = NULL;
 	}
 
 	delete_objects();
@@ -305,5 +299,9 @@ World::delete_lights(void) {
 }
 
 Camera * World::camera() const {
-	return _camera;
+	return _camera.get();
+}
+
+void World::set_camera(unique_ptr<Camera> c) {
+	_camera = move(c);
 }
