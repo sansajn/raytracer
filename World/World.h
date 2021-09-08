@@ -41,7 +41,6 @@ class World {
 		RGBColor					background_color;
 		Tracer*						tracer_ptr;
 		Light*   					ambient_ptr;
-		Camera*						camera_ptr;		
 		Sphere 						sphere;		// for Chapter 3 only
 		std::vector<GeometricObject*>	objects;
 		std::vector<Light*> 				lights;
@@ -51,7 +50,7 @@ class World {
 
 	public:
 	
-		World(void);												
+		World();
 		
 		~World();
 								
@@ -64,8 +63,8 @@ class World {
 		void
 		set_ambient_light(Light* light_ptr);			
 		
-		void
-		set_camera(Camera* c_ptr);	 
+		Camera * camera() const;
+		void set_camera(Camera * c_ptr);
 
 		void 					
 		build(void);
@@ -100,6 +99,8 @@ class World {
 		
 		void 
 		delete_lights(void);
+
+		Camera * _camera;  // TODO: use unique_ptr to make ownership clear
 };
 
 
@@ -131,7 +132,7 @@ World::set_ambient_light(Light* light_ptr) {
 
 inline void
 World::set_camera(Camera* c_ptr) {
-	camera_ptr = c_ptr;
+	_camera = c_ptr;
 }
 
 #endif

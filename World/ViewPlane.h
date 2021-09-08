@@ -11,12 +11,13 @@ class ViewPlane {
 		int 			hres;   					// horizontal image resolution 
 		int 			vres;   					// vertical image resolution
 		float			s;							// pixel size
-		int				num_samples;				// number of samples per pixel
+		int			num_samples;				// number of samples per pixel
 		
 		float			gamma;						// gamma correction factor
 		float			inv_gamma;					// the inverse of the gamma correction factor
 		bool			show_out_of_gamut;			// display red if RGBColor out of gamut
 		std::unique_ptr<Sampler> sampler_ptr;
+		int max_depth;
 									
 	
 	public:
@@ -48,6 +49,7 @@ class ViewPlane {
 		set_samples(const int n);
 
 		void set_sampler(Sampler * sp);
+		void set_max_depth(int depth);
 };
 
 

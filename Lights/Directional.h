@@ -48,6 +48,8 @@ class Directional: public Light {
 				
 		virtual RGBColor		
 		L(ShadeRec& sr);	
+
+		bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
 		
 	private:
 

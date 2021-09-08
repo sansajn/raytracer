@@ -35,9 +35,11 @@ fig3_20a = cpp.Object('build/BuildFigure3_20a.cpp')
 ch3_title = cpp.Object('build/BuildCh3Title.cpp')  # chapter 3 title image
 fig4_4a = cpp.Object('build/BuildFigure4_4a.cpp')
 fig4_4b = cpp.Object('build/BuildFigure4_4b.cpp')
+fig4_8a = cpp.Object('build/BuildFigure4_8a.cpp')
 
 cpp.Program('fig3_18', ['main.cpp', engine, fig3_18])
 cpp.Program('fig3_20a', ['main.cpp', engine, fig3_20a])
 cpp.Program('ch3_title', ['main.cpp', engine, ch3_title])
 cpp.Program('fig4_4a', ['main.cpp', engine, fig4_4a])
 cpp.Program('fig4_4b', ['main.cpp', engine, fig4_4b])
+cpp.Program('fig4_8a', ['main.cpp', engine, fig4_8a])

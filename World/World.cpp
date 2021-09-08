@@ -55,11 +55,11 @@ using namespace Magick;
 // camera_ptr is set to NULL because the build functions will always have to construct a camera
 // and set its parameters
 
-World::World(void)
-	:  	background_color(black),
-		tracer_ptr(NULL),
-		ambient_ptr(new Ambient),
-		camera_ptr(NULL)
+World::World()
+	: background_color{black}
+	, tracer_ptr{nullptr}
+	, ambient_ptr{new Ambient}
+	, _camera{nullptr}
 {}
 
 
@@ -80,9 +80,9 @@ World::~World(void) {
 	}
 
 
-	if (camera_ptr) {
-		delete camera_ptr;
-		camera_ptr = NULL;
+	if (_camera) {
+		delete _camera;
+		_camera = NULL;
 	}
 
 	delete_objects();
@@ -192,8 +192,9 @@ World::hit_objects(const Ray& ray) {
 	float		tmin 			= kHugeValue;
 	int 		num_objects 	= objects.size();
 
-	for (int j = 0; j < num_objects; j++)
-		if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
+	for (int j = 0; j < num_objects; j++) {
+		bool hit = objects[j]->hit(ray, t, sr);
+		if (hit && (t < tmin)) {
 			sr.hit_an_object	= true;
 			tmin 				= t;
 			sr.material_ptr     = objects[j]->get_material();
@@ -201,6 +202,7 @@ World::hit_objects(const Ray& ray) {
 			normal 				= sr.normal;
 			local_hit_point	 	= sr.local_hit_point;
 		}
+	}
 
 	if(sr.hit_an_object) {
 		sr.t = tmin;
@@ -302,3 +304,6 @@ World::delete_lights(void) {
 	lights.erase (lights.begin(), lights.end());
 }
 
+Camera * World::camera() const {
+	return _camera;
+}

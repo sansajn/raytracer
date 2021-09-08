@@ -36,7 +36,8 @@ class GeometricObject {
 		RGBColor const & get_color() const;
 		void set_color(RGBColor const & c);
 		void set_color(float r, float g, float b);
-	
+
+		virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
 
 	protected:
 

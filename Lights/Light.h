@@ -27,10 +27,19 @@ class Light {
 		~Light(void);
 						
 		virtual Vector3D								
-		get_direction(ShadeRec& sr) = 0;				
+		get_direction(ShadeRec& sr) = 0;
+
+		bool casts_shadows() const;
+		void set_shadows(bool shadows);
+		virtual bool in_shadow(Ray const & ray, ShadeRec const & sr) const;
 																
 		virtual RGBColor														
-		L(ShadeRec& sr);								
+		L(ShadeRec& sr);
+
+		virtual float G(ShadeRec & sr) const;
+
+	protected:
+		bool _shadows;
 };
 
 #endif
