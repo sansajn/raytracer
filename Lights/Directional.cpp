@@ -1,4 +1,7 @@
+#include <stdexcept>
 #include "Directional.h"
+
+using std::logic_error;
 
 // ---------------------------------------------------------------------- default constructor
 
@@ -64,6 +67,13 @@ Directional::get_direction(ShadeRec& sr) {
 RGBColor
 Directional::L(ShadeRec& s) {	
 	return (ls * color);
+}
+
+bool Directional::in_shadow(Ray const & ray, ShadeRec const & sr) const {
+	if (!_shadows)
+		return false;
+	else
+		throw logic_error{"shadows not yet implementes"};  // TODO: implement
 }
 
 
