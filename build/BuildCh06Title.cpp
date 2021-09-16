@@ -9,11 +9,20 @@
 // reproduce this scene
 // This scene is also used in Chapters 11, 12, and 24
 
+#include "World/World.h"
+#include "Tracers/RayCast.h"
 #include "Maths.h"
+#include "Utilities/Constants.h"
+#include "Lights/PointLight.h"
+#include "Samplers/MultiJittered.h"
+#include "Materials/Matte.h"
+#include "Materials/SV_Matte.h"
+#include "Textures/Checker3D.h"
+#include "GeometricObjects/Plane.h"
+#include "GeometricObjects/Grid.h"
 
-void 												
-World::build(void) {
-	int num_samples = 100;
+void World::build() {
+	constexpr int num_samples = 100;
 	
 	vp.set_hres(600);			
 	vp.set_vres(400);
@@ -22,7 +31,7 @@ World::build(void) {
 	vp.set_max_depth(0);
 	
 	background_color = black;
-	tracer_ptr = new RayCast(this);	
+	tracer_ptr = new RayCast{this};
 		
 	// thin lens camera	
 	
