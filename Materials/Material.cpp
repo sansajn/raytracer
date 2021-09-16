@@ -1,39 +1,25 @@
+#include <string>
+#include <stdexcept>
 #include "Material.h"
 
-// ---------------------------------------------------------------- default constructor
+using std::logic_error;
+using namespace std::string_literals;
 
-Material::Material(void) {}
-
-
-// ---------------------------------------------------------------- copy constructor
-
-Material::Material(const Material& m) {}
-
-
-
-// ---------------------------------------------------------------- assignment operator
-
-Material& 
-Material::operator= (const Material& rhs) {
+Material & Material::operator=(Material const & rhs) {
 	if (this == &rhs)
 		return (*this);
 
-	return (*this);
+	return *this;
 }
 
-
-// ---------------------------------------------------------------- destructor
-
-Material::~Material(void)
-{}
-
-
-// ---------------------------------------------------------------- shade
-
-RGBColor
-Material::shade(ShadeRec& sr) {
-	return (black);
+RGBColor Material::shade(ShadeRec &) {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
+RGBColor Material::area_light_shade(ShadeRec &) {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+}
 
-
+RGBColor Material::get_Le(ShadeRec const &) const {
+	return black;
+}

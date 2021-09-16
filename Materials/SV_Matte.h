@@ -8,16 +8,19 @@
 class SV_Matte : public Material {
 public:
 	SV_Matte();
-	SV_Matte(SV_Matte const & other);
+
+	RGBColor shade(ShadeRec & sr) override;
+	RGBColor area_light_shade(ShadeRec & sr) override;
+
 	void set_ka(float const k);
 	void set_kd(float const k);
 	void set_cd(Texture const * t);
-	RGBColor shade(ShadeRec & sr) override;
 
-	~SV_Matte() = default;
-	Material * clone() const override;
+	SV_Matte * clone() const override;
+
+	SV_Matte(SV_Matte const & other);
 
 private:
-	std::unique_ptr<SV_Lambertian> ambient_brdf,  // TODO: netreba implementovat aj SV_Light?
+	std::unique_ptr<SV_Lambertian> ambient_brdf,
 		diffuse_brdf;
 };

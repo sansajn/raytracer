@@ -22,7 +22,7 @@ class Plane: public GeometricObject {
 		operator= (const Plane& rhs);	
 		
 		virtual														// destructor
-		~Plane(void);   											
+		~Plane() = default;
 					
 		virtual bool 																								 
 		hit(const Ray& ray, double& tmin, ShadeRec& sr) const;

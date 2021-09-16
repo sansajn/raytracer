@@ -69,3 +69,18 @@ void GeometricObject::set_color(RGBColor const & c) {
 void GeometricObject::set_color(float r, float g, float b) {
 	color = {r, g, b};
 }
+
+void GeometricObject::set_sampler(std::shared_ptr<Sampler>) {
+}
+
+Point3D GeometricObject::sample() {
+	return {};
+}
+
+Normal GeometricObject::get_normal(Point3D const &) {
+	return {};
+}
+
+float GeometricObject::pdf(ShadeRec const & sr) const {
+	return 1.0;
+}
