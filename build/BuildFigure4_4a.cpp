@@ -5,23 +5,25 @@
 #include "Samplers/Regular.h"
 #include "Cameras/Orthographic.h"
 
+using std::make_unique;
+
 void World::build() {
 	constexpr int num_samples = 1;  // use 1 for 4.4(a) and 16 for 4.4(b)
 
-	Regular * uniform_ptr = new Regular{num_samples};
+	auto uniform_ptr = make_unique<Regular>(num_samples);
 
 	vp.set_hres(32);
 	vp.set_vres(32);
 	vp.set_pixel_size(1.0);
-	vp.set_sampler(uniform_ptr);
+	vp.set_sampler(move(uniform_ptr));
 
 	background_color = black;
 	tracer_ptr = new RayCast{this};
 
-	Orthographic * orthographic_ptr = new Orthographic;
+	auto orthographic_ptr = make_unique<Orthographic>();
 	orthographic_ptr->set_eye(0, 0, 100);
 	orthographic_ptr->set_lookat(0.0);
-	set_camera(orthographic_ptr);
+	set_camera(move(orthographic_ptr));
 
 	ambient_ptr = new Ambient;
 

@@ -61,9 +61,10 @@ class World {
 		void 					
 		build(void);
 
-		void 												
-		render_scene(void) const;  //!< \note it looks like this is only used in case scene doesn't contains camera
-						
+		/*! Render scene in orthographic viewing along the zw axis (without sampler supoprt).
+		\note only used in case scene doesn't contains camera */
+		void render_scene() const;
+
 		RGBColor
 		max_to_one(const RGBColor& c) const;
 		

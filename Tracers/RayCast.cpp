@@ -9,18 +9,11 @@ RayCast::RayCast(void)
 	: Tracer()
 {}
 
-
 // -------------------------------------------------------------------- constructor
 		
 RayCast::RayCast(World* _worldPtr)
 	: Tracer(_worldPtr)
 {}
-
-
-// -------------------------------------------------------------------- destructor
-
-RayCast::~RayCast(void) {}
-
 
 // -------------------------------------------------------------------- trace_ray
 

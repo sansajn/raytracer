@@ -1,6 +1,10 @@
+#include <string>
+#include <stdexcept>
 #include "Light.h"
-
 #include "Constants.h"
+
+using std::logic_error;
+using namespace std::string_literals;
 
 // ---------------------------------------------------------------------- default constructor
 
@@ -30,8 +34,6 @@ Light::operator= (const Light& rhs) {
 
 // ---------------------------------------------------------------------- destructor
 
-Light::~Light(void) {} 
-
 bool Light::casts_shadows() const {
 	return _shadows;
 }
@@ -50,11 +52,13 @@ bool Light::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 
 RGBColor								
 Light::L(ShadeRec &) {
-	return (black);
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
-float Light::G(ShadeRec &) const {
+float Light::G(ShadeRec const &) const {
 	return 1.0;
 }
 
-
+float Light::pdf(ShadeRec const &) const {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+}

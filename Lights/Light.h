@@ -1,45 +1,28 @@
-#ifndef __LIGHT__
-#define __LIGHT__
-
+#pragma once
 #include "Vector3D.h"
 #include "RGBColor.h"
 #include "Ray.h"
-
-class ShadeRec;
-
-
-//-------------------------------------------------------------------- class Light
+#include "ShadeRec.h"
 
 class Light {	
-	public:
-	
-		Light(void);
-								
-		Light(const Light& ls);			
+public:
+	Light();
 
-		Light& 								
-		operator= (const Light& rhs); 
+	bool casts_shadows() const;
+	void set_shadows(bool shadows);
 
-		virtual Light* 						
-		clone(void) const = 0;
-		
-		virtual 							
-		~Light(void);
-						
-		virtual Vector3D								
-		get_direction(ShadeRec& sr) = 0;
+	virtual RGBColor L(ShadeRec & sr);
+	virtual float G(ShadeRec const & sr) const;
+	virtual bool in_shadow(Ray const & ray, ShadeRec const & sr) const;
+	virtual Vector3D get_direction(ShadeRec& sr) = 0;
+	virtual float pdf(ShadeRec const & sr) const;
 
-		bool casts_shadows() const;
-		void set_shadows(bool shadows);
-		virtual bool in_shadow(Ray const & ray, ShadeRec const & sr) const;
-																
-		virtual RGBColor														
-		L(ShadeRec& sr);
+	virtual Light * clone(void) const = 0;
 
-		virtual float G(ShadeRec & sr) const;
+	Light(const Light& ls);
+	Light & operator=(const Light& rhs);
+	virtual ~Light() = default;
 
-	protected:
-		bool _shadows;
+protected:
+	bool _shadows;
 };
-
-#endif

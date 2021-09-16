@@ -12,12 +12,12 @@ using std::move, std::make_unique;
 void World::build() {
 	constexpr int num_samples = 64;  // use 1 for 4.8(a), 64 for 4.8(b)
 
-	Jittered * sampler_ptr = new Jittered{num_samples};
+	auto sampler_ptr = make_unique<Jittered>(num_samples);
 
 	vp.set_hres(300);
 	vp.set_vres(200);
 //	vp.set_samples(num_samples);		// for 4.8(a) (one regular sample per pixel)
-	vp.set_sampler(sampler_ptr);		// for 4.8(b)
+	vp.set_sampler(move(sampler_ptr));		// for 4.8(b)
 	vp.set_max_depth(0);
 
 	background_color = RGBColor(0.25);

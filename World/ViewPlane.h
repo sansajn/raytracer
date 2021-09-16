@@ -48,7 +48,7 @@ class ViewPlane {
 		void
 		set_samples(const int n);
 
-		void set_sampler(Sampler * sp);
+		void set_sampler(std::unique_ptr<Sampler> sp);
 		void set_max_depth(int depth);
 };
 

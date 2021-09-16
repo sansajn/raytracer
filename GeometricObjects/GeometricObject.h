@@ -2,10 +2,12 @@
 #define __GEOMETRIC_OBJECT__
 
 class Material;
-	
+
+#include <memory>
 #include "Point3D.h"
 #include "Ray.h"
 #include "ShadeRec.h"
+#include "Samplers/Sampler.h"
 
 
 //----------------------------------------------------------------------------------------------------- Class GeometricObject
@@ -24,8 +26,7 @@ class GeometricObject {
 		virtual 												// destructor
 		~GeometricObject (void);	
 			
-		virtual bool 												 
-		hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
+		virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
 				
 		Material*						
 		get_material(void) const;
@@ -39,13 +40,17 @@ class GeometricObject {
 
 		virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
 
-	protected:
+		// Area Lights API
+		virtual void set_sampler(std::shared_ptr<Sampler> sampler);
+		virtual Point3D sample();
+		virtual Normal get_normal(Point3D const & p);
+		virtual float pdf(ShadeRec const & sr) const;
 
+	protected:
 		GeometricObject&						// assignment operator
 		operator= (const GeometricObject& rhs);
 
 	private:
-
 		mutable Material*   material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
 		RGBColor color;
 };

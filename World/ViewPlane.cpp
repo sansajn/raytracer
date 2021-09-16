@@ -4,7 +4,7 @@
 #include "Samplers/Regular.h"
 #include "Samplers/MultiJittered.h"
 
-using std::make_unique;
+using std::unique_ptr, std::make_unique;
 	
 // ---------------------------------------------------------------- default constructor	
 						
@@ -70,9 +70,9 @@ void ViewPlane::set_samples(const int n) {
 		sampler_ptr = make_unique<Regular>(1);
 }
 
-void ViewPlane::set_sampler(Sampler * sp) {
-	sampler_ptr.reset(sp);
-	num_samples = sp->get_num_samples();
+void ViewPlane::set_sampler(unique_ptr<Sampler> sp) {
+	sampler_ptr = move(sp);
+	num_samples = sampler_ptr->get_num_samples();
 }
 
 void ViewPlane::set_max_depth(int depth) {
