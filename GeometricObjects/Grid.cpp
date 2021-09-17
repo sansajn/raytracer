@@ -26,6 +26,8 @@
 
 #include "ply.h"
 
+using std::vector, std::cout, std::endl;
+
 typedef enum {
 	flat, 
 	smooth

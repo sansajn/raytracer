@@ -18,10 +18,11 @@
 // This Grid class is also way too large. All the triangle and PLY file code should be placed in
 // a separate class called TriangleMesh that inherits from Grid.
 
-
+#include <vector>
 #include "Compound.h"
 #include "ShadeRec.h"
 #include "Utilities/Mesh.h"
+#include "Utilities/BBox.h"
 
 
 //---------------------------------------------------------------------- class Grid
@@ -73,7 +74,7 @@ class Grid: public Compound {
 
 	private: 
 
-		vector<GeometricObject*>	cells;			// grid of cells
+		std::vector<GeometricObject*>	cells;			// grid of cells
 		int							nx, ny, nz;    	// number of cells in the x, y, and z directions
 		BBox						bbox;			// bounding box
 		Mesh*						mesh_ptr;		// holds triangle data

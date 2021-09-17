@@ -11,6 +11,7 @@
 // this is the triangle discussed in Section 19.3
 
 #include "GeometricObject.h"
+#include "Utilities/BBox.h"
 
 class Triangle: public GeometricObject {	
 	public:
