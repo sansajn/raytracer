@@ -27,14 +27,9 @@ public:
 	virtual Normal get_normal(Point3D const & p);
 	virtual float pdf(ShadeRec const & sr) const;
 
-	// Acceleration API
-	virtual BBox get_bounding_box();
-
-	// Compound API
-	virtual void add_object(GeometricObject * object);
-
-	// Smoothing API
-	virtual Normal get_normal() const;
+	virtual BBox get_bounding_box();  // allows acceleration schema
+	virtual void add_object(GeometricObject * object);  // allows compound objects
+	virtual Normal get_normal() const;  // smoothing triangles
 
 	virtual GeometricObject * clone() const = 0;
 

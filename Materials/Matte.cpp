@@ -1,3 +1,4 @@
+#include "World/World.h"
 #include "Matte.h"
 
 // ---------------------------------------------------------------- default constructor

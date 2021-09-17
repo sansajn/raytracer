@@ -11,7 +11,7 @@
 //  See the file COPYING.txt for the full license.
 
 #include "MultiJittered.h"
-#include "../Utilities/Random.h"
+#include "Utilities/Random.h"
 
 // ---------------------------------------------------------------- default constructor
 	

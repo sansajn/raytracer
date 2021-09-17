@@ -11,8 +11,9 @@
 
 #include "World/World.h"
 #include "Tracers/RayCast.h"
-#include "Maths.h"
+#include "Utilities/Maths.h"
 #include "Utilities/Constants.h"
+#include "Utilities/Random.h"
 #include "Lights/PointLight.h"
 #include "Samplers/MultiJittered.h"
 #include "Materials/Matte.h"

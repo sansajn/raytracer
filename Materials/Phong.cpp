@@ -1,3 +1,4 @@
+#include "World/World.h"
 #include "Phong.h"
 
 using std::make_unique;

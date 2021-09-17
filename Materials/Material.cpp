@@ -21,5 +21,5 @@ RGBColor Material::area_light_shade(ShadeRec &) {
 }
 
 RGBColor Material::get_Le(ShadeRec const &) const {
-	return black;
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }

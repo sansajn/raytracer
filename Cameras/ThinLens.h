@@ -39,8 +39,7 @@ class ThinLens: public Camera {
 		Vector3D
 		ray_direction(const Point2D& pixel_point, const Point2D& lens_point) const;
 
-		virtual void
-		render_scene(const World& w, float x = 0, int offset = 0) override;
+		void render_scene(World const & w) override;
 
 		void
 		set_view_distance(float distance);
