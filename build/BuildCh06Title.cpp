@@ -9,6 +9,7 @@
 // reproduce this scene
 // This scene is also used in Chapters 11, 12, and 24
 
+#include <memory>
 #include "World/World.h"
 #include "Tracers/RayCast.h"
 #include "Utilities/Maths.h"
@@ -24,6 +25,8 @@
 #include "GeometricObjects/Box.h"
 #include "Cameras/ThinLens.h"
 
+using std::make_unique, std::move;
+
 void World::build() {
 	constexpr int num_samples = 100;
 	
@@ -38,7 +41,7 @@ void World::build() {
 		
 	// thin lens camera	
 	
-	ThinLens * thin_lens_ptr = new ThinLens;
+	auto thin_lens_ptr = make_unique<ThinLens>();
 	thin_lens_ptr->set_eye(100, 100, 50); 
 	thin_lens_ptr->set_lookat(0, -10, 0);
 	thin_lens_ptr->set_view_distance(390.0); 
@@ -46,7 +49,7 @@ void World::build() {
 	thin_lens_ptr->set_lens_radius(5.0); 			
 	thin_lens_ptr->set_sampler(new MultiJittered(num_samples));		
 	thin_lens_ptr->compute_uvw();     
-	set_camera(thin_lens_ptr);
+	set_camera(move(thin_lens_ptr));
 	   	
 	
 	PointLight* light_ptr2 = new PointLight;
