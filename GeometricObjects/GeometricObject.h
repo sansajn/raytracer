@@ -6,6 +6,7 @@
 #include "Samplers/Sampler.h"
 #include "Materials/Material.h"
 #include "Utilities/BBox.h"
+#include "Utilities/Normal.h"
 
 class GeometricObject {
 public:
@@ -32,6 +33,9 @@ public:
 	// Compound API
 	virtual void add_object(GeometricObject * object);
 
+	// Smoothing API
+	virtual Normal get_normal() const;
+
 	virtual GeometricObject * clone() const = 0;
 
 	GeometricObject(GeometricObject const & object);
@@ -46,8 +50,3 @@ protected:
 private:
 	RGBColor color;
 };
-
-inline Material* 
-GeometricObject::get_material(void) const {
-	return (material_ptr);
-}

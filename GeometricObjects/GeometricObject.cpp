@@ -57,6 +57,10 @@ GeometricObject::~GeometricObject (void) {
 
 // ---------------------------------------------------------------- set_material
 
+Material * GeometricObject::get_material() const {
+	return material_ptr;
+}
+
 void 
 GeometricObject::set_material(Material* mPtr) {
 	material_ptr = mPtr;
@@ -86,7 +90,7 @@ Normal GeometricObject::get_normal(Point3D const &) {
 	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
-float GeometricObject::pdf(ShadeRec const & sr) const {
+float GeometricObject::pdf(ShadeRec const &) const {
 	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
@@ -95,5 +99,9 @@ BBox GeometricObject::get_bounding_box() {
 }
 
 void GeometricObject::add_object(GeometricObject *) {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+}
+
+Normal GeometricObject::get_normal() const {
 	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
