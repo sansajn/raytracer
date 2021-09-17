@@ -89,3 +89,11 @@ Normal GeometricObject::get_normal(Point3D const &) {
 float GeometricObject::pdf(ShadeRec const & sr) const {
 	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
+
+BBox GeometricObject::get_bounding_box() {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+}
+
+void GeometricObject::add_object(GeometricObject *) {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+}

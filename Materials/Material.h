@@ -1,6 +1,4 @@
 #pragma once
-
-#include "World.h"			// required for the shade function in all derived classes
 #include "RGBColor.h"
 #include "ShadeRec.h"
 

@@ -60,8 +60,8 @@ class Grid: public Compound {
 		void												
 		tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps);
 
-		virtual bool 
-		hit(const Ray& ray, double& tmin, ShadeRec& sr) const;		 					 
+		bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
+		// shadow_hit
 
 		void
 		setup_cells(void);

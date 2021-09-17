@@ -8,51 +8,33 @@
 
 
 #include <vector> 
-
 #include "GeometricObject.h"
 
 //-------------------------------------------------------------------------------- class Compound
 
 class Compound: public GeometricObject {	
-	public:
-		
-		Compound(void);   										
+public:
+	Compound();
 
-		virtual Compound* 										
-		clone(void) const;
-	
-		Compound(const Compound& c); 							
+	void set_material(Material* material_ptr) override;
+	virtual void add_object(GeometricObject * object_ptr);
+	int get_num_objects(void);
 
-		~Compound (void);   									
+	bool hit(const Ray& ray, double& tmin, ShadeRec& s) const override;
+	bool shadow_hit(Ray const & ray, double & tmin) const override;
 
-		Compound& 												
-		operator= (const Compound& c);	
-		
-		virtual void 
-		set_material(Material* material_ptr);
-		
-		virtual void 											
-		add_object(GeometricObject* object_ptr);  
-		
-		int
-		get_num_objects(void);						
+	Compound * clone() const override;
 
-		bool hit(const Ray& ray, double& tmin, ShadeRec& s) const override;
+	Compound(const Compound& c);
+	Compound & operator=(const Compound& c);
+	~Compound();
 
-		bool shadow_hit(Ray const & ray, double & tmin) const override;
-			
-	protected:		
-		
-		std::vector<GeometricObject*> objects;
-		
-	private:
-	
-		void 													
-		delete_objects(void);								
+protected:
+	std::vector<GeometricObject*> objects;
 
-		void												
-		copy_objects(const std::vector<GeometricObject*>& rhs_objects);
-	
+private:
+	void delete_objects();
+	void copy_objects(const std::vector<GeometricObject*>& rhs_objects);
 };
 
 
