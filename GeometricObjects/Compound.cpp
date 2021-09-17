@@ -139,7 +139,7 @@ Compound::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool Compound::shadow_hit(Ray const & ray, double & tmin) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
 }
 
 

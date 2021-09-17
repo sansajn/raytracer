@@ -30,12 +30,12 @@ Tracer::~Tracer(void) {
 // -------------------------------------------------------------------- trace_ray
 
 RGBColor Tracer::trace_ray(Ray const &) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
 }
 
 
 // -------------------------------------------------------------------- trace_ray
 
 RGBColor	Tracer::trace_ray(Ray const, int const) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
 }
