@@ -20,6 +20,8 @@
 #include "Textures/Checker3D.h"
 #include "GeometricObjects/Plane.h"
 #include "GeometricObjects/Grid.h"
+#include "GeometricObjects/Box.h"
+#include "Cameras/ThinLens.h"
 
 void World::build() {
 	constexpr int num_samples = 100;
@@ -35,7 +37,7 @@ void World::build() {
 		
 	// thin lens camera	
 	
-	ThinLens* thin_lens_ptr = new ThinLens;
+	ThinLens * thin_lens_ptr = new ThinLens;
 	thin_lens_ptr->set_eye(100, 100, 50); 
 	thin_lens_ptr->set_lookat(0, -10, 0);
 	thin_lens_ptr->set_view_distance(390.0); 

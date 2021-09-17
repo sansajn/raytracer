@@ -1,9 +1,13 @@
 // this file contains the definition of the class GeometricObject 
 
+#include <string>
+#include <stdexcept>
 #include "Constants.h"
 #include "Material.h"
 #include "GeometricObject.h"
 
+using std::logic_error;
+using namespace std::string_literals;
 
 // ---------------------------------------------------------------------- default constructor
 
@@ -71,16 +75,17 @@ void GeometricObject::set_color(float r, float g, float b) {
 }
 
 void GeometricObject::set_sampler(std::shared_ptr<Sampler>) {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
 Point3D GeometricObject::sample() {
-	return {};
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
 Normal GeometricObject::get_normal(Point3D const &) {
-	return {};
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
 float GeometricObject::pdf(ShadeRec const & sr) const {
-	return 1.0;
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }

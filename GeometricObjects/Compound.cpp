@@ -5,10 +5,12 @@
 
 
 #include <vector>
+#include <stdexcept>
 #include "Constants.h"
 #include "Compound.h"
 
-using std::vector;
+using std::vector, std::logic_error;
+using namespace std::string_literals;
 					
 
 // ----------------------------------------------------------------  default constructor
@@ -134,6 +136,10 @@ Compound::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 	}
 	
 	return (hit);
+}
+
+bool Compound::shadow_hit(Ray const & ray, double & tmin) const {
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
 }
 
 

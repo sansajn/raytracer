@@ -15,6 +15,7 @@
 #include "../Utilities/Point3D.h"
 #include "../Utilities/Vector3D.h"
 #include "../Samplers/Sampler.h"
+#include "Utilities/Constants.h"
 
 ThinLens::ThinLens(void)
 	:	Camera(),
@@ -97,7 +98,7 @@ ThinLens::render_scene(const World& w, float x /*= 0*/, int offset /*= 0*/) {
 
 	for (int r = 0; r < vp.vres; r++)			// up
 		for (int c = 0; c < vp.hres; c++) {		// across
-			L = RGBColor::black;
+			L = black;
 
 			for (int n = 0; n < vp.num_samples; n++) {
 				sp = vp.sampler_ptr->sample_unit_square();

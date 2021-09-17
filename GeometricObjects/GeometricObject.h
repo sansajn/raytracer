@@ -15,21 +15,11 @@ class Material;
 class GeometricObject {	
 	
 	public:	
-
-		GeometricObject(void);									// default constructor
-		
-		GeometricObject(const GeometricObject& object);			// copy constructor
-	
-		virtual GeometricObject*								// virtual copy constructor
-		clone(void) const = 0;
-
-		virtual 												// destructor
-		~GeometricObject (void);	
+		GeometricObject();
 			
 		virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
 				
-		Material*						
-		get_material(void) const;
+		Material * get_material() const;
 
 		virtual void 							// needs to virtual so that it can be overriden in Compound
 		set_material(Material* mPtr); 			
@@ -45,6 +35,11 @@ class GeometricObject {
 		virtual Point3D sample();
 		virtual Normal get_normal(Point3D const & p);
 		virtual float pdf(ShadeRec const & sr) const;
+
+		virtual GeometricObject * clone() const = 0;
+		GeometricObject(GeometricObject const & object);
+
+		virtual ~GeometricObject();
 
 	protected:
 		GeometricObject&						// assignment operator
