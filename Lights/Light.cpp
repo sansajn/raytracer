@@ -52,7 +52,7 @@ bool Light::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 
 RGBColor								
 Light::L(ShadeRec &) {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
 }
 
 float Light::G(ShadeRec const &) const {
@@ -60,5 +60,5 @@ float Light::G(ShadeRec const &) const {
 }
 
 float Light::pdf(ShadeRec const &) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is not ment to be called"};
+	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
 }

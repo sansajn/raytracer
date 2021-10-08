@@ -1,66 +1,47 @@
-#ifndef __GEOMETRIC_OBJECT__
-#define __GEOMETRIC_OBJECT__
-
-class Material;
-
+#pragma once
 #include <memory>
 #include "Point3D.h"
 #include "Ray.h"
 #include "ShadeRec.h"
 #include "Samplers/Sampler.h"
+#include "Materials/Material.h"
+#include "Utilities/BBox.h"
+#include "Utilities/Normal.h"
 
+class GeometricObject {
+public:
+	GeometricObject();
 
-//----------------------------------------------------------------------------------------------------- Class GeometricObject
+	virtual bool hit(Ray const & ray, double & t, ShadeRec & sr) const = 0;
+	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
 
-class GeometricObject {	
-	
-	public:	
+	Material * get_material() const;
+	virtual void set_material(Material * mPtr);
+	RGBColor const & get_color() const;
+	void set_color(RGBColor const & c);
+	void set_color(float r, float g, float b);
 
-		GeometricObject(void);									// default constructor
-		
-		GeometricObject(const GeometricObject& object);			// copy constructor
-	
-		virtual GeometricObject*								// virtual copy constructor
-		clone(void) const = 0;
+	// Area Lights API
+	virtual void set_sampler(std::shared_ptr<Sampler> sampler);
+	virtual Point3D sample();
+	virtual Normal get_normal(Point3D const & p);
+	virtual float pdf(ShadeRec const & sr) const;
 
-		virtual 												// destructor
-		~GeometricObject (void);	
-			
-		virtual bool hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
-				
-		Material*						
-		get_material(void) const;
+	virtual BBox get_bounding_box();  // allows acceleration schema
+	virtual void add_object(GeometricObject * object);  // allows compound objects
+	virtual Normal get_normal() const;  // smoothing triangles
 
-		virtual void 							// needs to virtual so that it can be overriden in Compound
-		set_material(Material* mPtr); 			
+	virtual GeometricObject * clone() const = 0;
 
-		RGBColor const & get_color() const;
-		void set_color(RGBColor const & c);
-		void set_color(float r, float g, float b);
+	GeometricObject(GeometricObject const & object);
 
-		virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
+	virtual ~GeometricObject();
 
-		// Area Lights API
-		virtual void set_sampler(std::shared_ptr<Sampler> sampler);
-		virtual Point3D sample();
-		virtual Normal get_normal(Point3D const & p);
-		virtual float pdf(ShadeRec const & sr) const;
+protected:
+	GeometricObject & operator=(GeometricObject const & rhs);
 
-	protected:
-		GeometricObject&						// assignment operator
-		operator= (const GeometricObject& rhs);
+	mutable Material * material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
 
-	private:
-		mutable Material*   material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
-		RGBColor color;
+private:
+	RGBColor color;
 };
-
-
-// ------------------------------------------------------------------------- get_material
-
-inline Material* 
-GeometricObject::get_material(void) const {
-	return (material_ptr);
-}
-
-#endif

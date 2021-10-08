@@ -1,3 +1,4 @@
+#include "Utilities/Constants.h"
 #include "Emissive.h"
 
 Emissive::Emissive()
@@ -26,7 +27,7 @@ RGBColor Emissive::area_light_shade(ShadeRec& sr) {
 		return (black);
 }
 
-RGBColor	Emissive::get_Le(ShadeRec const & sr) const {
+RGBColor	Emissive::get_Le(ShadeRec const &) const {
 	return ls * ce;
 }
 
