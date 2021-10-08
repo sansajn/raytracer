@@ -7,7 +7,10 @@ cpp = Environment(
 	CXXFLAGS=['--std=c++17'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
-		'Utilities', 'World', '.']
+		'Utilities', 'World', '.'],
+	CPPDEFINES=['BOOST_STACKTRACE_USE_BACKTRACE'],
+	LIBS=['boost_stacktrace_backtrace', 'dl'],
+	LINKFLAGS=['-rdynamic']
 )
 
 cpp.ParseConfig('wx-config --cflags --libs')

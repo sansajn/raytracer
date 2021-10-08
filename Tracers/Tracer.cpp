@@ -1,14 +1,11 @@
 #include <string>
-#include <stdexcept>
+#include "Utilities/exception.hpp"
 #include "Tracer.h"
-
-using std::logic_error;
-using namespace std::string_literals;
 
 // -------------------------------------------------------------------- default constructor
 
 Tracer::Tracer(void)
-	: world_ptr(NULL)
+	: world_ptr{nullptr}
 {}
 
 
@@ -23,19 +20,19 @@ Tracer::Tracer(World* _worldPtr)
 
 Tracer::~Tracer(void) {
 	if (world_ptr)
-		world_ptr = NULL;
+		world_ptr = nullptr;
 }
 
 
 // -------------------------------------------------------------------- trace_ray
 
 RGBColor Tracer::trace_ray(Ray const &) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 
 // -------------------------------------------------------------------- trace_ray
 
 RGBColor	Tracer::trace_ray(Ray const, int const) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+	throw default_implementation{__PRETTY_FUNCTION__};
 }
