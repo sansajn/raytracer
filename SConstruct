@@ -44,6 +44,9 @@ fig4_8a = cpp.Object('build/BuildFigure4_8a.cpp')
 fig4_8b = cpp.Object('build/BuildFigure4_8b.cpp')
 fig5_13 = cpp.Object('build/BuildFigure5_13.cpp')
 ch6_title = cpp.Object('build/BuildCh06Title.cpp')  # chapter 6 title image
+fig8_16a = cpp.Object('build/BuildFigure8_16a.cpp')
+fig8_16b = cpp.Object('build/BuildFigure8_16b.cpp')
+fig8_16c = cpp.Object('build/BuildFigure8_16c.cpp')
 
 
 cpp.Program('fig3_18', ['main.cpp', engine, fig3_18])
@@ -55,3 +58,6 @@ cpp.Program('fig4_8a', ['main.cpp', engine, fig4_8a])
 cpp.Program('fig4_8b', ['main.cpp', engine, fig4_8b])
 cpp.Program('fig5_13', ['main.cpp', engine, fig5_13])
 cpp.Program('ch06_title', ['main.cpp', engine, ch6_title])
+cpp.Program('fig8_16a', ['main.cpp', engine, fig8_16a])
+cpp.Program('fig8_16b', ['main.cpp', engine, fig8_16b])
+cpp.Program('fig8_16c', ['main.cpp', engine, fig8_16c])
