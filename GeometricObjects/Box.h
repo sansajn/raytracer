@@ -11,6 +11,7 @@ public:
 	bool hit(Ray const & ray, double & tmin, ShadeRec & sr) const override;
 	bool shadow_hit(Ray const & ray, double & tmin) const override;
 	Normal get_normal(const int face_hit) const;
+	BBox get_bounding_box() override;
 
 	Box * clone() const override;
 

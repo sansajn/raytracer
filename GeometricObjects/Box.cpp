@@ -209,6 +209,10 @@ Normal Box::get_normal(const int face_hit) const {
 	}
 }
 
+BBox Box::get_bounding_box() {
+	return BBox{x0, x1, y0, y1, z0, z1};
+}
+
 Box * Box::clone() const {
 	return new Box{*this};
 }

@@ -216,7 +216,7 @@ Grid::setup_cells(void) {
 			num_greater += 1;
 	}
 	
-	cout << "num_cells =" << num_cells << endl;
+	cout << "num_cells = " << num_cells << endl;
 	cout << "numZeroes = " << num_zeroes << "  numOnes = " << num_ones << "  numTwos = " << num_twos << endl;  
 	cout << "numThrees = " << num_threes << "  numGreater = " << num_greater << endl;		
 
