@@ -65,6 +65,8 @@ class PointLight: public Light {
 		virtual RGBColor
 		L(ShadeRec& sr) override;
 
+		bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
+
 	private:
 
 		float		ls;

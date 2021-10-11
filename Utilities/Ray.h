@@ -8,7 +8,7 @@ class Ray {
 public:
 	Point3D o;  // origin
 	Vector3D d;  // direction
-	int depth;  // FIX: no where used (it is just set in Reflective::shade, but no where used)
+	int depth;  // FIXME: no where used (it is just set in Reflective::shade, but no where used)
 
 	Ray();
 	Ray(Point3D const & origin, Vector3D const & dir);

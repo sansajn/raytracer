@@ -20,3 +20,19 @@ default_implementation::default_implementation(string_view where) {
 char const * default_implementation::what() const noexcept {
 	return _what.c_str();
 }
+
+not_implemented::not_implemented(string_view where) {
+	ostringstream oss;
+
+	oss << "\"" << where << "\""
+		<< " not implemnted.\n"
+		<< "\n"
+		<< "Stack trace:\n"
+		<< boost::stacktrace::stacktrace{} << "\n";
+
+	_what = oss.str();
+}
+
+char const * not_implemented::what() const noexcept {
+	return _what.c_str();
+}

@@ -16,15 +16,24 @@ RGBColor Phong::shade(ShadeRec& sr) {
 	int 		num_lights	= sr.w.lights.size();
 
 	for (int j = 0; j < num_lights; j++) {
-		Vector3D wi = sr.w.lights[j]->get_direction(sr);
-		float ndotwi = sr.normal * wi;
+		Light * light = sr.w.lights[j];
+		Vector3D wi = light->get_direction(sr);
+		float const ndotwi = sr.normal * wi,
+			ndotwo = sr.normal * wo;
 
-		if (ndotwi > 0.0)  // FIX: shadow support missing (see SV_Matte)
-			L += (	diffuse_brdf->f(sr, wo, wi) +
-					specular_brdf->f(sr, wo, wi)) * sr.w.lights[j]->L(sr) * ndotwi;
+		if (ndotwi > 0.0 && ndotwo > 0) {
+			bool in_shadow = false;
+			if (light->casts_shadows()) {
+				Ray shadow_ray{sr.hit_point, wi};
+				in_shadow = light->in_shadow(shadow_ray, sr);
+			}
+
+			if (!in_shadow)
+				L += (diffuse_brdf->f(sr, wo, wi) + specular_brdf->f(sr, wo, wi)) * sr.w.lights[j]->L(sr) * ndotwi;
+		}
 	}
 
-	return (L);
+	return L;
 }
 
 void Phong::set_ka(float ka) {

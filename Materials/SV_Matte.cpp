@@ -47,7 +47,7 @@ RGBColor SV_Matte::shade(ShadeRec & sr) {
 			ndotwo = sr.normal * wo;
 
 		if (ndotwi > 0.0 && ndotwo > 0) {
-			bool in_shadow = false;  // TODO: netreba do Matte implementovat shadows?
+			bool in_shadow = false;
 			if (light_ptr->casts_shadows()) {
 				Ray shadow_ray{sr.hit_point, wi};
 				in_shadow = light_ptr->in_shadow(shadow_ray, sr);
