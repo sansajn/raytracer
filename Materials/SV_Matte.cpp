@@ -34,7 +34,7 @@ void SV_Matte::set_cd(Texture const * t) {
 	diffuse_brdf->set_cd(t);
 }
 
-RGBColor SV_Matte::shade(ShadeRec & sr) {
+RGBColor SV_Matte::shade(ShadeRec & sr) const {
 	Vector3D const wo = -sr.ray.d;
 	RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 
@@ -61,7 +61,7 @@ RGBColor SV_Matte::shade(ShadeRec & sr) {
 	return L;
 }
 
-RGBColor SV_Matte::area_light_shade(ShadeRec & sr) {
+RGBColor SV_Matte::area_light_shade(ShadeRec & sr) const {
 	Vector3D const wo = -sr.ray.d;
 	RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 

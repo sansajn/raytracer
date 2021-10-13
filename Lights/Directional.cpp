@@ -74,7 +74,7 @@ bool Directional::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 	if (!_shadows)
 		return false;
 	else
-		throw not_implemented{__PRETTY_FUNCTION__};  // TODO: implement
+		throw not_implemented{__PRETTY_FUNCTION__};  // TODO: implement (see PointLight)
 }
 
 

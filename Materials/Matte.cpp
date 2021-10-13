@@ -82,7 +82,7 @@ Matte::~Matte(void) {
 // ---------------------------------------------------------------- shade
 
 RGBColor
-Matte::shade(ShadeRec& sr) {
+Matte::shade(ShadeRec& sr) const {
 	Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 	int 		num_lights	= sr.w.lights.size();
@@ -108,7 +108,7 @@ Matte::shade(ShadeRec& sr) {
 	return L;
 }
 
-RGBColor Matte::area_light_shade(ShadeRec & sr) {
+RGBColor Matte::area_light_shade(ShadeRec & sr) const {
 	Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 	int 		num_lights	= sr.w.lights.size();

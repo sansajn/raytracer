@@ -7,20 +7,12 @@
 #include "Utilities/exception.hpp"
 #include "GeometricObject.h"
 
-// ---------------------------------------------------------------------- default constructor
-
-
-GeometricObject::GeometricObject(void)
-	: material_ptr(NULL)
-{}
-
+using std::shared_ptr;
 
 // ---------------------------------------------------------------------- copy constructor
 
 GeometricObject::GeometricObject (const GeometricObject& object) {
-	if(object.material_ptr)
-		material_ptr = object.material_ptr->clone(); 
-	else  material_ptr = NULL;
+	material_ptr = object.material_ptr;
 }	
 
 
@@ -31,36 +23,23 @@ GeometricObject::operator= (const GeometricObject& rhs) {
 	if (this == &rhs)
 		return (*this);
 			
-	if (material_ptr) {
-		delete material_ptr;
-		material_ptr = NULL;
-	}
-
-	if (rhs.material_ptr)
-		material_ptr = rhs.material_ptr->clone();
+	material_ptr = rhs.material_ptr;
 
 	return (*this);
 }
 
-
-// ---------------------------------------------------------------------- destructor
-
-GeometricObject::~GeometricObject (void) {	
-	if (material_ptr) {
-		delete material_ptr;
-		material_ptr = NULL;
-	}
-}
-
-
 // ---------------------------------------------------------------- set_material
 
-Material * GeometricObject::get_material() const {
-	return material_ptr;
+Material const * GeometricObject::get_material() const {
+	return material_ptr.get();
+}
+
+void GeometricObject::get_material(std::shared_ptr<Material> & m) const {
+	m = material_ptr;
 }
 
 void 
-GeometricObject::set_material(Material* mPtr) {
+GeometricObject::set_material(shared_ptr<Material> mPtr) {
 	material_ptr = mPtr;
 }
 

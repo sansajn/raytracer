@@ -10,7 +10,7 @@ Phong::Phong()
 	, specular_brdf{make_unique<GlossySpecular>()}
 {}
 
-RGBColor Phong::shade(ShadeRec& sr) {
+RGBColor Phong::shade(ShadeRec& sr) const {
 	Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 	int 		num_lights	= sr.w.lights.size();

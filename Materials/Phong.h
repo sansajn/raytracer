@@ -8,7 +8,7 @@ class Phong : public Material {
 public:
 	Phong();
 
-	RGBColor shade(ShadeRec & sr) override;
+	RGBColor shade(ShadeRec & sr) const override;
 
 	void set_ka(float ka);
 	void set_kd(float kd);

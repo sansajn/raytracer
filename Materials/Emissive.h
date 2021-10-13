@@ -9,8 +9,8 @@ public:
 	void scale_radiance(const float ls);
 	void set_ce(RGBColor const & ce);
 
-	RGBColor	shade(ShadeRec& sr) override;
-	RGBColor	area_light_shade(ShadeRec& sr) override;
+	RGBColor	shade(ShadeRec& sr) const override;
+	RGBColor	area_light_shade(ShadeRec& sr) const override;
 	RGBColor	get_Le(ShadeRec const & sr) const override;
 
 	Material * clone() const override;
