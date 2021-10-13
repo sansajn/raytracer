@@ -54,7 +54,6 @@ fig8_21a = cpp.Object('build/BuildFigure8_21a.cpp')
 fig8_21b = cpp.Object('build/BuildFigure8_21b.cpp')
 fig8_21c = cpp.Object('build/BuildFigure8_21c.cpp')
 
-
 cpp.Program('fig3_18', ['main.cpp', engine, fig3_18])
 cpp.Program('fig3_20a', ['main.cpp', engine, fig3_20a])
 cpp.Program('ch3_title', ['main.cpp', engine, ch3_title])
@@ -73,3 +72,5 @@ cpp.Program('fig8_19c', ['main.cpp', engine, fig8_19c])
 cpp.Program('fig8_21a', ['main.cpp', engine, fig8_21a])
 cpp.Program('fig8_21b', ['main.cpp', engine, fig8_21b])
 cpp.Program('fig8_21c', ['main.cpp', engine, fig8_21c])
+#cpp.Program('fig8_22a', ['main.cpp', engine, 'build/BuildFigure8_22a.cpp'])
+cpp.Program('ch08_title', ['main.cpp', engine, 'build/BuildCh08Title.cpp'])
