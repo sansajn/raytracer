@@ -20,9 +20,6 @@ class Sphere: public GeometricObject {
 		virtual Sphere* 									// Virtual copy constructor
 		clone(void) const;
 
-		virtual												// Destructor
-		~Sphere(void);   									
-
 		Sphere& 											// assignment operator
 		operator= (const Sphere& sphere);				
 																					

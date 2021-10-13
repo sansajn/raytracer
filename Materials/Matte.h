@@ -35,8 +35,8 @@ class Matte: public Material {
 		void																						
 		set_cd(const float c);
 				
-		RGBColor shade(ShadeRec& sr) override;
-		RGBColor area_light_shade(ShadeRec & sr) override;
+		RGBColor shade(ShadeRec& sr) const override;
+		RGBColor area_light_shade(ShadeRec & sr) const override;
 		
 	private:
 		Lambertian*		ambient_brdf;

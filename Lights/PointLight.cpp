@@ -69,3 +69,21 @@ RGBColor
 PointLight::L([[maybe_unused]] ShadeRec& s) {
 	return (ls * color);
 }
+
+bool PointLight::in_shadow(Ray const & ray, ShadeRec const & sr) const {
+	if (_shadows) {
+		size_t num_objects = size(sr.w.objects);
+		double d = location.distance(ray.o);
+
+		for (size_t j = 0; j < num_objects; ++j) {
+			if (double t;
+				sr.w.objects[j]->shadow_hit(ray, t) && t < d) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	else
+		return false;  // shadows off
+}

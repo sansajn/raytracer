@@ -9,8 +9,8 @@ class SV_Matte : public Material {
 public:
 	SV_Matte();
 
-	RGBColor shade(ShadeRec & sr) override;
-	RGBColor area_light_shade(ShadeRec & sr) override;
+	RGBColor shade(ShadeRec & sr) const override;
+	RGBColor area_light_shade(ShadeRec & sr) const override;
 
 	void set_ka(float const k);
 	void set_kd(float const k);

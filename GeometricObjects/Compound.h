@@ -16,7 +16,7 @@ class Compound: public GeometricObject {
 public:
 	Compound();
 
-	void set_material(Material* material_ptr) override;
+	void set_material(std::shared_ptr<Material> material_ptr) override;
 	virtual void add_object(GeometricObject * object_ptr);
 	int get_num_objects(void);
 

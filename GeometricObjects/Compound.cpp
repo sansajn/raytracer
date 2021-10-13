@@ -8,8 +8,9 @@
 #include <stdexcept>
 #include "Constants.h"
 #include "Compound.h"
+#include "Utilities/exception.hpp"
 
-using std::vector, std::logic_error;
+using std::vector, std::logic_error, std::shared_ptr;
 using namespace std::string_literals;
 					
 
@@ -72,11 +73,9 @@ Compound::add_object(GeometricObject* object_ptr) {
 // sets the same material on all objects
 
 void 
-Compound::set_material(Material* material_ptr) {
-	int num_objects = objects.size();
-
-	for (int j = 0; j < num_objects; j++)
-		objects[j]->set_material(material_ptr);
+Compound::set_material(shared_ptr<Material> material_ptr) {
+	for (auto o : objects)
+		o->set_material(material_ptr);
 }
 
 
@@ -124,7 +123,7 @@ Compound::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 		if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
 			hit				= true;
 			tmin 			= t;
-			material_ptr	= objects[j]->get_material();	// lhs is GeometricObject::material_ptr
+			objects[j]->get_material(material_ptr);
 			normal			= sr.normal;
 			local_hit_point	= sr.local_hit_point;  
 		}
@@ -139,7 +138,7 @@ Compound::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool Compound::shadow_hit(Ray const & ray, double & tmin) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 

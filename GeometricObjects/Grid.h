@@ -24,7 +24,6 @@
 #include "Utilities/Mesh.h"
 #include "Utilities/BBox.h"
 
-
 //---------------------------------------------------------------------- class Grid
 
 class Grid: public Compound {										  	
@@ -70,7 +69,7 @@ class Grid: public Compound {
 		reverse_mesh_normals(void);
 
 		void
-		store_material(Material* material, const int index); 							
+		store_material(std::shared_ptr<Material> material, const int index);
 
 	private: 
 
@@ -107,7 +106,7 @@ Grid::reverse_mesh_normals(void) {
 // this is called from the Rosette and Archway classes, which inherit from Grid
 
 inline void
-Grid::store_material(Material* material_ptr, const int index) {
+Grid::store_material(std::shared_ptr<Material> material_ptr, const int index) {
 	objects[index]->set_material(material_ptr); 
 }
 

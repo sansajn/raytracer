@@ -34,7 +34,7 @@ void SV_Matte::set_cd(Texture const * t) {
 	diffuse_brdf->set_cd(t);
 }
 
-RGBColor SV_Matte::shade(ShadeRec & sr) {
+RGBColor SV_Matte::shade(ShadeRec & sr) const {
 	Vector3D const wo = -sr.ray.d;
 	RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 
@@ -47,7 +47,7 @@ RGBColor SV_Matte::shade(ShadeRec & sr) {
 			ndotwo = sr.normal * wo;
 
 		if (ndotwi > 0.0 && ndotwo > 0) {
-			bool in_shadow = false;  // TODO: netreba do Matte implementovat shadows?
+			bool in_shadow = false;
 			if (light_ptr->casts_shadows()) {
 				Ray shadow_ray{sr.hit_point, wi};
 				in_shadow = light_ptr->in_shadow(shadow_ray, sr);
@@ -61,7 +61,7 @@ RGBColor SV_Matte::shade(ShadeRec & sr) {
 	return L;
 }
 
-RGBColor SV_Matte::area_light_shade(ShadeRec & sr) {
+RGBColor SV_Matte::area_light_shade(ShadeRec & sr) const {
 	Vector3D const wo = -sr.ray.d;
 	RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 

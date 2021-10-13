@@ -10,13 +10,14 @@
 
 class GeometricObject {
 public:
-	GeometricObject();
+	GeometricObject() = default;
 
 	virtual bool hit(Ray const & ray, double & t, ShadeRec & sr) const = 0;
 	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
 
-	Material * get_material() const;
-	virtual void set_material(Material * mPtr);
+	Material const * get_material() const;
+	void get_material(std::shared_ptr<Material> & m) const;
+	virtual void set_material(std::shared_ptr<Material> mPtr);
 	RGBColor const & get_color() const;
 	void set_color(RGBColor const & c);
 	void set_color(float r, float g, float b);
@@ -35,12 +36,12 @@ public:
 
 	GeometricObject(GeometricObject const & object);
 
-	virtual ~GeometricObject();
+	virtual ~GeometricObject() = default;
 
 protected:
 	GeometricObject & operator=(GeometricObject const & rhs);
 
-	mutable Material * material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
+	mutable std::shared_ptr<Material> material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
 
 private:
 	RGBColor color;

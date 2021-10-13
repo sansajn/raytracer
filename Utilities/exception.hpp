@@ -15,3 +15,16 @@ public:
 private:
 	std::string _what;
 };
+
+/*! Exception with stacktrace dump for calling not implemented code.
+\code
+throw not_implemented{__PRETTY_FUNCTION__};
+\endcode */
+class not_implemented : public std::exception {
+public:
+	not_implemented(std::string_view where);
+	char const * what() const noexcept override;
+
+private:
+	std::string _what;
+};

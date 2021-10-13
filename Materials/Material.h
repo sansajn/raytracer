@@ -6,8 +6,8 @@ class Material {
 public:
 	Material() = default;
 
-	virtual RGBColor shade(ShadeRec & sr);
-	virtual RGBColor area_light_shade(ShadeRec & sr);
+	virtual RGBColor shade(ShadeRec & sr) const;
+	virtual RGBColor area_light_shade(ShadeRec & sr) const;
 	virtual RGBColor get_Le(ShadeRec const & sr) const;
 
 	virtual Material * clone(void) const = 0;

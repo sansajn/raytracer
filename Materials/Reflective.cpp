@@ -68,7 +68,7 @@ Reflective::~Reflective(void) {
 // ------------------------------------------------------------------------------------ shade 
 
 RGBColor
-Reflective::shade(ShadeRec& sr) {	
+Reflective::shade(ShadeRec& sr) const {
 	RGBColor L(Phong::shade(sr));  // direct illumination
 	
 	Vector3D wo = -sr.ray.d;
@@ -82,7 +82,7 @@ Reflective::shade(ShadeRec& sr) {
 	return (L);
 }
 
-RGBColor Reflective::area_light_shade(ShadeRec & sr) {
+RGBColor Reflective::area_light_shade(ShadeRec & sr) const {
 	// FIX: shade() copy-paste, find out proper implementation
 	RGBColor L(Phong::shade(sr));  // direct illumination
 

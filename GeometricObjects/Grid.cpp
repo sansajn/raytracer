@@ -918,7 +918,7 @@ Grid::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 		
 		if (tx_next < ty_next && tx_next < tz_next) {
 			if (object_ptr && object_ptr->hit(ray, t, sr) && t < tx_next) {
-				material_ptr = object_ptr->get_material();
+				object_ptr->get_material(material_ptr);
 				return (true);
 			}
 			
@@ -931,7 +931,7 @@ Grid::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 		else { 	
 			if (ty_next < tz_next) {
 				if (object_ptr && object_ptr->hit(ray, t, sr) && t < ty_next) {
-					material_ptr = object_ptr->get_material();
+					object_ptr->get_material(material_ptr);
 					return (true);
 				}
 				
@@ -943,7 +943,7 @@ Grid::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 		 	}
 		 	else {		
 				if (object_ptr && object_ptr->hit(ray, t, sr) && t < tz_next) {
-					material_ptr = object_ptr->get_material();
+					object_ptr->get_material(material_ptr);
 					return (true);
 				}
 				

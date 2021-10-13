@@ -1,6 +1,7 @@
 #include <string>
 #include <stdexcept>
 #include "Material.h"
+#include "Utilities/exception.hpp"
 
 using std::logic_error;
 using namespace std::string_literals;
@@ -12,14 +13,14 @@ Material & Material::operator=(Material const & rhs) {
 	return *this;
 }
 
-RGBColor Material::shade(ShadeRec &) {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+RGBColor Material::shade(ShadeRec &) const {
+	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
-RGBColor Material::area_light_shade(ShadeRec &) {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+RGBColor Material::area_light_shade(ShadeRec &) const {
+	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 RGBColor Material::get_Le(ShadeRec const &) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+	throw default_implementation{__PRETTY_FUNCTION__};
 }

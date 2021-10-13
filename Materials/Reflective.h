@@ -19,8 +19,8 @@ public:
 	void set_cr(const float r, const float g, const float b);
 	void set_cr(const float c);
 
-	RGBColor	shade(ShadeRec& s) override;
-	RGBColor area_light_shade(ShadeRec & sr) override;
+	RGBColor	shade(ShadeRec& s) const override;
+	RGBColor area_light_shade(ShadeRec & sr) const override;
 
 	Reflective * clone() const override;
 

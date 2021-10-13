@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include "Directional.h"
+#include "Utilities/exception.hpp"
 
 using std::logic_error;
 
@@ -73,7 +74,7 @@ bool Directional::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 	if (!_shadows)
 		return false;
 	else
-		throw logic_error{"shadows not yet implementes"};  // TODO: implement
+		throw not_implemented{__PRETTY_FUNCTION__};  // TODO: implement (see PointLight)
 }
 
 
