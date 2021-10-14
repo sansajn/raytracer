@@ -78,8 +78,7 @@ void World::build() {
 	
 	// first row
 	
-//	int num_boxes = 40;
-	int num_boxes = 1;
+	int num_boxes = 40;
 	float wx = 50;
 	float wz = 50;
 	float h = 150;
@@ -93,7 +92,6 @@ void World::build() {
 		grid_ptr->add_object(box_ptr);
 	}
 	
-/*
 	// second row
 	
 	h = 300;
@@ -131,7 +129,6 @@ void World::build() {
 //		add_object(box_ptr);
 		grid_ptr->add_object(box_ptr);
 	}
-*/
 	
 	grid_ptr->setup_cells();
 	add_object(grid_ptr);
