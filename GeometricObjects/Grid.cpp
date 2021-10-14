@@ -21,6 +21,7 @@
 #include "SmoothTriangle.h"
 #include "ply.h"
 #include "Utilities/Maths.h"
+#include "Utilities/exception.hpp"
 
 using std::vector, std::cout, std::endl;
 
@@ -957,4 +958,6 @@ Grid::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 	}
 }	// end of hit
 
-
+bool Grid::shadow_hit(Ray const & ray, double & tmin) const {
+	throw not_implemented{__PRETTY_FUNCTION__};
+}

@@ -3,7 +3,7 @@
 # TODO: implement --with-ui to build against wxwidget as interface
 
 cpp = Environment(
-	CCFLAGS=['-Wall', '-Og', '-ggdb3'],
+	CCFLAGS=['-Wall', '-O0', '-ggdb3'],
 	CXXFLAGS=['--std=c++17'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
@@ -77,3 +77,4 @@ cpp.Program('ch08_title', ['main.cpp', engine, 'build/BuildCh08Title.cpp'])
 cpp.Program('fig9_9a', ['main.cpp', engine, 'build/BuildFigure9_9a.cpp'])
 cpp.Program('fig9_9b', ['main.cpp', engine, 'build/BuildFigure9_9b.cpp'])
 cpp.Program('fig9_9c', ['main.cpp', engine, 'build/BuildFigure9_9c.cpp'])
+cpp.Program('fig9_10a', ['main.cpp', engine, 'build/BuildFigure9_10a.cpp'])

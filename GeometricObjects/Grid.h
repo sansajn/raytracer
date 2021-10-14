@@ -33,19 +33,16 @@ class Grid: public Compound {
 
 		Grid(Mesh* _mesh_ptr);    										
 
-		virtual Grid* 										
-		clone(void) const;
+		virtual Grid * clone() const override;
 
-		Grid(const Grid& rg); 		
+		Grid(Grid const & rg);
 
 		Grid& 								
 		operator= (const Grid& rhs);	
 
-		virtual 										
-		~Grid(void);   			
+		virtual ~Grid();
 
-		virtual BBox 
-		get_bounding_box(void);
+		BBox get_bounding_box() override;
 
 		void												
 		read_flat_triangles(char* file_name);
@@ -59,8 +56,8 @@ class Grid: public Compound {
 		void												
 		tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps);
 
-		bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
-		// shadow_hit
+		bool hit(Ray const & ray, double& tmin, ShadeRec& sr) const override;
+		bool shadow_hit(Ray const & ray, double & tmin) const override;
 
 		void
 		setup_cells(void);

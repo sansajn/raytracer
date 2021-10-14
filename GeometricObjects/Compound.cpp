@@ -138,7 +138,14 @@ Compound::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool Compound::shadow_hit(Ray const & ray, double & tmin) const {
-	throw default_implementation{__PRETTY_FUNCTION__};
+	bool hit = false;
+	tmin = kHugeValue;
+	for (GeometricObject * g : objects) {
+		if (double t; g->shadow_hit(ray, t) && (t < tmin)) {
+			tmin = t;
+			hit = true;
+		}
+	}
+
+	return hit;
 }
-
-
