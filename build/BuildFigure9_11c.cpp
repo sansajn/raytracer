@@ -32,33 +32,27 @@ void World::build() {
 
 	// for Figure 9.11(a)	
 
-	camera_ptr->set_eye(0, 0, 500);
-	camera_ptr->set_lookat(0);    
-	camera_ptr->set_view_distance(500);
-	camera_ptr->set_up_vector(1, 1, 0); 
+//	camera_ptr->set_eye(0, 0, 500);
+//	camera_ptr->set_lookat(0);
+//	camera_ptr->set_view_distance(500);
+//	camera_ptr->set_up_vector(1, 1, 0);
 
 
-/*
-	
 	// for Figure 9.11(b)
 	
-	camera_ptr->set_eye(500, 0, 0);
-	camera_ptr->set_lookat(0);    
-	camera_ptr->set_view_distance(400);
-	camera_ptr->set_up_vector(0, 1, -1);
-	
-*/
+//	camera_ptr->set_eye(500, 0, 0);
+//	camera_ptr->set_lookat(0);
+//	camera_ptr->set_view_distance(400);
+//	camera_ptr->set_up_vector(0, 1, -1);
 
-/*	
+	
 	// for Figure 9.11(c)
 		
 	camera_ptr->set_eye(300, 400, 500);
 	camera_ptr->set_lookat(-20, -30, -50); 
 	camera_ptr->set_view_distance(400);
-	camera_ptr->set_roll_angle(145);        // see Exercise 9.6
+	camera_ptr->set_roll(/*145*/10);        // see Exercise 9.6
 	
-*/
-
 	
 	camera_ptr->compute_uvw();		  
 	set_camera(move(camera_ptr));
