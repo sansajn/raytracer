@@ -9,6 +9,7 @@
 /image_*.ppm
 
 # binaries
+/test/test
 /fig3_18
 /fig3_20a
 /ch3_title
@@ -34,3 +35,6 @@
 /fig9_10a
 /fig9_10b
 /fig9_10c
+/fig9_11a
+/fig9_11b
+/fig9_11c
