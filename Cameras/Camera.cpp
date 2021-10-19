@@ -52,13 +52,6 @@ Camera::operator= (const Camera& rhs) {
 	return (*this);
 }
 
-
-// ----------------------------------------------------------------- destructor
-
-Camera::~Camera(void) {}
-
-
-
 //-------------------------------------------------------------- compute_uvw
 
 // This computes an orthornormal basis given the view point, lookat point, and up vector
@@ -85,7 +78,7 @@ Camera::compute_uvw(void) {
 		w = Vector3D(0, -1, 0);
 	}
 
-	if (ra != 0) {
+	if (ra != 0) {  // formula 20.18 used
 		// apply roll
 		Vector3D p = eye - lookat;
 		Matrix Tp = {

@@ -53,10 +53,6 @@ RGBColor SV_Matte::shade(ShadeRec & sr) const {
 				in_shadow = light_ptr->in_shadow(shadow_ray, sr);
 			}
 
-			if (in_shadow) {
-				int __dummy = 100;
-			}
-
 			if (!in_shadow)
 				L += diffuse_brdf->f(sr, wo, wi) * light_ptr->L(sr) * light_ptr->G(sr) * ndotwi;
 		}

@@ -21,8 +21,7 @@ class Camera {
 		virtual Camera*							// virtual copy constructor
 		clone(void) const = 0;
 		
-		virtual
-		~Camera();   							
+		virtual ~Camera() = default;
 
 		virtual void 																		
 		render_scene(const World& w) = 0;
