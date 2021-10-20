@@ -83,6 +83,11 @@ cpp.Program('fig9_10c', ['main.cpp', engine, 'build/BuildFigure9_10c.cpp'])
 cpp.Program('fig9_11a', ['main.cpp', engine, 'build/BuildFigure9_11a.cpp'])
 cpp.Program('fig9_11b', ['main.cpp', engine, 'build/BuildFigure9_11b.cpp'])
 cpp.Program('fig9_11c', ['main.cpp', engine, 'build/BuildFigure9_11c.cpp'])
+cpp.Program('fig10_9a', ['main.cpp', engine, 'build/BuildFigure10_9a.cpp'])
+cpp.Program('fig10_9b', ['main.cpp', engine, 'build/BuildFigure10_9b.cpp'])
+cpp.Program('fig10_10a', ['main.cpp', engine, 'build/BuildFigure10_10a.cpp'])
+cpp.Program('fig10_10b', ['main.cpp', engine, 'build/BuildFigure10_10b.cpp'])
+cpp.Program('fig10_10c', ['main.cpp', engine, 'build/BuildFigure10_10c.cpp'])
 
 # tests
 cpp.Program('test/test', [
