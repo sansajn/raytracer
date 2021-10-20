@@ -12,7 +12,7 @@
 // The prototypes of any inlined functions must be placed here
 
 #include <stdlib.h>
-
+#include <cmath>
 #include "Constants.h"
 #include "RGBColor.h"
 
@@ -61,6 +61,11 @@ max(double x0, double x1) {
 inline double
 clamp(const double x, const double min, const double max) {
 	return (x < min ? min : (x > max ? max : x));
+}
+
+template <typename T>
+T radians(T const & val) {
+	return static_cast<T>(val * PI_ON_180);
 }
 
 #endif

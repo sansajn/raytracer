@@ -3,7 +3,7 @@
 # TODO: implement --with-ui to build against wxwidget as interface
 
 cpp = Environment(
-	CCFLAGS=['-Wall', '-Og', '-ggdb3'],
+	CCFLAGS=['-Wall', '-O0', '-ggdb3'],
 	CXXFLAGS=['--std=c++17'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
@@ -74,3 +74,18 @@ cpp.Program('fig8_21b', ['main.cpp', engine, fig8_21b])
 cpp.Program('fig8_21c', ['main.cpp', engine, fig8_21c])
 #cpp.Program('fig8_22a', ['main.cpp', engine, 'build/BuildFigure8_22a.cpp'])
 cpp.Program('ch08_title', ['main.cpp', engine, 'build/BuildCh08Title.cpp'])
+cpp.Program('fig9_9a', ['main.cpp', engine, 'build/BuildFigure9_9a.cpp'])
+cpp.Program('fig9_9b', ['main.cpp', engine, 'build/BuildFigure9_9b.cpp'])
+cpp.Program('fig9_9c', ['main.cpp', engine, 'build/BuildFigure9_9c.cpp'])
+cpp.Program('fig9_10a', ['main.cpp', engine, 'build/BuildFigure9_10a.cpp'])
+cpp.Program('fig9_10b', ['main.cpp', engine, 'build/BuildFigure9_10b.cpp'])
+cpp.Program('fig9_10c', ['main.cpp', engine, 'build/BuildFigure9_10c.cpp'])
+cpp.Program('fig9_11a', ['main.cpp', engine, 'build/BuildFigure9_11a.cpp'])
+cpp.Program('fig9_11b', ['main.cpp', engine, 'build/BuildFigure9_11b.cpp'])
+cpp.Program('fig9_11c', ['main.cpp', engine, 'build/BuildFigure9_11c.cpp'])
+
+# tests
+cpp.Program('test/test', [
+	'test/test.cpp',
+	'test/matrix.cpp',
+	engine])

@@ -71,10 +71,14 @@ Directional::L(ShadeRec& s) {
 }
 
 bool Directional::in_shadow(Ray const & ray, ShadeRec const & sr) const {
-	if (!_shadows)
+	if (_shadows) {
+		for (GeometricObject * g : sr.w.objects) {
+			if (double t; g->shadow_hit(ray, t))
+				return true;
+		}
+
 		return false;
+	}
 	else
-		throw not_implemented{__PRETTY_FUNCTION__};  // TODO: implement (see PointLight)
+		return false;  // shadows off
 }
-
-

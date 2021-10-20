@@ -1,6 +1,7 @@
 // This file contains the definition of the Camera class
 
 #include "Camera.h"
+#include "Maths.h"
 
 
 // ----------------------------------------------------------------- default constructor
@@ -51,13 +52,6 @@ Camera::operator= (const Camera& rhs) {
 	return (*this);
 }
 
-
-// ----------------------------------------------------------------- destructor
-
-Camera::~Camera(void) {}
-
-
-
 //-------------------------------------------------------------- compute_uvw
 
 // This computes an orthornormal basis given the view point, lookat point, and up vector
@@ -82,6 +76,43 @@ Camera::compute_uvw(void) {
 		u = Vector3D(1, 0, 0);
 		v = Vector3D(0, 0, 1);
 		w = Vector3D(0, -1, 0);
+	}
+
+	if (ra != 0) {  // formula 20.18 used
+		// apply roll
+		Vector3D p = eye - lookat;
+		Matrix Tp = {
+			{1, 0, 0},
+			{0, 1, 0},
+			{0, 0, 1},
+			p
+		};
+
+		Matrix R{u, v, w};
+		Matrix R_trans = transpose(R);
+		Matrix Tp_inv = {
+			{1, 0, 0},
+			{0, 1, 0},
+			{0, 0, 1},
+			-p
+		};
+
+		double angle = radians(ra);
+		double cos_ra = cos(angle),
+			sin_ra = sin(angle);
+
+		Matrix Rz = {
+			cos_ra, sin_ra, 0, 0,
+			-sin_ra, cos_ra, 0, 0,
+			0, 0, 1, 0
+		};
+
+		Matrix T = Tp * R_trans * Rz * R * Tp_inv;
+
+		up = T*up;
+		u = up ^ w;
+		u.normalize();
+		v = w ^ u;
 	}
 }
 

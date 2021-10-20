@@ -21,8 +21,7 @@ class Camera {
 		virtual Camera*							// virtual copy constructor
 		clone(void) const = 0;
 		
-		virtual
-		~Camera();   							
+		virtual ~Camera() = default;
 
 		virtual void 																		
 		render_scene(const World& w) = 0;
@@ -57,12 +56,12 @@ class Camera {
 		
 	protected:		
 	
-		Point3D			eye;				// eye point
-		Point3D			lookat; 			// lookat point
-		float			ra;					// roll angle
-		Vector3D		u, v, w;			// orthonormal basis vectors
-		Vector3D		up;					// up vector
-		float			exposure_time;
+		Point3D eye;				// eye point
+		Point3D lookat; 			// lookat point
+		float ra;					// roll angle
+		Vector3D	u, v, w;			// orthonormal basis vectors
+		Vector3D	up;					// up vector
+		float	exposure_time;
 		
 		Camera& 							// assignment operator
 		operator= (const Camera& camera);

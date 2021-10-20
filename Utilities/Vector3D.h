@@ -3,10 +3,9 @@
 
 // This file contains the defintion of the class Vector3D
 
-#include "Matrix.h"
-
 class Normal;
 class Point3D;
+class Matrix;
 
 //----------------------------------------- class Vector3D
 
@@ -71,6 +70,10 @@ class Vector3D {
 		Vector3D& 												// return a unit vector, and normalize the vector												
 		hat(void);
 };
+
+inline bool operator==(Vector3D const & lhs, Vector3D const & rhs) {
+	return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
+}
 
 
 // inlined member functions

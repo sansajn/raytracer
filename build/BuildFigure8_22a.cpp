@@ -13,7 +13,7 @@
 
 using std::make_unique, std::move;
 
-void World::build(void) {
+void World::build() {
 	constexpr int num_samples = 16;
 	
 	vp.set_hres(400);

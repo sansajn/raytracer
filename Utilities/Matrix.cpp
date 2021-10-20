@@ -27,10 +27,35 @@ Matrix::Matrix (const Matrix& mat) {
 
 // ----------------------------------------------------------------------- destructor
 
-Matrix::~Matrix (void) {}   
+Matrix::Matrix(
+	double xx, double xy, double xz, double px,
+	double yx, double yy, double yz, double py,
+	double zx, double zy, double zz, double pz)
+{
+	m[0][0] = xx; m[0][1] = xy; m[0][2] = xz;	m[0][3] = px;
+	m[1][0] = yx; m[1][1] = yy; m[1][2] = yz; m[1][3] = py;
+	m[2][0] = zx; m[2][1] = zy; m[2][2] = zz; m[2][3] = pz;
+	m[3][0] = 0;  m[3][1] = 0;  m[3][2] = 0;  m[3][3] = 1;
+}
 
+Matrix::Matrix(
+	double xx, double xy, double xz, double xw,
+	double yx, double yy, double yz, double yw,
+	double zx, double zy, double zz, double zw,
+	double wx, double wy, double wz, double ww) {
 
+	m[0][0] = xx; m[0][1] = xy; m[0][2] = xz;	m[0][3] = xw;
+	m[1][0] = yx; m[1][1] = yy; m[1][2] = yz; m[1][3] = yw;
+	m[2][0] = zx; m[2][1] = zy; m[2][2] = zz; m[2][3] = zw;
+	m[3][0] = wx; m[3][1] = wy; m[3][2] = wz; m[3][3] = ww;
+}
 
+Matrix::Matrix(Vector3D const & x, Vector3D const & y, Vector3D const & z, Vector3D const & p) {
+	m[0][0] = x.x; m[0][1] = x.y; m[0][2] = x.z;	m[0][3] = p.x;
+	m[1][0] = y.x; m[1][1] = y.y; m[1][2] = y.z; m[1][3] = p.y;
+	m[2][0] = z.x; m[2][1] = z.y; m[2][2] = z.z; m[2][3] = p.z;
+	m[3][0] = 0;   m[3][1] = 0;   m[3][2] = 0;   m[3][3] =  1;
+}
 
 // ----------------------------------------------------------------------- assignment operator
 
@@ -96,6 +121,14 @@ Matrix::set_identity(void) {
 		}
 }
 
+Matrix transpose(Matrix const & m) {
+	return Matrix{
+		m.m[0][0], m.m[1][0], m.m[2][0], m.m[3][0],
+		m.m[0][1], m.m[1][1], m.m[2][1], m.m[3][1],
+		m.m[0][2], m.m[1][2], m.m[2][2], m.m[3][2],
+		m.m[0][3], m.m[1][3], m.m[2][3], m.m[3][3]
+	};
+}
 
 
 
