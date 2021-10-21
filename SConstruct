@@ -92,6 +92,7 @@ cpp.Program('fig10_11a', ['main.cpp', engine, 'build/BuildFigure10_11a.cpp'])
 cpp.Program('fig10_11b', ['main.cpp', engine, 'build/BuildFigure10_11b.cpp'])
 cpp.Program('fig10_12', ['main.cpp', engine, 'build/BuildFigure10_12.cpp'])
 cpp.Program('fig10_13', ['main.cpp', engine, 'build/BuildFigure10_13.cpp'])
+cpp.Program('fig11_7a', ['main.cpp', engine, 'build/BuildFigure11_7a.cpp'])
 
 # tests
 cpp.Program('test/test', [
