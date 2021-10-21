@@ -203,13 +203,8 @@ void World::build() {
 	ImageTexture* image_texture_ptr = new ImageTexture(image_ptr); 
 	image_texture_ptr->set_mapping(spherical_map_ptr);
 	
-	SV_Matte* sv_matte_ptr2 = new SV_Matte;		
-	sv_matte_ptr2->set_ka(1);
-	sv_matte_ptr2->set_kd(0.85);
-	sv_matte_ptr2->set_cd(image_texture_ptr);	
-	
 	Instance* sphere_ptr1 = new Instance(new Sphere); 
 	sphere_ptr1->scale(1000000);
-	sphere_ptr1->set_material(sv_matte_ptr2);
+	sphere_ptr1->set_material(make_shared<SV_Matte>(1, 0.85, image_texture_ptr));
 	add_object(sphere_ptr1);
 }

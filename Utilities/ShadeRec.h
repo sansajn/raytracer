@@ -29,6 +29,7 @@ class ShadeRec {
 		float				t;					// ray parameter
 		World&				w;					// World reference
 		RGBColor            color;
+		float u, v;  // uv mapping coordinates
 				
 		ShadeRec(World& wr);					// constructor
 		

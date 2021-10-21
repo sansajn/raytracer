@@ -20,7 +20,8 @@ ShadeRec::ShadeRec(World& wr)
 		ray(),
 		depth(0),
 		t(0.0),
-		w(wr)
+		w(wr),
+		u{0.0f}, v{0.0f}
 {}
 
 
