@@ -15,9 +15,11 @@ public:
 	virtual bool hit(Ray const & ray, double & t, ShadeRec & sr) const = 0;
 	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
 
-	Material const * get_material() const;
-	void get_material(std::shared_ptr<Material> & m) const;
+	// material API needs to be virtual due to Instance implementation
+	virtual Material const * get_material() const;
+	virtual void get_material(std::shared_ptr<Material> & m) const;
 	virtual void set_material(std::shared_ptr<Material> mPtr);  //!< \note we do not want all objects look the same so maybe material shuold be unique
+
 	RGBColor const & get_color() const;
 	void set_color(RGBColor const & c);
 	void set_color(float r, float g, float b);

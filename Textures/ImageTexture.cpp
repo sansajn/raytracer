@@ -3,7 +3,7 @@
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
-
+#include <stdexcept>
 #include "ImageTexture.h"
 
 // ---------------------------------------------------------------- default constructor
@@ -120,7 +120,8 @@ ImageTexture::get_color(const ShadeRec& sr) const {
 		mapping_ptr->get_texel_coordinates(sr.local_hit_point, hres, vres, row, column);
 	else {
 		row 	= (int)(sr.v * (vres - 1));  	
-		column 	= (int)(sr.u * (hres - 1));	
+		column 	= (int)(sr.u * (hres - 1));
+		throw std::runtime_error{"sr.u|v always set to 0"};
 	}
 	
 	return (image_ptr->get_color(row, column));

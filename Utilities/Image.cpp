@@ -58,7 +58,7 @@ Image::read_ppm_file(const char* file_name) {
     FILE* file = fopen(file_name, "rb");
     
     if (file == 0){
-		cout << "could not open file" << endl;
+		cout << "could not open file \"" << file_name << "\"" << endl;
 	}
 	else
 		cout << "file opened" << endl;

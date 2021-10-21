@@ -196,7 +196,7 @@ void World::build() {
 	// skydome with clouds
 	
 	Image* image_ptr = new Image;						
-	image_ptr->read_ppm_file("CloudsSmall.ppm");
+	image_ptr->read_ppm_file("assets/CloudsSmall.ppm");
 	
 	SphericalMap* spherical_map_ptr = new SphericalMap; 
 	

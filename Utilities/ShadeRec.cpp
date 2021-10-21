@@ -37,7 +37,8 @@ ShadeRec::ShadeRec(const ShadeRec& sr)
 		depth(sr.depth),
 		t(sr.t),
 		w(sr.w),
-		color{sr.color}
+		color{sr.color},
+		u{sr.u}, v{sr.v}
 {}
 
 

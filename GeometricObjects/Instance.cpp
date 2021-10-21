@@ -104,6 +104,19 @@ Instance::set_object(GeometricObject* obj_ptr) {
 	object_ptr = obj_ptr;
 }
 
+Material const * Instance::get_material() const {
+	return object_ptr->get_material();
+}
+
+void Instance::get_material(std::shared_ptr<Material> & m) const {
+	object_ptr->get_material(m);
+}
+
+void Instance::set_material(std::shared_ptr<Material> m) {
+	object_ptr->set_material(m);
+}
+
+
 
 //---------------------------------------------------------------- set_bounding_box
 // This function is only called when the instance is to be placed in a grid

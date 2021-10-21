@@ -33,7 +33,11 @@ class Instance: public GeometricObject {
 		operator= (const Instance& rhs);
 				
 		void 												
-		set_object(GeometricObject* obj_ptr);	
+		set_object(GeometricObject* obj_ptr);
+
+		Material const * get_material() const override;
+		void get_material(std::shared_ptr<Material> & m) const override;
+		void set_material(std::shared_ptr<Material> m) override;
 		
 		void
 		transform_texture(const bool transform);
