@@ -210,7 +210,7 @@ Sampler::map_samples_to_unit_disk(void) {
 			}
 		}
 		
-		phi *= PI / 4.0;
+		phi *= PI<double> / 4.0;
 				
 		disk_samples[j].x = r * (float)cos(phi);
 		disk_samples[j].y = r * (float)sin(phi);
@@ -231,8 +231,8 @@ Sampler::map_samples_to_hemisphere(const float exp) {
 	hemisphere_samples.reserve(num_samples * num_sets);
 		
 	for (int j = 0; j < size; j++) {
-		double cos_phi = cos(2.0 * PI * samples[j].x);
-		double sin_phi = sin(2.0 * PI * samples[j].x);
+		double cos_phi = cos(2.0 * PI<double> * samples[j].x);
+		double sin_phi = sin(2.0 * PI<double> * samples[j].x);
 		double cos_theta = pow((1.0 - samples[j].y), 1.0 / (exp + 1.0));
 		double sin_theta = sqrt (1.0 - cos_theta * cos_theta);
 		double pu = sin_theta * cos_phi;
@@ -258,7 +258,7 @@ Sampler::map_samples_to_sphere(void) {
     	float r2 	= samples[j].y;
     	float z 	= 1.0f - 2.0f * r1;
     	float r 	= (float)sqrt(1.0 - z * z);
-    	float phi = TWO_PI * r2;
+		float phi = TWO_PI<float> * r2;
     	float x 	= r * (float)cos(phi);
     	float y 	= r * (float)sin(phi);
 		sphere_samples.push_back(Point3D(x, y, z)); 

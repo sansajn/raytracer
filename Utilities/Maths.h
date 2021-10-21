@@ -65,7 +65,7 @@ clamp(const double x, const double min, const double max) {
 
 template <typename T>
 T radians(T const & val) {
-	return static_cast<T>(val * PI_ON_180);
+	return val * PI_ON_180<T>;
 }
 
 #endif
