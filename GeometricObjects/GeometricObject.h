@@ -17,7 +17,7 @@ public:
 
 	Material const * get_material() const;
 	void get_material(std::shared_ptr<Material> & m) const;
-	virtual void set_material(std::shared_ptr<Material> mPtr);
+	virtual void set_material(std::shared_ptr<Material> mPtr);  //!< \note we do not want all objects look the same so maybe material shuold be unique
 	RGBColor const & get_color() const;
 	void set_color(RGBColor const & c);
 	void set_color(float r, float g, float b);

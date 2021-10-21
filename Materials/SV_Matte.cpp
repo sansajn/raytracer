@@ -7,6 +7,14 @@ SV_Matte::SV_Matte()
 	, diffuse_brdf{new SV_Lambertian}
 {}
 
+SV_Matte::SV_Matte(float ka, float kd, Texture const * t)
+	: SV_Matte{}
+{
+	set_ka(ka);
+	set_kd(kd);
+	set_cd(t);
+}
+
 SV_Matte::SV_Matte(SV_Matte const & other)
 	: Material{other}
 {
