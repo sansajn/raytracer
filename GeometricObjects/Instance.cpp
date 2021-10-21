@@ -214,23 +214,6 @@ Instance::get_bounding_box(void) {
 	return (bbox);
 }
 
-//---------------------------------------------------------------- get_material
-																
-Material* 
-Instance::get_material(void) const {
-	return (material_ptr);     
-}
-
-
-//---------------------------------------------------------------- set_material
-// Here, material_ptr is GeometricObject::material_ptr
-
-void 
-Instance::set_material(Material* m_ptr) {
-	material_ptr = m_ptr;
-}
-
-
 
 //----------------------------------------------------------------------------------------- hit 
 
@@ -244,8 +227,7 @@ Instance::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 		sr.normal = inv_matrix * sr.normal;
 		sr.normal.normalize();				
 						
-		if (object_ptr->get_material())
-			material_ptr = object_ptr->get_material(); 
+		object_ptr->get_material(material_ptr);
 			
 		if (!transform_the_texture) 
 			sr.local_hit_point = ray.o + t * ray.d;  		 
@@ -255,6 +237,19 @@ Instance::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 
 	return (false);   
 }
+
+bool Instance::shadow_hit(const Ray& ray, double& tmin) const {
+	Ray inv_ray(ray);
+	inv_ray.o = inv_matrix * inv_ray.o;
+	inv_ray.d = inv_matrix * inv_ray.d;
+
+	if (object_ptr->shadow_hit(inv_ray, tmin)) {
+		return (true);
+	}
+
+	return (false);
+}
+
 
 
 //-------------------------------------------------------------------------------- scale
@@ -355,8 +350,8 @@ Instance::translate(const double dx, const double dy, const double dz) {
 void
 Instance::rotate_x(const double theta) {
 
-	double sin_theta = sin(theta * PI_ON_180);
-	double cos_theta = cos(theta * PI_ON_180);
+	double sin_theta = sin(theta * PI_ON_180<double>);
+	double cos_theta = cos(theta * PI_ON_180<double>);
 	
 	Matrix inv_x_rotation_matrix;					// temporary inverse rotation matrix about x axis
 	
@@ -383,8 +378,8 @@ Instance::rotate_x(const double theta) {
 void
 Instance::rotate_y(const double theta) {
 
-	double sin_theta = sin(theta * PI / 180.0);
-	double cos_theta = cos(theta * PI / 180.0);
+	double sin_theta = sin(theta * PI<double> / 180.0);
+	double cos_theta = cos(theta * PI<double> / 180.0);
 
 	Matrix inv_y_rotation_matrix;					// temporary inverse rotation matrix about y axis
 	
@@ -411,8 +406,8 @@ Instance::rotate_y(const double theta) {
 
 void
 Instance::rotate_z(const double theta) {
-	double sin_theta = sin(theta * PI / 180.0);
-	double cos_theta = cos(theta * PI / 180.0);
+	double sin_theta = sin(theta * PI<double> / 180.0);
+	double cos_theta = cos(theta * PI<double> / 180.0);
 
 	Matrix inv_z_rotation_matrix;					// temporary inverse rotation matrix about y axis	
 	

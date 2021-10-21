@@ -22,6 +22,7 @@
 #include "Lights/PointLight.h"
 #include "Textures/Checker3D.h"
 #include "Textures/SphericalMap.h"
+#include "Textures/ImageTexture.h"
 #include "Materials/Matte.h"
 #include "Materials/SV_Matte.h"
 #include "GeometricObjects/Box.h"

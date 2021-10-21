@@ -39,8 +39,7 @@ class FishEye: public Camera {
 						const float s,
 						float& 		r_squared) const;
 
-		virtual void
-		render_scene(const World& w, float x = 0, int offset = 0) override;
+		void render_scene(const World& w) override;
 
     void
     set_fov(const float fov);

@@ -60,7 +60,7 @@ FishEye::ray_direction(	const Point2D& 	pp,
 
 	if (r_squared <= 1.0) {
 		float r 		= sqrtf(r_squared);
-		float psi 		= r * psi_max * PI_ON_180;
+		float psi 		= r * psi_max * PI_ON_180<float>;
 		float sin_psi 	= sinf(psi);
 		float cos_psi 	= cosf(psi);
 		float sin_alpha = pn.y / r;
@@ -74,7 +74,7 @@ FishEye::ray_direction(	const Point2D& 	pp,
 }
 
 void
-FishEye::render_scene(const World& wr, float x /*= 0*/, int offset /*= 0*/) {
+FishEye::render_scene(const World& wr) {
 	RGBColor	L;
 	ViewPlane	vp(wr.vp);
 	int 		hres		= vp.hres;
@@ -91,11 +91,11 @@ FishEye::render_scene(const World& wr, float x /*= 0*/, int offset /*= 0*/) {
 
 	for (int r = 0; r < vres; r++)		// up
 		for (int c = 0; c < hres; c++) {	// across
-			L = RGBColor::black;
+			L = black;
 
 			for (int j = 0; j < vp.num_samples; j++) {
 				sp = vp.sampler_ptr->sample_unit_square();
-				pp.x = s * (c - 0.5f * hres + sp.x) + x;
+				pp.x = s * (c - 0.5f * hres + sp.x);
 				pp.y = s * (r - 0.5f * vres + sp.y);
 				ray.d = ray_direction(pp, hres, vres, s, r_squared);
 
@@ -106,9 +106,8 @@ FishEye::render_scene(const World& wr, float x /*= 0*/, int offset /*= 0*/) {
 
 			L *= inv_num_samples;
 			L *= exposure_time;
-			wr.display_pixel(r, c + offset, L);
+			wr.display_pixel(r, c, L);
 		}
 
-
-	wr.save_to_ppm();
+//	wr.save_to_ppm();
 }

@@ -44,15 +44,8 @@ class Instance: public GeometricObject {
 		virtual BBox 										
 		get_bounding_box(void);					
 											
-		virtual Material* 									
-		get_material(void) const;  								
-				
-		virtual void 							 	
-		set_material(Material* materialPtr);
-				
-		virtual bool 												 
-		hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
-		
+		bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
+		bool shadow_hit(const Ray& ray, double& tmin) const override;
 		
 		// affine tranformation functions
 		
