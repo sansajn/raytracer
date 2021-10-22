@@ -28,8 +28,6 @@ class SphericalMap: public Mapping {
 		virtual SphericalMap*									
 		clone(void) const;				
 
-		~SphericalMap(void);									
-		
 		virtual void
 		get_texel_coordinates(	const 	Point3D& 	local_hit_point, 
 								const 	int 		xres, 

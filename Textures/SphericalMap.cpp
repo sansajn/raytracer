@@ -26,12 +26,6 @@ SphericalMap::operator= (const SphericalMap& rhs) {
 	return (*this);
 }
 
-
-// ---------------------------------------------------------------- destructor
-
-SphericalMap::~SphericalMap (void) {} 
-
-
 // ---------------------------------------------------------------- clone
 
 SphericalMap*								
@@ -56,13 +50,13 @@ SphericalMap::get_texel_coordinates(	const 	Point3D& 	local_hit_point,
 	
 	float theta = acos(local_hit_point.y);
 	float phi   = atan2(local_hit_point.x, local_hit_point.z);
-	if (phi < 0.0)
+	if (phi < 0.0f)
 		phi += TWO_PI<float>;
 	
 	// next, map theta and phi to (u, v) in [0, 1] X [0, 1]
 		
 	float u = phi * invTWO_PI<float>;
-	float v = 1.0 - theta * invPI<float>;
+	float v = 1.0f - theta * invPI<float>;
 			
 	// finally, map u and v to the texel coordinates
 		
