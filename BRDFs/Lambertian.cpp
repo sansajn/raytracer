@@ -52,7 +52,7 @@ Lambertian::operator= (const Lambertian& rhs) {
 
 RGBColor
 Lambertian::f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const {
-	return (kd * cd * invPI);
+	return (kd * cd * invPI<float>);
 }
 
 

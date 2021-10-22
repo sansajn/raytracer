@@ -50,7 +50,7 @@ void World::build() {
 	pinHole_ptr->set_lookat(-20, 300, -110);  
 	pinHole_ptr->set_view_distance(250);
 	pinHole_ptr->compute_uvw();  
-	set_camera(move(pinHole_ptr));
+//	set_camera(move(pinHole_ptr));
 		
 	
 	// fisheye camera for the other parts
@@ -66,16 +66,12 @@ void World::build() {
 //	fisheye_ptr->set_fov(360);  // part (d)
    
 
-/*	
-	
 	// for part (e)
 	
 	fisheye_ptr->set_eye(250, 450, 150); 
 	fisheye_ptr->set_lookat(-20, 250, -110);  
 	fisheye_ptr->set_fov(360);
 	
-*/
-
 
 /*	
 	// for part (f)
@@ -91,8 +87,8 @@ void World::build() {
 		
 	// for part b, ..., f
 
-//	fisheye_ptr->compute_uvw();
-//	set_camera(move(fisheye_ptr));
+	fisheye_ptr->compute_uvw();
+	set_camera(move(fisheye_ptr));
 
 
 	PointLight* light_ptr1 = new PointLight;

@@ -32,7 +32,7 @@ RGBColor SV_Lambertian::rho(ShadeRec const & sr, Vector3D const & wo) const {
 
 RGBColor SV_Lambertian::f(ShadeRec const & sr, Vector3D const & wo, Vector3D const & wi) const {
 	assert(cd);
-	return kd * cd->get_color(sr) * invPI;
+	return kd * cd->get_color(sr) * invPI<float>;
 }
 
 RGBColor SV_Lambertian::sample_f(ShadeRec const & sr, Vector3D const & wo, Vector3D & wi) const {

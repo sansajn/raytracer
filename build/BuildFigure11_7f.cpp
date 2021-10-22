@@ -50,7 +50,7 @@ void World::build() {
 	pinHole_ptr->set_lookat(-20, 300, -110);  
 	pinHole_ptr->set_view_distance(250);
 	pinHole_ptr->compute_uvw();  
-	set_camera(move(pinHole_ptr));
+//	set_camera(move(pinHole_ptr));
 		
 	
 	// fisheye camera for the other parts
@@ -66,18 +66,15 @@ void World::build() {
 //	fisheye_ptr->set_fov(360);  // part (d)
    
 
-/*	
-	
+/*
 	// for part (e)
 	
 	fisheye_ptr->set_eye(250, 450, 150); 
 	fisheye_ptr->set_lookat(-20, 250, -110);  
 	fisheye_ptr->set_fov(360);
-	
 */
+	
 
-
-/*	
 	// for part (f)
 	// for this image the skydome is the only object in the scene
 	// you need to comment out the two statements:
@@ -87,12 +84,12 @@ void World::build() {
 	fisheye_ptr->set_eye(0, 0, 0);     
 	fisheye_ptr->set_lookat(0, 1, 0);
 	fisheye_ptr->set_fov(180);
-*/	
-		
+
+
 	// for part b, ..., f
 
-//	fisheye_ptr->compute_uvw();
-//	set_camera(move(fisheye_ptr));
+	fisheye_ptr->compute_uvw();
+	set_camera(move(fisheye_ptr));
 
 
 	PointLight* light_ptr1 = new PointLight;
@@ -180,7 +177,7 @@ void World::build() {
 	}
 	
 	grid_ptr->setup_cells();
-	add_object(grid_ptr);
+//	add_object(grid_ptr);
 	
 	
 	// ground plane with checker
@@ -192,7 +189,7 @@ void World::build() {
 	
 	Plane* plane_ptr = new Plane(Point3D(0, 1, 0), Normal(0, 1, 0));
 	plane_ptr->set_material(make_shared<SV_Matte>(0.2, 0.5, checker_ptr));
-	add_object(plane_ptr);
+//	add_object(plane_ptr);
 
 	
 	// skydome with clouds

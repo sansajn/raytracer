@@ -61,8 +61,8 @@ SphericalMap::get_texel_coordinates(	const 	Point3D& 	local_hit_point,
 	
 	// next, map theta and phi to (u, v) in [0, 1] X [0, 1]
 		
-	float u = phi * invTWO_PI;
-	float v = 1.0 - theta * invPI;
+	float u = phi * invTWO_PI<float>;
+	float v = 1.0 - theta * invPI<float>;
 			
 	// finally, map u and v to the texel coordinates
 		
