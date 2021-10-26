@@ -18,7 +18,7 @@
 class SphericalMap: public Mapping {		
 	public:
 	
-		SphericalMap(void);									
+		SphericalMap() = default;
 		
 		SphericalMap(const SphericalMap& sm);					
 

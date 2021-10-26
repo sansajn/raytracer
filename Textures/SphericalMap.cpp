@@ -6,14 +6,10 @@
 
 #include "SphericalMap.h"
 
-// ---------------------------------------------------------------- default constructor
-
-SphericalMap::SphericalMap(void) {}
-
 
 // ---------------------------------------------------------------- copy constructor
 
-SphericalMap::SphericalMap(const SphericalMap& sm) {}
+SphericalMap::SphericalMap(const SphericalMap&) {}
 	
 	
 // ---------------------------------------------------------------- assignment operator
