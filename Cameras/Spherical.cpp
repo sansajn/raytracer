@@ -16,6 +16,7 @@
 #include "../Utilities/Vector3D.h"
 #include "../Utilities/Maths.h"
 #include "../Samplers/Sampler.h"
+#include "Utilities/Random.h"
 
 Spherical::Spherical(void)
 	:	Camera(),
@@ -59,13 +60,13 @@ Spherical::ray_direction(	const Point2D& 	pp,
 
 	// compute the angles lambda and psi in radians
 
-	float lambda = pn.x * degreeToRadian(lambda_max);
-	float psi = pn.y * degreeToRadian(psi_max);
+	float lambda = pn.x * radians(lambda_max);
+	float psi = pn.y * radians(psi_max);
 
 	// compute the sherical azimuth and polar angles
 
-	float phi = PI - lambda;
-	float theta = 0.5f * PI - psi;
+	float phi = PI<float> - lambda;
+	float theta = 0.5f * PI<float> - psi;
 
 	float sin_phi = sinf(phi);
 	float cos_phi = cosf(phi);
@@ -109,7 +110,4 @@ Spherical::render_scene(World const & wr) {
 			L *= exposure_time;
 			wr.display_pixel(r, c, L);
 		}
-
-
-	wr.save_to_ppm();
 }

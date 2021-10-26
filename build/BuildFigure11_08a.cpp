@@ -61,7 +61,3 @@ void World::build() {
 	sphere_ptr->set_material(make_shared<SV_Matte>(1.0, 0.85, image_texture_ptr));
 	add_object(sphere_ptr);
 }
-
-
-
-

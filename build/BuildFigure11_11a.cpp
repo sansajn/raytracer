@@ -21,6 +21,7 @@
 #include "Textures/ImageTexture.h"
 #include "Textures/SphericalMap.h"
 #include "Utilities/Image.h"
+#include "Utilities/Random.h"
 
 using std::make_unique, std::make_shared, std::move;
 
@@ -33,7 +34,7 @@ void World::build() {
 	vp.set_pixel_size(1.0);
 	vp.set_max_depth(0);
 	
-	tracer_ptr = new RayCast(this);	
+	tracer_ptr = new RayCast(this);
 	
 	auto spherical_ptr = make_unique<Spherical>();
 	
@@ -111,7 +112,7 @@ void World::build() {
 			
 			if (abs(row_test) >= (num_park_rows / 2) || abs(column_test) >= (num_park_columns / 2)) {
 		
-				Matte* matte_ptr = new Matte;
+				auto matte_ptr = make_shared<Matte>();
 				matte_ptr->set_ka(0.4); 
 				matte_ptr->set_kd(0.6); 			
 				matte_ptr->set_cd(	min_color + rand_float() * (max_color - min_color), 
@@ -164,14 +165,9 @@ void World::build() {
 	checker3D_ptr1->set_color1(0.35, 0.75, 0.35);  
 	checker3D_ptr1->set_color2(0.3, 0.5, 0.3);
 	
-	SV_Matte* sv_matte_ptr1 = new SV_Matte;		
-	sv_matte_ptr1->set_ka(0.3);
-	sv_matte_ptr1->set_kd(0.50);  
-	sv_matte_ptr1->set_cd(checker3D_ptr1);
-											
 	Box* park_ptr = new Box( 	Point3D(-a * num_park_rows / 2, 0.0, -b * num_park_columns / 2), 
 								Point3D(a * num_park_rows / 2, 0.1, b * num_park_columns / 2)  );										
-	park_ptr->set_material(sv_matte_ptr1);
+	park_ptr->set_material(make_shared<SV_Matte>(0.3, 0.50, checker3D_ptr1));
 	add_object(park_ptr);
 											
 	
@@ -182,35 +178,25 @@ void World::build() {
 	checker3D_ptr2->set_color1(RGBColor(0.7));  
 	checker3D_ptr2->set_color2(RGBColor(1));
 	
-	SV_Matte* sv_matte_ptr2 = new SV_Matte;		
-	sv_matte_ptr2->set_ka(0.30);
-	sv_matte_ptr2->set_kd(0.40);  
-	sv_matte_ptr2->set_cd(checker3D_ptr2);
-	
 	Plane* plane_ptr = new Plane(Point3D(0, 0.01, 0), Normal(0, 1, 0));
-	plane_ptr->set_material(sv_matte_ptr2);
+	plane_ptr->set_material(make_shared<SV_Matte>(0.3, 0.4, checker3D_ptr2));
 	add_object(plane_ptr);
 
 	
 	Image* image_ptr = new Image;
-	image_ptr->read_ppm_file("CloudsSmall.ppm");	
+	image_ptr->read_ppm_file("assets/CloudsSmall.ppm");
 	
 	SphericalMap* spherical_map_ptr = new SphericalMap; 
 	
 	ImageTexture* image_texture_ptr = new ImageTexture(image_ptr); 
 	image_texture_ptr->set_mapping(spherical_map_ptr); 
 	
-	SV_Matte* sv_matte_ptr = new SV_Matte;		
-	sv_matte_ptr->set_ka(1.0);
-	sv_matte_ptr->set_kd(0.85); 
-	sv_matte_ptr->set_cd(image_texture_ptr);
-	
 	Sphere* unit_sphere_ptr = new Sphere;
-	unit_sphere_ptr->set_shadows(false);	
+//	unit_sphere_ptr->set_shadows(false);  // TODO: implement
 	
 	Instance* sphere_ptr = new Instance(unit_sphere_ptr); 
 	sphere_ptr->scale(1000000);
-	sphere_ptr->set_material(sv_matte_ptr);
+	sphere_ptr->set_material(make_shared<SV_Matte>(1.0, 0.85, image_texture_ptr));
 	add_object(sphere_ptr);
 }
 
