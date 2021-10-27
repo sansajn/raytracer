@@ -192,7 +192,7 @@ void World::build() {
 	image_texture_ptr->set_mapping(spherical_map_ptr); 
 	
 	Sphere* unit_sphere_ptr = new Sphere;
-//	unit_sphere_ptr->set_shadows(false);  // TODO: implement
+	unit_sphere_ptr->set_shadows(false);
 	
 	Instance* sphere_ptr = new Instance(unit_sphere_ptr); 
 	sphere_ptr->scale(1000000);

@@ -10,10 +10,13 @@
 
 class GeometricObject {
 public:
-	GeometricObject() = default;
+	GeometricObject();
 
 	virtual bool hit(Ray const & ray, double & t, ShadeRec & sr) const = 0;
 	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
+
+	bool casts_shadows() const;
+	void set_shadows(bool shadows);
 
 	// material API needs to be virtual due to Instance implementation
 	virtual Material const * get_material() const;
@@ -46,5 +49,6 @@ protected:
 	mutable std::shared_ptr<Material> material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
 
 private:
+	bool _shadows;
 	RGBColor color;
 };

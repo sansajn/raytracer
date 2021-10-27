@@ -9,10 +9,16 @@
 
 using std::shared_ptr;
 
+GeometricObject::GeometricObject()
+	: _shadows{true}
+{}
+
 // ---------------------------------------------------------------------- copy constructor
 
 GeometricObject::GeometricObject (const GeometricObject& object) {
 	material_ptr = object.material_ptr;
+	_shadows = object._shadows;
+	color = object.color;
 }	
 
 
@@ -24,11 +30,22 @@ GeometricObject::operator= (const GeometricObject& rhs) {
 		return (*this);
 			
 	material_ptr = rhs.material_ptr;
+	_shadows = rhs._shadows;
+	color = rhs.color;
 
 	return (*this);
 }
 
 // ---------------------------------------------------------------- set_material
+
+
+bool GeometricObject::casts_shadows() const {
+	return _shadows;
+}
+
+void GeometricObject::set_shadows(bool shadows) {
+	_shadows = shadows;
+}
 
 Material const * GeometricObject::get_material() const {
 	return material_ptr.get();
