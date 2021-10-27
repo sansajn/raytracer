@@ -92,6 +92,18 @@ cpp.Program('fig10_11a', ['main.cpp', engine, 'build/BuildFigure10_11a.cpp'])
 cpp.Program('fig10_11b', ['main.cpp', engine, 'build/BuildFigure10_11b.cpp'])
 cpp.Program('fig10_12', ['main.cpp', engine, 'build/BuildFigure10_12.cpp'])
 cpp.Program('fig10_13', ['main.cpp', engine, 'build/BuildFigure10_13.cpp'])
+cpp.Program('fig11_7a', ['main.cpp', engine, 'build/BuildFigure11_7a.cpp'])
+cpp.Program('fig11_7b', ['main.cpp', engine, 'build/BuildFigure11_7b.cpp'])
+cpp.Program('fig11_7c', ['main.cpp', engine, 'build/BuildFigure11_7c.cpp'])
+cpp.Program('fig11_7d', ['main.cpp', engine, 'build/BuildFigure11_7d.cpp'])
+cpp.Program('fig11_7e', ['main.cpp', engine, 'build/BuildFigure11_7e.cpp'])
+cpp.Program('fig11_7f', ['main.cpp', engine, 'build/BuildFigure11_7f.cpp'])
+cpp.Program('fig11_08a', ['main.cpp', engine, 'build/BuildFigure11_08a.cpp'])
+cpp.Program('fig11_11a', ['main.cpp', engine, 'build/BuildFigure11_11a.cpp'])
+cpp.Program('fig11_11b', ['main.cpp', engine, 'build/BuildFigure11_11b.cpp'])
+cpp.Program('fig11_12a', ['main.cpp', engine, 'build/BuildFigure11_12a.cpp'])
+cpp.Program('fig11_12b', ['main.cpp', engine, 'build/BuildFigure11_12b.cpp'])
+cpp.Program('fig11_13', ['main.cpp', engine, 'build/BuildFigure11_13.cpp'])
 
 # tests
 cpp.Program('test/test', [
