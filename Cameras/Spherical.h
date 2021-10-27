@@ -38,7 +38,7 @@ class Spherical: public Camera {
 						const int 	vres,
 						const float s) const;
 
-		void render_scene(World const & w) override;
+		void render_scene(World const & w, float x = 0, int offset = 0) override;
 
     void
 	set_horizontal_fov(const float fov);

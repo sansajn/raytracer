@@ -79,7 +79,7 @@ Spherical::ray_direction(	const Point2D& 	pp,
 }
 
 void
-Spherical::render_scene(World const & wr) {
+Spherical::render_scene(World const & wr, float x, int offset) {
 	RGBColor	L;
 	ViewPlane	vp(wr.vp);
 	int 		hres		= vp.hres;
@@ -99,7 +99,7 @@ Spherical::render_scene(World const & wr) {
 
 			for (int j = 0; j < vp.num_samples; j++) {
 				sp = vp.sampler_ptr->sample_unit_square();
-				pp.x = s * (c - 0.5f * hres + sp.x);
+				pp.x = s * (c - 0.5f * hres + sp.x) + x;
 				pp.y = s * (r - 0.5f * vres + sp.y);
 				ray.d = ray_direction(pp, hres, vres, s);
 
@@ -108,6 +108,6 @@ Spherical::render_scene(World const & wr) {
 
 			L *= inv_num_samples;
 			L *= exposure_time;
-			wr.display_pixel(r, c, L);
+			wr.display_pixel(r, c + offset, L);
 		}
 }

@@ -69,7 +69,7 @@ Pinhole::get_direction(const Point2D& p) const {
 // ----------------------------------------------------------------------------- render_scene
 
 void 												
-Pinhole::render_scene(const World& w) {
+Pinhole::render_scene(World const & w, float x, int offset) {
 	RGBColor	L;
 	ViewPlane	vp(w.vp);
 	Ray			ray;
@@ -86,7 +86,7 @@ Pinhole::render_scene(const World& w) {
 			
 			for (int p = 0; p < n; p++)			// up pixel
 				for (int q = 0; q < n; q++) {	// across pixel
-					pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n); 
+					pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n) + x;
 					pp.y = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
 					ray.d = get_direction(pp);
 					L += w.tracer_ptr->trace_ray(ray, depth);
@@ -94,7 +94,7 @@ Pinhole::render_scene(const World& w) {
 											
 			L /= vp.num_samples;
 			L *= exposure_time;
-			w.display_pixel(r, c, L);
+			w.display_pixel(r, c + offset, L);
 		} 
 }
 

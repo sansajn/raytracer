@@ -1,5 +1,4 @@
-#ifndef __CAMERA__
-#define __CAMERA__
+#pragma once
 
 // This file contains the declaration of the base class Camera
 // There is no view plane distance because the fisheye and panoramic cameras don't use it
@@ -23,8 +22,7 @@ class Camera {
 		
 		virtual ~Camera() = default;
 
-		virtual void 																		
-		render_scene(const World& w) = 0;
+		virtual void render_scene(World const & w, float x = 0, int offset = 0) = 0;  //!< \note x and offset required to implement StereoCamera
 		
 		void
 		set_eye(const Point3D& p);
@@ -133,6 +131,3 @@ inline void
 Camera::set_exposure_time(const float exposure) {
 	exposure_time = exposure;
 }
-
-
-#endif
