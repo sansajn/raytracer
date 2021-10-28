@@ -12,8 +12,9 @@ class GeometricObject {
 public:
 	GeometricObject();
 
-	virtual bool hit(Ray const & ray, double & t, ShadeRec & sr) const = 0;
+	virtual bool hit(Ray const & ray, double & tmin, ShadeRec & sr) const = 0;
 	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
+	virtual GeometricObject * clone() const = 0;
 
 	bool casts_shadows() const;
 	void set_shadows(bool shadows);
@@ -36,8 +37,6 @@ public:
 	virtual BBox get_bounding_box();  // allows acceleration schema
 	virtual void add_object(GeometricObject * object);  // allows compound objects
 	virtual Normal get_normal() const;  // smoothing triangles
-
-	virtual GeometricObject * clone() const = 0;
 
 	GeometricObject(GeometricObject const & object);
 

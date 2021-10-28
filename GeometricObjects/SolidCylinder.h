@@ -4,6 +4,13 @@ class SolidCylinder: public Compound {
 public:
 	SolidCylinder();
 	SolidCylinder(const double bottom, const double top, const double radius);
+
+	bool hit(Ray const & ray, double & tmin, ShadeRec & sr) const override;
+	bool shadow_hit(Ray const & ray, double & tmin) const override;
+
 	SolidCylinder(const SolidCylinder& cc);
+	SolidCylinder * clone() const override;
+
+
 };
 

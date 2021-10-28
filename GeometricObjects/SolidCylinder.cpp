@@ -1,5 +1,6 @@
 #include "OpenCylinder.h"
 #include "SolidCylinder.h"
+#include "Disk.h"
 
 SolidCylinder::SolidCylinder(const double bottom, const double top, const double radius)
 	: Compound() {
@@ -15,9 +16,16 @@ SolidCylinder::SolidCylinder(const double bottom, const double top, const double
 	objects.push_back(new OpenCylinder(bottom, top, radius));	// wall
 }
 
-bool SolidCylinder::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+bool SolidCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const {
 	if (bbox.hit(ray))
 		return (Compound::hit(ray, tmin, sr));
 	else
 		return (false);
+}
+
+bool SolidCylinder::shadow_hit(Ray const & ray, double & tmin) const {
+	if (!bbox.shadow_hit(ray, tmin))
+		return false;
+	else
+		return Compound::shadow_hit(ray, tmin);
 }
