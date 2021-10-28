@@ -3,13 +3,19 @@
 
 // ---------------------------------------------------------------- default constructor
 
-Matte::Matte (void)
+Matte::Matte()
 	:	Material(),
 		ambient_brdf(new Lambertian),
 		diffuse_brdf(new Lambertian)
 {}
 
-
+Matte::Matte(float ka, float kd, RGBColor const & cd)
+	: Matte{}
+{
+	set_ka(ka);
+	set_kd(kd);
+	set_cd(cd);
+}
 
 // ---------------------------------------------------------------- copy constructor
 
