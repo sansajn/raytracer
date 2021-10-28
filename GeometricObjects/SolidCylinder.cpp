@@ -5,6 +5,8 @@
 SolidCylinder::SolidCylinder(const double bottom, const double top, const double radius)
 	: Compound() {
 
+	// TODO: use add_object there
+
 	objects.push_back(new Disk(	Point3D(0, bottom, 0), 			// bottom
 								Normal(0, -1, 0),
 								radius));
@@ -14,6 +16,11 @@ SolidCylinder::SolidCylinder(const double bottom, const double top, const double
 								radius));
 
 	objects.push_back(new OpenCylinder(bottom, top, radius));	// wall
+
+	bbox = BBox{
+		-radius, radius,
+		bottom, top,
+		-radius, radius};
 }
 
 bool SolidCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const {
@@ -24,8 +31,21 @@ bool SolidCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const {
 }
 
 bool SolidCylinder::shadow_hit(Ray const & ray, double & tmin) const {
-	if (!bbox.shadow_hit(ray, tmin))
+	if (!bbox.hit(ray))
 		return false;
 	else
 		return Compound::shadow_hit(ray, tmin);
+}
+
+BBox SolidCylinder::get_bounding_box() {
+	return bbox;
+}
+
+SolidCylinder::SolidCylinder(const SolidCylinder& cc)
+	: Compound{cc}
+	, bbox{cc.bbox}
+{}
+
+SolidCylinder * SolidCylinder::clone() const {
+	return new SolidCylinder{*this};
 }
