@@ -24,8 +24,6 @@ public:
 	OpenCylinder & operator=(const OpenCylinder& rhs);
 	OpenCylinder *	clone() const override;
 
-	~OpenCylinder();
-
 protected:
 	double		y0;				// bottom y value
 	double		y1;				// top y value

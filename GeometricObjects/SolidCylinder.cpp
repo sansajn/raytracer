@@ -5,8 +5,6 @@
 SolidCylinder::SolidCylinder(const double bottom, const double top, const double radius)
 	: Compound() {
 
-	// TODO: use add_object there
-
 	objects.push_back(new Disk(	Point3D(0, bottom, 0), 			// bottom
 								Normal(0, -1, 0),
 								radius));

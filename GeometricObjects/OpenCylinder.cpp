@@ -66,12 +66,6 @@ OpenCylinder::operator= (const OpenCylinder& rhs)
 	return (*this) ;
 }
 
-
-// ---------------------------------------------------------------- destructor
-
-OpenCylinder::~OpenCylinder(void) {}
-
-
 // ----------------------------------------------------------------------------- hit
 // The code reverses the normal when the ray hits the inside surface, allows both
 // sides to be shaded, but completely messes up transparency.
