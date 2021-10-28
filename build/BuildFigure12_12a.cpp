@@ -41,6 +41,7 @@ void World::build() {
 	stereo_ptr->set_lookat(0);
 	stereo_ptr->compute_uvw();
 	stereo_ptr->set_stereo_angle(0.75);  // in degrees
+
 	stereo_ptr->setup_cameras(); 
 	set_camera(move(stereo_ptr));
 	

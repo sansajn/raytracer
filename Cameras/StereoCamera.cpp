@@ -31,9 +31,7 @@ StereoCamera::StereoCamera(void)
 	:	Camera(),
 		viewing_type(ViewingType::parallel),
 		pixel_gap(5),
-		beta(5.0f),
-		left_camera_ptr(nullptr),
-		right_camera_ptr(nullptr)
+		beta(5.0f)
 {}
 
 StereoCamera::StereoCamera(unique_ptr<Camera> left_camera, unique_ptr<Camera> right_camera)
