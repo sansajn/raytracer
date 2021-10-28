@@ -25,18 +25,13 @@
 class PointLight: public Light {
 	public:
 
-		PointLight(void);
-
+		PointLight();
 		PointLight(const PointLight& dl);
 
-		virtual Light*
-		clone(void) const override;
+		Light * clone() const override;
 
 		PointLight&
 		operator= (const PointLight& rhs);
-
-		virtual
-		~PointLight(void);
 
 		void
 		scale_radiance(const float b);
@@ -62,13 +57,11 @@ class PointLight: public Light {
 		virtual Vector3D
 		get_direction(ShadeRec& sr) override;
 
-		virtual RGBColor
-		L(ShadeRec& sr) override;
+		RGBColor	L(ShadeRec& sr) override;
 
 		bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
 
-	private:
-
+	protected:
 		float		ls;
 		RGBColor	color;
 		Point3D location;
