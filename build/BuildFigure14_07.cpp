@@ -3,11 +3,12 @@
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
-// This builds the scene for Figure 14.5
+// This builds the scene for Figure 14.7
 
 #include "World/World.h"
 #include "Tracers/RayCast.h"
 #include "Cameras/Pinhole.h"
+#include "Lights/Directional.h"
 #include "Materials/Matte.h"
 #include "GeometricObjects/SolidCylinder.h"
 #include "GeometricObjects/Box.h"
@@ -37,8 +38,13 @@ void World::build(){
 	pinhole_ptr->set_view_distance(340);		
 	pinhole_ptr->compute_uvw(); 
 	set_camera(move(pinhole_ptr));
-
-
+	
+	Directional* light_ptr = new Directional;
+	light_ptr->set_direction(15, 15, 2.5); 
+	light_ptr->scale_radiance(2.0);	
+	add_light(light_ptr);
+		
+	
 	// spheres
 	
 	Sphere* sphere_ptr1 = new Sphere(Point3D(3.85, 2.3, -2.55), 2.3);
