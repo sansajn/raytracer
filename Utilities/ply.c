@@ -36,6 +36,7 @@ WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <assert.h>
 #include "ply.h"
 
 
@@ -835,6 +836,7 @@ PlyFile *ply_open_for_reading(
   /* create the PlyFile data structure */
 
   plyfile = ply_read (fp, nelems, elem_names);
+  assert(plyfile);
 
   /* determine the file type and version */
 
