@@ -29,7 +29,7 @@ void World::build() {
 	auto pinhole_ptr = make_unique<Pinhole>();
 	pinhole_ptr->set_eye(0, 0, 100);
 	pinhole_ptr->set_lookat(0, 0, 0);
-	pinhole_ptr->set_view_distance(6000); 
+	pinhole_ptr->set_view_distance(6000);
 	pinhole_ptr->compute_uvw();
 	set_camera(move(pinhole_ptr));
 	
@@ -45,12 +45,12 @@ void World::build() {
 	float radius 		= 1.0;
 	float bevel_radius 	= 0.2;
 	
-	BeveledCylinder* cylinder_ptr1 = new BeveledCylinder(bottom, top, radius, bevel_radius);
+	auto cylinder_ptr1 = make_shared<BeveledCylinder>(bottom, top, radius, bevel_radius);
 	
 	for (int j = 0; j < 4; j++) {
 		Instance* cylinder_ptr2 = new Instance(cylinder_ptr1);
 		cylinder_ptr2->translate(-3.75 + 2.5 * j, 0, 0);
-		cylinder_ptr2->set_material(make_shared<Matte>(0.25, 0.1 + 0.3*j, RGBColor{0.5, 0.5, 0.5});
+		cylinder_ptr2->set_material(make_shared<Matte>(0.25, 0.1 + 0.3*j, RGBColor{0.5, 0.5, 0.5}));
 		add_object(cylinder_ptr2);
 	}
 }

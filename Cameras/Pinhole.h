@@ -33,8 +33,7 @@ class Pinhole: public Camera {
 		Vector3D								
 		get_direction(const Point2D& p) const;
 		
-		virtual void 												
-		render_scene(const World& w);
+		void render_scene(const World& w) override;
 		
 	private:
 			

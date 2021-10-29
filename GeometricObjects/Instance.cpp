@@ -7,6 +7,8 @@
 #include "Constants.h"
 #include "Instance.h"
 
+using std::shared_ptr;
+
 // initialise the static transformation matrix
 
 Matrix
@@ -28,7 +30,7 @@ Instance::Instance(void)
 
 // ----------------------------------------------------------------  constructor
 
-Instance::Instance(GeometricObject* obj_ptr)     
+Instance::Instance(shared_ptr<GeometricObject> obj_ptr)
 	:	GeometricObject(),
 		object_ptr(obj_ptr),
 		inv_matrix(),
@@ -42,31 +44,17 @@ Instance::Instance(GeometricObject* obj_ptr)
 // ---------------------------------------------------------------- copy constructor
 
 Instance::Instance (const Instance& instance)
-	: 	GeometricObject(instance),
-		inv_matrix(instance.inv_matrix),
-		transform_the_texture(instance.transform_the_texture)
-{
-	if(instance.object_ptr)
-		object_ptr = instance.object_ptr->clone(); 
-	else  object_ptr = NULL;
-}
-
+	: GeometricObject(instance)
+	, object_ptr{instance.object_ptr}
+	, inv_matrix{instance.inv_matrix}
+	, transform_the_texture{instance.transform_the_texture}
+{}
 
 // ---------------------------------------------------------------- clone
 
 Instance* 
 Instance::clone(void) const {
 	return (new Instance(*this));
-}
-
-
-// ---------------------------------------------------------------- destructor
-
-Instance::~Instance(void) {
-	if (object_ptr) {
-		delete object_ptr;
-		object_ptr = NULL;
-	}
 }
 
 
@@ -79,15 +67,7 @@ Instance::operator= (const Instance& rhs) {
 
 	GeometricObject::operator=(rhs);
 		
-	if(object_ptr) {
-		delete object_ptr;
-		object_ptr = NULL;
-	}
-	
-	if (rhs.object_ptr)
-		object_ptr = rhs.object_ptr->clone();
-	else
-		object_ptr = NULL;
+	object_ptr = rhs.object_ptr;
 	
 	inv_matrix				= rhs.inv_matrix;
 	bbox					= rhs.bbox;
@@ -100,7 +80,7 @@ Instance::operator= (const Instance& rhs) {
 //------------------------------------------------------------------ set_object
 
 void 												
-Instance::set_object(GeometricObject* obj_ptr) {
+Instance::set_object(std::shared_ptr<GeometricObject> obj_ptr) {
 	object_ptr = obj_ptr;
 }
 

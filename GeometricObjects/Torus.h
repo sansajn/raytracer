@@ -12,17 +12,13 @@
 class Torus: public GeometricObject {
 	public:
 		
-		Torus(void);   									
+		Torus();
 		
 		Torus(const double _a, const double _b);
 
-		virtual Torus* 									
-		clone(void) const;
+		Torus * clone() const override;
 	
 		Torus(const Torus& torus);
-		
-		virtual
-		~Torus(void); 											
 		
 		Torus& 
 		operator= (Torus& rhs);	
@@ -30,8 +26,8 @@ class Torus: public GeometricObject {
 		Normal 					
 		compute_normal(const Point3D& p) const;  												
 		
-		virtual bool 																 
-		hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
+		bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
+		bool shadow_hit(Ray const & ray, double & tmin) const override;
 		
 	private:
 	
