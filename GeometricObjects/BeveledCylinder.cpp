@@ -19,12 +19,12 @@ BeveledCylinder::BeveledCylinder(double bottom, double top, double radius, doubl
 	// have to use instances for the tori because they have to be translated
 	
 	Instance* bottom_torus_ptr = new Instance(make_shared<Torus>(r - br, br));
-	bottom_torus_ptr->translate(0, bottom + br, 0);
+	bottom_torus_ptr->translate(Vector3D{0, bottom + br, 0});
 	bottom_torus_ptr->transform_texture(false);        
 	objects.push_back(bottom_torus_ptr);
 	
 	Instance* top_torus_ptr = new Instance(make_shared<Torus>(r - br, br));
-	top_torus_ptr->translate(0, top  - br, 0);
+	top_torus_ptr->translate(Vector3D{0, top  - br, 0});
 	top_torus_ptr->transform_texture(false);	
 	objects.push_back(top_torus_ptr);
 

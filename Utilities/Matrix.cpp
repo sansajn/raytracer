@@ -1,5 +1,6 @@
 // This file contains the definition of the class Matrix
 
+#include <cmath>
 #include "Matrix.h"
 
 // ----------------------------------------------------------------------- default constructor
@@ -111,7 +112,7 @@ Matrix::operator/ (const double d) {
 // set matrix to the identity matrix
 
 void											
-Matrix::set_identity(void) {
+Matrix::set_identity() {
     for (int x = 0; x < 4; x++)
 		for (int y = 0; y < 4; y++) {
 			if (x == y)
@@ -130,7 +131,62 @@ Matrix transpose(Matrix const & m) {
 	};
 }
 
+Matrix translate(Matrix const & M, Vector3D const & v) {
+	Matrix T{
+		{1,0,0},
+		{0,1,0},
+		{0,0,1},
+		v};
 
+	return T*M;  // T=T_n*T_{n-1}*...T_1  (see equation 20.10)
+}
 
+Matrix rotateX(Matrix const & M, double angle_r) {
+	Matrix R = eulerAngleX(angle_r);
+	return R*M;
+}
+
+Matrix rotateY(Matrix const & M, double angle_r) {
+	Matrix R = eulerAngleY(angle_r);
+	return R*M;
+}
+
+Matrix rotateZ(Matrix const & M, double angle_r) {
+	Matrix R = eulerAngleZ(angle_r);
+	return R*M;
+}
+
+Matrix eulerAngleX(double angle_r) {
+	double cos_angle = cos(angle_r),
+		sin_angle = sin(angle_r);
+
+	return {
+		{1, 0, 0},  // x
+		{0, cos_angle, -sin_angle},  // y
+		{0, sin_angle, cos_angle}  // z
+	};
+}
+
+Matrix eulerAngleY(double angle_r) {
+	double cos_angle = cos(angle_r),
+		sin_angle = sin(angle_r);
+
+	return {
+		{cos_angle, 0, sin_angle},  // x
+		{0, 1, 0},  // y
+		{-sin_angle, 0, cos_angle}  // z
+	};
+}
+
+Matrix eulerAngleZ(double angle_r) {
+	double cos_angle = cos(angle_r),
+		sin_angle = sin(angle_r);
+
+	return {
+		{cos_angle, -sin_angle, 0},  // x
+		{sin_angle, cos_angle, 0},  // y
+		{0, 0, 1}  // z
+	};
+}
 
 

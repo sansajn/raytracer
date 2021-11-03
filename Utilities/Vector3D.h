@@ -17,7 +17,7 @@ class Vector3D {
 	public:
 	
 		Vector3D(void);											// default constructor
-		Vector3D(double a);										// constructor
+		explicit Vector3D(double a);										// constructor
 		Vector3D(double _x, double _y, double _z);				// constructor
 		Vector3D(const Vector3D& v);							// copy constructor
 		Vector3D(const Normal& n);								// constructs a vector from a Normal

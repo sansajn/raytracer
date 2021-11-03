@@ -85,18 +85,16 @@ Instance::set_object(std::shared_ptr<GeometricObject> obj_ptr) {
 }
 
 Material const * Instance::get_material() const {
-	return object_ptr->get_material();
+	return material_ptr.get();
 }
 
 void Instance::get_material(std::shared_ptr<Material> & m) const {
-	object_ptr->get_material(m);
+	m = material_ptr;
 }
 
 void Instance::set_material(std::shared_ptr<Material> m) {
-	object_ptr->set_material(m);
+	material_ptr = m;
 }
-
-
 
 //---------------------------------------------------------------- set_bounding_box
 // This function is only called when the instance is to be placed in a grid
@@ -218,9 +216,10 @@ Instance::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 				
 	if (object_ptr->hit(inv_ray, t, sr)) {
 		sr.normal = inv_matrix * sr.normal;
-		sr.normal.normalize();				
+		sr.normal.normalize();
 						
-		object_ptr->get_material(material_ptr);
+		if (object_ptr->get_material())  // prefer object material
+			object_ptr->get_material(material_ptr);
 			
 		if (!transform_the_texture) 
 			sr.local_hit_point = ray.o + t * ray.d;  		 
@@ -267,30 +266,6 @@ Instance::scale(const Vector3D& s) {
 	forward_matrix = scaling_matrix * forward_matrix; 		
 }
 
-
-//-------------------------------------------------------------------------------- scale
-
-void 
-Instance::scale(const double a, const double b, const double c) {
-
-	Matrix inv_scaling_matrix;					// temporary inverse scaling matrix
-	
-	inv_scaling_matrix.m[0][0] = 1.0 / a;
-	inv_scaling_matrix.m[1][1] = 1.0 / b;
-	inv_scaling_matrix.m[2][2] = 1.0 / c;
-	
-	inv_matrix = inv_matrix * inv_scaling_matrix;			
-
-	Matrix scaling_matrix;						// temporary scaling matrix
-	
-	scaling_matrix.m[0][0] = a;
-	scaling_matrix.m[1][1] = b;
-	scaling_matrix.m[2][2] = c;
-	
-	forward_matrix = scaling_matrix * forward_matrix; 	
-}
-
-
 //-------------------------------------------------------------------------------- translate
 
 void
@@ -312,30 +287,6 @@ Instance::translate(const Vector3D& trans) {
 	
 	forward_matrix = translation_matrix * forward_matrix; 
 }
-
-
-//-------------------------------------------------------------------------------- translate
-
-void
-Instance::translate(const double dx, const double dy, const double dz) {
-
-	Matrix inv_translation_matrix;				// temporary inverse translation matrix	
-			
-	inv_translation_matrix.m[0][3] = -dx;
-	inv_translation_matrix.m[1][3] = -dy;
-	inv_translation_matrix.m[2][3] = -dz;
-					
-	inv_matrix = inv_matrix * inv_translation_matrix;
-	
-	Matrix translation_matrix;					// temporary translation matrix	
-	
-	translation_matrix.m[0][3] = dx;
-	translation_matrix.m[1][3] = dy;
-	translation_matrix.m[2][3] = dz;
-	
-	forward_matrix = translation_matrix * forward_matrix; 
-}
-
 
 
 //-------------------------------------------------------------------------------- rotate_x

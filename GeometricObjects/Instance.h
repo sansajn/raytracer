@@ -24,8 +24,7 @@ class Instance: public GeometricObject {
 		
 		Instance(const Instance& instance); 
 		
-		virtual Instance* 									
-		clone(void) const;				
+		Instance * clone() const override;
 
 		Instance& 											
 		operator= (const Instance& rhs);
@@ -55,14 +54,8 @@ class Instance: public GeometricObject {
 		translate(const Vector3D& trans);
 		
 		void
-		translate(const double dx, const double dy, const double dz);	
-		
-		void												
 		scale(const Vector3D& s);
-		
-		void 
-		scale(const double a, const double b, const double c);
-		
+
 		virtual void										
 		rotate_x(const double r);
 		

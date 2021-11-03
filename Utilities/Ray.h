@@ -1,6 +1,4 @@
-#ifndef __RAY__
-#define __RAY__
-
+#pragma once
 #include "Point3D.h"
 #include "Vector3D.h"
 
@@ -13,8 +11,5 @@ public:
 	Ray();
 	Ray(Point3D const & origin, Vector3D const & dir);
 	Ray(Ray const & ray);
-
-	Ray & operator=(const Ray& rhs);
+	Ray & operator=(Ray const & rhs);
 };
-
-#endif

@@ -90,8 +90,8 @@ void World::build() {
 			
 			Instance* bunny_ptr2 = new Instance(bunny_ptr1);
 			bunny_ptr2->set_material(phong_ptr);
-			bunny_ptr2->scale(6.5);
-			bunny_ptr2->translate(x0 + ix * x_spacing, 0, z0 + iz * z_spacing);
+			bunny_ptr2->scale(Vector3D{6.5});
+			bunny_ptr2->translate(Vector3D{x0 + ix * x_spacing, 0, z0 + iz * z_spacing});
 			bunny_ptr2->compute_bounding_box(); // essential for placing each bunny in the grid
 			grid_ptr->add_object(bunny_ptr2);
 		}

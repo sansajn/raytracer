@@ -33,6 +33,7 @@ public:
 		double zx, double zy, double zz, double zw,
 		double wx, double wy, double wz, double ww);
 
+	/*! param[in] p origin position */
 	Matrix(Vector3D const & x, Vector3D const & y, Vector3D const & z, Vector3D const & p = {0,0,0});
 
 	Matrix& 										// assignment operator
@@ -44,10 +45,25 @@ public:
 	Matrix 											// divsion by a double
 	operator/ (const double d);
 
-	void											// set to the identity matrix
-	set_identity(void);
+	void set_identity();
 };
 
+/*! \defgroup matt Matrix transformations
+Matrix transformations.
+\note Angles are in radians.
+\{ */
+
 Matrix transpose(Matrix const & m);
+Matrix translate(Matrix const & M, Vector3D const & v);
+
+Matrix rotateX(Matrix const & M, double angle_r);
+Matrix rotateY(Matrix const & M, double angle_r);
+Matrix rotateZ(Matrix const & M, double angle_r);
+
+Matrix eulerAngleX(double angle_r);
+Matrix eulerAngleY(double angle_r);
+Matrix eulerAngleZ(double angle_r);
+
+/*! \} */
 
 #endif

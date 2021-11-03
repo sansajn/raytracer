@@ -113,10 +113,9 @@ cpp.Program('fig14_15', ['main.cpp', engine, 'build/BuildFigure14_15.cpp'])
 cpp.Program('fig21_04', ['main.cpp', engine, 'build/BuildFigure21_04.cpp'])
 cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_05b.cpp'])
 
-cpp.Program('bunny', ['main.cpp', engine, 'build/bunny.cpp'])
+cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 
 # tests
 cpp.Program('test/test', [
-	'test/test.cpp',
-	'test/matrix.cpp',
+	Glob('test/*.cpp'),
 	engine])

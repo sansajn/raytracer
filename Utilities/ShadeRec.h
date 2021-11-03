@@ -32,7 +32,6 @@ class ShadeRec {
 		float u, v;  // uv mapping coordinates
 				
 		ShadeRec(World& wr);					// constructor
-		
 		ShadeRec(const ShadeRec& sr);			// copy constructor
 };
 
