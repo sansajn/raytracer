@@ -49,7 +49,7 @@ void World::build() {
 	
 	for (int j = 0; j < 4; j++) {
 		Instance* cylinder_ptr2 = new Instance(cylinder_ptr1);
-		cylinder_ptr2->translate(-3.75 + 2.5 * j, 0, 0);
+		cylinder_ptr2->translate(Vector3D{-3.75 + 2.5 * j, 0, 0});
 		cylinder_ptr2->set_material(make_shared<Matte>(0.25, 0.1 + 0.3*j, RGBColor{0.5, 0.5, 0.5}));
 		add_object(cylinder_ptr2);
 	}
