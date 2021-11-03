@@ -17,22 +17,23 @@ class World;
 #include "RGBColor.h"
 
 class ShadeRec {
-	public:
-	
-		bool				hit_an_object;		// Did the ray hit an object?
-		Material const * material_ptr;		// Pointer to the nearest object's material
-		Point3D 			hit_point;			// World coordinates of intersection
-		Point3D				local_hit_point;	// World coordinates of hit point on generic object (used for texture transformations)
-		Normal				normal;				// Normal at hit point
-		Ray					ray;				// Required for specular highlights and area lights
-		int					depth;				// recursion depth
-		float				t;					// ray parameter
-		World&				w;					// World reference
-		RGBColor            color;
-		float u, v;  // uv mapping coordinates
-				
-		ShadeRec(World& wr);					// constructor
-		ShadeRec(const ShadeRec& sr);			// copy constructor
+public:
+	bool				hit_an_object;		// Did the ray hit an object?
+	Material const * material_ptr;		// Pointer to the nearest object's material
+	Point3D 			hit_point;			// World coordinates of intersection
+	Point3D				local_hit_point;	// World coordinates of hit point on generic object (used for texture transformations)
+	Normal				normal;				// Normal at hit point
+	Ray					ray;				// Required for specular highlights and area lights
+	int					depth;				// recursion depth
+	Vector3D dir;  // for area lights
+	World&				w;					// World reference
+	float				t;					// ray parameter
+	float u, v;  // uv mapping coordinates
+
+	RGBColor            color;  // only used in chapter 3
+
+	ShadeRec(World& wr);					// constructor
+	ShadeRec(const ShadeRec& sr);			// copy constructor
 };
 
 #endif
