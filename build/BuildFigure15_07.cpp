@@ -69,5 +69,3 @@ void World::build() {
 		add_object(cylinder_ptr2);
 	}
 }
-
-
