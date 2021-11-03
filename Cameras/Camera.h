@@ -16,11 +16,8 @@ class Camera {
 		Camera();
 		virtual void render_scene(const World& w) = 0;
 		void set_eye(const Point3D& p);
-		void set_eye(const float x, const float y, const float z);
 		void set_lookat(const Point3D& p);
-		void set_lookat(const float x, const float y, const float z);
 		void set_up_vector(const Vector3D& u);
-		void set_up_vector(const float x, const float y, const float z);
 		void set_roll(const float ra);
 		void set_exposure_time(const float exposure);
 		void compute_uvw();
@@ -52,15 +49,6 @@ Camera::set_eye(const Point3D& p) {
 	eye = p;
 }
 
-
-// ----------------------------------------------------------------- set_eye
-
-inline void
-Camera::set_eye(const float x, const float y, const float z) {
-	eye.x = x; eye.y = y; eye.z = z;
-}
-
-
 // ----------------------------------------------------------------- set_lookat
 
 inline void
@@ -68,30 +56,12 @@ Camera::set_lookat(const Point3D& p) {
 	lookat = p;
 }
 
-
-// ----------------------------------------------------------------- set_lookat
-
-inline void
-Camera::set_lookat(const float x, const float y, const float z) {
-	lookat.x = x; lookat.y = y; lookat.z = z;
-}
-
-
 // ----------------------------------------------------------------- set_up_vector
 
 inline void
 Camera::set_up_vector(const Vector3D& u) {
 	up = u;
 }
-
-
-// ----------------------------------------------------------------- set_up_vector
-
-inline void
-Camera::set_up_vector(const float x, const float y, const float z) {
-	up.x = x; up.y = y; up.z = z;
-}
-
 
 // ----------------------------------------------------------------- set_roll
 

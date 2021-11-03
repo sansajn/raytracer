@@ -32,8 +32,8 @@ void World::build() {
 	tracer_ptr = new RayCast(this);	
 	
 	auto pinhole_ptr = make_unique<Pinhole>();
-	pinhole_ptr->set_eye(0, 0, 10000);
-	pinhole_ptr->set_lookat(Point3D{0.0});
+	pinhole_ptr->set_eye({0, 0, 10000});
+	pinhole_ptr->set_lookat({0, 0, 0});
 	pinhole_ptr->set_view_distance(15000);	
 	pinhole_ptr->compute_uvw(); 
 	set_camera(move(pinhole_ptr));
