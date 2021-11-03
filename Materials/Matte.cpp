@@ -3,13 +3,19 @@
 
 // ---------------------------------------------------------------- default constructor
 
-Matte::Matte (void)
+Matte::Matte()
 	:	Material(),
 		ambient_brdf(new Lambertian),
 		diffuse_brdf(new Lambertian)
 {}
 
-
+Matte::Matte(float ka, float kd, RGBColor const & cd)
+	: Matte{}
+{
+	set_ka(ka);
+	set_kd(kd);
+	set_cd(cd);
+}
 
 // ---------------------------------------------------------------- copy constructor
 
@@ -85,10 +91,8 @@ RGBColor
 Matte::shade(ShadeRec& sr) const {
 	Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-	int 		num_lights	= sr.w.lights.size();
 	
-	for (int j = 0; j < num_lights; j++) {
-		Light * light = sr.w.lights[j];
+	for (Light * light : sr.w.lights) {
 		Vector3D wi = light->get_direction(sr);
 		float ndotwi = sr.normal * wi,
 			ndotwo = sr.normal * wo;

@@ -124,9 +124,10 @@ Vector3D::hat(void) {
 // multiplication by a matrix on the left
 
 Vector3D operator*(Matrix const & mat, Vector3D const & v) {
+	// note: vector transformation should not be affected by translation (see section 21.1.2
 	return {
-		mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z + mat.m[0][3],
-		mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z + mat.m[1][3],
-		mat.m[2][0] * v.x + mat.m[2][1] * v.y + mat.m[2][2] * v.z + mat.m[2][3]
+		mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
+		mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z,
+		mat.m[2][0] * v.x + mat.m[2][1] * v.y + mat.m[2][2] * v.z
 	};
 }

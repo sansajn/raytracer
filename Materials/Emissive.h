@@ -5,6 +5,7 @@
 class Emissive: public Material {	
 public:
 	Emissive();
+	Emissive(RGBColor const & ce, float ls = 1.0f);
 	
 	void scale_radiance(const float ls);
 	void set_ce(RGBColor const & ce);

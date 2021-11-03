@@ -10,10 +10,10 @@ Camera::Camera(void)
 	:	eye(0, 0, 500),
 		lookat(0),
 		ra(0),
-		up(0, 1, 0),
 		u(1, 0, 0),
 		v(0, 1, 0),
 		w(0, 0, 1),
+		up(0, 1, 0),
 		exposure_time(1.0)
 {}
 
@@ -24,10 +24,10 @@ Camera::Camera(const Camera& c)
 	: 	eye(c.eye),
 		lookat(c.lookat),
 		ra(c.ra),
-		up(c.up),
 		u(c.u),
 		v(c.v),
 		w(c.w),
+		up(c.up),
 		exposure_time(c.exposure_time)
 {}
 

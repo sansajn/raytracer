@@ -45,10 +45,10 @@ class Grid: public Compound {
 		BBox get_bounding_box() override;
 
 		void												
-		read_flat_triangles(char* file_name);
+		read_flat_triangles(char const * file_name);
 
 		void												
-		read_smooth_triangles(char* file_name);
+		read_smooth_triangles(char const * file_name);
 
 		void												
 		tessellate_flat_sphere(const int horizontal_steps, const int vertical_steps);
@@ -83,7 +83,7 @@ class Grid: public Compound {
 		find_max_bounds(void);
 
 		void
-		read_ply_file(char* file_name, const int triangle_type);
+		read_ply_file(char const * file_name, const int triangle_type);
 
 		void
 		compute_mesh_normals(void);	

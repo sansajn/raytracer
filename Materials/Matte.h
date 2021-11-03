@@ -7,40 +7,25 @@
 //----------------------------------------------------------------------------- class Matte
 
 class Matte: public Material {	
-	public:
-			
-		Matte(void);											
+public:
+	Matte();
+	Matte(float ka, float kd, RGBColor const & cd);
+	void set_ka(const float k);
+	void set_kd(const float k);
+	void set_cd(const RGBColor c);
+	void set_cd(const float r, const float g, const float b);
+	void set_cd(const float c);
+	RGBColor shade(ShadeRec& sr) const override;
+	RGBColor area_light_shade(ShadeRec & sr) const override;
 
-		Matte(const Matte& m);
-		
-		Material * clone() const override;
+	Matte(Matte const & m);
+	Matte & operator= (const Matte& rhs);
+	Material * clone() const override;
+	~Matte();
 
-		Matte& 
-		operator= (const Matte& rhs);							
-
-		~Matte(void);											
-		
-		void 													
-		set_ka(const float k);
-		
-		void 													
-		set_kd(const float k);
-		
-		void													
-		set_cd(const RGBColor c);
-		
-		void													
-		set_cd(const float r, const float g, const float b);
-		
-		void																						
-		set_cd(const float c);
-				
-		RGBColor shade(ShadeRec& sr) const override;
-		RGBColor area_light_shade(ShadeRec & sr) const override;
-		
-	private:
-		Lambertian*		ambient_brdf;
-		Lambertian*		diffuse_brdf;
+private:
+	Lambertian*		ambient_brdf;
+	Lambertian*		diffuse_brdf;
 };
 
 

@@ -13,49 +13,20 @@ class World;  // can't #include "World" here because World contains a camera poi
 
 class Camera {
 	public:
-	
-		Camera();   							// default constructor
+		Camera();
+		virtual void render_scene(const World& w) = 0;
+		void set_eye(const Point3D& p);
+		void set_lookat(const Point3D& p);
+		void set_up_vector(const Vector3D& u);
+		void set_roll(const float ra);
+		void set_exposure_time(const float exposure);
+		void compute_uvw();
 
-		Camera(const Camera& camera);			// copy constructor
-		
-		virtual Camera*							// virtual copy constructor
-		clone(void) const = 0;
-		
+		Camera(const Camera& camera);
+		virtual Camera * clone() const = 0;
 		virtual ~Camera() = default;
-
-		virtual void 																		
-		render_scene(const World& w) = 0;
-		
-		void
-		set_eye(const Point3D& p);
-
-		void
-		set_eye(const float x, const float y, const float z);
-		
-		void
-		set_lookat(const Point3D& p);
-
-		void
-		set_lookat(const float x, const float y, const float z);
-
-		void
-		set_up_vector(const Vector3D& u);
-
-		void
-		set_up_vector(const float x, const float y, const float z);
-
-		void
-		set_roll(const float ra);
-		
-		void
-		set_exposure_time(const float exposure);
-		
-		void									
-		compute_uvw(void);
-		
 		
 	protected:		
-	
 		Point3D eye;				// eye point
 		Point3D lookat; 			// lookat point
 		float ra;					// roll angle
@@ -78,15 +49,6 @@ Camera::set_eye(const Point3D& p) {
 	eye = p;
 }
 
-
-// ----------------------------------------------------------------- set_eye
-
-inline void
-Camera::set_eye(const float x, const float y, const float z) {
-	eye.x = x; eye.y = y; eye.z = z;
-}
-
-
 // ----------------------------------------------------------------- set_lookat
 
 inline void
@@ -94,30 +56,12 @@ Camera::set_lookat(const Point3D& p) {
 	lookat = p;
 }
 
-
-// ----------------------------------------------------------------- set_lookat
-
-inline void
-Camera::set_lookat(const float x, const float y, const float z) {
-	lookat.x = x; lookat.y = y; lookat.z = z;
-}
-
-
 // ----------------------------------------------------------------- set_up_vector
 
 inline void
 Camera::set_up_vector(const Vector3D& u) {
 	up = u;
 }
-
-
-// ----------------------------------------------------------------- set_up_vector
-
-inline void
-Camera::set_up_vector(const float x, const float y, const float z) {
-	up.x = x; up.y = y; up.z = z;
-}
-
 
 // ----------------------------------------------------------------- set_roll
 

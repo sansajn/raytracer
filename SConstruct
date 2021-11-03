@@ -104,9 +104,21 @@ cpp.Program('fig11_11b', ['main.cpp', engine, 'build/BuildFigure11_11b.cpp'])
 cpp.Program('fig11_12a', ['main.cpp', engine, 'build/BuildFigure11_12a.cpp'])
 cpp.Program('fig11_12b', ['main.cpp', engine, 'build/BuildFigure11_12b.cpp'])
 cpp.Program('fig11_13', ['main.cpp', engine, 'build/BuildFigure11_13.cpp'])
+cpp.Program('fig14_05', ['main.cpp', engine, 'build/BuildFigure14_05.cpp'])
+cpp.Program('fig14_07', ['main.cpp', engine, 'build/BuildFigure14_07.cpp'])
+cpp.Program('fig14_10', ['main.cpp', engine, 'build/BuildFigure14_10.cpp'])
+cpp.Program('fig14_11b', ['main.cpp', engine, 'build/BuildFigure14_11b.cpp'])
+cpp.Program('fig14_11c', ['main.cpp', engine, 'build/BuildFigure14_11c.cpp'])
+cpp.Program('fig14_15', ['main.cpp', engine, 'build/BuildFigure14_15.cpp'])
+cpp.Program('fig14_21', ['main.cpp', engine, 'build/BuildFigure14_21.cpp'])
+cpp.Program('fig14_22a', ['main.cpp', engine, 'build/BuildFigure14_22a.cpp'])
+cpp.Program('fig14_22b', ['main.cpp', engine, 'build/BuildFigure14_22b.cpp'])
+cpp.Program('fig21_04', ['main.cpp', engine, 'build/BuildFigure21_04.cpp'])
+cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_05b.cpp'])
+
+cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 
 # tests
 cpp.Program('test/test', [
-	'test/test.cpp',
-	'test/matrix.cpp',
+	Glob('test/*.cpp'),
 	engine])

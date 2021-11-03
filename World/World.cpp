@@ -178,24 +178,20 @@ World::display_pixel(const int row, const int column, const RGBColor& raw_color)
 
 ShadeRec
 World::hit_objects(const Ray& ray) {
-
-	ShadeRec	sr(*this);
-	double		t;
+	ShadeRec	sr{*this};
 	Normal normal;
 	Point3D local_hit_point;
-	float		tmin 			= kHugeValue;
-	int 		num_objects 	= objects.size();
+	float	tmin = kHugeValue;
 
-	for (int j = 0; j < num_objects; j++) {
-		bool hit = objects[j]->hit(ray, t, sr);
-		if (hit && (t < tmin)) {
+	for (auto const & object : objects) {
+		if (double t; object->hit(ray, t, sr) && (t < tmin)) {
 			sr.hit_an_object	= true;
-			tmin 				= t;
-			sr.material_ptr     = objects[j]->get_material();
+			tmin = t;
+			sr.material_ptr = object->get_material();
 			assert(sr.material_ptr);
-			sr.hit_point 		= ray.o + t * ray.d;
-			normal 				= sr.normal;
-			local_hit_point	 	= sr.local_hit_point;
+			sr.hit_point = ray.o + t * ray.d;
+			normal = sr.normal;
+			local_hit_point = sr.local_hit_point;
 		}
 	}
 
@@ -205,7 +201,7 @@ World::hit_objects(const Ray& ray) {
 		sr.local_hit_point = local_hit_point;
 	}
 
-	return(sr);
+	return sr;
 }
 
 ShadeRec

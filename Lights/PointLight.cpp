@@ -54,11 +54,6 @@ PointLight::operator= (const PointLight& rhs)
 	return (*this);
 }
 
-
-
-PointLight::~PointLight(void) {}
-
-
 Vector3D
 PointLight::get_direction(ShadeRec& sr) {
 	return (location - sr.hit_point).hat();

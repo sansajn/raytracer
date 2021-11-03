@@ -17,7 +17,7 @@ public:
 	Compound();
 
 	void set_material(std::shared_ptr<Material> material_ptr) override;
-	virtual void add_object(GeometricObject * object_ptr);
+	void add_object(GeometricObject * object_ptr) override;
 	int get_num_objects(void);
 
 	bool hit(const Ray& ray, double& tmin, ShadeRec& s) const override;

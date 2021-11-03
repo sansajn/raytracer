@@ -11,6 +11,7 @@
 // This uses extra memory but the object to be transformed may be a grid or some other complex object
 // whose bouding box is expensive to compute.
 
+#include <memory>
 #include "GeometricObject.h"
 #include "Matrix.h"
 
@@ -19,21 +20,17 @@ class Instance: public GeometricObject {
 		
 		Instance(void);   									
 		
-		Instance(GeometricObject* obj_ptr);					
+		Instance(std::shared_ptr<GeometricObject> obj_ptr);
 		
 		Instance(const Instance& instance); 
 		
-		virtual Instance* 									
-		clone(void) const;				
+		Instance * clone() const override;
 
-		virtual												
-		~Instance(void); 
-		
 		Instance& 											
 		operator= (const Instance& rhs);
 				
 		void 												
-		set_object(GeometricObject* obj_ptr);
+		set_object(std::shared_ptr<GeometricObject> obj_ptr);
 
 		Material const * get_material() const override;
 		void get_material(std::shared_ptr<Material> & m) const override;
@@ -57,14 +54,8 @@ class Instance: public GeometricObject {
 		translate(const Vector3D& trans);
 		
 		void
-		translate(const double dx, const double dy, const double dz);	
-		
-		void												
 		scale(const Vector3D& s);
-		
-		void 
-		scale(const double a, const double b, const double c);
-		
+
 		virtual void										
 		rotate_x(const double r);
 		
@@ -80,7 +71,7 @@ class Instance: public GeometricObject {
 		
 	private:
 
-		GeometricObject*	object_ptr;				// object to be transformed
+		std::shared_ptr<GeometricObject> object_ptr;				// object to be transformed
 		Matrix				inv_matrix;		    	// inverse transformation matrix
 		static 	Matrix		forward_matrix; 		// transformation matrix
 		BBox				bbox;					// transformed object's bounding box

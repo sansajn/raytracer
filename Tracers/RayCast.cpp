@@ -1,25 +1,16 @@
+#include <cassert>
 #include "RayCast.h"
 #include "World.h"
 #include "ShadeRec.h"
 #include "Material.h"
 
-// -------------------------------------------------------------------- default constructor
-
-RayCast::RayCast(void)
-	: Tracer()
+RayCast::RayCast(World * world)
+	: Tracer{world}
 {}
 
-// -------------------------------------------------------------------- constructor
-		
-RayCast::RayCast(World* _worldPtr)
-	: Tracer(_worldPtr)
-{}
-
-// -------------------------------------------------------------------- trace_ray
-
-RGBColor	
-RayCast::trace_ray(const Ray& ray) const {
-	ShadeRec sr(world_ptr->hit_objects(ray));
+RGBColor	RayCast::trace_ray(Ray const & ray) const {
+	assert(world_ptr);
+	ShadeRec sr{world_ptr->hit_objects(ray)};
 		
 	if (sr.hit_an_object) {
 		sr.ray = ray;			// used for specular shading
@@ -30,11 +21,8 @@ RayCast::trace_ray(const Ray& ray) const {
 }
 
 
-// -------------------------------------------------------------------- trace_ray
-// this ignores the depth argument
-
-RGBColor	
-RayCast::trace_ray(const Ray ray, const int depth) const {
+//! \note this ignores the depth argument
+RGBColor	RayCast::trace_ray(const Ray ray, const int depth) const {
 	ShadeRec sr(world_ptr->hit_objects(ray));
 		
 	if (sr.hit_an_object) {

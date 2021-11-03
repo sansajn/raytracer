@@ -5,6 +5,11 @@ Emissive::Emissive()
 	: ls{1.0}
 {}
 
+Emissive::Emissive(RGBColor const & ce, float ls)
+	: ls{ls}
+	, ce{ce}
+{}
+
 void Emissive::set_ce(RGBColor const & ce) {
 	this->ce = ce;
 }

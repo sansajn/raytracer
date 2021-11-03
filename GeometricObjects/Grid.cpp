@@ -293,7 +293,7 @@ Grid::find_max_bounds(void) {
 // ----------------------------------------------------------------------------- read_flat_triangles
 
 void												
-Grid::read_flat_triangles(char* file_name) {
+Grid::read_flat_triangles(char const * file_name) {
   	read_ply_file(file_name, flat);
  }
 
@@ -301,7 +301,7 @@ Grid::read_flat_triangles(char* file_name) {
 // ----------------------------------------------------------------------------- read_smooth_triangles
 
 void												
-Grid::read_smooth_triangles(char* file_name) {
+Grid::read_smooth_triangles(char const * file_name) {
   	read_ply_file(file_name, smooth);
   	compute_mesh_normals();
 }
@@ -322,7 +322,7 @@ Grid::read_smooth_triangles(char* file_name) {
 
 
 void
-Grid::read_ply_file(char* file_name, const int triangle_type) {
+Grid::read_ply_file(char const * file_name, const int triangle_type) {
 	// Vertex definition 
 	
 	typedef struct Vertex {
@@ -376,7 +376,7 @@ Grid::read_ply_file(char* file_name, const int triangle_type) {
 
   	// open a ply file for reading
   
-	ply = ply_open_for_reading(file_name, &nelems, &elist, &file_type, &version);
+	ply = ply_open_for_reading(const_cast<char *>(file_name), &nelems, &elist, &file_type, &version);
 	
   	// print what we found out about the file
   
