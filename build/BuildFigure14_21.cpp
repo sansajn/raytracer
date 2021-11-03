@@ -31,7 +31,7 @@ void World::build() {
 	auto pinhole_ptr = make_unique<Pinhole>();
 	pinhole_ptr->set_eye(0, 0, 500);
 	pinhole_ptr->set_lookat(-5, 0, 0); 
-//	pinhole_ptr->set_vpd(850.0);
+	pinhole_ptr->set_vpd(850.0);
 	pinhole_ptr->compute_uvw();     
 	set_camera(move(pinhole_ptr));
 	

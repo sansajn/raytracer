@@ -184,9 +184,7 @@ World::hit_objects(const Ray& ray) {
 	float	tmin = kHugeValue;
 
 	for (auto const & object : objects) {
-		double t;
-		bool hit = object->hit(ray, t, sr);
-		if (hit && (t < tmin)) {
+		if (double t; object->hit(ray, t, sr) && (t < tmin)) {
 			sr.hit_an_object	= true;
 			tmin = t;
 			sr.material_ptr = object->get_material();
