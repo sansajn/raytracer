@@ -61,9 +61,8 @@ void World::build() {
 	
 	// Matt material reflection coefficients
 	
-	float ka = 0.25;
-	float kd = 0.75;
-	
+	float const ka = 0.25,
+		kd = 0.75;
 	
 	// spheres
 	
