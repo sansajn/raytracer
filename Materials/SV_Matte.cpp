@@ -12,7 +12,7 @@ SV_Matte::SV_Matte(float ka, float kd, Texture const * t)
 {
 	set_ka(ka);
 	set_kd(kd);
-	set_cd(t);
+	set_cd(t);  // FIX: memory leak, SV_Lambertian doesn't own texture (SV_Mate should)
 }
 
 SV_Matte::SV_Matte(SV_Matte const & other)
