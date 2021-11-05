@@ -5,6 +5,7 @@
 class AmbientOccluder: public Light {
 public:
 	AmbientOccluder();
+
 	void set_sampler(std::unique_ptr<Sampler> s);
 	void set_color(RGBColor const & c);
 	void set_min_amount(float amount);
