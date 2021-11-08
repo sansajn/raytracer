@@ -11,8 +11,6 @@ public:
 	void set_ka(const float k);
 	void set_kd(const float k);
 	void set_cd(const RGBColor c);
-	void set_cd(const float r, const float g, const float b);
-	void set_cd(const float c);
 	RGBColor shade(ShadeRec& sr) const override;
 	RGBColor area_light_shade(ShadeRec & sr) const override;
 
@@ -51,23 +49,6 @@ Matte::set_kd (const float kd) {
 
 inline void												
 Matte::set_cd(const RGBColor c) {
-	ambient_brdf->set_cd(c);
-	diffuse_brdf->set_cd(c);
-}
-
-
-// ---------------------------------------------------------------- set_cd
-
-inline void													
-Matte::set_cd(const float r, const float g, const float b) {
-	ambient_brdf->set_cd(r, g, b);
-	diffuse_brdf->set_cd(r, g, b);
-}
-
-// ---------------------------------------------------------------- set_cd
-
-inline void													
-Matte::set_cd(const float c) {
 	ambient_brdf->set_cd(c);
 	diffuse_brdf->set_cd(c);
 }

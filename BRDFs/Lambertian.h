@@ -1,6 +1,4 @@
-#ifndef __LAMBERTIAN__
-#define __LAMBERTIAN__
-
+#pragma once
 #include "BRDF.h"
 
 class Lambertian: public BRDF {
@@ -32,20 +30,11 @@ class Lambertian: public BRDF {
 		
 		void
 		set_cd(const RGBColor& c);
-		
-		void													
-		set_cd(const float r, const float g, const float b);
-		
-		void													
-		set_cd(const float c);
-					
+
 	private:
-	
 		float		kd;
 		RGBColor 	cd;
 };
-
-
 
 
 // -------------------------------------------------------------- set_ka
@@ -71,21 +60,3 @@ inline void
 Lambertian::set_cd(const RGBColor& c) {
 	cd = c;
 }
-
-
-// ---------------------------------------------------------------- set_cd
-
-inline void													
-Lambertian::set_cd(const float r, const float g, const float b) {
-	cd.r = r; cd.g = g; cd.b = b;
-}
-
-
-// ---------------------------------------------------------------- set_cd
-
-inline void													
-Lambertian::set_cd(const float c) {
-	cd.r = c; cd.g = c; cd.b = c;
-}
-
-#endif

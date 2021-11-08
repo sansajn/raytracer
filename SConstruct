@@ -145,6 +145,7 @@ cpp.Program('fig17_08b', ['main.cpp', engine, 'build/BuildFigure17_08b.cpp'])
 cpp.Program('fig17_12a', ['main.cpp', engine, 'build/BuildFigure17_12a.cpp'])
 cpp.Program('fig17_12b', ['main.cpp', engine, 'build/BuildFigure17_12b.cpp'])
 cpp.Program('fig17_12c', ['main.cpp', engine, 'build/BuildFigure17_12c.cpp'])
+cpp.Program('fig17_13a', ['main.cpp', engine, 'build/BuildFigure17_13a.cpp'])
 cpp.Program('fig21_04', ['main.cpp', engine, 'build/BuildFigure21_04.cpp'])
 cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_0b.cpp'])
 
