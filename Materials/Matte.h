@@ -1,6 +1,4 @@
-#ifndef __MATTE__
-#define __MATTE__
-
+#pragma once
 #include "Material.h"
 #include "Lambertian.h"
 
@@ -73,5 +71,3 @@ Matte::set_cd(const float c) {
 	ambient_brdf->set_cd(c);
 	diffuse_brdf->set_cd(c);
 }
-
-#endif
