@@ -19,7 +19,6 @@
 #include "GeometricObjects/Instance.h"
 #include "GeometricObjects/Rectangle.h"
 
-
 using std::make_unique, std::make_shared, std::move;
 
 void World::build() {
