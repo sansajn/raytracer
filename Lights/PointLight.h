@@ -21,7 +21,8 @@
 #include "../World/World.h"			// you will need this later on for shadows
 #include "../Utilities/ShadeRec.h"
 
-
+/*! \code
+\endcode */
 class PointLight: public Light {
 	public:
 

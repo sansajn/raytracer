@@ -63,9 +63,16 @@ clamp(const double x, const double min, const double max) {
 	return (x < min ? min : (x > max ? max : x));
 }
 
+//! Convert degrees to radians.
 template <typename T>
 T radians(T const & val) {
 	return val * PI_ON_180<T>;
+}
+
+//! Convert radians to degrees.
+template <typename T>
+T degrees(T const & val) {
+	return val * (180.0 * invPI<double>);
 }
 
 #endif

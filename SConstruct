@@ -142,6 +142,7 @@ cpp.Program('fig17_07c', ['main.cpp', engine, 'build/BuildFigure17_07c.cpp'])
 cpp.Program('fig17_07d', ['main.cpp', engine, 'build/BuildFigure17_07d.cpp'])
 cpp.Program('fig17_08a', ['main.cpp', engine, 'build/BuildFigure17_08a.cpp'])
 cpp.Program('fig17_08b', ['main.cpp', engine, 'build/BuildFigure17_08b.cpp'])
+cpp.Program('fig17_11a', ['main.cpp', engine, 'build/BuildFigure17_11a.cpp'])
 cpp.Program('fig17_12a', ['main.cpp', engine, 'build/BuildFigure17_12a.cpp'])
 cpp.Program('fig17_12b', ['main.cpp', engine, 'build/BuildFigure17_12b.cpp'])
 cpp.Program('fig17_12c', ['main.cpp', engine, 'build/BuildFigure17_12c.cpp'])
@@ -150,6 +151,7 @@ cpp.Program('fig21_04', ['main.cpp', engine, 'build/BuildFigure21_04.cpp'])
 cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_0b.cpp'])
 
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
+cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])
 
 # tests
 cpp.Program('test/test', [

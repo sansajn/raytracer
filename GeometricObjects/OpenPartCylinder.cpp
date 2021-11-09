@@ -5,7 +5,7 @@ OpenPartCylinder::OpenPartCylinder()
 	, _y1{1.0}
 	, _radius{1.0}
 	, _phi_min{0.0}
-	, _phi_max{TWO_PI<double>}
+	, _phi_max{360.0}
 	, _inv_radius{1.0}
 {}
 
@@ -52,11 +52,14 @@ bool OpenPartCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const 
 			if (yhit > _y0 && yhit < _y1) {
 				tmin = t;
 
+				// FIX:
 				Point3D hit_point = ray.o + tmin * ray.d;
 
 				double phi = atan2(hit_point.x, hit_point.z);
 				if (phi < 0.0)
 					phi += TWO_PI<double>;
+
+				phi = degrees(phi);
 
 				if (phi >= _phi_min && phi <= _phi_max) {
 					sr.normal = Normal((ox + t * dx) * _inv_radius, 0.0, (oz + t * dz) * _inv_radius);
@@ -69,6 +72,9 @@ bool OpenPartCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const 
 					sr.local_hit_point = hit_point;
 
 					return true;
+				}
+				else {
+					int __i = 101;
 				}
 			}
 		}
@@ -87,6 +93,8 @@ bool OpenPartCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const 
 				if (phi < 0.0)
 					phi += TWO_PI<double>;
 
+				phi = degrees(phi);
+
 				if (phi >= _phi_min && phi <= _phi_max) {
 
 					sr.normal = Normal((ox + t * dx) * _inv_radius, 0.0, (oz + t * dz) * _inv_radius);
@@ -99,6 +107,9 @@ bool OpenPartCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const 
 					sr.local_hit_point = hit_point;
 
 					return true;
+				}
+				else {
+					int __i = 102;
 				}
 			}
 		}
@@ -141,6 +152,8 @@ bool OpenPartCylinder::shadow_hit(Ray const & ray, double & tmin) const {
 				if (phi < 0.0)
 					phi += TWO_PI<double>;
 
+				phi = degrees(phi);
+
 				if (phi >= _phi_min && phi <= _phi_max)
 					return true;
 			}
@@ -159,6 +172,8 @@ bool OpenPartCylinder::shadow_hit(Ray const & ray, double & tmin) const {
 				double phi = atan2(hit_point.x, hit_point.z);
 				if (phi < 0.0)
 					phi += TWO_PI<double>;
+
+				phi = degrees(phi);
 
 				if (phi >= _phi_min && phi <= _phi_max)
 					return true;

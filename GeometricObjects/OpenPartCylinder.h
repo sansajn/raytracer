@@ -15,8 +15,8 @@ private:
 	double _y0,
 		_y1,
 		_radius,
-		_phi_min,
-		_phi_max,
+		_phi_min,  //!< in degrees
+		_phi_max,  //!< in degrees
 		_inv_radius;
 	BBox _bbox;
 };
