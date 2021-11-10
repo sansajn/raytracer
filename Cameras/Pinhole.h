@@ -21,22 +21,16 @@ class Pinhole: public Camera {
 		Pinhole& 							
 		operator= (const Pinhole& rhs);	
 		
-		virtual
-		~Pinhole();   						
 			
-		void
-		set_view_distance(const float vpd);
-		
-		void
-		set_zoom(const float zoom_factor);
-		
-		Vector3D								
-		get_direction(const Point2D& p) const;
+		void set_view_distance(const float vpd);
+		void set_zoom(const float zoom_factor);
+		Vector3D	get_direction(const Point2D& p) const;
 		
 		void render_scene(const World& w) override;
+
+		virtual ~Pinhole();
 		
 	private:
-			
 		float	d;		// view plane distance
 		float	zoom;	// zoom factor
 		

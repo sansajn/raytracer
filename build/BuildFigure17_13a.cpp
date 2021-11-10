@@ -13,6 +13,7 @@
 #include "Lights/AmbientOccluder.h"
 #include "Lights/PointLight.h"
 #include "Cameras/Orthographic.h"
+#include "Cameras/Pinhole.h"
 #include "Materials/Matte.h"
 #include "GeometricObjects/Box.h"
 #include "GeometricObjects/Plane.h"
@@ -37,16 +38,16 @@ void World::build() {
 	set_ambient_light(ambient_occluder_ptr);
 	
 	
-	auto orthographic_ptr = make_unique<Orthographic>();
-	vp.set_pixel_size(0.31);	
-	orthographic_ptr->set_eye({100, 100, 50});
-	orthographic_ptr->set_lookat({0, 10, 0});
-	orthographic_ptr->compute_uvw(); 
-	set_camera(move(orthographic_ptr));
+	auto camera = make_unique<Orthographic>();
+	vp.set_pixel_size(0.31);
+	camera->set_eye({100, 100, 50});
+	camera->set_lookat({0, 10, 0});
+	camera->compute_uvw();
 
+	set_camera(move(camera));
 	
-	PointLight* light_ptr = new PointLight;
-	light_ptr->set_location(150, 500, 300); 
+	PointLight * light_ptr = new PointLight;
+	light_ptr->set_location({150, 500, 300});
 	light_ptr->scale_radiance(3.75);
 	light_ptr->set_shadows(true);
 	add_light(light_ptr);

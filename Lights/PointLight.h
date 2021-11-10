@@ -21,8 +21,16 @@
 #include "../World/World.h"			// you will need this later on for shadows
 #include "../Utilities/ShadeRec.h"
 
-/*! \code
-\endcode */
+/*! Point light.
+\code
+void World::build() {
+	// ...
+	PointLight * light_ptr = new PointLight;
+	light_ptr->set_location({150, 500, 300});
+	light_ptr->scale_radiance(3.75);
+	light_ptr->set_shadows(true);
+	add_light(light_ptr);
+} \endcode */
 class PointLight: public Light {
 	public:
 
