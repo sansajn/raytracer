@@ -50,6 +50,10 @@ RGBColor AmbientOccluder::L(ShadeRec & sr) {
 	shadow_ray.o = sr.hit_point;
 	shadow_ray.d = get_direction(sr);
 
+	if (shadow_ray.o.distance({0, 1, 1}) < 0.01) {
+		int _dummy = 101;
+	}
+
 	if (in_shadow(shadow_ray, sr))
 		return (min_amount * ls * color);
 	else
