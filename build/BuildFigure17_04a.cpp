@@ -33,7 +33,7 @@ void World::build(){
 	occluder_ptr->scale_radiance(1.0);
 	occluder_ptr->set_min_amount(0.0);
 	occluder_ptr->set_sampler(move(sampler_ptr));
-	set_ambient_light(occluder_ptr);	
+//	set_ambient_light(occluder_ptr);
 			
 	auto pinhole_ptr = make_unique<Pinhole>();
 	pinhole_ptr->set_eye({25, 20, -45});

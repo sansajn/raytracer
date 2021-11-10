@@ -12,13 +12,6 @@
 
 #include "Regular.h"
 
-// ---------------------------------------------------------------- default constructor
-	
-Regular::Regular(void)							
-	: Sampler()
-{}
-
-
 // ---------------------------------------------------------------- constructor
 
 Regular::Regular(const int num)
