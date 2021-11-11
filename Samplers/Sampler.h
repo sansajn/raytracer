@@ -30,13 +30,13 @@ class Sampler {
 
 		Sampler& operator= (const Sampler& rhs);
 
-		virtual Sampler* clone(void) const = 0;
+		virtual Sampler* clone() const = 0;
 
-		virtual ~Sampler(void);
+		virtual ~Sampler();
 		
 		void set_num_sets(const int np);
 		
-		virtual void generate_samples() = 0;  //!< generate sample patterns in a unit square
+		virtual void generate_samples() = 0;  //!< generate sample patterns in a unit square [0,0]x[1,1]
 
 		int get_num_samples();
 
