@@ -52,7 +52,6 @@ bool OpenPartCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const 
 			if (yhit > _y0 && yhit < _y1) {
 				tmin = t;
 
-				// FIX:
 				Point3D hit_point = ray.o + tmin * ray.d;
 
 				double phi = atan2(hit_point.x, hit_point.z);
@@ -72,9 +71,6 @@ bool OpenPartCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const 
 					sr.local_hit_point = hit_point;
 
 					return true;
-				}
-				else {
-					int __i = 101;
 				}
 			}
 		}
@@ -107,9 +103,6 @@ bool OpenPartCylinder::hit(Ray const & ray, double & tmin, ShadeRec & sr) const 
 					sr.local_hit_point = hit_point;
 
 					return true;
-				}
-				else {
-					int __i = 102;
 				}
 			}
 		}
