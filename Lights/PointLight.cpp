@@ -60,8 +60,7 @@ PointLight::get_direction(ShadeRec& sr) {
 }
 
 
-RGBColor
-PointLight::L([[maybe_unused]] ShadeRec& s) {
+RGBColor PointLight::L(ShadeRec &) {
 	return (ls * color);
 }
 

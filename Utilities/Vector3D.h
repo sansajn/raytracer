@@ -11,11 +11,8 @@ class Matrix;
 
 class Vector3D {
 	public:
-	
 		double	x, y, z;
 
-	public:
-	
 		Vector3D(void);											// default constructor
 		explicit Vector3D(double a);										// constructor
 		Vector3D(double _x, double _y, double _z);				// constructor
