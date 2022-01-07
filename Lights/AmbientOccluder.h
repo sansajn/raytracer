@@ -2,6 +2,7 @@
 #include "Light.h"
 #include "Samplers/Sampler.h"
 
+//! \note based on listings from chapter 17
 class AmbientOccluder: public Light {
 public:
 	AmbientOccluder();

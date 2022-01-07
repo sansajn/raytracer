@@ -35,9 +35,9 @@ void World::build(){
 	set_ambient_light(occluder_ptr);
 			
 	auto pinhole_ptr = make_unique<Pinhole>();
-	pinhole_ptr->set_eye({0, 1, 5}/*{25, 20, -45}*/);
+	pinhole_ptr->set_eye({25, 20, -45});
 	pinhole_ptr->set_lookat({0, 1, 0});
-//	pinhole_ptr->set_view_distance(5000);
+	pinhole_ptr->set_view_distance(5000);
 	pinhole_ptr->compute_uvw();     
 	set_camera(move(pinhole_ptr));
 	
