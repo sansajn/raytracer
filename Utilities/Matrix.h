@@ -18,7 +18,7 @@ public:
 	double	m[4][4];								// elements
 	
 
-	Matrix(void);									// default constructor
+	Matrix();
 
 	Matrix(const Matrix& mat);						// copy constructor
 

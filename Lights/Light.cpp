@@ -8,7 +8,7 @@ using namespace std::string_literals;
 
 // ---------------------------------------------------------------------- default constructor
 
-Light::Light(void)
+Light::Light()
 	: _shadows{false}
 {}
 

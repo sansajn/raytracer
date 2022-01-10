@@ -250,7 +250,7 @@ Sampler::map_samples_to_hemisphere(const float exp) {
 // this is used for modelling a spherical light
 
 void
-Sampler::map_samples_to_sphere(void) {		
+Sampler::map_samples_to_sphere() {
 	sphere_samples.reserve(num_samples * num_sets);   
 		
 	for (int j = 0; j < num_samples * num_sets; j++) {

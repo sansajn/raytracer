@@ -38,62 +38,37 @@ class World {
 		std::vector<Light*> 				lights;
 		
 		mutable std::vector<uint8_t> pixels;
-			
 
 	public:
-	
 		World();
-		
 		~World();
 								
-		void 
-		add_object(GeometricObject* object_ptr);
-		
-		void 
-		add_light(Light* light_ptr); 
-		
-		void
-		set_ambient_light(Light* light_ptr);			
-		
-		Camera * camera() const;  // TODO: should I return unique_ptr& rather then *?
-		void set_camera(std::unique_ptr<Camera> c);
+		void build();
 
-		void 					
-		build(void);
+		void add_object(GeometricObject* object_ptr);
+		void add_light(Light* light_ptr);
+		void set_ambient_light(Light* light_ptr);
+		Camera * camera() const;
+		void set_camera(std::unique_ptr<Camera> c);
 
 		/*! Render scene in orthographic viewing along the zw axis (without sampler supoprt).
 		\note only used in case scene doesn't contains camera */
 		void render_scene() const;
 
-		RGBColor
-		max_to_one(const RGBColor& c) const;
-		
-		RGBColor
-		clamp_to_color(const RGBColor& c) const;
-		
-		void
-		display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
+		RGBColor	max_to_one(const RGBColor& c) const;
+		RGBColor	clamp_to_color(const RGBColor& c) const;
+		void display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
+		ShadeRec	hit_objects(const Ray& ray);
+		ShadeRec	hit_bare_bones_objects(const Ray &ray);  //!< \note the function is only used in chapter 3
 
-		ShadeRec
-		hit_objects(const Ray& ray);
-
-		ShadeRec
-		hit_bare_bones_objects(const Ray &ray);  //!< \note the function is only used in chapter 3
-
-		void
-		save_to_ppm(void) const;
-
+		void save_to_ppm() const;
 		void save_to_png() const;
 						
 	private:
-		
-		void 
-		delete_objects(void);
-		
-		void 
-		delete_lights(void);
+		void delete_objects();
+		void delete_lights();
 
-		std::unique_ptr<Camera> _camera;  // TODO: use unique_ptr to make ownership clear
+		std::unique_ptr<Camera> _camera;
 };
 
 

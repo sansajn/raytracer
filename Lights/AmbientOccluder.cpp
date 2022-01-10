@@ -1,27 +1,40 @@
+#include <cassert>
 #include "World.h"
+#include "GeometricObjects/GeometricObject.h"
+#include "Constants.h"
 #include "AmbientOccluder.h"
 
-void AmbientOccluder::set_sampler(Sampler * s_ptr) {
-	if (sampler_ptr) {
-		delete sampler_ptr;
-		sampler_ptr = nullptr;
-	}
+using std::unique_ptr, std::move;
 
-	sampler_ptr = s_ptr;
+AmbientOccluder::AmbientOccluder()
+	: ls{1.0}
+	, color{white}
+	, min_amount{0.1}
+{}
+
+void AmbientOccluder::set_sampler(unique_ptr<Sampler> s) {
+	assert(s);
+	sampler_ptr = move(s);
 	sampler_ptr->map_samples_to_hemisphere(1);
 }
 
-Vector3D AmbientOccluder::get_direction(ShadeRec & sr) {
+void AmbientOccluder::set_min_amount(float amount) {
+	min_amount = amount;
+}
+
+void AmbientOccluder::scale_radiance(float k) {
+	ls = k;
+}
+
+Vector3D AmbientOccluder::get_direction(ShadeRec &) {
+	assert(sampler_ptr);
 	Point3D sp = sampler_ptr->sample_hemisphere();
 	return (sp.x * u + sp.y * v + sp.z * w);
 }
 
 bool AmbientOccluder::in_shadow(Ray const & ray, ShadeRec const & sr) const {
-	double t;
-	int num_objects = sr.w.objects.size();
-
-	for (int j = 0; j < num_objects; j++)
-		if (sr.w.objects[j]->shadow_hit(ray, t))
+	for (GeometricObject const * object : sr.w.objects)
+		if (double t; object->shadow_hit(ray, t))
 			return true;
 
 	return false;
@@ -37,8 +50,27 @@ RGBColor AmbientOccluder::L(ShadeRec & sr) {
 	shadow_ray.o = sr.hit_point;
 	shadow_ray.d = get_direction(sr);
 
+	if (shadow_ray.o.distance({0, 1, 1}) < 0.01) {
+		int _dummy = 101;
+	}
+
 	if (in_shadow(shadow_ray, sr))
 		return (min_amount * ls * color);
 	else
 		return (ls * color);
+}
+
+AmbientOccluder * AmbientOccluder::clone() const {
+	return new AmbientOccluder{*this};
+}
+
+AmbientOccluder::AmbientOccluder(AmbientOccluder const & rhs)
+	: Light{rhs}
+	, ls{rhs.ls}
+	, color{rhs.color}
+	, min_amount{rhs.min_amount}
+	, u{rhs.u}, v{rhs.v}, w{rhs.w}
+{
+	if (rhs.sampler_ptr)
+		sampler_ptr.reset(rhs.sampler_ptr->clone());
 }

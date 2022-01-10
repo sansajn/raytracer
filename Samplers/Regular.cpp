@@ -12,13 +12,6 @@
 
 #include "Regular.h"
 
-// ---------------------------------------------------------------- default constructor
-	
-Regular::Regular(void)							
-	: Sampler()
-{}
-
-
 // ---------------------------------------------------------------- constructor
 
 Regular::Regular(const int num)
@@ -52,19 +45,14 @@ Regular::operator= (const Regular& rhs)	{
 // ---------------------------------------------------------------- clone
 
 Regular*										
-Regular::clone(void) const {
+Regular::clone() const {
 	return (new Regular(*this));
 }
-
-// ---------------------------------------------------------------- destructor			
-
-Regular::~Regular(void) {}
-
 
 // ---------------------------------------------------------------- generate_samples	
 
 void
-Regular::generate_samples(void) {
+Regular::generate_samples() {
 	int n = (int) sqrt((float)num_samples);
 
 	for (int j = 0; j < num_sets; j++) {

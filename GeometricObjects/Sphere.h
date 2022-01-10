@@ -8,12 +8,9 @@
 //-------------------------------------------------------------------------------- class Sphere
 
 class Sphere: public GeometricObject {	
-								  	
 	public:
-		
-		Sphere(void);   									// Default constructor
-				
-		Sphere(Point3D center, double r);					// Constructor 
+		Sphere();
+		Sphere(Point3D center, double r);
 					
 		Sphere(const Sphere& sphere); 						// Copy constructor
 		
