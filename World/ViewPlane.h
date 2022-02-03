@@ -48,7 +48,9 @@ class ViewPlane {
 		void
 		set_samples(const int n);
 
+		/*! TODO: implementacia nedovoluje zdielat jednu instanciu sampleru pre VP a napr. area light objekty (figure 18.04), je to problem? */
 		void set_sampler(std::unique_ptr<Sampler> sp);
+
 		void set_max_depth(int depth);
 };
 

@@ -45,7 +45,10 @@ class World {
 								
 		void build();
 
+		/* TODO: implementacia nedovoluje aby boly area-light objekty vykreslene ako sucast sveta (figure 18.04) */
 		void add_object(GeometricObject* object_ptr);
+
+
 		void add_light(Light* light_ptr);
 		void set_ambient_light(Light* light_ptr);
 		Camera * camera() const;

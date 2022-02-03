@@ -1,5 +1,4 @@
-#ifndef __RECTANGLE__
-#define __RECTANGLE__
+#pragma once
 
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
@@ -24,8 +23,7 @@ public:
 	Rectangle&
 	operator= (const Rectangle& rhs);
 
-	BBox
-	get_bounding_box(void);
+	BBox get_bounding_box();
 	
 	bool hit(Ray const & ray, double & t, ShadeRec & s) const override;
 	bool shadow_hit(Ray const & ray, double & tmin) const override;
@@ -51,5 +49,3 @@ private:
 
 	static const double kEpsilon;
 };
-
-#endif

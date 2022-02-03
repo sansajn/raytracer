@@ -13,12 +13,12 @@ class RGBColor {
 				
 	public:
 	
-		RGBColor(void);										// default constructor
-		RGBColor(float c);									// constructor
+		RGBColor();										// default constructor
+		explicit RGBColor(float c);									// constructor
 		RGBColor(float _r, float _g, float _b);				// constructor
 		RGBColor(const RGBColor& c); 						// copy constructor
 		
-		~RGBColor(void);									// destructor
+		~RGBColor();									// destructor
 		
 		RGBColor& 											// assignment operator
 		operator= (const RGBColor& rhs); 
