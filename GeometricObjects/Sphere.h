@@ -1,62 +1,31 @@
-#ifndef __SPHERE__
-#define __SPHERE__
-
-// This file contains the declaration of the class Sphere
-
+#pragma once
 #include "GeometricObject.h"
 
-//-------------------------------------------------------------------------------- class Sphere
-
 class Sphere: public GeometricObject {	
-	public:
-		Sphere();
-		Sphere(Point3D center, double r);
-					
-		Sphere(const Sphere& sphere); 						// Copy constructor
-		
-		virtual Sphere* 									// Virtual copy constructor
-		clone(void) const;
+public:
+	Sphere();
+	Sphere(Point3D center, double r);
+	void set_center(const Point3D& c);
+	void set_center(double x, double y, double z);
+	void set_radius(double r);
+	bool hit(const Ray& ray, double& t, ShadeRec& s) const override;
+	bool shadow_hit(Ray const & ray, double & tmin) const override;
 
-		Sphere& 											// assignment operator
-		operator= (const Sphere& sphere);				
-																					
-		void
-		set_center(const Point3D& c);
-		
-		void
-		set_center(const double x, const double y, const double z);
-		
-		void
-		set_radius(const double r);
-						
-		bool hit(const Ray& ray, double& t, ShadeRec& s) const override;
-		bool shadow_hit(Ray const & ray, double & tmin) const override;
-		
-	private:
-	
-		Point3D 	center;   			// center coordinates as a point  
-		double 		radius;				// the radius 
-		
-		static const double kEpsilon;   // for shadows and secondary rays
+	// Area Lights API
+	void set_sampler(std::shared_ptr<Sampler> sampler) override;
+	Point3D sample() override;
+	Normal get_normal(Point3D const & p) override;
+	float pdf(ShadeRec const & sr) const override;
+
+	// Copy API
+	Sphere *	clone() const override;
+	Sphere &	operator=(const Sphere& sphere);
+
+private:
+	Point3D _center;
+	double _radius,
+		_inv_area;
+	std::shared_ptr<Sampler> _sampler;
+
+	static const double kEpsilon;   // for shadows and secondary rays
 };
-
-
-
-inline void
-Sphere::set_center(const Point3D& c) {
-	center = c;
-}
-		
-inline void
-Sphere::set_center(const double x, const double y, const double z) {
-	center.x = x;
-	center.y = y;
-	center.z = z;
-}
-		
-inline void
-Sphere::set_radius(const double r) {
-	radius = r;
-}
-
-#endif

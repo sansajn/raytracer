@@ -110,7 +110,7 @@ Triangle::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 	if (beta < 0.0)
 	 	return (false);
 	
-	double r = r = e * l - h * i;
+	double r = e * l - h * i;
 	double e2 = a * n + d * q + c * r;
 	double gamma = e2 * inv_denom;
 	

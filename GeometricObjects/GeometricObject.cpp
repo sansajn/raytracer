@@ -13,15 +13,6 @@ GeometricObject::GeometricObject()
 	: _shadows{true}
 {}
 
-// ---------------------------------------------------------------------- copy constructor
-
-GeometricObject::GeometricObject (const GeometricObject& object) {
-	material_ptr = object.material_ptr;
-	_shadows = object._shadows;
-	color = object.color;
-}	
-
-
 // ---------------------------------------------------------------------- assignment operator
 
 GeometricObject&														

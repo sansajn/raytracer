@@ -6,55 +6,27 @@
 //------------------------------------------------------------ class RGBColor
 
 class RGBColor {
-	
-	public:
-	
-		float	r, g, b;									
+public:
+	float	r, g, b;
 				
-	public:
-	
-		RGBColor();										// default constructor
-		explicit RGBColor(float c);									// constructor
-		RGBColor(float _r, float _g, float _b);				// constructor
-		RGBColor(const RGBColor& c); 						// copy constructor
-		
-		~RGBColor();									// destructor
-		
-		RGBColor& 											// assignment operator
-		operator= (const RGBColor& rhs); 
+	RGBColor();
+	explicit RGBColor(float c);
+	RGBColor(float _r, float _g, float _b);
+	RGBColor(const RGBColor& c);
+	~RGBColor();
 
-		RGBColor 											// addition
-		operator+ (const RGBColor& c) const;	
-
-		RGBColor& 											// compound addition
-		operator+= (const RGBColor& c);
-		
-		RGBColor 											// multiplication by a float on the right
-		operator* (const float a) const;
-		
-		RGBColor& 											// compound multiplication by a float on the right
-		operator*= (const float a);					
-				
-		RGBColor 											// division by a float
-		operator/ (const float a) const;
-		
-		RGBColor& 											// compound division by a float
-		operator/= (const float a); 
-				
-		RGBColor 											// component-wise multiplication
-		operator* (const RGBColor& c) const;
-		
-		bool												// are two RGBColours the same?
-		operator== (const RGBColor& c) const;				
-
-		RGBColor											// raise components to a power
-		powc(float p) const;
-		
-		float												// the average of the components
-		average(void) const;
+	RGBColor & operator=(const RGBColor& rhs);
+	RGBColor	operator+(const RGBColor& c) const;
+	RGBColor & operator+=(const RGBColor& c);
+	RGBColor	operator*(const float a) const;
+	RGBColor & operator*=(const float a);
+	RGBColor operator/(const float a) const;
+	RGBColor & operator/=(const float a);
+	RGBColor operator*(const RGBColor& c) const;
+	bool operator==(const RGBColor& c) const;
+	RGBColor	powc(float p) const;  //!< raise components to a power
+	float	average() const;  // the average of the components
 };
-
-
 
 // inlined member functions
 

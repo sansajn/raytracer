@@ -42,29 +42,15 @@ class PointLight: public Light {
 		PointLight&
 		operator= (const PointLight& rhs);
 
-		void
-		scale_radiance(const float b);
+		void scale_radiance(const float b);
+		void set_color(const float c);
+		void set_color(const RGBColor& c);
+		void set_color(const float r, const float g, const float b);
+		void set_location(const Point3D& p);
+		void set_location(float x, float y, float z);
+		void set_direction(float dx, float dy, float dz);
 
-		void
-		set_color(const float c);
-
-		void
-		set_color(const RGBColor& c);
-
-		void
-		set_color(const float r, const float g, const float b);
-
-		void
-		set_location(const Point3D& p);
-
-		void
-		set_location(float x, float y, float z);
-
-		void
-		set_direction(float dx, float dy, float dz);
-
-		virtual Vector3D
-		get_direction(ShadeRec& sr) override;
+		Vector3D get_direction(ShadeRec& sr) override;
 
 		RGBColor	L(ShadeRec& sr) override;
 
