@@ -14,18 +14,6 @@ Pinhole::Pinhole(void)
 		zoom(1.0)
 {}
 
-
-// ----------------------------------------------------------------------------- copy constructor
-
-Pinhole::Pinhole(const Pinhole& c)   		
-	: 	Camera(c),
-		d(c.d),
-		zoom(c.zoom)
-{}
-
-
-// ----------------------------------------------------------------------------- clone
-
 Pinhole * Pinhole::clone() const {
 	return (new Pinhole(*this));
 }

@@ -15,7 +15,6 @@ public:
 
 	Pinhole * clone() const override;
 	Pinhole & operator=(const Pinhole& rhs);
-	Pinhole(const Pinhole & ph);
 
 private:
 	float	d;		// view plane distance
