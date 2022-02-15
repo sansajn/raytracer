@@ -1,20 +1,16 @@
 // This file contains the definition of the class sphere
 
+#include <cassert>
 #include "Sphere.h"
 #include "Utilities/Maths.h"
 
 const double Sphere::kEpsilon = 0.001;
 					
-// ---------------------------------------------------------------- default constructor
-
 Sphere::Sphere()
 	: _center{0}
 	, _radius{1.0}
 	, _inv_area{0}
 {}
-
-
-// ---------------------------------------------------------------- constructor
 
 Sphere::Sphere(Point3D c, double r)
 	: _center{c}
@@ -22,51 +18,43 @@ Sphere::Sphere(Point3D c, double r)
 	, _inv_area{1.0 / (4*PI<double>*r*r)}
 {}
 
-
-// ---------------------------------------------------------------- clone
-
-Sphere* 
-Sphere::clone(void) const {
-	return (new Sphere(*this));
-}
-
-
-// ---------------------------------------------------------------- copy constructor
-
 void Sphere::set_center(const Point3D& c) {
 	_center = c;
-}
-
-void Sphere::set_center(const double x, const double y, const double z) {
-	_center.x = x;
-	_center.y = y;
-	_center.z = z;
 }
 
 void Sphere::set_radius(const double r) {
 	_radius = r;
 }
 
-// ---------------------------------------------------------------- assignment operator
+Sphere::Sphere(Sphere const & rhs)
+	: GeometricObject{rhs}
+	, _center{rhs._center}
+	, _radius{rhs._radius}
+	, _inv_area{rhs._inv_area}
+{
+	if (rhs._sampler)
+		_sampler.reset(rhs._sampler->clone());
+}
 
-Sphere& 
-Sphere::operator= (const Sphere& rhs)		
+Sphere & Sphere::operator=(const Sphere& rhs)
 {
 	if (this == &rhs)
 		return (*this);
 
-	GeometricObject::operator= (rhs);
+	GeometricObject::operator=(rhs);
 
 	_center 	= rhs._center;
 	_radius	= rhs._radius;
+	_sampler.reset(rhs._sampler->clone());
 
 	return (*this);
 }
 
-//---------------------------------------------------------------- hit
+Sphere * Sphere::clone() const {
+	return new Sphere{*this};
+}
 
-bool
-Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+bool Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 	double 		t;
 	Vector3D	temp 	= ray.o - _center;
 	double 		a 		= ray.d * ray.d;
@@ -135,8 +123,9 @@ bool Sphere::shadow_hit(Ray const & ray, double & tmin) const {
 	return (false);
 }
 
-void Sphere::set_sampler(std::shared_ptr<Sampler> sampler) {
-	_sampler = sampler;
+void Sphere::set_sampler(std::unique_ptr<Sampler> s) {
+	assert(s);
+	_sampler = move(s);
 	_sampler->map_samples_to_sphere();
 }
 

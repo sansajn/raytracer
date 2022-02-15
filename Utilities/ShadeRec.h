@@ -1,5 +1,4 @@
-#ifndef __SHADE_REC__
-#define __SHADE_REC__
+#pragma once
 
 // this file contains the declaration of the class ShadeRec
 
@@ -35,5 +34,3 @@ public:
 	ShadeRec(World& wr);					// constructor
 	ShadeRec(const ShadeRec& sr);			// copy constructor
 };
-
-#endif

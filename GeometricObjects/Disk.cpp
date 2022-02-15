@@ -1,3 +1,4 @@
+#include <cassert>
 #include "Disk.h"
 
 Disk::Disk()
@@ -38,6 +39,9 @@ bool Disk::hit(Ray const & ray, double & tmin, ShadeRec & sr) const {
 }
 
 bool Disk::shadow_hit(Ray const & ray, double & tmin) const {
+	if (!casts_shadows())
+		return false;
+
 	double t = (_center - ray.o) * _normal / (ray.d * _normal);
 
 	if (t <= kEpsilon)
@@ -53,8 +57,9 @@ bool Disk::shadow_hit(Ray const & ray, double & tmin) const {
 		return false;
 }
 
-void Disk::set_sampler(std::shared_ptr<Sampler> sampler) {
-	_sampler = sampler;
+void Disk::set_sampler(std::unique_ptr<Sampler> s) {
+	assert(s);
+	_sampler = move(s);
 	_sampler->map_samples_to_unit_disk();
 }
 
@@ -69,6 +74,20 @@ Normal Disk::get_normal(Point3D const & p) {
 
 float Disk::pdf(ShadeRec const & sr) const {
 	return _inv_area;
+}
+
+Disk::Disk(Disk const & rhs)
+	: GeometricObject{rhs}
+	, _center{rhs._center}
+	, _normal{rhs._normal}
+	, _r{rhs._r}
+	, _r_squared{rhs._r_squared}
+	, _inv_area{rhs._inv_area}
+	, _u{rhs._u}
+	, _v{rhs._v}
+{
+	if (rhs._sampler)
+		_sampler.reset(rhs._sampler->clone());
 }
 
 Disk * Disk::clone() const {

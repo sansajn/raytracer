@@ -115,6 +115,9 @@ MeshTriangle::get_bounding_box(void) {
 
 bool 															 
 MeshTriangle::shadow_hit(const Ray& ray, double& tmin) const {	
+	if (!casts_shadows())
+		return false;
+
 	Point3D v0(mesh_ptr->vertices[index0]);
 	Point3D v1(mesh_ptr->vertices[index1]);
 	Point3D v2(mesh_ptr->vertices[index2]);

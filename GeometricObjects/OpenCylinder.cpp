@@ -137,6 +137,9 @@ OpenCylinder::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool OpenCylinder::shadow_hit(Ray const & ray, double & tmin) const {
+	if (!casts_shadows())
+		return false;
+
 	double t;
 	double ox = ray.o.x;
 	double oy = ray.o.y;

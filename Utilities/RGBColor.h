@@ -1,5 +1,4 @@
-#ifndef __RGB_COLOR__
-#define __RGB_COLOR__
+#pragma once
 
 // This file contains the declaration of the class RGBColor
 
@@ -129,6 +128,3 @@ inline RGBColor
 operator* (const float a, const RGBColor& c) {
 	return (RGBColor (a * c.r, a * c.g, a * c.b));	
 }
-
-
-#endif

@@ -7,7 +7,7 @@
 #include "Utilities/exception.hpp"
 #include "GeometricObject.h"
 
-using std::shared_ptr;
+using std::shared_ptr, std::unique_ptr;
 
 GeometricObject::GeometricObject()
 	: _shadows{true}
@@ -63,7 +63,7 @@ void GeometricObject::set_color(float r, float g, float b) {
 	color = {r, g, b};
 }
 
-void GeometricObject::set_sampler(std::shared_ptr<Sampler>) {
+void GeometricObject::set_sampler(unique_ptr<Sampler>) {
 	throw default_implementation{__PRETTY_FUNCTION__};
 }
 

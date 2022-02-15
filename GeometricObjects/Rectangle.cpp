@@ -3,10 +3,11 @@
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
+#include <cassert>
 #include "Maths.h"
 #include "Rectangle.h"
 
-using std::shared_ptr;
+using std::shared_ptr, std::unique_ptr;
 
 const double Rectangle::kEpsilon = 0.001;
 
@@ -20,8 +21,7 @@ Rectangle::Rectangle(void)
 	  b_len_squared(4.0),
 	  normal(0, 1, 0),
 	  area(4.0),
-	  inv_area(0.25),
-	  sampler_ptr(NULL)
+	  inv_area(0.25)
 {}
 
 
@@ -36,8 +36,7 @@ Rectangle::Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b)
 	  a_len_squared(a.len_squared()),
 	  b_len_squared(b.len_squared()),
 	  area(a.length() * b.length()),
-	  inv_area(1.0 / area),
-	  sampler_ptr(NULL)
+	  inv_area(1.0 / area)
 {
 	normal = a ^ b;
 	normal.normalize();
@@ -54,10 +53,9 @@ Rectangle::Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b,
 	  b(_b),
 	  a_len_squared(a.len_squared()),
 	  b_len_squared(b.len_squared()),
-	  area(a.length() * b.length()),
-	  inv_area(1.0 / area),
 	  normal(n),
-	  sampler_ptr(NULL)
+	  area(a.length() * b.length()),
+	  inv_area(1.0 / area)
 {
 	normal.normalize();
 }
@@ -66,15 +64,11 @@ Rectangle::Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b,
 
 // ---------------------------------------------------------------- clone
 
-Rectangle* 
-Rectangle::clone(void) const {
-	return (new Rectangle(*this));
+Rectangle * Rectangle::clone() const {
+	return new Rectangle{*this};
 }
 
-
-// ---------------------------------------------------------------- copy constructor
-
-Rectangle::Rectangle (const Rectangle& r)
+Rectangle::Rectangle(const Rectangle& r)
 	:	GeometricObject(r),
 	  p0(r.p0),
 	  a(r.a),
@@ -86,7 +80,7 @@ Rectangle::Rectangle (const Rectangle& r)
 	  inv_area(r.inv_area)
 {
 	if(r.sampler_ptr)
-		sampler_ptr	= r.sampler_ptr;
+		sampler_ptr.reset(r.sampler_ptr->clone());
 }
 
 
@@ -109,7 +103,7 @@ Rectangle::operator= (const Rectangle& rhs) {
 	normal			= rhs.normal;
 	
 	if (rhs.sampler_ptr)
-		sampler_ptr= rhs.sampler_ptr;
+		sampler_ptr.reset(rhs.sampler_ptr->clone());
 
 	return (*this);
 }
@@ -117,7 +111,7 @@ Rectangle::operator= (const Rectangle& rhs) {
 //------------------------------------------------------------------ get_bounding_box 
 
 BBox
-Rectangle::get_bounding_box(void) {
+Rectangle::get_bounding_box() {
 	double delta = 0.0001;
 
 	return(BBox(min(p0.x, p0.x + a.x + b.x) - delta, max(p0.x, p0.x + a.x + b.x) + delta,
@@ -157,6 +151,9 @@ Rectangle::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool Rectangle::shadow_hit(Ray const & ray, double & tmin) const {
+	if (!casts_shadows())
+		return false;
+
 	double const t = (p0 - ray.o) * normal / (ray.d * normal);
 
 	if (t <= kEpsilon)
@@ -183,8 +180,9 @@ bool Rectangle::shadow_hit(Ray const & ray, double & tmin) const {
 // ---------------------------------------------------------------- setSampler
 
 void 								
-Rectangle::set_sampler(shared_ptr<Sampler> sampler) {
-	sampler_ptr = sampler;
+Rectangle::set_sampler(unique_ptr<Sampler> s) {
+	assert(s);
+	sampler_ptr = move(s);
 }
 
 

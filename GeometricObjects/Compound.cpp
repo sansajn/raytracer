@@ -138,6 +138,9 @@ Compound::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool Compound::shadow_hit(Ray const & ray, double & tmin) const {
+	if (!casts_shadows())
+		return false;
+
 	bool hit = false;
 	tmin = kHugeValue;
 	for (GeometricObject * g : objects) {

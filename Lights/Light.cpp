@@ -12,15 +12,6 @@ Light::Light()
 	: _shadows{false}
 {}
 
-// ---------------------------------------------------------------------- dopy constructor
-
-Light::Light(const Light& ls)
-	: _shadows{ls._shadows}
-{}
-
-
-// ---------------------------------------------------------------------- assignment operator
-
 Light& 
 Light::operator= (const Light& rhs) {
 	if (this == &rhs)

@@ -31,7 +31,7 @@ public:
 	/*! \name Area Lights API.
 	The following functions are used when the geometric-object is a light source */
 	//! \{
-	virtual void set_sampler(std::shared_ptr<Sampler> sampler);  //!< \bug sampler can not be shared, because implementations calls map_samples_XX function, which can make sampler unusable every time set_sampler called
+	virtual void set_sampler(std::unique_ptr<Sampler> sampler);
 	virtual Point3D sample();
 	virtual Normal get_normal(Point3D const & p);  //!< \param [in] p Point on surface (\sa sample()).
 	virtual float pdf(ShadeRec const & sr) const;

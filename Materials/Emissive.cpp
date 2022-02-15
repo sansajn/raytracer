@@ -39,9 +39,3 @@ RGBColor	Emissive::get_Le(ShadeRec const &) const {
 Material * Emissive::clone() const {
 	return new Emissive{*this};
 }
-
-Emissive::Emissive(Emissive const & other)
-	: Material{other}
-	, ls{other.ls}
-	, ce{other.ce}
-{}
