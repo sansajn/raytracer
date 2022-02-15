@@ -18,40 +18,23 @@ class ViewPlane {
 		bool			show_out_of_gamut;			// display red if RGBColor out of gamut
 		std::unique_ptr<Sampler> sampler_ptr;
 		int max_depth;
-									
 	
 	public:
-	
-		ViewPlane();   								// default Constructor
-				
-		ViewPlane(const ViewPlane& vp);				// copy constructor
+		ViewPlane();
+		ViewPlane(int hres, int vres, int samples);
 
-		ViewPlane& operator= (const ViewPlane& rhs);		// assignment operator
-		
-		~ViewPlane();   							// destructor
-						
-		void 													
-		set_hres(const int h_res);
-		
-		void 													
-		set_vres(const int v_res);
-				
-		void
-		set_pixel_size(const float size);
-		
-		void
-		set_gamma(const float g);
-		
-		void
-		set_gamut_display(const bool show);	
-		
-		void
-		set_samples(const int n);
-
-		/*! TODO: implementacia nedovoluje zdielat jednu instanciu sampleru pre VP a napr. area light objekty (figure 18.04), je to problem? */
-		void set_sampler(std::unique_ptr<Sampler> sp);
-
+		void set_hres(const int h_res);
+		void set_vres(const int v_res);
+		void set_pixel_size(const float size);
+		void set_gamma(const float g);
+		void set_gamut_display(const bool show);
+		void set_samples(const int n);
+		void set_sampler(std::unique_ptr<Sampler> sp);  //!< \note We do not want to share sampler between ViewPlane and lights because calling `Sampler::map_samples_to_XXX()` function can make sampler broken for ViewPlane.
 		void set_max_depth(int depth);
+
+		ViewPlane(const ViewPlane& vp);				// copy constructor
+		ViewPlane& operator= (const ViewPlane& rhs);		// assignment operator
+		~ViewPlane() = default;
 };
 
 

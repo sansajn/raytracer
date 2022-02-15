@@ -9,14 +9,17 @@ using std::unique_ptr, std::make_unique;
 // ---------------------------------------------------------------- default constructor	
 						
 ViewPlane::ViewPlane(void)							
-	: 	hres(400), 
-		vres(400),
-		s(1.0),
-		num_samples(1),
-		gamma(1.0),
-		inv_gamma(1.0),
-		show_out_of_gamut(false),
-		max_depth{0}
+	: ViewPlane{400, 400, 1}
+{}
+
+ViewPlane::ViewPlane(int hres, int vres, int samples)
+	: hres{hres}
+	, vres{vres}
+	, s{1.0}
+	, num_samples{samples}
+	, gamma{1.0}
+	, show_out_of_gamut{false}
+	, max_depth{0}
 {}
 
 
@@ -57,9 +60,6 @@ ViewPlane::operator= (const ViewPlane& rhs) {
 
 
 // -------------------------------------------------------------- destructor
-
-ViewPlane::~ViewPlane(void) {
-}
 
 void ViewPlane::set_samples(const int n) {
 	num_samples = n;
