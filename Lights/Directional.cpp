@@ -14,16 +14,6 @@ Directional::Directional(void)
 {}
 
 
-// ---------------------------------------------------------------------- dopy constructor
-
-Directional::Directional(const Directional& dl)
-	: 	Light(dl),
-		ls(dl.ls),
-		color(dl.color),
-		dir(dl.dir)  		
-{}
-
-
 // ---------------------------------------------------------------------- clone
 
 Light* 
@@ -48,12 +38,6 @@ Directional::operator= (const Directional& rhs)
 
 	return (*this);
 }
-
-
-// ---------------------------------------------------------------------- destructor																			
-
-Directional::~Directional(void) {}
-
 
 // ---------------------------------------------------------------------- get_direction
 // as this function is virtual, it shouldn't be inlined 
