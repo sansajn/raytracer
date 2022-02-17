@@ -109,6 +109,9 @@ bool Box::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 }
 
 bool Box::shadow_hit(Ray const & ray, double & tmin) const {
+	if (!casts_shadows())
+		return false;
+
 	double ox = ray.o.x,
 		oy = ray.o.y,
 		oz = ray.o.z,

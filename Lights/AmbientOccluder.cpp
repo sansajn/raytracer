@@ -1,10 +1,11 @@
+#include <algorithm>
 #include <cassert>
 #include "World.h"
 #include "GeometricObjects/GeometricObject.h"
 #include "Constants.h"
 #include "AmbientOccluder.h"
 
-using std::unique_ptr, std::move;
+using std::any_of, std::unique_ptr, std::move;
 
 AmbientOccluder::AmbientOccluder()
 	: ls{1.0}
@@ -33,11 +34,11 @@ Vector3D AmbientOccluder::get_direction(ShadeRec &) {
 }
 
 bool AmbientOccluder::in_shadow(Ray const & ray, ShadeRec const & sr) const {
-	for (GeometricObject const * object : sr.w.objects)
-		if (double t; object->shadow_hit(ray, t))
-			return true;
-
-	return false;
+	return any_of(begin(sr.w.objects), end(sr.w.objects),
+		[&ray](GeometricObject const * obj){
+			double t;
+			return obj->shadow_hit(ray, t);
+	});
 }
 
 RGBColor AmbientOccluder::L(ShadeRec & sr) {
@@ -49,10 +50,6 @@ RGBColor AmbientOccluder::L(ShadeRec & sr) {
 	Ray shadow_ray;
 	shadow_ray.o = sr.hit_point;
 	shadow_ray.d = get_direction(sr);
-
-	if (shadow_ray.o.distance({0, 1, 1}) < 0.01) {
-		int _dummy = 101;
-	}
 
 	if (in_shadow(shadow_ray, sr))
 		return (min_amount * ls * color);

@@ -15,11 +15,8 @@ public:
 	RGBColor	get_Le(ShadeRec const & sr) const override;
 
 	Material * clone() const override;
-	Emissive(Emissive const & other);
 
 private:
-
-	float		ls;		// radiance scaling factor
-	RGBColor 	ce;		// color
-
+	float	ls;  //!< radiance scaling factor
+	RGBColor ce;  //!< color
 };

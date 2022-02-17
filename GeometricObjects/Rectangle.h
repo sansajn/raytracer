@@ -1,5 +1,4 @@
-#ifndef __RECTANGLE__
-#define __RECTANGLE__
+#pragma once
 
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
@@ -13,29 +12,25 @@
 
 class Rectangle: public GeometricObject {	
 public:
-	Rectangle(void);
+	Rectangle();
 	Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b);
 	Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b, const Normal& n);
-	Rectangle *	clone() const override;
-	Rectangle(const Rectangle& r);
 
-	~Rectangle() = default;
-
-	Rectangle&
-	operator= (const Rectangle& rhs);
-
-	BBox
-	get_bounding_box(void);
+	BBox get_bounding_box() override;
 	
 	bool hit(Ray const & ray, double & t, ShadeRec & s) const override;
 	bool shadow_hit(Ray const & ray, double & tmin) const override;
 
 	// the following functions are used when the rectangle is a light source
-
-	void set_sampler(std::shared_ptr<Sampler> sampler) override;
+	void set_sampler(std::unique_ptr<Sampler> sampler) override;
 	Point3D sample() override;
 	Normal get_normal(const Point3D& p) override;
 	float	pdf(ShadeRec const & sr) const override;
+
+	// Copy API.
+	Rectangle(const Rectangle& r);
+	Rectangle & operator= (const Rectangle& rhs);
+	Rectangle *	clone() const override;
 
 private:
 	Point3D 		p0;   			// corner vertex
@@ -47,9 +42,7 @@ private:
 
 	float			area;			// for rectangular lights
 	float			inv_area;		// for rectangular lights
-	std::shared_ptr<Sampler> sampler_ptr;  // for rectangular lights
+	std::unique_ptr<Sampler> sampler_ptr;  // for rectangular lights
 
 	static const double kEpsilon;
 };
-
-#endif

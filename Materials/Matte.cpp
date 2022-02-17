@@ -113,25 +113,24 @@ Matte::shade(ShadeRec& sr) const {
 }
 
 RGBColor Matte::area_light_shade(ShadeRec & sr) const {
-	Vector3D 	wo 			= -sr.ray.d;
-	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-	int 		num_lights	= sr.w.lights.size();
+	Vector3D wo = -sr.ray.d;
+	RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 
-	for (int j = 0; j < num_lights; j++) {
-		Vector3D 	wi 		= sr.w.lights[j]->get_direction(sr);
-		float 		ndotwi 	= sr.normal * wi,
+	for (Light * light : sr.w.lights) {
+		Vector3D wi = light->get_direction(sr);
+		float ndotwi = sr.normal * wi,
 			ndotwo = sr.normal * wo;
 
 		if (ndotwi > 0.0 && ndotwo > 0) {
 			bool in_shadow = false;
 
-			if (sr.w.lights[j]->casts_shadows()) {
+			if (light->casts_shadows()) {
 				Ray shadow_ray(sr.hit_point, wi);
-				in_shadow = sr.w.lights[j]->in_shadow(shadow_ray, sr);
+				in_shadow = light->in_shadow(shadow_ray, sr);
 			}
 
 			if (!in_shadow)
-				L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * sr.w.lights[j]->G(sr) * ndotwi / sr.w.lights[j]->pdf(sr);
+				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * light->G(sr) * ndotwi / light->pdf(sr);
 		}
 	}
 

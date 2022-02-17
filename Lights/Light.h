@@ -18,7 +18,6 @@ public:
 
 	virtual Light * clone() const = 0;
 
-	Light(const Light& ls);
 	Light & operator=(const Light& rhs);
 	virtual ~Light() = default;
 

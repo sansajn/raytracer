@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include "Light.h"
 #include "Constants.h"
+#include "Utilities/exception.hpp"
 
 using std::logic_error;
 using namespace std::string_literals;
@@ -11,15 +12,6 @@ using namespace std::string_literals;
 Light::Light()
 	: _shadows{false}
 {}
-
-// ---------------------------------------------------------------------- dopy constructor
-
-Light::Light(const Light& ls)
-	: _shadows{ls._shadows}
-{}
-
-
-// ---------------------------------------------------------------------- assignment operator
 
 Light& 
 Light::operator= (const Light& rhs) {
@@ -52,7 +44,7 @@ bool Light::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 
 RGBColor								
 Light::L(ShadeRec &) {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 float Light::G(ShadeRec const &) const {
@@ -60,5 +52,5 @@ float Light::G(ShadeRec const &) const {
 }
 
 float Light::pdf(ShadeRec const &) const {
-	throw logic_error{"not implemented, the default implemenation of '"s + __PRETTY_FUNCTION__ + "' is ment to be override"};
+	throw default_implementation{__PRETTY_FUNCTION__};
 }

@@ -231,6 +231,9 @@ Instance::hit(const Ray& ray, double& t, ShadeRec& sr) const {
 }
 
 bool Instance::shadow_hit(const Ray& ray, double& tmin) const {
+	if (!casts_shadows())
+		return false;
+
 	Ray inv_ray(ray);
 	inv_ray.o = inv_matrix * inv_ray.o;
 	inv_ray.d = inv_matrix * inv_ray.d;

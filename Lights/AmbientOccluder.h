@@ -16,7 +16,6 @@ public:
 	RGBColor L(ShadeRec & sr) override;
 
 	AmbientOccluder * clone() const override;
-
 	AmbientOccluder(AmbientOccluder const & rhs);
 
 private:
