@@ -22,8 +22,6 @@ void World::build() {
 //	constexpr int num_samples = 1;   		// for Figure 18.4(a)
 	constexpr int num_samples = 100;   	// for Figure 18.4(b) & (c)
 	
-//	Sampler* sampler_ptr = new MultiJittered(num_samples);
-
 	vp.set_hres(600);
 	vp.set_vres(600);
 	vp.set_sampler(make_unique<MultiJittered>(num_samples));
@@ -53,7 +51,7 @@ void World::build() {
 	
 	auto rectangle_ptr = make_unique<Rectangle>(p0, a, b, normal);
 	rectangle_ptr->set_material(make_shared<Emissive>(white, 40.0));
-	rectangle_ptr->set_sampler(make_shared<MultiJittered>(num_samples));
+	rectangle_ptr->set_sampler(make_unique<MultiJittered>(num_samples));
 	rectangle_ptr->set_shadows(false);
 //	add_object(rectangle_ptr);
 

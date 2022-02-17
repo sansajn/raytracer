@@ -19,7 +19,7 @@
 using std::make_unique, std::make_shared, std::move;
 
 void World::build() {
-	int num_samples = 100;   
+	constexpr int num_samples = 100;
 	
 	vp.set_hres(600);
 	vp.set_vres(600);
@@ -49,7 +49,7 @@ void World::build() {
 	
 	auto rectangle_ptr = make_unique<Rectangle>(p0, a, b, normal);
 	rectangle_ptr->set_material(make_shared<Emissive>(white, 40.0f));
-	rectangle_ptr->set_sampler(make_shared<MultiJittered>(num_samples));
+	rectangle_ptr->set_sampler(make_unique<MultiJittered>(num_samples));
 	rectangle_ptr->set_shadows(false);
 //	add_object(rectangle_ptr);
 	

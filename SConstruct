@@ -151,8 +151,7 @@ cpp.Program('fig17_13a', ['main.cpp', engine, 'build/BuildFigure17_13a.cpp'])
 cpp.Program('fig17_13b', ['main.cpp', engine, 'build/BuildFigure17_13b.cpp'])
 cpp.Program('fig17_14', ['main.cpp', engine, 'build/BuildFigure17_14.cpp'])
 
-# chapter 18
-
+# chapter 18 figures
 ch18 = [
 	cpp.Program('fig18_04a', ['main.cpp', engine, 'build/BuildFigure18_04a.cpp']),
 	cpp.Program('fig18_04b', ['main.cpp', engine, 'build/BuildFigure18_04b.cpp']),
@@ -173,14 +172,14 @@ ch18 = [
 	cpp.Program('fig18_10d', ['main.cpp', engine, 'build/BuildFigure18_10d.cpp'])
 ]
 
+cpp.Alias('ch18', ch18)
+
+
 cpp.Program('fig21_04', ['main.cpp', engine, 'build/BuildFigure21_04.cpp'])
 cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_0b.cpp'])
 
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])
-
-cpp.Alias('ch18', ch18)
-
 
 # tests
 cpp.Program('test/test', [

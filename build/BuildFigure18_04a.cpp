@@ -53,7 +53,7 @@ void World::build() {
 	
 	auto rectangle_ptr = make_unique<Rectangle>(p0, a, b, normal);
 	rectangle_ptr->set_material(make_shared<Emissive>(white, 40.0));
-	rectangle_ptr->set_sampler(make_shared<MultiJittered>(num_samples));
+	rectangle_ptr->set_sampler(make_unique<MultiJittered>(num_samples));
 	rectangle_ptr->set_shadows(false);
 //	add_object(rectangle_ptr);
 

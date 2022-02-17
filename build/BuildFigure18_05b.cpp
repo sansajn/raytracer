@@ -16,12 +16,10 @@ using std::make_unique, std::make_shared, std::move;
 void World::build() {
 	constexpr int num_samples = 100;
 	
-//	Sampler* sampler_ptr = new MultiJittered(num_samples);
-
 	vp.set_hres(600);
 	vp.set_vres(600);
 	vp.set_max_depth(0);
-	vp.set_sampler(/*sampler_ptr*/make_unique<MultiJittered>(num_samples));
+	vp.set_sampler(make_unique<MultiJittered>(num_samples));
 
 	background_color = RGBColor(0.5);
 
@@ -43,7 +41,7 @@ void World::build() {
 	
 	auto sphere_ptr = make_unique<Sphere>(center, radius);
 	sphere_ptr->set_material(make_shared<Emissive>(white, 40));
-	sphere_ptr->set_sampler(/*sampler_ptr*/make_shared<MultiJittered>(num_samples));
+	sphere_ptr->set_sampler(make_unique<MultiJittered>(num_samples));
 	sphere_ptr->set_shadows(false);
 //	disk_ptr->compute_uvw();
 //	add_object(disk_ptr);
