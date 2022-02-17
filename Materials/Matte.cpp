@@ -113,9 +113,8 @@ Matte::shade(ShadeRec& sr) const {
 }
 
 RGBColor Matte::area_light_shade(ShadeRec & sr) const {
-	Vector3D 	wo 			= -sr.ray.d;
-	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-	int 		num_lights	= sr.w.lights.size();
+	Vector3D wo = -sr.ray.d;
+	RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 
 	for (Light * light : sr.w.lights) {
 		Vector3D wi = light->get_direction(sr);
