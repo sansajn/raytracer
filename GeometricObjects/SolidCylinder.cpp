@@ -47,3 +47,15 @@ SolidCylinder::SolidCylinder(const SolidCylinder& cc)
 SolidCylinder * SolidCylinder::clone() const {
 	return new SolidCylinder{*this};
 }
+
+void SolidCylinder::set_bottom_material(std::shared_ptr<Material> m) {
+	objects[0]->set_material(m);
+}
+
+void SolidCylinder::set_top_material(std::shared_ptr<Material> m) {
+	objects[1]->set_material(m);
+}
+
+void SolidCylinder::set_wall_material(std::shared_ptr<Material> m) {
+	objects[2]->set_material(m);
+}

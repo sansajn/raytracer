@@ -14,7 +14,7 @@
 
 class Compound: public GeometricObject {	
 public:
-	Compound();
+	Compound() = default;
 
 	void set_material(std::shared_ptr<Material> material_ptr) override;
 	void add_object(GeometricObject * object_ptr) override;
@@ -23,10 +23,11 @@ public:
 	bool hit(const Ray& ray, double& tmin, ShadeRec& s) const override;
 	bool shadow_hit(Ray const & ray, double & tmin) const override;
 
+	// Copy API.
 	Compound * clone() const override;
-
 	Compound(const Compound& c);
 	Compound & operator=(const Compound& c);
+
 	~Compound();
 
 protected:
