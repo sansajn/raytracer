@@ -9,10 +9,16 @@
 // ----------------------------------------------------------------------------- default constructor
 
 Pinhole::Pinhole(void)		
-	:	Camera(),
-		d(500),
+	:	d(500),
 		zoom(1.0)
 {}
+
+Pinhole::Pinhole(Point3D const & eye, Point3D const & lookat, float distance)
+	: Camera{eye, lookat}
+	, d{distance}
+	, zoom{1.0}
+{}
+
 
 Pinhole * Pinhole::clone() const {
 	return (new Pinhole(*this));
@@ -21,20 +27,28 @@ Pinhole * Pinhole::clone() const {
 
 // ----------------------------------------------------------------------------- assignment operator
 
-Pinhole& 
-Pinhole::operator= (const Pinhole& rhs) { 	
-	if (this == &rhs)
-		return (*this);
+//Pinhole&
+//Pinhole::operator= (const Pinhole& rhs) {
+//	if (this == &rhs)
+//		return (*this);
 		
-	Camera::operator= (rhs);
+//	Camera::operator= (rhs);
 
-	d 		= rhs.d;
-	zoom	= rhs.zoom;
+//	d 		= rhs.d;
+//	zoom	= rhs.zoom;
 
-	return (*this);
-}
+//	return (*this);
+//}
 
 // ----------------------------------------------------------------------------- get_direction
+
+void Pinhole::set_view_distance(float _d) {
+	d = _d;
+}
+
+void Pinhole::set_zoom(float zoom_factor) {
+	zoom = zoom_factor;
+}
 
 Vector3D
 Pinhole::get_direction(const Point2D& p) const {

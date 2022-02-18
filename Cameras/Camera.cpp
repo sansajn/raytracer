@@ -1,24 +1,10 @@
 // This file contains the definition of the Camera class
-
 #include "Camera.h"
 #include "Maths.h"
 
-
-// ----------------------------------------------------------------- default constructor
-
-Camera::Camera(void)		
-	:	eye(0, 0, 500),
-		lookat(0),
-		ra(0),
-		u(1, 0, 0),
-		v(0, 1, 0),
-		w(0, 0, 1),
-		up(0, 1, 0),
-		exposure_time(1.0)
+Camera::Camera()
+	: Camera{{0,0,500}, {0,0,0}}
 {}
-
-
-// ----------------------------------------------------------------- copy constructor
 
 Camera::Camera(const Camera& c)   		
 	: 	eye(c.eye),
@@ -29,6 +15,17 @@ Camera::Camera(const Camera& c)
 		w(c.w),
 		up(c.up),
 		exposure_time(c.exposure_time)
+{}
+
+Camera::Camera(Point3D const & eye, Point3D const & lookat)
+	: eye{eye}
+	, lookat{lookat}
+	, ra{0}
+	, u{1,0,0}
+	, v{0,1,0}
+	, w{0,0,1}
+	, up{0,1,0}
+	, exposure_time{1.0}
 {}
 
 
