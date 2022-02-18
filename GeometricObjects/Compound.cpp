@@ -14,13 +14,6 @@ using std::vector, std::logic_error, std::shared_ptr;
 using namespace std::string_literals;
 					
 
-// ----------------------------------------------------------------  default constructor
-
-Compound::Compound (void)
-	: 	GeometricObject()
-{}
-
-
 // ---------------------------------------------------------------- clone
 
 Compound* 

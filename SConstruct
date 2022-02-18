@@ -175,6 +175,25 @@ ch18 = [
 cpp.Alias('ch18', ch18)
 
 
+# chapter 19
+ch19path = 'build/chapter19/'
+
+ch19 = [
+	cpp.Program('fig19_07', ['main.cpp', engine, ch19path + 'BuildFigure19_07.cpp']),
+	cpp.Program('fig19_16a', ['main.cpp', engine, ch19path + 'BuildFigure19_16a.cpp']),
+	cpp.Program('fig19_16b', ['main.cpp', engine, ch19path + 'BuildFigure19_16b.cpp']),
+	cpp.Program('fig19_16c', ['main.cpp', engine, ch19path + 'BuildFigure19_16c.cpp']),
+	cpp.Program('fig19_23a', ['main.cpp', engine, ch19path + 'BuildFigure19_23a.cpp']),
+	#cpp.Program('fig19_25b', ['main.cpp', engine, ch19path + 'BuildFigure19_25b.cpp']),
+	#cpp.Program('fig19_27a', ['main.cpp', engine, ch19path + 'BuildFigure19_27a.cpp']),
+	#cpp.Program('fig19_27b', ['main.cpp', engine, ch19path + 'BuildFigure19_27b.cpp']),
+	cpp.Program('fig19_29a', ['main.cpp', engine, ch19path + 'BuildFigure19_29a.cpp']),
+	#cpp.Program('fig19_29b', ['main.cpp', engine, ch19path + 'BuildFigure19_29b.cpp']),
+]
+
+cpp.Alias('ch19', ch19)
+
+
 cpp.Program('fig21_04', ['main.cpp', engine, 'build/BuildFigure21_04.cpp'])
 cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_0b.cpp'])
 
