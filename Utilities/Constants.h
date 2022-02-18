@@ -1,5 +1,4 @@
-#ifndef __CONSTANTS__
-#define __CONSTANTS__
+#pragma once
 
 #include <cmath>
 #include <stdlib.h>
@@ -37,5 +36,3 @@ RGBColor const light_purple(0.65, 0.3, 1.0);
 RGBColor const dark_purple(0.5, 0.0, 1.0);
 
 const float 	invRAND_MAX = 1.0 / (float)RAND_MAX;
-
-#endif
