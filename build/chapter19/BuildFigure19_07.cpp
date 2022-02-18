@@ -8,21 +8,12 @@
 
 #include "World/World.h"
 #include "Samplers/MultiJittered.h"
-//#include "Tracers/AreaLighting.h"
 #include "Tracers/RayCast.h"
 #include "Cameras/Pinhole.h"
 #include "Materials/Emissive.h"
 #include "Materials/Matte.h"
 #include "GeometricObjects/Triangle.h"
 #include "GeometricObjects/Instance.h"
-//#include "GeometricObjects/Box.h"
-//#include "GeometricObjects/Plane.h"
-//#include "GeometricObjects/Sphere.h"
-//#include "GeometricObjects/SolidCylinder.h"
-//#include "GeometricObjects/ConcaveSphere.h"
-//#include "Lights/AmbientOccluder.h"
-//#include "Lights/EnvironmentLight.h"
-//#include "Lights/Directional.h"
 #include "Lights/PointLight.h"
 
 using std::make_unique, std::make_shared, std::move;
@@ -37,9 +28,6 @@ void World::build() {
 	tracer_ptr = new RayCast(this);
 	
 	auto pinhole_ptr = make_unique<Pinhole>(Point3D{25, 200, 100}, Point3D{-.5, 0, 0}, 8000.0f);
-//	pinhole_ptr->set_eye({25, 200, 100});
-//	pinhole_ptr->set_lookat({-0.5, 0, 0});
-//	pinhole_ptr->set_view_distance(8000);
 	pinhole_ptr->compute_uvw();
 	set_camera(move(pinhole_ptr));
 	
@@ -48,7 +36,6 @@ void World::build() {
 	light_ptr1->scale_radiance(3.0);
 	light_ptr1->set_shadows(true);
 	add_light(light_ptr1);
-	
 	
 	// yellow triangle
 	Triangle* triangle_ptr1 = new Triangle(Point3D(2, 0.5, 5), Point3D(2, 1.5, -5), Point3D(-1, 0, -4)); 

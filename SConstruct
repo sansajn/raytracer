@@ -180,6 +180,9 @@ ch19path = 'build/chapter19/'
 
 ch19 = [
 	cpp.Program('fig19_07', ['main.cpp', engine, ch19path + 'BuildFigure19_07.cpp']),
+	cpp.Program('fig19_16a', ['main.cpp', engine, ch19path + 'BuildFigure19_16a.cpp']),
+	cpp.Program('fig19_16b', ['main.cpp', engine, ch19path + 'BuildFigure19_16b.cpp']),
+	cpp.Program('fig19_16c', ['main.cpp', engine, ch19path + 'BuildFigure19_16c.cpp']),
 ]
 
 cpp.Alias('ch19', ch19)

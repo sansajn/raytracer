@@ -15,7 +15,7 @@ public:
 
 	void set_ka(float const k);
 	void set_kd(float const k);
-	void set_cd(Texture const * t);
+	void set_cd(Texture const * t);  // TODO: use shared_ptr for texture
 
 	SV_Matte * clone() const override;
 
