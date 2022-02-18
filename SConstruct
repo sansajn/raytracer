@@ -188,6 +188,7 @@ ch19 = [
 	#cpp.Program('fig19_27a', ['main.cpp', engine, ch19path + 'BuildFigure19_27a.cpp']),
 	#cpp.Program('fig19_27b', ['main.cpp', engine, ch19path + 'BuildFigure19_27b.cpp']),
 	cpp.Program('fig19_29a', ['main.cpp', engine, ch19path + 'BuildFigure19_29a.cpp']),
+	#cpp.Program('fig19_29b', ['main.cpp', engine, ch19path + 'BuildFigure19_29b.cpp']),
 ]
 
 cpp.Alias('ch19', ch19)
