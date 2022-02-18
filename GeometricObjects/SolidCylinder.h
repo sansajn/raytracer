@@ -8,6 +8,8 @@ public:
 	bool hit(Ray const & ray, double & tmin, ShadeRec & sr) const override;
 	bool shadow_hit(Ray const & ray, double & tmin) const override;
 	BBox get_bounding_box() override;
+
+	// Copy API.
 	SolidCylinder(const SolidCylinder& rhs);
 	SolidCylinder * clone() const override;
 

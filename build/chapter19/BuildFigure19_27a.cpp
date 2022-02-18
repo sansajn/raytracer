@@ -38,7 +38,7 @@ World::build(void) {
 	double inner_radius = 0.9;
 	double outer_radius = 1.0;
 
-	FlatRimmedBowl* bowl_ptr = new FlatRimmedBowl(inner_radius, outer_radius);
+	FlatRimmedBowl* bowl_ptr = new FlatRimmedBowl(inner_radius, outer_radius);  // TODO: implement FlatRimmedBowl
 	bowl_ptr->set_material(phong_ptr);
 	add_object(bowl_ptr);
 			

@@ -34,5 +34,7 @@ RGBColor const light_green(0.65, 1.0, 0.30);
 RGBColor const dark_yellow(0.61, 0.61, 0.0);
 RGBColor const light_purple(0.65, 0.3, 1.0);
 RGBColor const dark_purple(0.5, 0.0, 1.0);
+RGBColor const cyan{0,1,1};
+
 
 const float 	invRAND_MAX = 1.0 / (float)RAND_MAX;
