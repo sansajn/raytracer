@@ -22,7 +22,7 @@ void World::build() {
 	vp.set_vres(400);
 	vp.set_samples(num_samples);
 	
-//	tracer_ptr = new FirstHit(this);
+//	tracer_ptr = new FirstHit(this);  // TODO: implement FirstHit tracer
 	tracer_ptr = new RayCast(this);
 	
 	auto pinhole_ptr = make_unique<Pinhole>(Point3D{0,5,10}, Point3D{0}, 1200);
