@@ -203,12 +203,22 @@ ch20 = [
 	cpp.Program('fig20_06d', ['main.cpp', engine, ch20path + 'BuildFigure20_06d.cpp']),
 ]
 
-
 cpp.Alias('ch20', ch20)
 
+# chapter 21
+ch21path = 'build/chapter21/'
 
-cpp.Program('fig21_04', ['main.cpp', engine, 'build/BuildFigure21_04.cpp'])
-cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_0b.cpp'])
+ch21 = [
+	cpp.Program('fig21_04', ['main.cpp', engine, ch21path + 'BuildFigure21_04.cpp']),
+	cpp.Program('fig21_05a', ['main.cpp', engine, ch21path + 'BuildFigure21_05a.cpp']),
+	cpp.Program('fig21_05b', ['main.cpp', engine, ch21path + 'BuildFigure21_05b.cpp']),
+	cpp.Program('fig21_12', ['main.cpp', engine, ch21path + 'BuildFigure21_12.cpp']),
+	cpp.Program('fig21_13', ['main.cpp', engine, ch21path + 'BuildFigure21_13.cpp']),
+	cpp.Program('fig21_15', ['main.cpp', engine, ch21path + 'BuildFigure21_15.cpp']),
+]
+
+cpp.Alias('ch21', ch21)
+
 
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])

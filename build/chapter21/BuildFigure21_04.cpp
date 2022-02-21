@@ -13,9 +13,9 @@
 #include "Lights/PointLight.h"
 #include "Materials/Matte.h"
 #include "Materials/Phong.h"
+#include "GeometricObjects/Instance.h"
 #include "GeometricObjects/Plane.h"
 #include "GeometricObjects/Grid.h"
-#include "GeometricObjects/Instance.h"
 #include "Utilities/Random.h"
 
 using std::make_unique, std::make_shared, std::move;
@@ -33,10 +33,7 @@ void World::build() {
 		
 	tracer_ptr = new RayCast(this);
 	
-	auto pinHole_ptr = make_unique<Pinhole>();
-	pinHole_ptr->set_eye(7.7, 6, 15);
-	pinHole_ptr->set_lookat(-1.0, -0.5, 0); 
-	pinHole_ptr->set_view_distance(650);
+	auto pinHole_ptr = make_unique<Pinhole>(Point3D{7.7, 6,15}, Point3D{-1, -.5, 0}, 650);
 	pinHole_ptr->compute_uvw();
 	set_camera(move(pinHole_ptr));
 	
@@ -54,9 +51,8 @@ void World::build() {
 	add_light(light_ptr2);
 	
 	// ground plane 
-	
 	Plane* planePr1 = new Plane(Point3D(0, 0.24, 0), Normal(0, 1, 0));
-	planePr1->set_material(make_shared<Matte>(0.35, 0.75, white));
+	planePr1->set_material(make_shared<Matte>(.35, .75, white));
 	add_object(planePr1);
 
 				
@@ -85,13 +81,13 @@ void World::build() {
 			phong_ptr->set_ka(0.25); 
 			phong_ptr->set_kd(0.75);
 			phong_ptr->set_cd(RGBColor{rand_float(), rand_float(), rand_float()});
-			phong_ptr->set_ks(0.125);  
+			phong_ptr->set_ks(0.125);
 			phong_ptr->set_exp(20.0);
 			
 			Instance* bunny_ptr2 = new Instance(bunny_ptr1);
 			bunny_ptr2->set_material(phong_ptr);
 			bunny_ptr2->scale(Vector3D{6.5});
-			bunny_ptr2->translate(Vector3D{x0 + ix * x_spacing, 0, z0 + iz * z_spacing});
+			bunny_ptr2->translate({x0 + ix * x_spacing, 0, z0 + iz * z_spacing});
 			bunny_ptr2->compute_bounding_box(); // essential for placing each bunny in the grid
 			grid_ptr->add_object(bunny_ptr2);
 		}
@@ -99,4 +95,3 @@ void World::build() {
 	grid_ptr->setup_cells();
 	add_object(grid_ptr);
 }
-
