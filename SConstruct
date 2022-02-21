@@ -213,6 +213,8 @@ ch21 = [
 	cpp.Program('fig21_05a', ['main.cpp', engine, ch21path + 'BuildFigure21_05a.cpp']),
 	cpp.Program('fig21_05b', ['main.cpp', engine, ch21path + 'BuildFigure21_05b.cpp']),
 	cpp.Program('fig21_12', ['main.cpp', engine, ch21path + 'BuildFigure21_12.cpp']),
+	cpp.Program('fig21_13', ['main.cpp', engine, ch21path + 'BuildFigure21_13.cpp']),
+	cpp.Program('fig21_15', ['main.cpp', engine, ch21path + 'BuildFigure21_15.cpp']),
 ]
 
 cpp.Alias('ch21', ch21)
