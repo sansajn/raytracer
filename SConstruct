@@ -210,12 +210,12 @@ ch21path = 'build/chapter21/'
 
 ch21 = [
 	cpp.Program('fig21_04', ['main.cpp', engine, ch21path + 'BuildFigure21_04.cpp']),
+	cpp.Program('fig21_05a', ['main.cpp', engine, ch21path + 'BuildFigure21_05a.cpp']),
+	cpp.Program('fig21_05b', ['main.cpp', engine, ch21path + 'BuildFigure21_05b.cpp']),
 ]
 
 cpp.Alias('ch21', ch21)
 
-
-cpp.Program('fig21_05b', ['main.cpp', engine, 'build/BuildFigure21_0b.cpp'])
 
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])
