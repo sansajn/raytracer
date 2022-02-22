@@ -16,6 +16,8 @@
 
 using std::make_unique, std::make_shared, std::move;
 
+// TODO: render not working find out why
+
 void World::build() {
 	constexpr int num_samples = 1;
 	
