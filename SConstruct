@@ -301,7 +301,20 @@ ch22 = [
 cpp.Alias('ch22', ch22)
 
 
+# chapter 23
+ch23path = 'build/chapter23/'
 
+ch23 = [
+	cpp.Program('fig23_01a', ['main.cpp', engine, ch23path + 'BuildFigure23_01a.cpp']),
+	cpp.Program('fig23_01b', ['main.cpp', engine, ch23path + 'BuildFigure23_01b.cpp']),
+	cpp.Program('fig23_01c', ['main.cpp', engine, ch23path + 'BuildFigure23_01c.cpp']),
+	cpp.Program('fig23_01d', ['main.cpp', engine, ch23path + 'BuildFigure23_01d.cpp']),
+]
+
+cpp.Alias('ch23', ch23)
+
+
+# other samples
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])
 
