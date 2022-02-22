@@ -5,9 +5,19 @@
 
 // This builds the scene for the Chapter 22 page one image
 
-void 												
-World::build(void){
-	int num_samples = 1;
+#include "World/World.h"
+#include "Tracers/RayCast.h"
+#include "Cameras/Pinhole.h"
+#include "Lights/Directional.h"
+#include "Materials/Matte.h"
+#include "GeometricObjects/Box.h"
+#include "GeometricObjects/Grid.h"
+#include "Utilities/Random.h"
+
+using std::make_unique, std::make_shared, std::move;
+
+void World::build() {
+	constexpr int num_samples = 1;
 	
 	vp.set_hres(600);
 	vp.set_vres(600);
@@ -15,12 +25,12 @@ World::build(void){
 	
 	tracer_ptr = new RayCast(this);
 	
-	Pinhole* pinhole_ptr = new Pinhole;
-	pinhole_ptr->set_eye(0.0, 0.0, 0.9);
-	pinhole_ptr->set_lookat(0, 0, -100);
+	auto pinhole_ptr = make_unique<Pinhole>();
+	pinhole_ptr->set_eye({0.0, 0.0, 0.9});
+	pinhole_ptr->set_lookat({0, 0, -100});
 	pinhole_ptr->set_view_distance(150); 
 	pinhole_ptr->compute_uvw();
-	set_camera(pinhole_ptr);
+	set_camera(move(pinhole_ptr));
 	
 	Directional* light_ptr = new Directional;   
 	light_ptr->set_direction(0, 0, 1);				
@@ -37,16 +47,16 @@ World::build(void){
 	Grid* grid_ptr = new Grid;  
 	
 	for (int j = 0; j < num_spheres; j++) {
-		Matte* matte_ptr = new Matte;
+		auto matte_ptr = make_shared<Matte>();
 		matte_ptr->set_ka(0.25);
 		matte_ptr->set_kd(0.75);
-		matte_ptr->set_cd(RGBColour(rand_float(), rand_float(), rand_float()));
+		matte_ptr->set_cd(RGBColor(rand_float(), rand_float(), rand_float()));
 		
 		Sphere*	sphere_ptr = new Sphere; 
 		sphere_ptr->set_radius(radius);
-		sphere_ptr->set_center(	1.0 - 2.0 * rand_float(), 
+		sphere_ptr->set_center({1.0 - 2.0 * rand_float(),
 								1.0 - 2.0 * rand_float(), 
-								1.0 - 2.0 * rand_float());	
+								1.0 - 2.0 * rand_float()});
 		sphere_ptr->set_material(matte_ptr);
 		grid_ptr->add_object(sphere_ptr);
 	}	
@@ -54,5 +64,3 @@ World::build(void){
 	grid_ptr->setup_cells();
 	add_object(grid_ptr);
 }
-
-
