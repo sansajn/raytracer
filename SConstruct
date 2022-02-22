@@ -83,15 +83,6 @@ cpp.Program('fig9_10c', ['main.cpp', engine, 'build/BuildFigure9_10c.cpp'])
 cpp.Program('fig9_11a', ['main.cpp', engine, 'build/BuildFigure9_11a.cpp'])
 cpp.Program('fig9_11b', ['main.cpp', engine, 'build/BuildFigure9_11b.cpp'])
 cpp.Program('fig9_11c', ['main.cpp', engine, 'build/BuildFigure9_11c.cpp'])
-cpp.Program('fig10_9a', ['main.cpp', engine, 'build/BuildFigure10_9a.cpp'])
-cpp.Program('fig10_9b', ['main.cpp', engine, 'build/BuildFigure10_9b.cpp'])
-cpp.Program('fig10_10a', ['main.cpp', engine, 'build/BuildFigure10_10a.cpp'])
-cpp.Program('fig10_10b', ['main.cpp', engine, 'build/BuildFigure10_10b.cpp'])
-cpp.Program('fig10_10c', ['main.cpp', engine, 'build/BuildFigure10_10c.cpp'])
-cpp.Program('fig10_11a', ['main.cpp', engine, 'build/BuildFigure10_11a.cpp'])
-cpp.Program('fig10_11b', ['main.cpp', engine, 'build/BuildFigure10_11b.cpp'])
-cpp.Program('fig10_12', ['main.cpp', engine, 'build/BuildFigure10_12.cpp'])
-cpp.Program('fig10_13', ['main.cpp', engine, 'build/BuildFigure10_13.cpp'])
 cpp.Program('fig11_7a', ['main.cpp', engine, 'build/BuildFigure11_7a.cpp'])
 cpp.Program('fig11_7b', ['main.cpp', engine, 'build/BuildFigure11_7b.cpp'])
 cpp.Program('fig11_7c', ['main.cpp', engine, 'build/BuildFigure11_7c.cpp'])
@@ -151,7 +142,26 @@ cpp.Program('fig17_13a', ['main.cpp', engine, 'build/BuildFigure17_13a.cpp'])
 cpp.Program('fig17_13b', ['main.cpp', engine, 'build/BuildFigure17_13b.cpp'])
 cpp.Program('fig17_14', ['main.cpp', engine, 'build/BuildFigure17_14.cpp'])
 
-# chapter 18 figures
+
+# chapter 10
+ch10path = 'build/chapter10/'
+
+ch10 = [
+	cpp.Program('fig10_9a', ['main.cpp', engine, ch10path + 'BuildFigure10_9a.cpp']),
+	cpp.Program('fig10_9b', ['main.cpp', engine, ch10path + 'BuildFigure10_9b.cpp']),
+	cpp.Program('fig10_10a', ['main.cpp', engine, ch10path + 'BuildFigure10_10a.cpp']),
+	cpp.Program('fig10_10b', ['main.cpp', engine, ch10path + 'BuildFigure10_10b.cpp']),
+	cpp.Program('fig10_10c', ['main.cpp', engine, ch10path + 'BuildFigure10_10c.cpp']),
+	cpp.Program('fig10_11a', ['main.cpp', engine, ch10path + 'BuildFigure10_11a.cpp']),
+	cpp.Program('fig10_11b', ['main.cpp', engine, ch10path + 'BuildFigure10_11b.cpp']),
+	cpp.Program('fig10_12', ['main.cpp', engine, ch10path + 'BuildFigure10_12.cpp']),
+	cpp.Program('fig10_13', ['main.cpp', engine, ch10path + 'BuildFigure10_13.cpp'])
+]
+
+cpp.Alias('ch10', ch10)
+
+
+# chapter 18
 ch18 = [
 	cpp.Program('fig18_04a', ['main.cpp', engine, 'build/BuildFigure18_04a.cpp']),
 	cpp.Program('fig18_04b', ['main.cpp', engine, 'build/BuildFigure18_04b.cpp']),
@@ -218,6 +228,17 @@ ch21 = [
 ]
 
 cpp.Alias('ch21', ch21)
+
+
+# chapter 22
+ch22path = 'build/chapter22/'
+
+ch22 = [
+	cpp.Program('fig22_09a', ['main.cpp', engine, ch21path + 'BuildFigure22_09a.cpp']),
+]
+
+cpp.Alias('ch22', ch22)
+
 
 
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
