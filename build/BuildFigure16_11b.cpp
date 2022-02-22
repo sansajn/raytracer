@@ -51,7 +51,7 @@ void World::build(){
 	
 	PointLight* light_ptr3 = new PointLight;
 	light_ptr3->set_location(0, 10, -3); 
-	light_ptr3->set_color(0, 0, 1);				// blue
+	light_ptr3->set_color(blue);
 	light_ptr3->scale_radiance(12.0);
 	light_ptr3->set_shadows(true);
 	add_light(light_ptr3);

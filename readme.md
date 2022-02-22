@@ -40,3 +40,4 @@ Read section *3.6.5 The Build Function* for detailed description, but in short r
 scene = cpp.Object('build/BuildShadedObjects.cpp')
 ```
 
+> TODO: describe building samples from the book ...

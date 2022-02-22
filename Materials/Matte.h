@@ -8,20 +8,22 @@ class Matte: public Material {
 public:
 	Matte();
 	Matte(float ka, float kd, RGBColor const & cd);
-	void set_ka(const float k);
-	void set_kd(const float k);
-	void set_cd(const RGBColor c);
+	void set_ka(float k);  //!< ambient coefficient
+	void set_kd(float k);  //!< diffuse coefficient
+	void set_cd(RGBColor c);  //!< ambient and diffuse color
 	RGBColor shade(ShadeRec& sr) const override;
 	RGBColor area_light_shade(ShadeRec & sr) const override;
 
+	// Copy API.
 	Matte(Matte const & m);
 	Matte & operator= (const Matte& rhs);
 	Material * clone() const override;
+
 	~Matte();
 
 private:
-	Lambertian*		ambient_brdf;
-	Lambertian*		diffuse_brdf;
+	Lambertian * ambient_brdf,
+		* diffuse_brdf;
 };
 
 
@@ -31,7 +33,7 @@ private:
 // is diffuse reflection
 
 inline void								
-Matte::set_ka(const float ka) {
+Matte::set_ka(float ka) {
 	ambient_brdf->set_kd(ka);
 }
 
@@ -40,7 +42,7 @@ Matte::set_ka(const float ka) {
 // this also sets Lambertian::kd, but for a different Lambertian object
 
 inline void								
-Matte::set_kd (const float kd) {
+Matte::set_kd (float kd) {
 	diffuse_brdf->set_kd(kd);
 }
 
@@ -48,7 +50,7 @@ Matte::set_kd (const float kd) {
 // ---------------------------------------------------------------- set_cd
 
 inline void												
-Matte::set_cd(const RGBColor c) {
+Matte::set_cd(RGBColor c) {
 	ambient_brdf->set_cd(c);
 	diffuse_brdf->set_cd(c);
 }

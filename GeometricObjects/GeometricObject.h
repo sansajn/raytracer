@@ -21,7 +21,7 @@ public:
 
 	// material API needs to be virtual due to Instance implementation
 	virtual Material const * get_material() const;
-	virtual void get_material(std::shared_ptr<Material> & m) const;  // TODO: materials are small enough to use copy not pointer, check it
+	virtual void get_material(std::shared_ptr<Material> & m) const;  // TODO: materials are small enough to use copy not pointer, check ifit is possibe (code do not share materials)
 	virtual void set_material(std::shared_ptr<Material> mPtr);  //!< \note we do not want all objects look the same so maybe material shuold be unique
 
 	RGBColor const & get_color() const;
@@ -37,7 +37,7 @@ public:
 	virtual float pdf(ShadeRec const & sr) const;
 	//! \}
 
-	virtual BBox get_bounding_box();  // allows acceleration schema
+	virtual BBox get_bounding_box();  //!< \note Allows acceleration schema.
 	virtual void add_object(GeometricObject * object);  // allows compound objects
 	virtual Normal get_normal() const;  // smoothing triangles
 

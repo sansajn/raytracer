@@ -68,12 +68,6 @@ SphereChecker::clone(void) const {
 }	
 
 
-// ---------------------------------------------------------------- destructor
-
-SphereChecker::~SphereChecker(void) {}
-
-
-
 // ---------------------------------------------------------------- get_color
 
 RGBColor																				
@@ -113,7 +107,11 @@ SphereChecker::get_color(const ShadeRec& sr) const {
 	
 	return (line_color);
 }
-	
+
+void SphereChecker::set_line_width(float w) {
+	set_horizontal_line_width(w);
+	set_vertical_line_width(w);
+}
 
 
 

@@ -10,9 +10,7 @@
 //  This C++ code is licensed under the GNU General Public License Version 2.
 //  See the file COPYING.txt for the full license.
 
-#ifndef __POINTLIGHT__
-#define __POINTLIGHT__
-
+#pragma once
 #include "Light.h"
 #include "../Utilities/Vector3D.h"
 #include "../Utilities/Point3D.h"
@@ -47,7 +45,7 @@ class PointLight: public Light {
 		void set_color(const RGBColor& c);
 		void set_color(const float r, const float g, const float b);
 		void set_location(const Point3D& p);
-		void set_location(float x, float y, float z);
+//		void set_location(float x, float y, float z);
 		void set_direction(float dx, float dy, float dz);
 
 		Vector3D get_direction(ShadeRec& sr) override;
@@ -100,11 +98,9 @@ PointLight::set_location(const Point3D& p) {
 
 
 
-inline void
-PointLight::set_location(float x, float y, float z) {
-	location.x = x;
-	location.y = y;
-	location.z = z;
-}
-
-#endif
+//inline void
+//PointLight::set_location(float x, float y, float z) {
+//	location.x = x;
+//	location.y = y;
+//	location.z = z;
+//}
