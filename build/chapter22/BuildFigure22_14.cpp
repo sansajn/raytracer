@@ -8,9 +8,20 @@
 // See Section 30.2.2 and Exercise 30.4
 // This texture can only be applied to a unit sphere at the origin
 
-void 												
-World::build(void) {
-	int num_samples = 1;
+#include "World/World.h"
+#include "Tracers/RayCast.h"
+#include "Cameras/Spherical.h"
+#include "Lights/Directional.h"
+#include "Materials/SV_Matte.h"
+#include "Textures/SphereChecker.h"
+#include "GeometricObjects/Grid.h"
+#include "GeometricObjects/Instance.h"
+#include "Utilities/Random.h"
+
+using std::make_unique, std::make_shared, std::move;
+
+void World::build() {
+	constexpr int num_samples = 16;
 	
 	vp.set_hres(800);
 	vp.set_vres(400);
@@ -18,13 +29,13 @@ World::build(void) {
 	
 	tracer_ptr = new RayCast(this);
 	
-	Spherical* spherical_ptr = new Spherical;
-	spherical_ptr->set_eye(0, 0, 0);       
-	spherical_ptr->set_lookat(-100, 0, 0);
+	auto spherical_ptr = make_unique<Spherical>();
+	spherical_ptr->set_eye({0, 0, 0});
+	spherical_ptr->set_lookat({-100, 0, 0});
 	spherical_ptr->set_horizontal_fov(360);     
 	spherical_ptr->set_vertical_fov(180);
 	spherical_ptr->compute_uvw();
-	set_camera(spherical_ptr);
+	set_camera(move(spherical_ptr));
 
 	
 	Directional* light_ptr1 = new Directional;
@@ -44,7 +55,6 @@ World::build(void) {
 	light_ptr3->scale_radiance(1.5);   
 	light_ptr3->set_shadows(true);
 	add_light(light_ptr3);
-	
 	
 	Directional* light_ptr4 = new Directional;
 	light_ptr4->set_direction(-1, 0, 0);    			// from the -ve x direction     
@@ -75,27 +85,27 @@ World::build(void) {
 	
 	for (int j = 0; j < num_spheres; j++) {
 		SphereChecker* checker_ptr = new SphereChecker;
-		checker_ptr->set_numlong(20);
-		checker_ptr->set_numlat(10);
+		checker_ptr->set_num_vertical_checkers(20);
+		checker_ptr->set_num_horizontal_checkers(10);
 		checker_ptr->set_line_width(0.05);
 		
-		RGBColour color(rand_float(), rand_float(), rand_float());
+		RGBColor color(rand_float(), rand_float(), rand_float());
 		checker_ptr->set_color1(color);
 		checker_ptr->set_color2(color);
 		checker_ptr->set_line_color(black);
 		
-		SV_Matte* sv_matte_ptr1 = new SV_Matte;		
+		auto sv_matte_ptr1 = make_shared<SV_Matte>();
 		sv_matte_ptr1->set_ka(0.25);
 		sv_matte_ptr1->set_kd(0.85);
 		sv_matte_ptr1->set_cd(checker_ptr);
 		
-		Sphere* sphere_ptr1 = new Sphere;
+		auto sphere_ptr1 = make_shared<Sphere>();
 		sphere_ptr1->set_material(sv_matte_ptr1);
 		
 		Instance* sphere_ptr2 = new Instance(sphere_ptr1);
-		sphere_ptr2->scale(radius);
-		sphere_ptr2->translate(1.0 - 2.0 * rand_float(), 1.0 - 2.0 * rand_float(), 1.0 - 2.0 * rand_float());
-		sphere_ptr2->set_bounding_box();
+		sphere_ptr2->scale(Vector3D{radius});
+		sphere_ptr2->translate({1.0 - 2.0 * rand_float(), 1.0 - 2.0 * rand_float(), 1.0 - 2.0 * rand_float()});
+		sphere_ptr2->compute_bounding_box();
 		
 		grid_ptr->add_object(sphere_ptr2);
 	}	
@@ -103,5 +113,3 @@ World::build(void) {
 	grid_ptr->setup_cells();
 	add_object(grid_ptr);	
 }
-
-

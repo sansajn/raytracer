@@ -1,5 +1,4 @@
-#ifndef __SPHERE_CHECKER__
-#define __SPHERE_CHECKER__
+#pragma once
 
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
@@ -17,63 +16,35 @@
 
 class SphereChecker: public Texture {		
 	public:
-	
-		SphereChecker(void);										
+		SphereChecker();
 		
+		RGBColor get_color(const ShadeRec& sr) const override;
+
+		void set_num_horizontal_checkers(const int num_horizontal);
+		void set_num_vertical_checkers(const int num_vertical);
+
+		void set_line_width(float w);
+		void set_horizontal_line_width(const float width);
+		void set_vertical_line_width(const float width);
+
+		void set_color1(const float r, const float g, const float b);
+		void set_color1(const float c);
+		void set_color1(const RGBColor& c);
+		
+		void set_color2(const float r, const float g, const float b);
+		void set_color2(const float c);
+		void set_color2(const RGBColor& c);
+		
+		void set_line_color(const float r, const float g, const float b);
+		void set_line_color(const float c);
+		void set_line_color(const RGBColor& c);
+
+		// Copy API.
 		SphereChecker(const SphereChecker& sc);
-		
-		SphereChecker& 												
-		operator= (const SphereChecker& rhs);		
+		SphereChecker & operator=(const SphereChecker& rhs);
+		SphereChecker* clone() const override;
 
-		virtual SphereChecker*							
-		clone(void) const;				
-
-		~SphereChecker(void);						
-		
-		virtual RGBColor																				
-		get_color(const ShadeRec& sr) const;
-				
-		void													
-		set_num_horizontal_checkers(const int num_horizontal);
-		
-		void													
-		set_num_vertical_checkers(const int num_vertical);
-		
-		void													
-		set_horizontal_line_width(const float width);
-		
-		void													
-		set_vertical_line_width(const float width);
-								
-		void																	
-		set_color1(const float r, const float g, const float b);
-		
-		void																
-		set_color1(const float c);	
-		
-		void																
-		set_color1(const RGBColor& c);
-		
-		void																	
-		set_color2(const float r, const float g, const float b);
-		
-		void																
-		set_color2(const float c);	
-		
-		void																
-		set_color2(const RGBColor& c);									
-		
-		void																	
-		set_line_color(const float r, const float g, const float b); 
-		
-		void																	
-		set_line_color(const float c);
-		
-		void																
-		set_line_color(const RGBColor& c);	
-		
 	private:
-	
 		int			num_horizontal_checkers;	// number of checkers in the horizontal (azithum) direction
 		int			num_vertical_checkers;		// number of checkers in the vertical (polar) direction
 		float		horizontal_line_width;		// width of the horizontal lines as a fraction of the checker width
@@ -152,5 +123,3 @@ inline void
 SphereChecker::set_line_color(const RGBColor& c) {
 	line_color.r = c.r; line_color.g = c.g; line_color.b = c.b;
 }
-
-#endif

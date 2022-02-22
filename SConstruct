@@ -267,6 +267,7 @@ ch22 = [
 	cpp.Program('fig22_11c', ['main.cpp', engine, ch22path + 'BuildFigure22_11c.cpp']),
 	cpp.Program('fig22_11d', ['main.cpp', engine, ch22path + 'BuildFigure22_11d.cpp']),
 	cpp.Program('fig22_11e', ['main.cpp', engine, ch22path + 'BuildFigure22_11e.cpp']),
+	cpp.Program('fig22_14', ['main.cpp', engine, ch22path + 'BuildFigure22_14.cpp']),
 ]
 
 cpp.Alias('ch22', ch22)
