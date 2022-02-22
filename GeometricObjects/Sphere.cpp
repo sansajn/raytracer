@@ -143,3 +143,9 @@ Normal Sphere::get_normal(Point3D const & p) {
 float Sphere::pdf(ShadeRec const &) const {
 	return _inv_area;
 }
+
+BBox Sphere::get_bounding_box() {
+	Point3D p0 = {_center.x - _radius, _center.y - _radius, _center.z - _radius},
+		p1 = {_center.x + _radius, _center.y + _radius, _center.z + _radius};
+	return BBox{p0, p1};
+}

@@ -17,6 +17,8 @@ public:
 	Normal get_normal(Point3D const & p) override;
 	float pdf(ShadeRec const & sr) const override;
 
+	BBox get_bounding_box() override;
+
 	// Copy API
 	Sphere(Sphere const & rhs);
 	Sphere &	operator=(const Sphere& sphere);
