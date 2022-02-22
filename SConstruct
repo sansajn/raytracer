@@ -16,6 +16,11 @@ cpp = Environment(
 cpp.ParseConfig('wx-config --cflags --libs')
 cpp.ParseConfig('pkg-config --cflags --libs Magick++')
 
+import os
+if 'TERM' in os.environ:
+	cpp['ENV']['TERM'] = os.environ['TERM']
+
+
 engine = cpp.Object([
 	Glob('BRDFs/*.cpp'),
 	Glob('BTDFs/*.cpp'),
@@ -234,7 +239,7 @@ cpp.Alias('ch21', ch21)
 ch22path = 'build/chapter22/'
 
 ch22 = [
-	cpp.Program('fig22_09a', ['main.cpp', engine, ch21path + 'BuildFigure22_09a.cpp']),
+	cpp.Program('fig22_09a', ['main.cpp', engine, ch22path + 'BuildFigure22_09a.cpp']),
 ]
 
 cpp.Alias('ch22', ch22)

@@ -5,9 +5,18 @@
 
 // This builds the scene for Figure 22.09
 
-void 												
-World::build(void) {
-	int num_samples = 16;
+#include "World/World.h"
+#include "Tracers/RayCast.h"
+#include "Cameras/Orthographic.h"
+#include "Lights/Directional.h"
+#include "Materials/Matte.h"
+#include "GeometricObjects/Box.h"
+#include "GeometricObjects/Grid.h"
+
+using std::make_unique, std::make_shared, std::move;
+
+void World::build() {
+	constexpr int num_samples = 16;
 	
 	vp.set_hres(400);
 	vp.set_vres(400);
@@ -15,12 +24,12 @@ World::build(void) {
 	
 	tracer_ptr = new RayCast(this);
 
-	Orthographic* orthographic_ptr = new Orthographic;
+	auto orthographic_ptr = make_unique<Orthographic>();
 	vp.set_pixel_size(0.0085);
-	orthographic_ptr->set_eye(7, 5, 5); 
-	orthographic_ptr->set_lookat(0, 0, 0);
+	orthographic_ptr->set_eye({7, 5, 5});
+	orthographic_ptr->set_lookat({0, 0, 0});
 	orthographic_ptr->compute_uvw(); 
-	set_camera(orthographic_ptr);
+	set_camera(move(orthographic_ptr));
 	
 	
 	Directional* light_ptr1 = new Directional;
@@ -70,49 +79,25 @@ World::build(void) {
 	Vector3D diagonal(bottom_size, bottom_size, bottom_size);
 	Point3D p0;
 	
-	Matte* matte_ptr1 = new Matte;
-	matte_ptr1->set_ka(0.25);
-	matte_ptr1->set_kd(0.75);
-	matte_ptr1->set_cd(0.5);   // gray
-		
 	p0 = Point3D(-1, -1, -1);
 	Box* box_ptr1 = new Box(p0, p0 + diagonal); 
-	box_ptr1->set_material(matte_ptr1);
+	box_ptr1->set_material(make_shared<Matte>(.25, .75, gray));
 	grid_ptr->add_object(box_ptr1);
-	
 		
-	Matte* matte_ptr2 = new Matte;
-	matte_ptr2->set_ka(0.25);
-	matte_ptr2->set_kd(0.75);
-	matte_ptr2->set_cd(1, 0, 0);  // red
-	
 	p0 = Point3D(-1, -1, 1 - bottom_size);
 	Box* box_ptr2 = new Box(p0, p0 + diagonal); 
-	box_ptr2->set_material(matte_ptr2);
+	box_ptr2->set_material(make_shared<Matte>(.25, .75, red));
 	grid_ptr->add_object(box_ptr2);
-	
-	
-	Matte* matte_ptr3 = new Matte;
-	matte_ptr3->set_ka(0.25);
-	matte_ptr3->set_kd(0.75);
-	matte_ptr3->set_cd(1, 1, 0);  // yellow
 	
 	p0 = Point3D(1 - bottom_size, -1, 1 - bottom_size);
 	Box* box_ptr3 = new Box(p0, p0 + diagonal); 
-	box_ptr3->set_material(matte_ptr3);
+	box_ptr3->set_material(make_shared<Matte>(.25, .75, yellow));
 	grid_ptr->add_object(box_ptr3);
-	
-	
-	Matte* matte_ptr4 = new Matte;
-	matte_ptr4->set_ka(0.25);
-	matte_ptr4->set_kd(0.75);
-	matte_ptr4->set_cd(0.2, 0.6, 0.4);  // green
 	
 	p0 = Point3D(1 - bottom_size, -1, -1);
 	Box* box_ptr4 = new Box(p0, p0 + diagonal); 
-	box_ptr4->set_material(matte_ptr4);
+	box_ptr4->set_material(make_shared<Matte>(.25, .75, RGBColor{.2, .6, .4}));
 	grid_ptr->add_object(box_ptr4);
-	
 	
 	
 	// top four
@@ -120,51 +105,26 @@ World::build(void) {
 	float top_size = 0.35;
 	diagonal = Vector3D(top_size, top_size, top_size);
 	
-	Matte* matte_ptr5 = new Matte;
-	matte_ptr5->set_ka(0.25);
-	matte_ptr5->set_kd(0.75);
-	matte_ptr5->set_cd(0.27, 0.36, 1.0);  // blue
-	
 	p0 = Point3D(-1, 1 - top_size, -1);
 	Box* box_ptr5 = new Box(p0, p0 + diagonal); 
-	box_ptr5->set_material(matte_ptr5);
+	box_ptr5->set_material(make_shared<Matte>(.25, .75, RGBColor{.27, .36, 1}));
 	grid_ptr->add_object(box_ptr5);
 
-	
-	Matte* matte_ptr6 = new Matte;
-	matte_ptr6->set_ka(0.25);
-	matte_ptr6->set_kd(0.75);
-	matte_ptr6->set_cd(0.75, 0, 0.75);  // majenta
-	
 	p0 = Point3D(-1, 1 - top_size, 1 - top_size);
 	Box* box_ptr6 = new Box(p0, p0 + Vector3D(0.25, top_size, top_size)); 
-	box_ptr6->set_material(matte_ptr6);
+	box_ptr6->set_material(make_shared<Matte>(.25, .75, majenta));
 	grid_ptr->add_object(box_ptr6);
-	
-	
-	Matte* matte_ptr7 = new Matte;
-	matte_ptr7->set_ka(0.25);
-	matte_ptr7->set_kd(0.75);
-	matte_ptr7->set_cd(1, 1, 1);  // white
 	
 	p0 = Point3D(1 - 0.25, 1 - 0.25, 1 - 0.25);
 	Box* box_ptr7 = new Box(p0, p0 + Vector3D(0.25)); 
-	box_ptr7->set_material(matte_ptr7);
+	box_ptr7->set_material(make_shared<Matte>(.25, .75, white));
 	grid_ptr->add_object(box_ptr7);
-	
-	
-	Matte* matte_ptr8 = new Matte;
-	matte_ptr8->set_ka(0.25);
-	matte_ptr8->set_kd(0.75);
-	matte_ptr8->set_cd(0, 0.75, 0.75);  // cyan
 	
 	p0 = Point3D(1 - top_size, 1 - top_size, -1);
 	Box* box_ptr8 = new Box(p0, p0 + Vector3D(top_size, top_size, 0.25)); 
-	box_ptr8->set_material(matte_ptr8);
+	box_ptr8->set_material(make_shared<Matte>(.25, .75, RGBColor{0, .75, .75}));
 	grid_ptr->add_object(box_ptr8);
 	
 	grid_ptr->setup_cells();
 	add_object(grid_ptr);
 }
-
-
