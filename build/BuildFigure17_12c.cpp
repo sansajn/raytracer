@@ -62,7 +62,7 @@ void World::build() {
 	auto matte_ptr1 = make_shared<Matte>();
 	matte_ptr1->set_ka(ka);
 	matte_ptr1->set_kd(0.5);
-	matte_ptr1->set_cd(0.5, 0.75, 1);   // pale blue for bunny
+	matte_ptr1->set_cd(pale_blue);   // pale blue for bunny
 
 	const char* file_name = "assets/bunny.ply"; 	// 10000 triangles - needs the normals reversed
 	
