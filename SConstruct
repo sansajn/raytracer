@@ -88,15 +88,6 @@ cpp.Program('fig9_10c', ['main.cpp', engine, 'build/BuildFigure9_10c.cpp'])
 cpp.Program('fig9_11a', ['main.cpp', engine, 'build/BuildFigure9_11a.cpp'])
 cpp.Program('fig9_11b', ['main.cpp', engine, 'build/BuildFigure9_11b.cpp'])
 cpp.Program('fig9_11c', ['main.cpp', engine, 'build/BuildFigure9_11c.cpp'])
-cpp.Program('fig14_05', ['main.cpp', engine, 'build/BuildFigure14_05.cpp'])
-cpp.Program('fig14_07', ['main.cpp', engine, 'build/BuildFigure14_07.cpp'])
-cpp.Program('fig14_10', ['main.cpp', engine, 'build/BuildFigure14_10.cpp'])
-cpp.Program('fig14_11b', ['main.cpp', engine, 'build/BuildFigure14_11b.cpp'])
-cpp.Program('fig14_11c', ['main.cpp', engine, 'build/BuildFigure14_11c.cpp'])
-cpp.Program('fig14_15', ['main.cpp', engine, 'build/BuildFigure14_15.cpp'])
-cpp.Program('fig14_21', ['main.cpp', engine, 'build/BuildFigure14_21.cpp'])
-cpp.Program('fig14_22a', ['main.cpp', engine, 'build/BuildFigure14_22a.cpp'])
-cpp.Program('fig14_22b', ['main.cpp', engine, 'build/BuildFigure14_22b.cpp'])
 cpp.Program('fig15_07', ['main.cpp', engine, 'build/BuildFigure15_07.cpp'])
 cpp.Program('fig15_08a', ['main.cpp', engine, 'build/BuildFigure15_08a.cpp'])
 cpp.Program('fig15_08b', ['main.cpp', engine, 'build/BuildFigure15_08b.cpp'])
@@ -149,6 +140,24 @@ ch11 = [
 ]
 
 cpp.Alias('ch11', ch11)
+
+
+# chapter 14
+ch14path = 'build/chapter14/'
+
+ch14 = [
+	cpp.Program('fig14_05', ['main.cpp', engine, ch14path + 'BuildFigure14_05.cpp']),
+	cpp.Program('fig14_07', ['main.cpp', engine, ch14path + 'BuildFigure14_07.cpp']),
+	cpp.Program('fig14_10', ['main.cpp', engine, ch14path + 'BuildFigure14_10.cpp']),
+	cpp.Program('fig14_11b', ['main.cpp', engine, ch14path + 'BuildFigure14_11b.cpp']),
+	cpp.Program('fig14_11c', ['main.cpp', engine, ch14path + 'BuildFigure14_11c.cpp']),
+	cpp.Program('fig14_15', ['main.cpp', engine, ch14path + 'BuildFigure14_15.cpp']),
+	cpp.Program('fig14_21', ['main.cpp', engine, ch14path + 'BuildFigure14_21.cpp']),
+	cpp.Program('fig14_22a', ['main.cpp', engine, ch14path + 'BuildFigure14_22a.cpp']),
+	cpp.Program('fig14_22b', ['main.cpp', engine, ch14path + 'BuildFigure14_22b.cpp'])
+]
+
+cpp.Alias('ch14', ch14)
 
 
 # chapter 17
