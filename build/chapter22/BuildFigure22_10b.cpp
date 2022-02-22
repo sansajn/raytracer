@@ -3,11 +3,12 @@
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
-// This builds the scene for Figure 22.10a
+// This builds the scene for Figure 22.10b
 
 #include "World/World.h"
 #include "Tracers/RayCast.h"
-#include "Cameras/Orthographic.h"
+//#include "Cameras/Orthographic.h"
+#include "Cameras/Spherical.h"
 #include "Lights/Directional.h"
 #include "Materials/Matte.h"
 #include "GeometricObjects/Box.h"
@@ -18,19 +19,19 @@ using std::make_unique, std::make_shared, std::move;
 void World::build() {
 	constexpr int num_samples = 16;
 	
-	vp.set_hres(400);
+	vp.set_hres(800);
 	vp.set_vres(400);
 	vp.set_samples(num_samples);
 	
 	tracer_ptr = new RayCast(this);
 
-	auto orthographic_ptr = make_unique<Orthographic>();
-	vp.set_pixel_size(0.006);
-	orthographic_ptr->set_eye({0, 0, 0});
-	orthographic_ptr->set_lookat({0, -100, 0});
-	orthographic_ptr->compute_uvw(); 
-	set_camera(move(orthographic_ptr));
-	
+	auto spherical_ptr = make_unique<Spherical>();
+	spherical_ptr->set_eye({0, 0, 0});
+	spherical_ptr->set_lookat({-100, 0, 0});
+	spherical_ptr->set_horizontal_fov(360);
+	spherical_ptr->set_vertical_fov(180);
+	spherical_ptr->compute_uvw();
+	set_camera(move(spherical_ptr));
 	
 	Directional* light_ptr1 = new Directional;
 	light_ptr1->set_direction(1, 0, 0);    				// from the +ve x direction     
