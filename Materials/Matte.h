@@ -8,20 +8,22 @@ class Matte: public Material {
 public:
 	Matte();
 	Matte(float ka, float kd, RGBColor const & cd);
-	void set_ka(const float k);
-	void set_kd(const float k);
+	void set_ka(const float k);  //!< ambient coefficient
+	void set_kd(const float k);  //!< diffuse coefficient
 	void set_cd(const RGBColor c);
 	RGBColor shade(ShadeRec& sr) const override;
 	RGBColor area_light_shade(ShadeRec & sr) const override;
 
+	// Copy API.
 	Matte(Matte const & m);
 	Matte & operator= (const Matte& rhs);
 	Material * clone() const override;
+
 	~Matte();
 
 private:
-	Lambertian*		ambient_brdf;
-	Lambertian*		diffuse_brdf;
+	Lambertian * ambient_brdf,
+		* diffuse_brdf;
 };
 
 
