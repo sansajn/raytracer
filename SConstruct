@@ -315,6 +315,7 @@ ch23 = [
 	cpp.Program('fig23_03d', ['main.cpp', engine, ch23path + 'BuildFigure23_03d.cpp']),
 	cpp.Program('fig23_07a', ['main.cpp', engine, ch23path + 'BuildFigure23_07a.cpp']),
 	cpp.Program('fig23_07b', ['main.cpp', engine, ch23path + 'BuildFigure23_07b.cpp']),
+	cpp.Program('fig23_09b', ['main.cpp', engine, ch23path + 'BuildFigure23_09b.cpp']),
 ]
 
 cpp.Alias('ch23', ch23)

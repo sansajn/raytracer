@@ -54,6 +54,10 @@ void Phong::set_exp(float exp) {
 	specular_brdf->set_exp(exp);
 }
 
+void Phong::set_cs(RGBColor const & cs) {
+	specular_brdf->set_cs(cs);
+}
+
 Phong::Phong(Phong const & other)
 	: Material{other}
 {
