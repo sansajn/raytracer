@@ -9,7 +9,9 @@ Matte::Matte()
 	, diffuse_brdf{make_unique<Lambertian>()}
 {}
 
-Matte::Matte(float ka, float kd, RGBColor const & cd) {
+Matte::Matte(float ka, float kd, RGBColor const & cd)
+	: Matte{} {
+
 	set_ka(ka);
 	set_kd(kd);
 	set_cd(cd);
