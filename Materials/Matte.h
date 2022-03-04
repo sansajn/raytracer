@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "Material.h"
 #include "Lambertian.h"
 
@@ -21,11 +22,9 @@ public:
 	Matte & operator= (const Matte& rhs);
 	Material * clone() const override;
 
-	~Matte();
-
 private:
-	Lambertian * ambient_brdf,  // TODO: make unique_ptr
-		* diffuse_brdf;
+	std::unique_ptr<Lambertian> ambient_brdf,
+		diffuse_brdf;
 };
 
 

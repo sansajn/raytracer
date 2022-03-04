@@ -1,94 +1,47 @@
+#include <cassert>
 #include "World/World.h"
 #include "Matte.h"
 
-// ---------------------------------------------------------------- default constructor
+using std::make_unique, std::move;
 
 Matte::Matte()
-	:	Material(),
-		ambient_brdf(new Lambertian),
-		diffuse_brdf(new Lambertian)
+	: ambient_brdf{make_unique<Lambertian>()}
+	, diffuse_brdf{make_unique<Lambertian>()}
 {}
 
-Matte::Matte(float ka, float kd, RGBColor const & cd)
-	: Matte{}
-{
+Matte::Matte(float ka, float kd, RGBColor const & cd) {
 	set_ka(ka);
 	set_kd(kd);
 	set_cd(cd);
 }
 
-// ---------------------------------------------------------------- copy constructor
-
 Matte::Matte(const Matte& m)
 	: 	Material(m)
-{
-	if(m.ambient_brdf)
-		ambient_brdf = m.ambient_brdf->clone(); 
-	else  ambient_brdf = NULL;
-	
-	if(m.diffuse_brdf)
-		diffuse_brdf = m.diffuse_brdf->clone(); 
-	else  diffuse_brdf = NULL;
+	, ambient_brdf{m.ambient_brdf->clone()}
+	, diffuse_brdf{m.diffuse_brdf->clone()} {
+
+	assert(ambient_brdf && diffuse_brdf);
 }
 
-
-// ---------------------------------------------------------------- clone
-
-Material*										
-Matte::clone(void) const {
+Material * Matte::clone() const {
 	return (new Matte(*this));
 }	
 
-
-// ---------------------------------------------------------------- assignment operator
-
-Matte& 
-Matte::operator= (const Matte& rhs) {
+Matte & Matte::operator=(Matte const & rhs) {
 	if (this == &rhs)
-		return (*this);
+		return *this;
 		
 	Material::operator=(rhs);
+
+	assert(rhs.ambient_brdf && rhs.diffuse_brdf);
+
+	ambient_brdf.reset(rhs.ambient_brdf->clone());
+	diffuse_brdf.reset(rhs.diffuse_brdf->clone());
 	
-	if (ambient_brdf) {
-		delete ambient_brdf;
-		ambient_brdf = NULL;
-	}
-
-	if (rhs.ambient_brdf)
-		ambient_brdf = rhs.ambient_brdf->clone();
-		
-	if (diffuse_brdf) {
-		delete diffuse_brdf;
-		diffuse_brdf = NULL;
-	}
-
-	if (rhs.diffuse_brdf)
-		diffuse_brdf = rhs.diffuse_brdf->clone();
-
-	return (*this);
+	return *this;
 }
 
-
-// ---------------------------------------------------------------- destructor
-
-Matte::~Matte(void) {
-
-	if (ambient_brdf) {
-		delete ambient_brdf;
-		ambient_brdf = NULL;
-	}
-	
-	if (diffuse_brdf) {
-		delete diffuse_brdf;
-		diffuse_brdf = NULL;
-	}
-}
-
-
-// ---------------------------------------------------------------- shade
-
-RGBColor
-Matte::shade(ShadeRec& sr) const {
+RGBColor Matte::shade(ShadeRec & sr) const {
 	Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 	
