@@ -17,7 +17,7 @@ class Directional: public Light {
 		void set_color(const float c);
 		void set_color(const RGBColor& c);
 		void set_color(const float r, const float g, const float b);
-		void set_direction(Vector3D d);
+		void set_direction(Vector3D d);  //!< \param d [in] direction to light
 		void set_direction(float dx, float dy, float dz);
 		
 		RGBColor	L(ShadeRec& sr) override;

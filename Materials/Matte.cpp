@@ -94,10 +94,9 @@ Matte::shade(ShadeRec& sr) const {
 	
 	for (Light * light : sr.w.lights) {
 		Vector3D wi = light->get_direction(sr);
-		float ndotwi = sr.normal * wi,
-			ndotwo = sr.normal * wo;
+		float ndotwi = sr.normal * wi;
 	
-		if (ndotwi > 0.0 && ndotwo > 0) {
+		if (ndotwi > 0.0) {
 			bool in_shadow = false;
 			if (light->casts_shadows()) {
 				Ray shadow_ray{sr.hit_point, wi};
@@ -118,10 +117,9 @@ RGBColor Matte::area_light_shade(ShadeRec & sr) const {
 
 	for (Light * light : sr.w.lights) {
 		Vector3D wi = light->get_direction(sr);
-		float ndotwi = sr.normal * wi,
-			ndotwo = sr.normal * wo;
+		float const ndotwi = sr.normal * wi;
 
-		if (ndotwi > 0.0 && ndotwo > 0) {
+		if (ndotwi > 0.0) {
 			bool in_shadow = false;
 
 			if (light->casts_shadows()) {

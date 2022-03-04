@@ -1,6 +1,4 @@
-#ifndef __SMOOTH_TRIANGLE__
-#define __SMOOTH_TRIANGLE__
-
+#pragma once
 
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
@@ -18,32 +16,19 @@
 
 class SmoothTriangle: public GeometricObject {
 	public:
-		
 		Normal n0, n1, n2;		// normals at each vertex
 		
-		SmoothTriangle (void);   										
+		SmoothTriangle();
+		SmoothTriangle(const Point3D& a, const Point3D& b, const Point3D& c);
 		
-		SmoothTriangle (const Point3D& a, const Point3D& b, const Point3D& c);		
+		BBox get_bounding_box() override;
+		bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
+		bool shadow_hit(const Ray& ray, double& tmin) const override;
 
-		virtual SmoothTriangle* 										
-		clone(void) const;
-	
-		SmoothTriangle(const SmoothTriangle& st); 					
-
-		virtual
-		~SmoothTriangle(void);   									
-
-		SmoothTriangle& 												
-		operator= (const SmoothTriangle& rhs);
-		
-		virtual BBox
-		get_bounding_box(void);
-		
-		virtual bool 
-		hit(const Ray& ray, double& tmin, ShadeRec& sr) const;		 					 
-		
-		virtual bool 																						 
-		shadow_hit(const Ray& ray, double& tmin) const; 
+		// Copy API.
+		SmoothTriangle* clone() const override;
+		SmoothTriangle(const SmoothTriangle& st);
+		SmoothTriangle & operator=(const SmoothTriangle& rhs);
 		
 	private:
 		
@@ -52,6 +37,3 @@ class SmoothTriangle: public GeometricObject {
 		Normal												
 		interpolate_normal(const float beta, const float gamma) const;
 };
-
-#endif
-

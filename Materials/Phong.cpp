@@ -13,15 +13,12 @@ Phong::Phong()
 RGBColor Phong::shade(ShadeRec& sr) const {
 	Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-	int 		num_lights	= sr.w.lights.size();
 
-	for (int j = 0; j < num_lights; j++) {
-		Light * light = sr.w.lights[j];
+	for (Light * light : sr.w.lights) {
 		Vector3D wi = light->get_direction(sr);
-		float const ndotwi = sr.normal * wi,
-			ndotwo = sr.normal * wo;
+		float const ndotwi = sr.normal * wi;
 
-		if (ndotwi > 0.0 && ndotwo > 0) {
+		if (ndotwi > 0.0) {
 			bool in_shadow = false;
 			if (light->casts_shadows()) {
 				Ray shadow_ray{sr.hit_point, wi};
@@ -29,7 +26,7 @@ RGBColor Phong::shade(ShadeRec& sr) const {
 			}
 
 			if (!in_shadow)
-				L += (diffuse_brdf->f(sr, wo, wi) + specular_brdf->f(sr, wo, wi)) * sr.w.lights[j]->L(sr) * ndotwi;
+				L += (diffuse_brdf->f(sr, wo, wi) + specular_brdf->f(sr, wo, wi)) * light->L(sr) * ndotwi;
 		}
 	}
 

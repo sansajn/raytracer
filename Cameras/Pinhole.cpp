@@ -24,22 +24,6 @@ Pinhole * Pinhole::clone() const {
 	return (new Pinhole(*this));
 }
 
-
-// ----------------------------------------------------------------------------- assignment operator
-
-//Pinhole&
-//Pinhole::operator= (const Pinhole& rhs) {
-//	if (this == &rhs)
-//		return (*this);
-		
-//	Camera::operator= (rhs);
-
-//	d 		= rhs.d;
-//	zoom	= rhs.zoom;
-
-//	return (*this);
-//}
-
 // ----------------------------------------------------------------------------- get_direction
 
 void Pinhole::set_view_distance(float _d) {

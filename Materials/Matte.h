@@ -4,13 +4,15 @@
 
 //----------------------------------------------------------------------------- class Matte
 
+/*! Material without specular reflection.
+\note Supports area lighting. */
 class Matte: public Material {	
 public:
 	Matte();
 	Matte(float ka, float kd, RGBColor const & cd);
-	void set_ka(float k);  //!< ambient coefficient
-	void set_kd(float k);  //!< diffuse coefficient
-	void set_cd(RGBColor c);  //!< ambient and diffuse color
+	void set_ka(float k);  //!< ambient light coefficient
+	void set_kd(float k);  //!< diffuse light coefficient
+	void set_cd(RGBColor c);  //!< ambient and diffuse light color
 	RGBColor shade(ShadeRec& sr) const override;
 	RGBColor area_light_shade(ShadeRec & sr) const override;
 
@@ -22,7 +24,7 @@ public:
 	~Matte();
 
 private:
-	Lambertian * ambient_brdf,
+	Lambertian * ambient_brdf,  // TODO: make unique_ptr
 		* diffuse_brdf;
 };
 

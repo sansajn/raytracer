@@ -43,7 +43,6 @@ void World::build() {
 	auto phong_ptr = make_shared<Phong>();
 	phong_ptr->set_ka(0.25);
 	phong_ptr->set_kd(0.75);
-//	phong_ptr->set_cd(0.5);
 	phong_ptr->set_cd(RGBColor{0.2, 0.5, 0.4});
 	phong_ptr->set_ks(0.2);
 	phong_ptr->set_exp(20.0);

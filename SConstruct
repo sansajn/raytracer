@@ -318,6 +318,7 @@ cpp.Alias('ch23', ch23)
 # other samples
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])
+cpp.Program('smooth_triangle', ['main.cpp', engine, 'build/smooth_triangle.cpp'])
 
 # tests
 cpp.Program('test/test', [

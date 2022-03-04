@@ -15,7 +15,6 @@ public:
 	void render_scene(const World& w) override;
 
 	Pinhole * clone() const override;
-//	Pinhole & operator=(const Pinhole& rhs);
 
 private:
 	float	d;		// view plane distance
