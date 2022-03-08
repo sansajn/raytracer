@@ -1,23 +1,25 @@
 #pragma once
 #include "Texture.h"
 
-class PlaneChecker : public Texture
-{
+class PlaneChecker : public Texture {
 public:
 	PlaneChecker();
-	~PlaneChecker();
 
-	void SetColor1(const RGBColor& color);
-	void SetColor2(const RGBColor& color);
-	void SetOutlineColor(const RGBColor& color);
-	void SetSize(const float s);
-	void SetOutlineWidth(const float ow);
+	void set_color1(RGBColor const & color);
+	void set_color2(RGBColor const & color);
+	void set_outline_color(RGBColor const & color);
+	void set_size(float s);
+	void set_outline_width(float ow);
 
-	RGBColor GetColor(const ShadeRec& sr) const override;
+	RGBColor get_color(ShadeRec const & sr) const override;
+
+	// Copy API.
+	PlaneChecker * clone() const override;
+
 private:
-	RGBColor mColor1;
-	RGBColor mColor2;
-	RGBColor mOutlineColor;
-	float mSize;
-	float mOutlineWidth;
+	RGBColor _color1,
+		_color2,
+		_outline_color;
+	float _size,
+		_outline_width;
 };

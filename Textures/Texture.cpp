@@ -12,8 +12,6 @@
 
 #include "Texture.h"
 
-Texture::Texture(void) {}
-
 Texture::Texture(const Texture& texture) {}
 
 Texture&
@@ -24,5 +22,3 @@ Texture::operator= (const Texture& rhs) {
 
     return (*this);
 }
-
-Texture::~Texture(void) {}

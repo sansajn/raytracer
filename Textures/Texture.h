@@ -10,15 +10,13 @@
 //  This C++ code is licensed under the GNU General Public License Version 2.
 //  See the file COPYING.txt for the full license.
 
-#ifndef __TEXTURE__
-#define __TEXTURE__
-
+#pragma once
 #include "../Utilities/ShadeRec.h"
 #include "../Utilities/RGBColor.h"
 
 class Texture {
   public:
-      Texture(void);
+		Texture() = default;
 
       Texture(const Texture& texture);
 
@@ -28,11 +26,8 @@ class Texture {
       Texture&
       operator= (const Texture& rhs);
 
-      virtual
-      ~Texture(void);
+		virtual ~Texture() = default;
 
       virtual RGBColor
       get_color(const ShadeRec& sr) const = 0;
 };
-
-#endif
