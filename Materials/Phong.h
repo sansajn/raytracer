@@ -9,6 +9,7 @@ public:
 	Phong();
 
 	RGBColor shade(ShadeRec & sr) const override;
+	RGBColor area_light_shade(ShadeRec & sr) const override;
 
 	void set_ka(float ka);
 	void set_kd(float kd);
