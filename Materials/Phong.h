@@ -15,7 +15,9 @@ public:
 	void set_cd(RGBColor const & c);
 	void set_ks(float ks);
 	void set_exp(float exp);
+	void set_cs(RGBColor const & cs);
 
+	// Copy API.
 	Phong * clone() const override;
 	Phong(Phong const & other);
 	Phong & operator=(Phong const & other);

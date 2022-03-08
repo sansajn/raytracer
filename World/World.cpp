@@ -183,7 +183,7 @@ World::hit_objects(const Ray& ray) {
 	Point3D local_hit_point;
 	float	tmin = kHugeValue;
 
-	for (auto const & object : objects) {
+	for (auto const * object : objects) {
 		if (double t; object->hit(ray, t, sr) && (t < tmin)) {
 			sr.hit_an_object	= true;
 			tmin = t;

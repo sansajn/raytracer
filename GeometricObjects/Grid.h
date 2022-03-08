@@ -28,13 +28,9 @@
 
 class Grid: public Compound {										  	
 	public:
-
-		Grid(void); 
-
+		Grid();
 		Grid(Mesh* _mesh_ptr);    										
-
-		virtual Grid * clone() const override;
-
+		Grid * clone() const override;
 		Grid(Grid const & rg);
 
 		Grid& 								
@@ -59,14 +55,9 @@ class Grid: public Compound {
 		bool hit(Ray const & ray, double& tmin, ShadeRec& sr) const override;
 		bool shadow_hit(Ray const & ray, double & tmin) const override;
 
-		void
-		setup_cells(void);
-
-		void
-		reverse_mesh_normals(void);
-
-		void
-		store_material(std::shared_ptr<Material> material, const int index);
+		void setup_cells();
+		void reverse_mesh_normals();
+		void store_material(std::shared_ptr<Material> material, const int index);
 
 	private: 
 

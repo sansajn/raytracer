@@ -71,12 +71,6 @@ SmoothTriangle::operator= (const SmoothTriangle& rhs) {
 	return (*this);
 }
 
-
-// ---------------------------------------------------------------- destructor
-
-SmoothTriangle::~SmoothTriangle(void) {}
-
-
 // ---------------------------------------------------------------- computeNormal
 
 Normal 

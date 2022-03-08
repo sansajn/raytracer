@@ -66,12 +66,11 @@ RGBColor PointLight::L(ShadeRec &) {
 
 bool PointLight::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 	if (_shadows) {
-		size_t num_objects = size(sr.w.objects);
 		double d = location.distance(ray.o);
 
-		for (size_t j = 0; j < num_objects; ++j) {
+		for (GeometricObject * geometry : sr.w.objects) {
 			if (double t;
-				sr.w.objects[j]->shadow_hit(ray, t) && t < d) {
+				geometry->shadow_hit(ray, t) && t < d) {
 				return true;
 			}
 		}

@@ -70,11 +70,10 @@ Grid::clone(void) const {
 // ---------------------------------------------------------------- copy constructor
 // not implemented
 
-Grid::Grid(const Grid& grid) {}
+Grid::Grid(const Grid& grid) {
+	throw not_implemented{__PRETTY_FUNCTION__};
+}
 
-
-// ---------------------------------------------------------------- assignment operator
-// not implemented
 
 Grid& 
 Grid::operator= (const Grid& rhs)	{
