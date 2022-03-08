@@ -1,98 +1,77 @@
+#include "World/World.h"
 #include "GlossyReflector.h"
 
+using std::make_shared;
+
 GlossyReflector::GlossyReflector()
-	: Phong()
-	, mGlossySpecularBRDF(std::make_shared<GlossySpecular>())
-{
-}
+	: _glossy_specular_BRDF(std::make_shared<GlossySpecular>())
+{}
 
 GlossyReflector::GlossyReflector(const GlossyReflector& re)
-	: Phong(re)
-{
-	if (re.mGlossySpecularBRDF)
-	{
-		mGlossySpecularBRDF = re.mGlossySpecularBRDF->Clone();
-	}
+	: Phong(re) {
+
+	if (re._glossy_specular_BRDF)
+		_glossy_specular_BRDF.reset(re._glossy_specular_BRDF->clone());
 	else
-	{
-		mGlossySpecularBRDF = std::make_shared<GlossySpecular>();
-	}
+		_glossy_specular_BRDF = make_shared<GlossySpecular>();
 }
 
-GlossyReflector::~GlossyReflector()
-{
-}
-
-GlossyReflector& GlossyReflector::operator=(const GlossyReflector& rhs)
-{
+GlossyReflector& GlossyReflector::operator=(const GlossyReflector& rhs) {
 	if (this == &rhs)
-	{
 		return *this;
-	}
 
 	Phong::operator=(rhs);
 
-	mGlossySpecularBRDF = nullptr;
+	_glossy_specular_BRDF = nullptr;
 
-	if (rhs.mGlossySpecularBRDF)
-	{
-		mGlossySpecularBRDF = rhs.mGlossySpecularBRDF;
-	}
+	if (rhs._glossy_specular_BRDF)
+		_glossy_specular_BRDF = rhs._glossy_specular_BRDF;
 
 	return *this;
 }
 
-std::shared_ptr<GlossyReflector> GlossyReflector::Clone() const
-{
-	return std::make_shared<GlossyReflector>(*this);
+GlossyReflector * GlossyReflector::clone() const {
+	return new GlossyReflector{*this};
 }
 
-void GlossyReflector::SetSampler(std::shared_ptr<Sampler> sp, const float exp)
-{
-	mGlossySpecularBRDF->SetSampler(sp, exp);
+void GlossyReflector::set_sampler(Sampler * sp, const float exp) {
+	_glossy_specular_BRDF->set_sampler(sp, exp);
 }
 
-void GlossyReflector::SetSamples(const int numSamples, const float exp)
-{
-	mGlossySpecularBRDF->SetSamples(numSamples, exp);
+void GlossyReflector::set_samples(const int numSamples, const float exp) {
+	_glossy_specular_BRDF->set_samples(numSamples, exp);
 }
 
-void GlossyReflector::SetKr(const float k)
-{
-	mGlossySpecularBRDF->SetKs(k);
+void GlossyReflector::set_kr(const float k) {
+	_glossy_specular_BRDF->set_ks(k);
 }
 
-void GlossyReflector::SetCr(const RGBColor r)
-{
-	mGlossySpecularBRDF->SetCs(r);
+void GlossyReflector::set_cr(const RGBColor r) {
+	_glossy_specular_BRDF->set_cs(r);
 }
 
-void GlossyReflector::SetCr(const float r, const float g, const float b)
-{
-	mGlossySpecularBRDF->SetCs(r, g, b);
+void GlossyReflector::set_cr(const float r, const float g, const float b) {
+	_glossy_specular_BRDF->set_cs(r, g, b);
 }
 
-void GlossyReflector::SetCr(const float c)
-{
-	mGlossySpecularBRDF->SetCs(c);
+void GlossyReflector::set_cr(const float c) {
+	_glossy_specular_BRDF->set_cs(c);
 }
 
-void GlossyReflector::SetExponent(const float exp)
-{
-	mGlossySpecularBRDF->SetExp(exp);
+void GlossyReflector::set_exponent(const float exp) {
+	_glossy_specular_BRDF->set_exp(exp);
 }
 
-RGBColor GlossyReflector::AreaLightShade(ShadeRec& sr)
-{
-	RGBColor L(Phong::AreaLightShade(sr));
-	Vector3D wo(-sr.mRay.mDirection);
+RGBColor GlossyReflector::area_light_shade(ShadeRec& sr) const {
+	RGBColor L(Phong::area_light_shade(sr));
+	Vector3D wo(-sr.ray.d);
 	Vector3D wi;
 	float pdf;
-	RGBColor fr(mGlossySpecularBRDF->SampleFunc(sr, wo, wi, pdf));
-	Ray reflectedRay(sr.mHitPoint, wi);
+	RGBColor fr(_glossy_specular_BRDF->sample_f(sr, wo, wi, pdf));
+	Ray reflectedRay(sr.hit_point, wi);
 
-	L += fr * sr.mWorld.mTracerPtr->TraceRay(reflectedRay, sr.mDepth + 1) *
-		(sr.mNormal * wi) / pdf;
+	L += fr * sr.w.tracer_ptr->trace_ray(reflectedRay, sr.depth + 1) *
+		(sr.normal * wi) / pdf;
 
 	return L;
 }
