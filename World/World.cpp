@@ -120,7 +120,7 @@ World::render_scene(void) const {
 	// note: begin(*paintArea) needs to be Forward Iterator
 
 	auto pixels = PixelRange(hres, vres);  // pixel range generuje indexy v zlom poradi (pre kazdy radok vsetky stlpce)
-	transform(std::execution::seq, begin(pixels), end(pixels), begin(*paintArea),  // parallel transform
+	transform(std::execution::par, begin(pixels), end(pixels), begin(*paintArea),  // parallel transform
 //	transform(begin(pixels), end(pixels), begin(*paintArea),  // standard transform
 		[hres, vres, zw, &ray, s, this](pair<size_t,size_t> p){
 			auto [c, r] = p;

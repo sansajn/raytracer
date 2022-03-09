@@ -30,7 +30,7 @@ public:
 	PixelRange begin() {return *this;}
 	PixelRange end() {return PixelRange{0, 0};}
 
-	// comparison for for-each loop
+	// comparison for for-each loop (works only for it == end(r) where r is PixelRange instance)
 	bool operator==(PixelRange const & rhs) const {
 		return _h == _pos.second && rhs._w == 0 && rhs._h == 0;
 	}
