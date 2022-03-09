@@ -119,11 +119,9 @@ World::render_scene(void) const {
 
 	// note: begin(*paintArea) needs to be Forward Iterator
 
-	// vygenerocany obrazok nie je ako original, vyrenderovane body ukladam na zle miesto
-
 	auto pixels = PixelRange(hres, vres);  // pixel range generuje indexy v zlom poradi (pre kazdy radok vsetky stlpce)
-	transform(std::execution::seq, begin(pixels), end(pixels), paintArea->begin(),
-//	transform(begin(pixels), end(pixels), begin(*paintArea),
+	transform(std::execution::seq, begin(pixels), end(pixels), begin(*paintArea),  // parallel transform
+//	transform(begin(pixels), end(pixels), begin(*paintArea),  // standard transform
 		[hres, vres, zw, &ray, s, this](pair<size_t,size_t> p){
 			auto [c, r] = p;
 			ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
@@ -131,6 +129,7 @@ World::render_scene(void) const {
 			return pixel_color;
 		});
 
+	// hand written render
 //	for (auto [c, r] : PixelRange(hres, vres)) {
 //		ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
 //		pixel_color = tracer_ptr->trace_ray(ray);
