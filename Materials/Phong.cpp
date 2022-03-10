@@ -33,6 +33,31 @@ RGBColor Phong::shade(ShadeRec& sr) const {
 	return L;
 }
 
+RGBColor Phong::area_light_shade(ShadeRec & sr) const {
+	Vector3D wo = -sr.ray.d;
+	RGBColor L = ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
+
+	for (Light * light : sr.w.lights) {
+		Vector3D wi = light->get_direction(sr);
+		float const ndotwi = sr.normal * wi;
+
+		if (ndotwi > 0.0) {
+			bool in_shadow = false;
+
+			if (light->casts_shadows()) {
+				Ray shadow_ray{sr.hit_point, wi};
+				in_shadow = light->in_shadow(shadow_ray, sr);
+			}
+
+			if (!in_shadow)
+				L += (diffuse_brdf->f(sr, wo, wi) + specular_brdf->f(sr, wo, wi)) * light->L(sr) * light->G(sr) * ndotwi / light->pdf(sr);
+		}
+	}
+
+	return L;
+}
+
+
 void Phong::set_ka(float ka) {
 	ambient_brdf->set_kd(ka);  // \note this sets Lambertian::kd for ambient light, there is no Lambertian::ka data member
 }

@@ -14,11 +14,11 @@ public:
 	virtual float G(ShadeRec const & sr) const;
 	virtual bool in_shadow(Ray const & ray, ShadeRec const & sr) const;
 	virtual Vector3D get_direction(ShadeRec& sr) = 0;
-	virtual float pdf(ShadeRec const & sr) const;
+	virtual float pdf(ShadeRec const & sr) const;  //!< Area shading support. \sa AreaLight
 
 	virtual Light * clone() const = 0;
-
 	Light & operator=(const Light& rhs);
+
 	virtual ~Light() = default;
 
 protected:

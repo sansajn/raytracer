@@ -15,7 +15,6 @@
 #include "../Utilities/Vector3D.h"
 #include "../Utilities/Point3D.h"
 #include "../Utilities/RGBColor.h"
-
 #include "../World/World.h"			// you will need this later on for shadows
 #include "../Utilities/ShadeRec.h"
 
@@ -45,12 +44,12 @@ class PointLight: public Light {
 		void set_color(const RGBColor& c);
 		void set_color(const float r, const float g, const float b);
 		void set_location(const Point3D& p);
-//		void set_location(float x, float y, float z);
 		void set_direction(float dx, float dy, float dz);
 
 		Vector3D get_direction(ShadeRec& sr) override;
 
 		RGBColor	L(ShadeRec& sr) override;
+		float pdf(ShadeRec const & sr) const override;
 
 		bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
 
