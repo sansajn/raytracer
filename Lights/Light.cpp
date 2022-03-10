@@ -48,7 +48,7 @@ Light::L(ShadeRec &) {
 }
 
 float Light::G(ShadeRec const &) const {
-	return 1.0;
+	return 1.0;  // TODO: do not allow default implementation, throw an exception instead
 }
 
 float Light::pdf(ShadeRec const &) const {

@@ -21,5 +21,5 @@ public:
 	RGBColor area_light_shade(ShadeRec& sr) const override;
 
 private:
-	std::shared_ptr<GlossySpecular> _glossy_specular_BRDF;
+	std::shared_ptr<GlossySpecular> _glossy_specular_brdf;
 };

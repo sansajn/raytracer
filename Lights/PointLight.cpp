@@ -64,6 +64,10 @@ RGBColor PointLight::L(ShadeRec &) {
 	return (ls * color);
 }
 
+float PointLight::pdf(ShadeRec const & sr) const {
+	return 1.0;
+}
+
 bool PointLight::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 	if (_shadows) {
 		double d = location.distance(ray.o);
