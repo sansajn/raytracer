@@ -14,12 +14,16 @@ public:
 	void set_ka(float k);  //!< ambient light coefficient
 	void set_kd(float k);  //!< diffuse light coefficient
 	void set_cd(RGBColor c);  //!< ambient and diffuse light color
+
 	RGBColor shade(ShadeRec& sr) const override;
 	RGBColor area_light_shade(ShadeRec & sr) const override;
+	RGBColor path_shade(ShadeRec & sr) const override;
+
+	void set_sampler(std::unique_ptr<Sampler> s);
 
 	// Copy API.
 	Matte(Matte const & m);
-	Matte & operator= (const Matte& rhs);
+	Matte & operator=(const Matte& rhs);
 	Material * clone() const override;
 
 private:

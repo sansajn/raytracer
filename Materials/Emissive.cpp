@@ -19,6 +19,7 @@ void Emissive::scale_radiance(const float ls) {
 }
 
 RGBColor	Emissive::shade(ShadeRec & sr) const {
+	// FIXME: implementation in `/home/ja/devel/source/raytracers/RayTracing-master/RayTracing/MyTracer/Material/` just returns black
 	if (-sr.normal * sr.ray.d > 0.0)
 		return (ls * ce);
 	else
@@ -30,6 +31,13 @@ RGBColor Emissive::area_light_shade(ShadeRec& sr) const {
 		return (ls * ce);
 	else
 		return (black);
+}
+
+RGBColor Emissive::path_shade(ShadeRec & sr) const {
+	if (-sr.normal * sr.ray.d > 0.0)
+		return ls * ce;
+	else
+		return black;
 }
 
 RGBColor	Emissive::get_Le(ShadeRec const &) const {

@@ -1,18 +1,16 @@
-#ifndef __REFLECTIVE__
-#define __REFLECTIVE__
-
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
-
+#pragma once
+#include <memory>
 #include "Phong.h"
 #include "PerfectSpecular.h"
 
 class Reflective: public Phong {	
 public:
-	Reflective(void);
+	Reflective();
 
 	void set_kr(const float k);
 	void set_cr(const RGBColor& c);
@@ -21,15 +19,14 @@ public:
 
 	RGBColor	shade(ShadeRec& s) const override;
 	RGBColor area_light_shade(ShadeRec & sr) const override;
+	RGBColor path_shade(ShadeRec & sr) const override;
 
 	Reflective * clone() const override;
-
 	Reflective(const Reflective& rm);
 	Reflective & operator=(Reflective const & rhs);
-	~Reflective(void);
 
 private:
-	PerfectSpecular * reflective_brdf;
+	std::unique_ptr<PerfectSpecular> reflective_brdf;
 };
 
 
@@ -63,5 +60,3 @@ inline void
 Reflective::set_cr(const float c) {
 	reflective_brdf->set_cr(c);
 }
-
-#endif

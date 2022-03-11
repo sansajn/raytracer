@@ -74,7 +74,7 @@ Pinhole::render_scene(const World& w) {
 			L /= vp.num_samples;
 			L *= exposure_time;
 			w.display_pixel(r, c, L);
-		} 
+		}
 }
 
 

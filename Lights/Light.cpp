@@ -1,11 +1,6 @@
-#include <string>
-#include <stdexcept>
 #include "Light.h"
 #include "Constants.h"
 #include "Utilities/exception.hpp"
-
-using std::logic_error;
-using namespace std::string_literals;
 
 // ---------------------------------------------------------------------- default constructor
 
@@ -44,13 +39,16 @@ bool Light::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 
 RGBColor								
 Light::L(ShadeRec &) {
+//	return black;
 	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 float Light::G(ShadeRec const &) const {
-	return 1.0;  // TODO: do not allow default implementation, throw an exception instead
+//	return 1.0;
+	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 float Light::pdf(ShadeRec const &) const {
+//	return 1.0;
 	throw default_implementation{__PRETTY_FUNCTION__};
 }

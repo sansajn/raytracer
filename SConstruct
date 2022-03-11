@@ -348,6 +348,19 @@ ch25 = [
 cpp.Alias('ch25', ch25)
 
 
+# chapter 26
+ch26path = 'build/chapter26/'
+
+ch26 = [
+	cpp.Program('fig26_06a', ['main.cpp', engine, ch26path + 'BuildFigure26_06a.cpp']),
+	cpp.Program('fig26_06b', ['main.cpp', engine, ch26path + 'BuildFigure26_06b.cpp']),
+	cpp.Program('fig26_06c', ['main.cpp', engine, ch26path + 'BuildFigure26_06c.cpp']),
+]
+
+cpp.Alias('ch26', ch26)
+
+
+
 # other samples
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])

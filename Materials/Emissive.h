@@ -12,6 +12,7 @@ public:
 
 	RGBColor	shade(ShadeRec& sr) const override;
 	RGBColor	area_light_shade(ShadeRec& sr) const override;
+	RGBColor path_shade(ShadeRec & sr) const override;
 	RGBColor	get_Le(ShadeRec const & sr) const override;
 
 	Material * clone() const override;

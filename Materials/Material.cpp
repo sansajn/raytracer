@@ -6,18 +6,15 @@
 using std::logic_error;
 using namespace std::string_literals;
 
-Material & Material::operator=(Material const & rhs) {
-	if (this == &rhs)
-		return (*this);
-
-	return *this;
-}
-
 RGBColor Material::shade(ShadeRec &) const {
 	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 RGBColor Material::area_light_shade(ShadeRec &) const {
+	throw default_implementation{__PRETTY_FUNCTION__};
+}
+
+RGBColor Material::path_shade(ShadeRec & sr) const {
 	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
