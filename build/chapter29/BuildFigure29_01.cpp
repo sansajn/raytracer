@@ -59,6 +59,7 @@
 #include "Textures/SphericalMap.h"
 #include "Textures/TInstance.h"
 #include "Textures/TurbulenceTexture.h"
+#include "Textures/DiskChecker.h"
 #include "Noise/CubicNoise.h"
 
 using std::make_unique, std::make_shared, std::move;
