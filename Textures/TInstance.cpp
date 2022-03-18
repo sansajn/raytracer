@@ -5,6 +5,7 @@
 //	See the file COPYING.txt for the full license.
 
 #include "TInstance.h"
+#include "Utilities/Constants.h"
 
 TInstance::TInstance(void): texture_ptr(0) { };										
 		
@@ -119,8 +120,8 @@ TInstance::translate(const double dx, const double dy, const double dz) {
 void
 TInstance::rotate_x(const double theta) {
 
-	double sin_theta = sin(theta * PI_ON_180);
-	double cos_theta = cos(theta * PI_ON_180);
+	double sin_theta = sin(theta * PI_ON_180<double>);
+	double cos_theta = cos(theta * PI_ON_180<double>);
 	
 	Matrix inv_x_rotation_matrix;					// temporary inverse rotation matrix about x axis
 	
@@ -138,8 +139,8 @@ TInstance::rotate_x(const double theta) {
 void
 TInstance::rotate_y(const double theta) {
 
-	double sin_theta = sin(theta * PI / 180.0);
-	double cos_theta = cos(theta * PI / 180.0);
+	double sin_theta = sin(theta * PI<double> / 180.0);
+	double cos_theta = cos(theta * PI<double> / 180.0);
 
 	Matrix inv_y_rotation_matrix;					// temporary inverse rotation matrix about y axis
 	
@@ -157,8 +158,8 @@ TInstance::rotate_y(const double theta) {
 
 void
 TInstance::rotate_z(const double theta) {
-	double sin_theta = sin(theta * PI / 180.0);
-	double cos_theta = cos(theta * PI / 180.0);
+	double sin_theta = sin(theta * PI<double> / 180.0);
+	double cos_theta = cos(theta * PI<double> / 180.0);
 
 	Matrix inv_z_rotation_matrix;					// temporary inverse rotation matrix about y axis	
 	

@@ -5,6 +5,7 @@
 //	See the file COPYING.txt for the full license.
 
 #include "Dielectric.h"
+#include "World/World.h"
 
 // ---------------------------------------------------------------- default constructor
 

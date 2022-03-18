@@ -39,6 +39,6 @@ RGBColor SV_Lambertian::sample_f(ShadeRec const & sr, Vector3D const & wo, Vecto
 	return {};  // TODO: implement
 }
 
-BRDF * SV_Lambertian::clone() const {
+SV_Lambertian * SV_Lambertian::clone() const {
 	return new SV_Lambertian{*this};
 }
