@@ -44,6 +44,7 @@
 #include "Materials/SV_Matte.h"
 #include "GeometricObjects/Plane.h"
 #include "GeometricObjects/Grid.h"
+#include "GeometricObjects/Disk.h"
 #include "GeometricObjects/BaveledBox.h"
 #include "GeometricObjects/OpenCylinder.h"
 #include "GeometricObjects/Instance.h"
@@ -92,23 +93,23 @@ void World::build() {
 	
 	// back wall 
 	Plane* back_wall_ptr = new Plane(Point3D(0, 0, 0), Normal(0, 0, 1));
-	back_wall_ptr->set_material(make_unique<Matte>(.75, .5, RGBColor{.85}));
+	back_wall_ptr->set_material(make_shared<Matte>(.75, .5, RGBColor{.85}));
 	add_object(back_wall_ptr);
 	
 	// front wall 
 	Plane* front_wall_ptr = new Plane(Point3D(0, 0, 51), Normal(0, 0, -1));
-	front_wall_ptr->set_material(make_unique<Matte>(1, .5, white));
+	front_wall_ptr->set_material(make_shared<Matte>(1, .5, white));
 	add_object(front_wall_ptr);
 	
 	// left wall 
 	RGBColor const wall_color = {.75, 1, 1};
 	Plane* left_wall_ptr = new Plane(Point3D(-15, 0, 0), Normal(1, 0, 0));
-	left_wall_ptr->set_material(make_unique<Matte>(.25, .75, wall_color));
+	left_wall_ptr->set_material(make_shared<Matte>(.25, .75, wall_color));
 	add_object(left_wall_ptr);
 
 	// right wall 
 	Plane* right_wall_ptr = new Plane(Point3D(15, 0, 0), Normal(-1, 0, 0));
-	right_wall_ptr->set_material(make_unique<Matte>(.5, .5, wall_color));
+	right_wall_ptr->set_material(make_shared<Matte>(.5, .5, wall_color));
 	add_object(right_wall_ptr);
 	
 	
@@ -118,12 +119,12 @@ void World::build() {
 	
 	// plain material	
 	
-	Phong* phong_ptr = new Phong;		
+	auto phong_ptr = make_shared<Phong>();
 	phong_ptr->set_ka(0.5);  
 	phong_ptr->set_kd(1.0);
 	phong_ptr->set_ks(0.2);  
 	phong_ptr->set_exp(20.0);
-	phong_ptr->set_cd(0.5, 0.3, 0.1);
+	phong_ptr->set_cd(RGBColor{0.5, 0.3, 0.1});
 			
 	// the floor is a simulation of wood planks using beveled boxes with random lengths in the x direction
 	
@@ -182,10 +183,10 @@ void World::build() {
 	
 	// plain material 
 	
-	Matte* matte_ptr5 = new Matte;		
+	auto matte_ptr5 = make_shared<Matte>();
 	matte_ptr5->set_ka(0.25);
 	matte_ptr5->set_kd(0.95);
-	matte_ptr5->set_cd(0.1, 0.4, 0.15);
+	matte_ptr5->set_cd(RGBColor{0.1, 0.4, 0.15});
 
 	// textured material for the curved surface
 	// this is a checker image
@@ -224,7 +225,7 @@ void World::build() {
 	disk_checker_ptr->set_color1(0.08, 0.39, 0.14);  	// dark green
 	disk_checker_ptr->set_color2(1.0, 1.0, 0.5);		// yellow
 	
-	SV_Matte* sv_matte_ptr2 = new SV_Matte;		
+	auto sv_matte_ptr2 = make_shared<SV_Matte>();
 	sv_matte_ptr2->set_ka(0.35);
 	sv_matte_ptr2->set_kd(0.5);
 	sv_matte_ptr2->set_cd(disk_checker_ptr);
@@ -242,15 +243,7 @@ void World::build() {
 	
 	// ************************************************************************************************* Earth sphere
 	
-	// plain material
-	
-	Matte* matte_ptr6 = new Matte;		
-	matte_ptr6->set_ka(0.5);
-	matte_ptr6->set_kd(0.5);
-	matte_ptr6->set_cd(0.2, 0.5, 1);
-
 	// Earth image texture
-	
 	Image* image_ptr2 = new Image;					
 //	image_ptr2->read_ppm_file("EarthLowRes.ppm");
 	image_ptr2->read_ppm_file("EarthHighRes.ppm");
@@ -258,19 +251,19 @@ void World::build() {
 	ImageTexture* image_texture_ptr2 = new ImageTexture(image_ptr2); 
 	image_texture_ptr2->set_mapping(spherical_map_ptr);
 	
-	SV_Matte* sv_matte_ptr3 = new SV_Matte;		
-	sv_matte_ptr3->set_ka(0.5);
-	sv_matte_ptr3->set_kd(0.95);
-	sv_matte_ptr3->set_cd(image_texture_ptr2);
+//	SV_Matte* sv_matte_ptr3 = new SV_Matte;
+//	sv_matte_ptr3->set_ka(0.5);
+//	sv_matte_ptr3->set_kd(0.95);
+//	sv_matte_ptr3->set_cd(image_texture_ptr2);
 	
 	Sphere* sphere_ptr1 = new Sphere;
-	sphere_ptr1->set_material(matte_ptr6);				// plain 
+	sphere_ptr1->set_material(make_shared<Matte>(.5, .5, RGBColor{.2, .5, 1}));				// plain
 //	sphere_ptr1->set_material(sv_matte_ptr3);			// textured with Earth image
 		
 	Instance* sphere_ptr2 = new Instance(sphere_ptr1);
 	sphere_ptr2->rotate_y(75);
-	sphere_ptr2->scale(3);
-	sphere_ptr2->translate(-11, 8, 12);
+	sphere_ptr2->scale(Vector3D{3});
+	sphere_ptr2->translate({-11, 8, 12});
 	add_object(sphere_ptr2);
 	
 
@@ -288,14 +281,6 @@ void World::build() {
 	double b = 5.05; 	// +ve z coordinate of untransformed image
 	double w = 1.0;		// width of the frame
 	
-	
-	// plain material picture
-	
-	Matte* matte_ptr7 = new Matte;		
-	matte_ptr7->set_ka(0.75);
-	matte_ptr7->set_kd(0.5);
-	matte_ptr7->set_cd(0.3, 0.65, 0.71);
-	
 	// the image is applied to a rectangle
 	
 	Image* image_ptr3 = new Image;					
@@ -306,16 +291,14 @@ void World::build() {
 	ImageTexture* image_texture_ptr3 = new ImageTexture(image_ptr3); 
 	image_texture_ptr3->set_mapping(square_map_ptr);
 	
-	SV_Matte* sv_matte_ptr4 = new SV_Matte;		
-	sv_matte_ptr4->set_ka(0.5);
-	sv_matte_ptr4->set_kd(0.75);
-	sv_matte_ptr4->set_cd(image_texture_ptr3);
-	
+//	SV_Matte* sv_matte_ptr4 = new SV_Matte;
+//	sv_matte_ptr4->set_ka(0.5);
+//	sv_matte_ptr4->set_kd(0.75);
+//	sv_matte_ptr4->set_cd(image_texture_ptr3);
 	
 	// construct the picture
-	
 	Rectangle* rectangle_ptr = new Rectangle;
-	rectangle_ptr->set_material(matte_ptr7);  	// plain
+	rectangle_ptr->set_material(make_shared<Matte>(.75, .5, RGBColor{.3, .65, .71}));  	// plain
 //	rectangle_ptr->set_material(sv_matte_ptr4);  // textured with Blue Glass
 	
 	Instance* picture_ptr = new Instance(rectangle_ptr);  
@@ -323,14 +306,6 @@ void World::build() {
 
 	
 	// construct the frame
-	
-	// plain material for the frame
-	
-	Matte* matte_ptr8 = new Matte;		
-	matte_ptr8->set_ka(0.75);
-	matte_ptr8->set_kd(0.5);
-	matte_ptr8->set_cd(0.5, 0.3, 0.14);
-	
 	
 	// wood materials for the frame
 
@@ -340,7 +315,7 @@ void World::build() {
 	wood_ptr1->scale(Vector3D(2));
 	wood_ptr1->rotate_y(90);
 	
-	SV_Matte* sv_matte_ptr5 = new SV_Matte;		
+	auto sv_matte_ptr5 = make_shared<SV_Matte>();
 	sv_matte_ptr5->set_ka(1.0);
 	sv_matte_ptr5->set_kd(1.0);
 	sv_matte_ptr5->set_cd(wood_ptr1);
@@ -350,7 +325,7 @@ void World::build() {
 	TInstance* wood_ptr2 = new TInstance(new Wood(RGBColor(0.55, 0.43, 0.13), black));
 	wood_ptr2->scale(2.0);
 
-	SV_Matte* sv_matte_ptr6 = new SV_Matte;		
+	auto sv_matte_ptr6 = make_shared<SV_Matte>();
 	sv_matte_ptr6->set_ka(1.0);
 	sv_matte_ptr6->set_kd(1.0);
 	sv_matte_ptr6->set_cd(wood_ptr2);
@@ -401,14 +376,14 @@ void World::build() {
 	triangle_ptr8->set_material(sv_matte_ptr6);
 	framed_picture_ptr->add_object(triangle_ptr8);
 	
-	framed_picture_ptr->set_material(matte_ptr8);    // plain material for the frame - replaces all the wood textures - see Listing 19.13
+	framed_picture_ptr->set_material(make_shared<Matte>(.75, .5, RGBColor{.5, .3, .14}));    // plain material for the frame - replaces all the wood textures - see Listing 19.13
 	framed_picture_ptr->add_object(picture_ptr);	
 	
 	
 	Instance* wall_picture_ptr = new Instance(framed_picture_ptr);	
 	wall_picture_ptr->rotate_y(90);
 	wall_picture_ptr->rotate_x(90);
-	wall_picture_ptr->translate(-6, 8, 0.5);
+	wall_picture_ptr->translate({-6, 8, 0.5});
 	add_object(wall_picture_ptr);
 	
 
@@ -417,13 +392,7 @@ void World::build() {
 	
 	// plain material for the bunny	
 	
-	Matte* matte_ptr9 = new Matte;		
-	matte_ptr9->set_ka(0.25);
-	matte_ptr9->set_kd(0.75);   
-	matte_ptr9->set_cd(0.8);	
-	
 	// ramp based marble texture
-	
 	Image* image_ptr4 = new Image;						
 	image_ptr4->read_ppm_file("GrayMarbleRamp.ppm");
 	
@@ -449,13 +418,13 @@ void World::build() {
 	
 	Grid* grid_ptr = new Grid(mesh_ptr);
 	grid_ptr->read_smooth_triangles(fileName);
-	grid_ptr->set_material(matte_ptr9);			// plain
+	grid_ptr->set_material(make_shared<Matte>(.25, .75, RGBColor{.85}));			// plain
 //	grid_ptr->set_material(sv_matte_ptr7); 		// textured
 	grid_ptr->setup_cells();
 	
 	Instance* bunny_ptr = new Instance(grid_ptr);
-	bunny_ptr->scale(47.0);
-	bunny_ptr->translate(-3.25, -1.65, 10);
+	bunny_ptr->scale(Vector3D{47.0});
+	bunny_ptr->translate({-3.25, -1.65, 10});
 	add_object(bunny_ptr);	
 	
 	
@@ -482,14 +451,6 @@ void World::build() {
 		
 	float bath_ka 				= 0.5;  	// common material property
 	float bath_kd 				= 0.85; 	// common material property
-	
-	
-	// plain material 
-	
-	Matte* matte_ptr10 = new Matte;				
-	matte_ptr10->set_ka(bath_ka);
-	matte_ptr10->set_kd(bath_kd);
-	matte_ptr10->set_cd(0.53, 0.51, 0.45);
 	
 	
 	// sandstone texture
@@ -602,7 +563,7 @@ void World::build() {
 		bath_ptr->add_object(box_ptr);
 	}
 		
-	bath_ptr->set_material(matte_ptr10);  // sets plain material for all boxes
+	bath_ptr->set_material(make_shared<Matte>(bath_ka, bath_kd, RGBColor{.53, .51, .45}));  // sets plain material for all boxes
 	bath_ptr->setup_cells();
 	add_object(bath_ptr);
 	
@@ -724,16 +685,10 @@ void World::build() {
 	// ************************************************************************************************* grout
 	
 	// this is not textured
-	
-	Matte* matte_ptr11 = new Matte;
-	matte_ptr11->set_ka(0.5);
-	matte_ptr11->set_kd(0.75);
-	matte_ptr11->set_cd(0.92, 0.85, 0.6);
-	
 	Rectangle* grout_ptr = new Rectangle(	Point3D(tiles_xmin, bath_height, tile_thickness / 2.0 - tile_bevel_radius * 0.666),
 											Vector3D(num_x_tiles * (tile_size + grout_width), 0.0, 0.0),
 											Vector3D(0.0, num_y_tiles * (tile_size + grout_width), 0.0));
-	grout_ptr->set_material(matte_ptr11);	
+	grout_ptr->set_material(make_shared<Matte>(.5, .75, RGBColor{.92, .85, .6}));
 										
 	Compound* tiles_and_grout_ptr = new Compound; 
 	tiles_and_grout_ptr->add_object(tiles_ptr); 
@@ -742,7 +697,4 @@ void World::build() {
 	Instance* instance_ptr = new Instance(tiles_and_grout_ptr);
 	instance_ptr->translate(0, 0, -0.99 * (tile_thickness / 2.0 - tile_bevel_radius * 0.666));
 	add_object(instance_ptr);
-												
 }
-
-
