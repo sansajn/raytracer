@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include "stdafx.h"
-
 #include "Material.h"
 #include "SV_Lambertian.h"
 #include "SV_GlossySpecular.h"
