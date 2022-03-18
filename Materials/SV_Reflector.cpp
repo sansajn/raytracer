@@ -5,6 +5,7 @@
 //	See the file COPYING.txt for the full license.
 
 #include "SV_Reflector.h"
+#include "World/World.h"
 
 // ---------------------------------------------------------------- default constructor
 
