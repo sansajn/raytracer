@@ -7,7 +7,7 @@
 #pragma once
 
 #include "Texture.h"
-#include "LatticeNoise.h"
+#include "Noise/LatticeNoise.h"
 
 class TurbulenceTexture: public Texture {			
 	public:
