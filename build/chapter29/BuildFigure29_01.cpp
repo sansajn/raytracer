@@ -42,13 +42,9 @@
 #include "Materials/Reflective.h"
 #include "Materials/SV_Phong.h"
 #include "Materials/SV_Matte.h"
-//#include "Materials/Emissive.h"
-//#include "GeometricObjects/Box.h"
 #include "GeometricObjects/Plane.h"
 #include "GeometricObjects/Grid.h"
 #include "GeometricObjects/BaveledBox.h"
-//#include "GeometricObjects/ConcaveSphere.h"
-//#include "GeometricObjects/SolidCylinder.h"
 #include "GeometricObjects/OpenCylinder.h"
 #include "GeometricObjects/Instance.h"
 #include "GeometricObjects/Rectangle.h"
@@ -75,16 +71,15 @@ void World::build() {
 	
 	tracer_ptr = new Whitted(this);
 	
-	Pinhole* pinhole_ptr = new Pinhole;
-	pinhole_ptr->set_eye(0, 15, 50);
-	pinhole_ptr->set_lookat(0.4, 3.0, 0.0); 
-//	pinhole_ptr->set_view_distance(600.0);		// for 475 x 250
+	auto pinhole_ptr = make_unique<Pinhole>();
+	pinhole_ptr->set_eye({0, 15, 50});
+	pinhole_ptr->set_lookat({0.4, 3.0, 0.0});
 	pinhole_ptr->set_view_distance(1200.0);   	// for 950 X 500
 	pinhole_ptr->compute_uvw();
-	set_camera(pinhole_ptr);
+	set_camera(move(pinhole_ptr));
 	
 	PointLight* light_ptr = new PointLight;
-	light_ptr->set_location(14, 50, 50);  
+	light_ptr->set_location({14, 50, 50});
 	light_ptr->scale_radiance(3.0);  
 	light_ptr->set_shadows(true);
 	add_light(light_ptr);
@@ -96,56 +91,28 @@ void World::build() {
 	// these are not textured
 	
 	// back wall 
-	
-	Matte* matte_ptr1 = new Matte;		
-	matte_ptr1->set_ka(0.75);
-	matte_ptr1->set_kd(0.5);
-	matte_ptr1->set_cd(0.85);  
-	
 	Plane* back_wall_ptr = new Plane(Point3D(0, 0, 0), Normal(0, 0, 1));
-	back_wall_ptr->set_material(matte_ptr1);
+	back_wall_ptr->set_material(make_unique<Matte>(.75, .5, RGBColor{.85}));
 	add_object(back_wall_ptr);
 	
-	
 	// front wall 
-	
-	Matte* matte_ptr2 = new Matte;		
-	matte_ptr2->set_ka(1.0);
-	matte_ptr2->set_kd(0.5);
-	matte_ptr2->set_cd(white);
-	
 	Plane* front_wall_ptr = new Plane(Point3D(0, 0, 51), Normal(0, 0, -1));
-	front_wall_ptr->set_material(matte_ptr2);
+	front_wall_ptr->set_material(make_unique<Matte>(1, .5, white));
 	add_object(front_wall_ptr);
 	
-	
 	// left wall 
-	
-	Matte* matte_ptr3 = new Matte;		
-	matte_ptr3->set_ka(0.25);
-	matte_ptr3->set_kd(0.75);
-	matte_ptr3->set_cd(0.75, 1.0, 1.0);    
-	
+	RGBColor const wall_color = {.75, 1, 1};
 	Plane* left_wall_ptr = new Plane(Point3D(-15, 0, 0), Normal(1, 0, 0));
-	left_wall_ptr->set_material(matte_ptr3);
+	left_wall_ptr->set_material(make_unique<Matte>(.25, .75, wall_color));
 	add_object(left_wall_ptr);
 
-	
 	// right wall 
-	
-	Matte* matte_ptr4 = new Matte;		
-	matte_ptr4->set_ka(0.5);
-	matte_ptr4->set_kd(0.5);
-	matte_ptr4->set_cd(0.75, 1.0, 1.0); 
-
 	Plane* right_wall_ptr = new Plane(Point3D(15, 0, 0), Normal(-1, 0, 0));
-	right_wall_ptr->set_material(matte_ptr4);
+	right_wall_ptr->set_material(make_unique<Matte>(.5, .5, wall_color));
 	add_object(right_wall_ptr);
 	
 	
 	// there is no ceiling
-	
-	
 	
 	// ************************************************************************************************* floor planks
 	
