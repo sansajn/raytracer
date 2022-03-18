@@ -4,6 +4,7 @@
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
+#include "Utilities/Constants.h"
 #include "SV_PerfectSpecular.h"
 
 // ---------------------------------------------------------- default constructor

@@ -86,7 +86,7 @@ DiskChecker::get_color(const ShadeRec& sr) const {
 		
 	double phi   = atan2(x, z);
 	
-	double phi_size = 2 * PI / num_angular_checkers;   	// in radians - azimuth angle
+	double phi_size = 2 * PI<double> / num_angular_checkers;   	// in radians - azimuth angle
 	double theta_size = radius / num_radial_checkers;
 	double ra = sqrt(x*x + z*z) / radius;   		// in radians - polar angle
 

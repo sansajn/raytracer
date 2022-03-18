@@ -5,6 +5,7 @@
 //	See the file COPYING.txt for the full license.
 
 #include "FresnelReflector.h"
+#include "Utilities/Constants.h"
 
 // ---------------------------------------------------------- default constructor
 

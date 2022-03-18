@@ -9,8 +9,8 @@
 #pragma once
 
 #include "BRDF.h"
-
-#include "Texture.h"
+#include "Textures/Texture.h"
+#include "Samplers/Sampler.h"
 
 class SV_GlossySpecular: public BRDF {
 public:
@@ -55,7 +55,7 @@ private:
 	float		ks;
 	Texture* 	cs;
 	float		exp; 		// specular exponent
-	Sampler*	sampler;    // for use in sample_f
+	Sampler*	sampler_ptr;    // for use in sample_f
 };
 
 

@@ -12,7 +12,7 @@
 SV_GlossySpecular::SV_GlossySpecular(void) 
 	: 	ks(0.0), 
 	cs(NULL),
-	sampler(NULL),
+	sampler_ptr{nullptr},
 	exp(1)
 {}
 
