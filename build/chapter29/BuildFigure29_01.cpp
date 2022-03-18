@@ -40,6 +40,7 @@
 #include "Materials/Matte.h"
 #include "Materials/Phong.h"
 #include "Materials/Reflective.h"
+#include "Materials/Dielectric.h"
 #include "Materials/SV_Phong.h"
 #include "Materials/SV_Matte.h"
 #include "GeometricObjects/Plane.h"
