@@ -47,7 +47,7 @@
 #include "GeometricObjects/Plane.h"
 #include "GeometricObjects/Grid.h"
 #include "GeometricObjects/Disk.h"
-#include "GeometricObjects/BaveledBox.h"
+//#include "GeometricObjects/BaveledBox.h"  // TODO: missing include
 #include "GeometricObjects/OpenCylinder.h"
 #include "GeometricObjects/Instance.h"
 #include "GeometricObjects/Rectangle.h"
@@ -55,11 +55,12 @@
 #include "Utilities/Random.h"
 #include "Utilities/Image.h"
 #include "Textures/ImageTexture.h"
-#include "Textures/CylindricalMap.h"
+//#include "Textures/CylindricalMap.h"  // TODO: missing include
 #include "Textures/SphericalMap.h"
 #include "Textures/TInstance.h"
 #include "Textures/TurbulenceTexture.h"
 #include "Textures/DiskChecker.h"
+#include "Textures/Wood.h"
 #include "Noise/CubicNoise.h"
 
 using std::make_unique, std::make_shared, std::move;
