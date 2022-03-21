@@ -13,21 +13,16 @@
 
 class Dielectric: public Phong {	
 	public:
-
-		Dielectric(void);											
-
+		Dielectric();
 		Dielectric(const Dielectric& m);
-		
-		virtual Material*										
-		clone(void) const;									
+		Dielectric * clone() const override;
 
 		Dielectric& 
 		operator= (const Dielectric& rhs);							
 
 		~Dielectric(void);											
 	
-		virtual RGBColor
-		area_light_shade(ShadeRec& sr);	
+//		virtual RGBColor area_light_shade(ShadeRec& sr);	// for chapter 18 page 1 image
 		// constructors, etc ...
 
 		virtual RGBColor										
@@ -53,8 +48,8 @@ class Dielectric: public Phong {
 		RGBColor 			cf_in;			// interior filter color 
 		RGBColor 			cf_out;			// exterior filter color
 		
-		FresnelReflector*	fresnel_brdf;
-		FresnelTransmitter*	fresnel_btdf;
+		FresnelReflector*	fresnel_brdf;  // TODO: make unique
+		FresnelTransmitter*	fresnel_btdf;  // TODO: make unique
 
 		bool shadows;
 };
