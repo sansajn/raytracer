@@ -17,6 +17,7 @@ public:
 
 	virtual RGBColor trace_ray(Ray const & ray) const;
 	virtual RGBColor trace_ray(Ray const ray, const int depth) const;
+	virtual RGBColor trace_ray(Ray const ray, double & t, const int depth) const;  //!< To support rflection.
 
 	virtual ~Tracer() = default;
 

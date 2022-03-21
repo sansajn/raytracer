@@ -1,6 +1,4 @@
-#ifndef __WHITTED__
-#define __WHITTED__
-
+#pragma once
 
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
@@ -11,17 +9,12 @@
 #include "Tracer.h"
 
 class Whitted: public Tracer {
-	public:
-		
-		Whitted(void);
-		
-		Whitted(World* _worldPtr);
-		
-		virtual											
-		~Whitted(void);
+public:
+	Whitted();
+	Whitted(World* _worldPtr);
 	
-		virtual RGBColor	
-		trace_ray(const Ray ray, const int depth) const;
-};
+	RGBColor	trace_ray(const Ray ray, const int depth) const override;
+	RGBColor trace_ray(Ray const ray, double & t, const int depth) const override;
 
-#endif
+	~Whitted();
+};
