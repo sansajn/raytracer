@@ -61,6 +61,7 @@
 #include "Textures/TurbulenceTexture.h"
 #include "Textures/DiskChecker.h"
 #include "Textures/Wood.h"
+#include "Textures/ConstantColor.h"
 #include "Noise/CubicNoise.h"
 
 using std::make_unique, std::make_shared, std::move;
