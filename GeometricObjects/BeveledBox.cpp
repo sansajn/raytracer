@@ -36,32 +36,32 @@ BeveledBox::BeveledBox(const Point3D	bottom_,
 	parts.assign(26,0);
 
 	parts[0] = new Instance(ocd);
-	parts[1] = new Instance(ocd->clone());
-	parts[2] = new Instance(ocd->clone());
-	parts[3] = new Instance(ocd->clone());
+	parts[1] = new Instance(ocd);
+	parts[2] = new Instance(ocd);
+	parts[3] = new Instance(ocd);
 	
-	OpenCylinder *ocd1 = new OpenCylinder(p0.x+br,p1.x-br,br);
+	auto ocd1 = make_shared<OpenCylinder>(p0.x+br,p1.x-br,br);
 	//BeveledCylinder *ocd1 = new BeveledCylinder(p0.x,p1.x,br,br);
 
-	parts[4] = new Instance(ocd1->clone());
-	parts[5] = new Instance(ocd1->clone());
-	parts[6] = new Instance(ocd1->clone());
-	parts[7] = new Instance(ocd1->clone());
+	parts[4] = new Instance(ocd1);
+	parts[5] = new Instance(ocd1);
+	parts[6] = new Instance(ocd1);
+	parts[7] = new Instance(ocd1);
 	
 	//BeveledCylinder *ocd2 = new BeveledCylinder(p0.z,p1.z,br,br);
-	OpenCylinder *ocd2 = new OpenCylinder(p0.z+br,p1.z-br,br);
-	parts[8] = new Instance(ocd2->clone());
-	parts[9] = new Instance(ocd2->clone());
-	parts[10] = new Instance(ocd2->clone());
-	parts[11] = new Instance(ocd2->clone());
+	auto ocd2 = make_shared<OpenCylinder>(p0.z+br,p1.z-br,br);
+	parts[8] = new Instance(ocd2);
+	parts[9] = new Instance(ocd2);
+	parts[10] = new Instance(ocd2);
+	parts[11] = new Instance(ocd2);
 	
 	//Here add a box
-	parts[12] = new Instance(new TRectangle( Point3D( -length/2+br,-height/2+br, width/2 ), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, height - 2 * br, 0 ), Normal(0, 0, 1) ));
-	parts[13] = new Instance(new TRectangle( Point3D( length/2,-height/2+br, width/2-br), Vector3D( 0, 0, - width + 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(1, 0, 0) ));
-	parts[14] = new Instance(new TRectangle( Point3D( length/2-br,-height/2+br, -width/2), Vector3D( - length + 2 * br, 0, 0 ), Vector3D( 0, height - 2 * br, 0 ), Normal(0, 0, -1) ));
-	parts[15] = new Instance(new TRectangle( Point3D( -length/2, -height/2+br, -width/2+br), Vector3D( 0, 0, width - 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(-1, 0, 0) ));
-	parts[16] = new Instance(new TRectangle( Point3D( -length/2+br,height/2, width/2-br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, -width + 2 * br ), Normal(0, 1, 0) ));
-	parts[17] = new Instance(new TRectangle( Point3D( -length/2+br,-height/2, -width/2+br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, width - 2 * br ), Normal(0, -1, 0) ));
+	parts[12] = new Instance(make_shared<Rectangle>( Point3D( -length/2+br,-height/2+br, width/2 ), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, height - 2 * br, 0 ), Normal(0, 0, 1) ));
+	parts[13] = new Instance(new Rectangle( Point3D( length/2,-height/2+br, width/2-br), Vector3D( 0, 0, - width + 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(1, 0, 0) ));
+	parts[14] = new Instance(new Rectangle( Point3D( length/2-br,-height/2+br, -width/2), Vector3D( - length + 2 * br, 0, 0 ), Vector3D( 0, height - 2 * br, 0 ), Normal(0, 0, -1) ));
+	parts[15] = new Instance(new Rectangle( Point3D( -length/2, -height/2+br, -width/2+br), Vector3D( 0, 0, width - 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(-1, 0, 0) ));
+	parts[16] = new Instance(new Rectangle( Point3D( -length/2+br,height/2, width/2-br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, -width + 2 * br ), Normal(0, 1, 0) ));
+	parts[17] = new Instance(new Rectangle( Point3D( -length/2+br,-height/2, -width/2+br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, width - 2 * br ), Normal(0, -1, 0) ));
 		
 	parts[18] = new Instance(new Sphere( Point3D( -length/2+br,height/2-br, width/2-br ), br ));
 	parts[19] = new Instance(new Sphere( Point3D( length/2-br,height/2-br, width/2-br ), br ));
