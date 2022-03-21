@@ -584,7 +584,7 @@ void World::build() {
 	
 	float c = 1.2;
 	RGBColor water_color(0.50 * c, 0.8 * c, 0.8 * c); 
-	Dielectric* water_ptr = new Dielectric;
+	auto water_ptr = make_shared<Dielectric>();
 	water_ptr->set_eta_in(1.33);		// water
 	water_ptr->set_eta_out(1.0);		// air
 	water_ptr->set_cf_in(water_color);

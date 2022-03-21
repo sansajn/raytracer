@@ -46,8 +46,7 @@ void GeometricObject::get_material(std::shared_ptr<Material> & m) const {
 	m = material_ptr;
 }
 
-void 
-GeometricObject::set_material(shared_ptr<Material> mPtr) {
+void GeometricObject::set_material(shared_ptr<Material> mPtr) {
 	material_ptr = mPtr;
 }
 
