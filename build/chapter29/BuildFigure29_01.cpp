@@ -47,7 +47,7 @@
 #include "GeometricObjects/Plane.h"
 #include "GeometricObjects/Grid.h"
 #include "GeometricObjects/Disk.h"
-//#include "GeometricObjects/BaveledBox.h"  // TODO: missing include
+#include "GeometricObjects/BeveledBox.h"
 #include "GeometricObjects/OpenCylinder.h"
 #include "GeometricObjects/Instance.h"
 #include "GeometricObjects/Rectangle.h"
