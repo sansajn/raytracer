@@ -280,7 +280,7 @@ void World::build() {
 	// this is initially constructed in the (x, z) plane, and then moved to the back wall
 	// the picture and its frame are stored in a compound object:
 	
-	Compound* framed_picture_ptr = new Compound;
+	auto framed_picture_ptr = make_shared<Compound>();
 	
 	// dimensions
 	
@@ -305,12 +305,12 @@ void World::build() {
 //	sv_matte_ptr4->set_cd(image_texture_ptr3);
 	
 	// construct the picture
-	Rectangle* rectangle_ptr = new Rectangle;
+	auto rectangle_ptr = make_shared<Rectangle>();
 	rectangle_ptr->set_material(make_shared<Matte>(.75, .5, RGBColor{.3, .65, .71}));  	// plain
 //	rectangle_ptr->set_material(sv_matte_ptr4);  // textured with Blue Glass
 	
 	Instance* picture_ptr = new Instance(rectangle_ptr);  
-	picture_ptr->scale(a, 1, b);
+	picture_ptr->scale({a, 1, b});
 
 	
 	// construct the frame
@@ -320,7 +320,7 @@ void World::build() {
 	// for front and back sides
 
 	TInstance* wood_ptr1 = new TInstance(new Wood(RGBColor(0.55, 0.43, 0.13), black));
-	wood_ptr1->scale(Vector3D(2));
+	wood_ptr1->scale(2);
 	wood_ptr1->rotate_y(90);
 	
 	auto sv_matte_ptr5 = make_shared<SV_Matte>();
@@ -424,7 +424,7 @@ void World::build() {
 //	const char* fileName = "Bunny4K.ply"; 		// development
 	const char* fileName = "Bunny16K.ply";   	// production
 	
-	Grid* grid_ptr = new Grid(mesh_ptr);
+	auto grid_ptr = make_shared<Grid>(mesh_ptr);
 	grid_ptr->read_smooth_triangles(fileName);
 	grid_ptr->set_material(make_shared<Matte>(.25, .75, RGBColor{.85}));			// plain
 //	grid_ptr->set_material(sv_matte_ptr7); 		// textured
@@ -485,7 +485,7 @@ void World::build() {
 		sandstone_ptr->rotate_z(45.0 * (2.0 * rand_float() - 1.0));
 		sandstone_ptr->translate(10.0 * (2.0 * rand_float() - 1.0), 20.0 * (2.0 * rand_float() - 1.0), 30.0 * (2.0 * rand_float() - 1.0));
 		
-		SV_Matte* sv_matte_ptr = new SV_Matte;		
+		auto sv_matte_ptr = make_shared<SV_Matte>();
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
@@ -534,7 +534,7 @@ void World::build() {
 		sandstone_ptr->rotate_z(45.0 * (2.0 * rand_float() - 1.0));
 		sandstone_ptr->translate(10.0 * (2.0 * rand_float() - 1.0), 20.0 * (2.0 * rand_float() - 1.0), 30.0 * (2.0 * rand_float() - 1.0));
 	
-		SV_Matte* sv_matte_ptr = new SV_Matte;		
+		auto sv_matte_ptr = make_shared<SV_Matte>();
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
@@ -559,7 +559,7 @@ void World::build() {
 		sandstone_ptr->rotate_z(45.0 * (2.0 * rand_float() - 1.0));
 		sandstone_ptr->translate(10.0 * (2.0 * rand_float() - 1.0), 20.0 * (2.0 * rand_float() - 1.0), 30.0 * (2.0 * rand_float() - 1.0));
 	
-		SV_Matte* sv_matte_ptr = new SV_Matte;		
+		auto sv_matte_ptr = make_shared<SV_Matte>();
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
@@ -643,7 +643,7 @@ void World::build() {
 	
 	// plain material
 	
-	Reflective* reflective_ptr = new Reflective;		
+	auto reflective_ptr = make_shared<Reflective>();
 	reflective_ptr->set_cr(0.75, 1.0, 0.85);
 	reflective_ptr->set_kr(1.0);
 		
@@ -698,11 +698,11 @@ void World::build() {
 											Vector3D(0.0, num_y_tiles * (tile_size + grout_width), 0.0));
 	grout_ptr->set_material(make_shared<Matte>(.5, .75, RGBColor{.92, .85, .6}));
 										
-	Compound* tiles_and_grout_ptr = new Compound; 
+	auto tiles_and_grout_ptr = make_shared<Compound>();
 	tiles_and_grout_ptr->add_object(tiles_ptr); 
 	tiles_and_grout_ptr->add_object(grout_ptr);
 	
 	Instance* instance_ptr = new Instance(tiles_and_grout_ptr);
-	instance_ptr->translate(0, 0, -0.99 * (tile_thickness / 2.0 - tile_bevel_radius * 0.666));
+	instance_ptr->translate({0, 0, -0.99 * (tile_thickness / 2.0 - tile_bevel_radius * 0.666)});
 	add_object(instance_ptr);
 }

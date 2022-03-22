@@ -9,6 +9,7 @@
 #include "Texture.h"
 #include "Constants.h"
 
+//! Texture instance.
 class TInstance: public Texture {
 public:
 
