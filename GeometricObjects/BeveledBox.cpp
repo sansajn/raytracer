@@ -12,6 +12,7 @@
 #include "Sphere.h"
 #include "Reflective.h"
 #include "BeveledBox.h"
+#include "Utilities/Random.h"
 
 using std::make_shared;
 
@@ -57,51 +58,51 @@ BeveledBox::BeveledBox(const Point3D	bottom_,
 	
 	//Here add a box
 	parts[12] = new Instance(make_shared<Rectangle>( Point3D( -length/2+br,-height/2+br, width/2 ), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, height - 2 * br, 0 ), Normal(0, 0, 1) ));
-	parts[13] = new Instance(new Rectangle( Point3D( length/2,-height/2+br, width/2-br), Vector3D( 0, 0, - width + 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(1, 0, 0) ));
-	parts[14] = new Instance(new Rectangle( Point3D( length/2-br,-height/2+br, -width/2), Vector3D( - length + 2 * br, 0, 0 ), Vector3D( 0, height - 2 * br, 0 ), Normal(0, 0, -1) ));
-	parts[15] = new Instance(new Rectangle( Point3D( -length/2, -height/2+br, -width/2+br), Vector3D( 0, 0, width - 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(-1, 0, 0) ));
-	parts[16] = new Instance(new Rectangle( Point3D( -length/2+br,height/2, width/2-br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, -width + 2 * br ), Normal(0, 1, 0) ));
-	parts[17] = new Instance(new Rectangle( Point3D( -length/2+br,-height/2, -width/2+br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, width - 2 * br ), Normal(0, -1, 0) ));
+	parts[13] = new Instance(make_shared<Rectangle>( Point3D( length/2,-height/2+br, width/2-br), Vector3D( 0, 0, - width + 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(1, 0, 0) ));
+	parts[14] = new Instance(make_shared<Rectangle>( Point3D( length/2-br,-height/2+br, -width/2), Vector3D( - length + 2 * br, 0, 0 ), Vector3D( 0, height - 2 * br, 0 ), Normal(0, 0, -1) ));
+	parts[15] = new Instance(make_shared<Rectangle>( Point3D( -length/2, -height/2+br, -width/2+br), Vector3D( 0, 0, width - 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(-1, 0, 0) ));
+	parts[16] = new Instance(make_shared<Rectangle>( Point3D( -length/2+br,height/2, width/2-br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, -width + 2 * br ), Normal(0, 1, 0) ));
+	parts[17] = new Instance(make_shared<Rectangle>( Point3D( -length/2+br,-height/2, -width/2+br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, width - 2 * br ), Normal(0, -1, 0) ));
 		
-	parts[18] = new Instance(new Sphere( Point3D( -length/2+br,height/2-br, width/2-br ), br ));
-	parts[19] = new Instance(new Sphere( Point3D( length/2-br,height/2-br, width/2-br ), br ));
-	parts[20] = new Instance(new Sphere( Point3D( length/2-br,height/2-br, -width/2+br ), br ));
-	parts[21] = new Instance(new Sphere( Point3D( -length/2+br,height/2-br, -width/2+br ), br ));
-	parts[22] = new Instance(new Sphere( Point3D( -length/2+br,-height/2+br, width/2-br ), br ));
-	parts[23] = new Instance(new Sphere( Point3D( length/2-br,-height/2+br, width/2-br ), br ));
-	parts[24] = new Instance(new Sphere( Point3D( length/2-br,-height/2+br, -width/2+br ), br ));
-	parts[25] = new Instance(new Sphere( Point3D( -length/2+br,-height/2+br, -width/2+br ), br ));
+	parts[18] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,height/2-br, width/2-br ), br ));
+	parts[19] = new Instance(make_shared<Sphere>( Point3D( length/2-br,height/2-br, width/2-br ), br ));
+	parts[20] = new Instance(make_shared<Sphere>( Point3D( length/2-br,height/2-br, -width/2+br ), br ));
+	parts[21] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,height/2-br, -width/2+br ), br ));
+	parts[22] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, width/2-br ), br ));
+	parts[23] = new Instance(make_shared<Sphere>( Point3D( length/2-br,-height/2+br, width/2-br ), br ));
+	parts[24] = new Instance(make_shared<Sphere>( Point3D( length/2-br,-height/2+br, -width/2+br ), br ));
+	parts[25] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, -width/2+br ), br ));
 
-	parts[0]->translate(-length/2+br,0,-width/2+br);
-	parts[1]->translate(-length/2+br,0,width/2-br);
-	parts[2]->translate(length/2-br,0,width/2-br);
-	parts[3]->translate(length/2-br,0,-width/2+br);
+	parts[0]->translate({-length/2+br,0,-width/2+br});
+	parts[1]->translate({-length/2+br,0,width/2-br});
+	parts[2]->translate({length/2-br,0,width/2-br});
+	parts[3]->translate({length/2-br,0,-width/2+br});
 	
-	parts[4]->translate(0,-(p0.x + p1.x)/2,0);
+	parts[4]->translate({0,-(p0.x + p1.x)/2,0});
 	parts[4]->rotate_z(90);
-	parts[4]->translate(0,height/2-br,width/2-br);
-	parts[5]->translate(0,-(p0.x + p1.x)/2,0);
+	parts[4]->translate({0,height/2-br,width/2-br});
+	parts[5]->translate({0,-(p0.x + p1.x)/2,0});
 	parts[5]->rotate_z(90);
-	parts[5]->translate(0,-height/2+br,width/2-br);
-	parts[6]->translate(0,-(p0.x + p1.x)/2,0);
+	parts[5]->translate({0,-height/2+br,width/2-br});
+	parts[6]->translate({0,-(p0.x + p1.x)/2,0});
 	parts[6]->rotate_z(90);
-	parts[6]->translate(0,-height/2+br,-width/2+br);
-	parts[7]->translate(0,-(p0.x + p1.x)/2,0);
+	parts[6]->translate({0,-height/2+br,-width/2+br});
+	parts[7]->translate({0,-(p0.x + p1.x)/2,0});
 	parts[7]->rotate_z(90);
-	parts[7]->translate(0,height/2-br,-width/2+br);
+	parts[7]->translate({0,height/2-br,-width/2+br});
 
-	parts[8]->translate(0,-(p0.z + p1.z)/2,0);
+	parts[8]->translate({0,-(p0.z + p1.z)/2,0});
 	parts[8]->rotate_x(90);
-	parts[8]->translate(-length/2+br,height/2-br,0);
-	parts[9]->translate(0,-(p0.z + p1.z)/2,0);
+	parts[8]->translate({-length/2+br,height/2-br,0});
+	parts[9]->translate({0,-(p0.z + p1.z)/2,0});
 	parts[9]->rotate_x(90);
-	parts[9]->translate(-length/2+br,-height/2+br,0);
-	parts[10]->translate(0,-(p0.z + p1.z)/2,0);
+	parts[9]->translate({-length/2+br,-height/2+br,0});
+	parts[10]->translate({0,-(p0.z + p1.z)/2,0});
 	parts[10]->rotate_x(90);
-	parts[10]->translate(length/2-br,-height/2+br,0);
-	parts[11]->translate(0,-(p0.z + p1.z)/2,0);
+	parts[10]->translate({length/2-br,-height/2+br,0});
+	parts[11]->translate({0,-(p0.z + p1.z)/2,0});
 	parts[11]->rotate_x(90);
-	parts[11]->translate(length/2-br,height/2-br,0);
+	parts[11]->translate({length/2-br,height/2-br,0});
 
 	bbox.x0 = p0.x - bevel_radius;
 	bbox.y0 = p0.y - bevel_radius;
