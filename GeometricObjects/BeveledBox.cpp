@@ -14,7 +14,7 @@
 #include "BeveledBox.h"
 #include "Utilities/Random.h"
 
-using std::make_shared;
+using std::make_shared, std::shared_ptr;
 
 BeveledBox::BeveledBox(const Point3D	bottom_,
 							const Point3D 	top_,
@@ -185,9 +185,8 @@ BeveledBox::~BeveledBox(void) {
 // sets the same material on all objects
 
 void 
-BeveledBox::set_material(Material* material_ptr) {
+BeveledBox::set_material(shared_ptr<Material> material_ptr) {
 	int num_objects = parts.size();
-
 	for (int j = 0; j < num_objects; j++)
 		parts[j]->set_material(material_ptr);
 }
@@ -242,7 +241,7 @@ BeveledBox::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 			if (parts[j]->hit(ray, t, sr) && (t < tmin)) {
 				hit				= true;
 				tmin 			= t;
-				material_ptr	= parts[j]->get_material();	// lhs is GeometricObject::material_ptr
+				parts[j]->get_material(material_ptr);  // sets material_ptr
 				normal			= sr.normal;
 				local_hit_point	= sr.local_hit_point;  
 			}
@@ -266,7 +265,7 @@ BeveledBox::shadow_hit(const Ray& ray, float& tmin) const
 {
 	if (bbox.hit(ray))
 	{
-		float		t = 100000;		// may be important too 
+		double		t = 100000;		// may be important too
 		Normal		normal;
 		Point3D		local_hit_point;
 		bool		hit 		= false;

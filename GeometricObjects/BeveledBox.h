@@ -36,8 +36,7 @@ class BeveledBox: public Compound {
 		virtual bool 																						 
 		shadow_hit(const Ray& ray, float& tmin) const;
 
-		virtual void 
-		set_material(Material* material_ptr);
+		void set_material(std::shared_ptr<Material> material_ptr) override;
 	
 	private:
 	
