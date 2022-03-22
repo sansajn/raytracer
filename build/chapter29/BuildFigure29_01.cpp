@@ -60,6 +60,7 @@
 #include "Textures/DiskChecker.h"
 #include "Textures/Wood.h"
 #include "Textures/ConstantColor.h"
+#include "Textures/RampFBmTexture.h"
 #include "Mapping/CylindricalMap.h"
 #include "Mapping/SphericalMap.h"
 #include "Mapping/RectangularMap.h"
