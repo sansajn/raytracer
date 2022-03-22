@@ -407,6 +407,7 @@ void World::build() {
 	
 	int 	num_octaves = 4;
 	float 	fbm_amount 	= 3.0;
+/* not used in 29.1 figure
 	TInstance* marble_ptr = new TInstance(new RampMarble(image_ptr4, num_octaves, fbm_amount));
 	marble_ptr->scale(0.0075);  // the bunny is small
 	marble_ptr->translate(0.5, 0.0, 0.0);
@@ -415,12 +416,12 @@ void World::build() {
 	marble_ptr->rotate_y(20);
 
 	// marble material
-
 	SV_Matte* sv_matte_ptr7 = new SV_Matte;		
 	sv_matte_ptr7->set_ka(0.25);
 	sv_matte_ptr7->set_kd(0.75);
 	sv_matte_ptr7->set_cd(marble_ptr);
-	
+*/
+
 	Mesh* mesh_ptr = new Mesh;
 //	const char* fileName = "Bunny4K.ply"; 		// development
 	const char* fileName = "Bunny16K.ply";   	// production
@@ -609,12 +610,14 @@ void World::build() {
 	float 	gain 				= 0.33333;
 	float 	perturbation_amount = 1.0;
 	
+/* not used in 29.1
 	FBM_Bump* fBm_bump_ptr = new FBM_Bump(num_octaves, lacunarity, gain, perturbation_amount);    // Ken Musgrave's water
 	
 	BumpedObject* bumped_water_ptr = new BumpedObject;
 	bumped_water_ptr->set_material(water_ptr);
 	bumped_water_ptr->set_object(water_surface_ptr);
 	bumped_water_ptr->set_bump_map(fBm_bump_ptr);
+*/
 //	add_object(bumped_water_ptr);						// use this for Figure 29.2
 
 
