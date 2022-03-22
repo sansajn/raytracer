@@ -62,6 +62,7 @@
 #include "Textures/ConstantColor.h"
 #include "Mapping/CylindricalMap.h"
 #include "Mapping/SphericalMap.h"
+#include "Mapping/RectangularMap.h"
 #include "Noise/CubicNoise.h"
 
 using std::make_unique, std::make_shared, std::move;
@@ -292,7 +293,8 @@ void World::build() {
 	Image* image_ptr3 = new Image;					
 	image_ptr3->read_ppm_file("BlueGlass.ppm");
 	
-	SquareMap* square_map_ptr = new SquareMap;   
+//	SquareMap* square_map_ptr = new SquareMap;
+	RectangularMap* square_map_ptr = new RectangularMap;
 	
 	ImageTexture* image_texture_ptr3 = new ImageTexture(image_ptr3); 
 	image_texture_ptr3->set_mapping(square_map_ptr);
