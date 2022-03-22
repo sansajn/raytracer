@@ -509,7 +509,7 @@ void World::build() {
 		sandstone_ptr->rotate_z(45.0 * (2.0 * rand_float() - 1.0));
 		sandstone_ptr->translate(10.0 * (2.0 * rand_float() - 1.0), 20.0 * (2.0 * rand_float() - 1.0), 30.0 * (2.0 * rand_float() - 1.0));
 			
-		SV_Matte* sv_matte_ptr = new SV_Matte;		
+		auto sv_matte_ptr = make_shared<SV_Matte>();
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
