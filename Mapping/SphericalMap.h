@@ -1,5 +1,4 @@
-#ifndef __SPHERICAL_MAP__
-#define __SPHERICAL_MAP__
+#pragma once
 
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
@@ -12,29 +11,21 @@
 // Here, an image with an aspect ratio of 2:1 is mapped onto a sphere so
 // that it just covers the whole sphere
 
-#include "Constants.h"
 #include "Mapping.h"
 
 class SphericalMap: public Mapping {		
-	public:
-	
-		SphericalMap() = default;
-		
-		SphericalMap(const SphericalMap& sm);					
+public:
+	SphericalMap() = default;
 
-		SphericalMap& 											
-		operator= (const SphericalMap& rhs);		
+	virtual void
+	get_texel_coordinates(	const 	Point3D& 	local_hit_point,
+									const 	int 		xres,
+									const 	int 		yres,
+									int& 		row,
+									int& 		column) const;
 
-		virtual SphericalMap*									
-		clone(void) const;				
-
-		virtual void
-		get_texel_coordinates(	const 	Point3D& 	local_hit_point, 
-								const 	int 		xres, 
-								const 	int 		yres, 
-										int& 		row, 
-										int& 		column) const;
+	// Copy API.
+	virtual SphericalMap * clone() const;
+	SphericalMap(SphericalMap const & sm);
+	SphericalMap & operator=(SphericalMap const & rhs);
 };
-
-#endif
-		

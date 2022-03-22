@@ -1,8 +1,7 @@
 #pragma once
 #include "Mapping.h"
 
-class CylindricalMap : public Mapping
-{
+class CylindricalMap : public Mapping {
 public:
 	void get_texel_coordinates(
 		const Point3D& localHitPoint,
@@ -11,4 +10,6 @@ public:
 		int& row,
 		int& column
 	) const override;
+
+	CylindricalMap * clone() const override;
 };

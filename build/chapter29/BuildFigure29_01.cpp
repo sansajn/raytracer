@@ -55,13 +55,13 @@
 #include "Utilities/Random.h"
 #include "Utilities/Image.h"
 #include "Textures/ImageTexture.h"
-//#include "Textures/CylindricalMap.h"  // TODO: missing include
-#include "Mapping/SphericalMap.h"
 #include "Textures/TInstance.h"
 #include "Textures/TurbulenceTexture.h"
 #include "Textures/DiskChecker.h"
 #include "Textures/Wood.h"
 #include "Textures/ConstantColor.h"
+#include "Mapping/CylindricalMap.h"
+#include "Mapping/SphericalMap.h"
 #include "Noise/CubicNoise.h"
 
 using std::make_unique, std::make_shared, std::move;
@@ -210,13 +210,13 @@ void World::build() {
 	sv_matte_ptr1->set_kd(0.95);
 	sv_matte_ptr1->set_cd(image_texture_ptr1);
 	
-	OpenCylinder* cylinder_ptr1 = new OpenCylinder(-1.0, 1.0, 1.0);  // default
+	auto cylinder_ptr1 = make_shared<OpenCylinder>(-1.0, 1.0, 1.0);  // default
 	cylinder_ptr1->set_material(matte_ptr5);		// plain
 //	cylinder_ptr1->set_material(sv_matte_ptr1); 	// textured
 	
 	Instance* cylinder_ptr2 = new Instance(cylinder_ptr1); 
 	cylinder_ptr2->translate(Vector3D(0, 1, 0));
-	cylinder_ptr2->scale(2, 2.5, 2);
+	cylinder_ptr2->scale({2, 2.5, 2});
 	cylinder_ptr2->translate(Vector3D(-11, 0, 12));
 	add_object(cylinder_ptr2);
 	
@@ -226,9 +226,9 @@ void World::build() {
 	// on the curved surface
 	
 	DiskChecker* disk_checker_ptr = new DiskChecker;
-	disk_checker_ptr->set_num_angle_checkers(20);
+	disk_checker_ptr->set_num_angular_checkers(20);
 	disk_checker_ptr->set_num_radial_checkers(4);
-	disk_checker_ptr->set_angle_line_width(0.0);
+	disk_checker_ptr->set_angular_line_width(0.0);
 	disk_checker_ptr->set_radial_line_width(0.0);
 	disk_checker_ptr->set_color1(0.08, 0.39, 0.14);  	// dark green
 	disk_checker_ptr->set_color2(1.0, 1.0, 0.5);		// yellow
@@ -238,15 +238,13 @@ void World::build() {
 	sv_matte_ptr2->set_kd(0.5);
 	sv_matte_ptr2->set_cd(disk_checker_ptr);
 	
-	Disk* disk_ptr = new Disk;					// default - center (0, 0, 0), radius 1
+	auto disk_ptr = make_shared<Disk>();					// default - center (0, 0, 0), radius 1
 	disk_ptr->set_material(matte_ptr5);			// plain
 //	disk_ptr->set_material(sv_matte_ptr2);		// textured
 	Instance* cylinder_top_ptr = new Instance(disk_ptr);
-	cylinder_top_ptr->scale(2, 1, 2);
-	cylinder_top_ptr->translate(-11, 5, 12);
+	cylinder_top_ptr->scale({2, 1, 2});
+	cylinder_top_ptr->translate({-11, 5, 12});
 	add_object(cylinder_top_ptr); 
-	
-	
 	
 	
 	// ************************************************************************************************* Earth sphere
@@ -264,7 +262,7 @@ void World::build() {
 //	sv_matte_ptr3->set_kd(0.95);
 //	sv_matte_ptr3->set_cd(image_texture_ptr2);
 	
-	Sphere* sphere_ptr1 = new Sphere;
+	auto sphere_ptr1 = make_shared<Sphere>();
 	sphere_ptr1->set_material(make_shared<Matte>(.5, .5, RGBColor{.2, .5, 1}));				// plain
 //	sphere_ptr1->set_material(sv_matte_ptr3);			// textured with Earth image
 		
