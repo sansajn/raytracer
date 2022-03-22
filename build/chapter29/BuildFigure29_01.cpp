@@ -61,9 +61,9 @@
 #include "Textures/Wood.h"
 #include "Textures/ConstantColor.h"
 #include "Textures/RampFBmTexture.h"
-#include "Mapping/CylindricalMap.h"
-#include "Mapping/SphericalMap.h"
-#include "Mapping/RectangularMap.h"
+#include "Mappings/CylindricalMap.h"
+#include "Mappings/SphericalMap.h"
+#include "Mappings/RectangularMap.h"
 #include "Noise/CubicNoise.h"
 
 using std::make_unique, std::make_shared, std::move;

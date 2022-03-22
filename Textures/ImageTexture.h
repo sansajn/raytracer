@@ -8,7 +8,7 @@
 
 
 #include "Image.h"
-#include "Mapping/Mapping.h"
+#include "Mappings/Mapping.h"
 #include "Texture.h"
 
 class ImageTexture: public Texture {	

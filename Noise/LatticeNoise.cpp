@@ -10,6 +10,7 @@
 #include "Maths.h"
 #include "LatticeNoise.h"
 #include "MultiJittered.h"
+#include "Utilities/Random.h"
 
 // The following table is by Darwyn Peachey in Ebert et al. (2003), page 70.
 
@@ -156,7 +157,7 @@ LatticeNoise::init_vector_table(int seed_value) {
     	r2 	= sample_point.y;
     	z 	= 1.0 - 2.0 * r1;
     	r 	= sqrt(1.0 - z * z);
-    	phi = TWO_PI * r2;
+		phi = TWO_PI<float> * r2;
     	x 	= r * cos(phi);
     	y 	= r * sin(phi);
     	vector_table[j] = Vector3D(x, y, z).hat();   // random unit vector

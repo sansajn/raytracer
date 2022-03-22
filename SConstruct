@@ -29,7 +29,7 @@ engine = cpp.Object([
 	Glob('Lights/*.cpp'),
 	Glob('Mappings/*.cpp'),
 	Glob('Materials/*.cpp'),
-	Glob('Noises/*.cpp'),
+	Glob('Noise/*.cpp'),
 	Glob('Samplers/*.cpp'),
 	Glob('Textures/*.cpp'),
 	Glob('Tracers/*.cpp'),
