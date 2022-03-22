@@ -4,11 +4,11 @@
 class CylindricalMap : public Mapping
 {
 public:
-	void GetTexelCoordinates(
+	void get_texel_coordinates(
 		const Point3D& localHitPoint,
 		const int hres,
 		const int vres,
 		int& row,
 		int& column
-	) override;
+	) const override;
 };

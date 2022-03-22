@@ -26,6 +26,8 @@ class Mapping {
 
 		virtual ~Mapping(void);								
 				
+		/*! Calculate texture coordinates.
+		\param [in] hit_point local hit point */
 		virtual void
 		get_texel_coordinates(	const 	Point3D& 	hit_point, 
 								const 	int 		xres, 

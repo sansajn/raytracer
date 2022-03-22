@@ -56,7 +56,7 @@
 #include "Utilities/Image.h"
 #include "Textures/ImageTexture.h"
 //#include "Textures/CylindricalMap.h"  // TODO: missing include
-#include "Textures/SphericalMap.h"
+#include "Mapping/SphericalMap.h"
 #include "Textures/TInstance.h"
 #include "Textures/TurbulenceTexture.h"
 #include "Textures/DiskChecker.h"
