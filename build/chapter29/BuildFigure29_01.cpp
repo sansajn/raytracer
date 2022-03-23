@@ -438,6 +438,7 @@ void World::build() {
 	const char* fileName = "assets/bunny.ply";   	// production
 	
 	auto grid_ptr = make_shared<Grid>(mesh_ptr);
+	grid_ptr->reverse_mesh_normals();  // see figure 17.12a build file
 	grid_ptr->read_smooth_triangles(fileName);
 	grid_ptr->set_material(make_shared<Matte>(.25, .75, RGBColor{.85}));			// plain
 //	grid_ptr->set_material(sv_matte_ptr7); 		// textured
