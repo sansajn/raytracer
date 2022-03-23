@@ -434,7 +434,8 @@ void World::build() {
 
 	Mesh* mesh_ptr = new Mesh;
 //	const char* fileName = "Bunny4K.ply"; 		// development
-	const char* fileName = "Bunny16K.ply";   	// production
+//	const char* fileName = "Bunny16K.ply";   	// production
+	const char* fileName = "assets/bunny.ply";   	// production
 	
 	auto grid_ptr = make_shared<Grid>(mesh_ptr);
 	grid_ptr->read_smooth_triangles(fileName);
