@@ -6,51 +6,43 @@
 //BeveledBox class only used in Listing 8.22, Here I have implemented a simple demo, and It seems to be OK according to source pictures.
 
 #pragma once
-
 #include "Compound.h"
-
 #include "Instance.h"
 
 class BeveledBox: public Compound {
-	public:
-		
-		BeveledBox(void);   									
-		
-		BeveledBox(const Point3D	bottom_,
-						const Point3D 	top_,
-						const float	bevel_radius);
-		
-		BeveledBox(const BeveledBox& cc);
+public:
+	BeveledBox();
 
-		~BeveledBox (void);   									
+	BeveledBox(const Point3D	bottom_,
+				  const Point3D 	top_,
+				  const float	bevel_radius);
 
-		BeveledBox& 												
-		operator= (const BeveledBox& c);	
+	bool hit(const Ray& ray, double& tmin, ShadeRec& s) const override;
+	bool shadow_hit(const Ray& ray, double & tmin) const override;
+	void set_material(std::shared_ptr<Material> material_ptr) override;
 
-		virtual BeveledBox* 										
-		clone(void) const;
+	BBox get_bounding_box() override;
 
-		virtual bool 															 
-		hit(const Ray& ray, double& tmin, ShadeRec& s) const;
-		
-		virtual bool 																						 
-		shadow_hit(const Ray& ray, float& tmin) const;
+	// Copy API.
+	BeveledBox * clone(void) const override;
+	BeveledBox & operator=(const BeveledBox& c);
+	BeveledBox(const BeveledBox& cc);
 
-		void set_material(std::shared_ptr<Material> material_ptr) override;
+	~BeveledBox (void);
 	
-	private:
+private:
 	
-		void 													
-		delete_objects(void);								
+	void
+	delete_objects(void);
 
-		void												
-		copy_objects(const std::vector<Instance*>& rhs_objects);
-		
-		BBox		bbox;	// the bounding box
+	void
+	copy_objects(const std::vector<Instance*>& rhs_objects);
 
-		Point3D p0;
-		Point3D p1;
-		float br;
+	BBox		bbox;	// the bounding box
 
-		std::vector<Instance*> parts;	//we build each arris of the whole wireframebox
+	Point3D p0;
+	Point3D p1;
+	float br;
+
+	std::vector<Instance*> parts;	//we build each arris of the whole wireframebox
 };

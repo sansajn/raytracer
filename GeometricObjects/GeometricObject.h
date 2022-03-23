@@ -37,7 +37,7 @@ public:
 	virtual float pdf(ShadeRec const & sr) const;
 	//! \}
 
-	virtual BBox get_bounding_box();  //!< \note Allows acceleration schema.
+	virtual BBox get_bounding_box();  //!< \note Allows acceleration schema in Grid structure.
 	virtual void add_object(GeometricObject * object);  // allows compound objects
 	virtual Normal get_normal() const;  // smoothing triangles
 

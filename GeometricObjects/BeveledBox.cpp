@@ -261,7 +261,7 @@ BeveledBox::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
 //This function has been modified since Listing 8.22
 
 bool 																						 
-BeveledBox::shadow_hit(const Ray& ray, float& tmin) const
+BeveledBox::shadow_hit(const Ray& ray, double & tmin) const
 {
 	if (bbox.hit(ray))
 	{

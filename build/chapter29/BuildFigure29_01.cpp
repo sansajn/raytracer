@@ -155,6 +155,7 @@ void World::build() {
 		double p0x = x0;
 		
 		for (int ix = 0; ix < num_x_planks; ix++) {  // to the right
+/* not used in figure 29.1
 			TInstance* wood_ptr = new TInstance(new Wood(RGBColor(0.5, 0.3, 0.1), black));
 			wood_ptr->scale(5.0);
 			wood_ptr->rotate_y(90);
@@ -168,6 +169,7 @@ void World::build() {
 			sv_phong_ptr->set_exp(20.0);
 			sv_phong_ptr->set_cd(wood_ptr);
 			sv_phong_ptr->set_cs(new ConstantColor());   // white, by default
+*/
 				
 			set_rand_seed(ix * 10000 + iz * 100);
 			double plank_length = min_length + rand_float() * (max_length - min_length);
