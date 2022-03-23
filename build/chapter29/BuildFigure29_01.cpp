@@ -200,7 +200,8 @@ void World::build() {
 
 	// textured material for the curved surface
 	// this is a checker image
-	
+
+/*not used in figure 29.1
 	Image* image_ptr1 = new Image;					
 	image_ptr1->read_ppm_file("GreenAndYellow.ppm");
 	CylindricalMap* cylindrical_map_ptr = new CylindricalMap;   
@@ -211,6 +212,7 @@ void World::build() {
 	sv_matte_ptr1->set_ka(0.25);
 	sv_matte_ptr1->set_kd(0.95);
 	sv_matte_ptr1->set_cd(image_texture_ptr1);
+*/
 	
 	auto cylinder_ptr1 = make_shared<OpenCylinder>(-1.0, 1.0, 1.0);  // default
 	cylinder_ptr1->set_material(matte_ptr5);		// plain
@@ -250,7 +252,8 @@ void World::build() {
 	
 	
 	// ************************************************************************************************* Earth sphere
-	
+
+/* not used in figure 29.1
 	// Earth image texture
 	Image* image_ptr2 = new Image;					
 //	image_ptr2->read_ppm_file("EarthLowRes.ppm");
@@ -258,6 +261,7 @@ void World::build() {
 	SphericalMap* spherical_map_ptr = new SphericalMap;   
 	ImageTexture* image_texture_ptr2 = new ImageTexture(image_ptr2); 
 	image_texture_ptr2->set_mapping(spherical_map_ptr);
+*/
 	
 //	SV_Matte* sv_matte_ptr3 = new SV_Matte;
 //	sv_matte_ptr3->set_ka(0.5);
@@ -291,6 +295,7 @@ void World::build() {
 	
 	// the image is applied to a rectangle
 	
+/* not used in figure 29.1
 	Image* image_ptr3 = new Image;					
 	image_ptr3->read_ppm_file("BlueGlass.ppm");
 	
@@ -299,6 +304,7 @@ void World::build() {
 	
 	ImageTexture* image_texture_ptr3 = new ImageTexture(image_ptr3); 
 	image_texture_ptr3->set_mapping(square_map_ptr);
+*/
 	
 //	SV_Matte* sv_matte_ptr4 = new SV_Matte;
 //	sv_matte_ptr4->set_ka(0.5);
@@ -401,9 +407,11 @@ void World::build() {
 	
 	// plain material for the bunny	
 	
+/* not used in figure 29.1
 	// ramp based marble texture
 	Image* image_ptr4 = new Image;						
 	image_ptr4->read_ppm_file("GrayMarbleRamp.ppm");
+*/
 	
 	int 	num_octaves = 4;
 	float 	fbm_amount 	= 3.0;
@@ -464,10 +472,14 @@ void World::build() {
 	
 	
 	// sandstone texture
-	
+	RGBColor const sand = {.54, .52, .47};
+	auto bath_mat = make_shared<Matte>(bath_ka, bath_kd, sand);
+
+/* not used in figure 29.1
 	Image* image_ptr5 = new Image;						
 	image_ptr5->read_ppm_file("Sandstone1.ppm");
-	
+*/
+
 	num_octaves = 4;
 	fbm_amount	= 0.1;
 	
@@ -478,7 +490,8 @@ void World::build() {
 	for (int j = 0; j < num_xboxes; j++) {
 	
 		// put a sandstone texture with a random set of intrinsic transformations on the beveled boxes
-				
+
+/* not used in figure 29.1
 		TInstance* sandstone_ptr = new TInstance(new RampFBmTexture(image_ptr5, num_octaves, fbm_amount));
 		sandstone_ptr->scale(2.0);
 		set_rand_seed(j * 10);
@@ -491,18 +504,20 @@ void World::build() {
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
-				
+*/
+
 		BeveledBox* box_ptr = new BeveledBox(	Point3D(bath_xmin + j * (x_size / num_xboxes), 0, bath_zmin), 
 												Point3D(bath_xmin + (j + 1) * (x_size / num_xboxes), bath_height, bath_zmin + thickness),
 												bath_bevel_radius);
-		box_ptr->set_material(sv_matte_ptr);
+		box_ptr->set_material(bath_mat);
+//		box_ptr->set_material(sv_matte_ptr);
 		bath_ptr->add_object(box_ptr);
 	}
 		
 	// build front - runs in xw direction
 	
 	for (int j = 0; j < num_xboxes; j++) {
-				
+/* not used in figure 29.1
 		TInstance* sandstone_ptr = new TInstance(new RampFBmTexture(image_ptr5, num_octaves, fbm_amount));
 		sandstone_ptr->scale(2.0);
 		set_rand_seed(j * 1000000);
@@ -515,11 +530,13 @@ void World::build() {
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
+*/
 		
 		BeveledBox* box_ptr = new BeveledBox(	Point3D(bath_xmin + j * (x_size / num_xboxes), 0, bath_zmax - thickness), 
 												Point3D(bath_xmin + (j + 1) * (x_size / num_xboxes), bath_height, bath_zmax),
 												bath_bevel_radius);
-		box_ptr->set_material(sv_matte_ptr);
+		box_ptr->set_material(bath_mat);
+//		box_ptr->set_material(sv_matte_ptr);
 		bath_ptr->add_object(box_ptr);
 	}
 	
@@ -527,7 +544,7 @@ void World::build() {
 	// build left side - runs in yw direction
 	
 	for (int j = 0; j < num_zboxes; j++) {
-		
+/* not used in figure 29.1
 		TInstance* sandstone_ptr = new TInstance(new RampFBmTexture(image_ptr5, num_octaves, fbm_amount));
 		sandstone_ptr->scale(2.0);
 		set_rand_seed(j * 1000);
@@ -540,11 +557,13 @@ void World::build() {
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
+*/
 		
 		BeveledBox* box_ptr = new BeveledBox(	Point3D(bath_xmin, 0, bath_zmin + thickness + j * ((z_size - 2 * thickness) / num_zboxes)),
 												Point3D(bath_xmin + thickness, bath_height, bath_zmin + thickness + (j + 1) * ((z_size - 2 * thickness) / num_zboxes)),
 												bath_bevel_radius);
-		box_ptr->set_material(sv_matte_ptr);
+		box_ptr->set_material(bath_mat);
+//		box_ptr->set_material(sv_matte_ptr);
 		bath_ptr->add_object(box_ptr);
 	}
 	
@@ -552,7 +571,7 @@ void World::build() {
 	// build right side - runs in yw direction
 	
 	for (int j = 0; j < num_zboxes; j++) {
-		
+/* not used in figure 29.1
 		TInstance* sandstone_ptr = new TInstance(new RampFBmTexture(image_ptr5, num_octaves, fbm_amount));
 		sandstone_ptr->scale(2.0);
 		set_rand_seed(j * 10000);
@@ -565,11 +584,13 @@ void World::build() {
 		sv_matte_ptr->set_ka(bath_ka);
 		sv_matte_ptr->set_kd(bath_kd);
 		sv_matte_ptr->set_cd(sandstone_ptr);
+*/
 		
 		BeveledBox* box_ptr = new BeveledBox(	Point3D(bath_xmax - thickness, 0, bath_zmin + thickness + j * ((z_size - 2 * thickness) / num_zboxes)),
 												Point3D(bath_xmax, bath_height, bath_zmin + thickness + (j + 1) * ((z_size - 2 * thickness) / num_zboxes)),
 												bath_bevel_radius);
-		box_ptr->set_material(sv_matte_ptr);
+		box_ptr->set_material(bath_mat);
+//		box_ptr->set_material(sv_matte_ptr);
 		bath_ptr->add_object(box_ptr);
 	}
 		
