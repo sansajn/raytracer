@@ -1,283 +1,539 @@
-// 	Copyright (C) Mp77 2012
+// 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
+
+// This file contains the definition of the class BeveledBox
+
 #include <memory>
-#include "Instance.h"
-#include "OpenCylinder.h"
-#include "Box.h"
-#include "Rectangle.h"
-#include "BeveledCylinder.h"
-#include "Sphere.h"
-#include "Reflective.h"
 #include "BeveledBox.h"
-#include "Utilities/Random.h"
+#include "OpenCylinder.h"
+#include "Rectangle.h"
+#include "Sphere.h"
+#include "Instance.h"
+#include "Vector3D.h"
+#include "Normal.h"
 
-using std::make_shared, std::shared_ptr;
+using std::make_shared;
 
-BeveledBox::BeveledBox(const Point3D	bottom_,
-							const Point3D 	top_,
-							const float	bevel_radius
-									)
-			: Compound(),
-			p0(bottom_),
-			p1(top_),
-			br(bevel_radius){
+// ------------------------------------------------------------------------------ default constructor
+
+BeveledBox::BeveledBox(void)
+			:	Compound(),
+				p0(-1.0),
+				p1(1.0),
+				rb(0.1),
+				bbox(p0, p1)
+{	
+	// edges
+	// since the cylinders have to be defined initially in the vertical direction, it's easiest to use -(...)/2, +(...)/2 for 
+	// y0 and y1 in the constructors, and then rotate them about their centers.
+	
+	// top edges  (+ve y)
+	
+	Instance* top_front_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// top front edge
+	top_front_edge->rotate_z(90);
+	top_front_edge->translate({(p0.x + p1.x) / 2, p1.y - rb, p1.z - rb});
+	top_front_edge->transform_texture(false);
+	objects.push_back(top_front_edge);
+	
+	
+	// top back (-ve z)
+	
+	Instance* top_back_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// top back edge
+	top_back_edge->rotate_z(90);
+	top_back_edge->translate({(p0.x + p1.x) / 2, p1.y - rb, p0.z + rb});
+	top_back_edge->transform_texture(false);
+	objects.push_back(top_back_edge);
+	
+	
+	// top right (+ve x)
+	
+	Instance* top_right_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // top right edge
+	top_right_edge->rotate_x(90);
+	top_right_edge->translate({p1.x - rb, p1.y - rb, (p0.z + p1.z) / 2});
+	top_right_edge->transform_texture(false);
+	objects.push_back(top_right_edge);
+	
+	
+	// top left (-ve x)
+	
+	Instance* top_left_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // top left edge
+	top_left_edge->rotate_x(90);
+	top_left_edge->translate({p0.x + rb, p1.y - rb, (p0.z + p1.z) / 2});
+	top_left_edge->transform_texture(false);
+	objects.push_back(top_left_edge);
+
+
+	
+	// bottom edges  (-ve y)
+	
+	// bottom front  (+ve z)
+	
+	Instance* bottom_front_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// bottom fromt edge
+	bottom_front_edge->rotate_z(90);
+	bottom_front_edge->translate({(p0.x + p1.x) / 2, p0.y + rb, p1.z - rb});
+	bottom_front_edge->transform_texture(false);
+	objects.push_back(bottom_front_edge);
+	
+	
+	// bottom back  (-ve z)
+	
+	Instance* bottom_back_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// bottom back edge
+	bottom_back_edge->rotate_z(90);
+	bottom_back_edge->translate({(p0.x + p1.x) / 2, p0.y + rb, p0.z + rb});
+	bottom_back_edge->transform_texture(false);
+	objects.push_back(bottom_back_edge);
+
+	
+	// bottom right (-ve x, -ve y)
+	
+	Instance* bottom_right_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // bottom right edge
+	bottom_right_edge->rotate_x(90);
+	bottom_right_edge->translate({p1.x - rb, p0.y + rb, (p0.z + p1.z) / 2});
+	bottom_right_edge->transform_texture(false);
+	objects.push_back(bottom_right_edge);
+	
+	// bottom left (-ve x, -ve y)
+	
+	Instance* bottom_left_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // bottom left edge
+	bottom_left_edge->rotate_x(90);
+	bottom_left_edge->translate({p0.x + rb, p0.y + rb, (p0.z + p1.z) / 2});
+	bottom_left_edge->transform_texture(false);
+	objects.push_back(bottom_left_edge);
+
+	
+	// vertical edges
+	
+	// vertical right front  (+ve x, +ve z)
+	
+	Instance* vertical_right_front_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_right_front_edge->translate({p1.x - rb, 0, p1.z - rb});
+	vertical_right_front_edge->transform_texture(false);
+	objects.push_back(vertical_right_front_edge);
+	
+	// vertical left front  (-ve x, +ve z)
+	
+	Instance* vertical_left_front_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_left_front_edge->translate({p0.x + rb, 0, p1.z - rb});
+	vertical_left_front_edge->transform_texture(false);
+	objects.push_back(vertical_left_front_edge);
+	
+	// vertical left back  (-ve x, -ve z)
+	
+	Instance* vertical_left_back_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_left_back_edge->translate({p0.x + rb, 0, p0.z + rb});
+	vertical_left_back_edge->transform_texture(false);
+	objects.push_back(vertical_left_back_edge);
+
+	
+	// vertical right back  (+ve x, -ve z)
+	
+	Instance* vertical_right_back_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_right_back_edge->translate({p1.x - rb, 0, p0.z + rb});
+	vertical_right_back_edge->transform_texture(false);
+	objects.push_back(vertical_right_back_edge);
+
+
+	
+	// corner spheres
+	
+	// top right front
+	
+	Sphere* top_right_front_corner = new Sphere(Point3D(p1.x - rb, p1.y - rb, p1.z - rb), rb);
+	objects.push_back(top_right_front_corner);
+	
+	// top left front  (-ve x)
+	
+	Sphere* top_left_front_corner = new Sphere(Point3D(p0.x + rb, p1.y - rb, p1.z - rb), rb);
+	objects.push_back(top_left_front_corner);
+	
+	// top left back
+	
+	Sphere* top_left_back_corner = new Sphere(Point3D(p0.x + rb, p1.y - rb, p0.z + rb), rb);
+	objects.push_back(top_left_back_corner);
+	
+	// top right back
+	
+	Sphere* top_right_back_corner = new Sphere(Point3D(p1.x - rb, p1.y - rb, p0.z + rb), rb);
+	objects.push_back(top_right_back_corner);
 		
-	double width = p1.z - p0.z;
-	double length = p1.x - p0.x;
-	double height = p1.y - p0.y;
-
-	//BeveledCylinder *ocd = new BeveledCylinder(p0.y,p1.y,br,br);
-	auto ocd = make_shared<OpenCylinder>(p0.y+br,p1.y-br,br);
+	// bottom right front
 	
-	// Here we must know that there is another box except previous twelve axis
-	parts.reserve(26);
-	parts.assign(26,0);
-
-	parts[0] = new Instance(ocd);
-	parts[1] = new Instance(ocd);
-	parts[2] = new Instance(ocd);
-	parts[3] = new Instance(ocd);
+	Sphere* bottom_right_front_corner = new Sphere(Point3D(p1.x - rb, p0.y + rb, p1.z - rb), rb);
+	objects.push_back(bottom_right_front_corner);
 	
-	auto ocd1 = make_shared<OpenCylinder>(p0.x+br,p1.x-br,br);
-	//BeveledCylinder *ocd1 = new BeveledCylinder(p0.x,p1.x,br,br);
-
-	parts[4] = new Instance(ocd1);
-	parts[5] = new Instance(ocd1);
-	parts[6] = new Instance(ocd1);
-	parts[7] = new Instance(ocd1);
+	// bottom left front
 	
-	//BeveledCylinder *ocd2 = new BeveledCylinder(p0.z,p1.z,br,br);
-	auto ocd2 = make_shared<OpenCylinder>(p0.z+br,p1.z-br,br);
-	parts[8] = new Instance(ocd2);
-	parts[9] = new Instance(ocd2);
-	parts[10] = new Instance(ocd2);
-	parts[11] = new Instance(ocd2);
+	Sphere* bottom_left_front_corner = new Sphere(Point3D(p0.x + rb, p0.y + rb, p1.z - rb), rb);
+	objects.push_back(bottom_left_front_corner);
 	
-	//Here add a box
-	parts[12] = new Instance(make_shared<Rectangle>( Point3D( -length/2+br,-height/2+br, width/2 ), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, height - 2 * br, 0 ), Normal(0, 0, 1) ));
-	parts[13] = new Instance(make_shared<Rectangle>( Point3D( length/2,-height/2+br, width/2-br), Vector3D( 0, 0, - width + 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(1, 0, 0) ));
-	parts[14] = new Instance(make_shared<Rectangle>( Point3D( length/2-br,-height/2+br, -width/2), Vector3D( - length + 2 * br, 0, 0 ), Vector3D( 0, height - 2 * br, 0 ), Normal(0, 0, -1) ));
-	parts[15] = new Instance(make_shared<Rectangle>( Point3D( -length/2, -height/2+br, -width/2+br), Vector3D( 0, 0, width - 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(-1, 0, 0) ));
-	parts[16] = new Instance(make_shared<Rectangle>( Point3D( -length/2+br,height/2, width/2-br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, -width + 2 * br ), Normal(0, 1, 0) ));
-	parts[17] = new Instance(make_shared<Rectangle>( Point3D( -length/2+br,-height/2, -width/2+br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, width - 2 * br ), Normal(0, -1, 0) ));
-		
-	parts[18] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,height/2-br, width/2-br ), br ));
-	parts[19] = new Instance(make_shared<Sphere>( Point3D( length/2-br,height/2-br, width/2-br ), br ));
-	parts[20] = new Instance(make_shared<Sphere>( Point3D( length/2-br,height/2-br, -width/2+br ), br ));
-	parts[21] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,height/2-br, -width/2+br ), br ));
-	parts[22] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, width/2-br ), br ));
-	parts[23] = new Instance(make_shared<Sphere>( Point3D( length/2-br,-height/2+br, width/2-br ), br ));
-	parts[24] = new Instance(make_shared<Sphere>( Point3D( length/2-br,-height/2+br, -width/2+br ), br ));
-	parts[25] = new Instance(make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, -width/2+br ), br ));
-
-	parts[0]->translate({-length/2+br,0,-width/2+br});
-	parts[1]->translate({-length/2+br,0,width/2-br});
-	parts[2]->translate({length/2-br,0,width/2-br});
-	parts[3]->translate({length/2-br,0,-width/2+br});
+	// bottom left back
 	
-	parts[4]->translate({0,-(p0.x + p1.x)/2,0});
-	parts[4]->rotate_z(90);
-	parts[4]->translate({0,height/2-br,width/2-br});
-	parts[5]->translate({0,-(p0.x + p1.x)/2,0});
-	parts[5]->rotate_z(90);
-	parts[5]->translate({0,-height/2+br,width/2-br});
-	parts[6]->translate({0,-(p0.x + p1.x)/2,0});
-	parts[6]->rotate_z(90);
-	parts[6]->translate({0,-height/2+br,-width/2+br});
-	parts[7]->translate({0,-(p0.x + p1.x)/2,0});
-	parts[7]->rotate_z(90);
-	parts[7]->translate({0,height/2-br,-width/2+br});
+	Sphere* bottom_left_back_corner = new Sphere(Point3D(p0.x + rb, p0.y + rb, p0.z + rb), rb);
+	objects.push_back(bottom_left_back_corner);
+	
+	// bottom right back
+	
+	Sphere* bottom_right_back_corner = new Sphere(Point3D(p1.x - rb, p0.y + rb, p0.z + rb), rb);
+	objects.push_back(bottom_right_back_corner);
+	
+	
+	// the faces
+	
+	// bottom face: -ve y
+	
+	Rectangle* bottom_face	= new Rectangle(	Point3D(p0.x + rb, p0.y, p0.z + rb),
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0), 
+												Normal(0, -1, 0));
+	objects.push_back(bottom_face);
+	
+	
+	// bottom face: +ve y
+	
+	Rectangle* top_face 	= new Rectangle(	Point3D(p0.x + rb, p1.y, p0.z + rb), 
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0),
+												Normal(0, 1, 0));
+	objects.push_back(top_face);
+	
+	
+	// back face: -ve z
+	
+	Rectangle* back_face 	= new Rectangle(	Point3D(p0.x + rb, p0.y + rb, p0.z), 
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(0, 0 , -1));
+	objects.push_back(back_face);
+	
+	
+	// front face: +ve z
+	
+	Rectangle* front_face 	= new Rectangle(	Point3D(p0.x + rb, p0.y + rb, p1.z), 
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(0, 0 , 1));
+	objects.push_back(front_face);
 
-	parts[8]->translate({0,-(p0.z + p1.z)/2,0});
-	parts[8]->rotate_x(90);
-	parts[8]->translate({-length/2+br,height/2-br,0});
-	parts[9]->translate({0,-(p0.z + p1.z)/2,0});
-	parts[9]->rotate_x(90);
-	parts[9]->translate({-length/2+br,-height/2+br,0});
-	parts[10]->translate({0,-(p0.z + p1.z)/2,0});
-	parts[10]->rotate_x(90);
-	parts[10]->translate({length/2-br,-height/2+br,0});
-	parts[11]->translate({0,-(p0.z + p1.z)/2,0});
-	parts[11]->rotate_x(90);
-	parts[11]->translate({length/2-br,height/2-br,0});
 
-	bbox.x0 = p0.x - bevel_radius;
-	bbox.y0 = p0.y - bevel_radius;
-	bbox.z0 = p0.z - bevel_radius;
-	bbox.x1 = p1.x + bevel_radius;
-	bbox.y1 = p1.y + bevel_radius;
-	bbox.z1 = p1.z + bevel_radius;
+	// left face: -ve x
+	
+	Rectangle* left_face 	= new Rectangle(	Point3D(p0.x, p0.y + rb, p0.z + rb), 
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(-1, 0 , 0));
+	objects.push_back(left_face);
+	
+	
+	// right face: +ve x
+	
+	Rectangle* right_face 	= new Rectangle(	Point3D(p1.x, p0.y + rb, p0.z + rb), 
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(1, 0 , 0));
+	objects.push_back(right_face);
+	
 
-	// The code below only works for 24.29d, which can replace the outer material set by others with random reflective materials
-	set_rand_seed(1000);
-	float c = 0.25;
-		
-	for (int j = 0; j < parts.size(); j++) {
-		auto reflective_ptr = make_shared<Reflective>();
-		reflective_ptr->set_ka(0.0); 
-		reflective_ptr->set_kd(0.0);
-		reflective_ptr->set_ks(0.0);
-		reflective_ptr->set_cd(RGBColor{0.0});
-		reflective_ptr->set_kr(0.9);
-		reflective_ptr->set_cr(1.0, 0.75 + c * (-1.0 + 2.0 * rand_float()) , 0.25 + c * (-1.0 + 2.0 * rand_float()));		
-		parts[j]->set_material(reflective_ptr);
-	}
+	
 }
 
-// ----------------------------------------------------------------  default constructor
 
-BeveledBox::BeveledBox (void)
-	: 	Compound()
+// ------------------------------------------------------------------------------ constructor
+
+// TODO: unify code with BeveledBox()
+BeveledBox::BeveledBox(	const Point3D& 	min_corner, 
+						const Point3D& 	max_corner,
+						const double 	bevel_radius)
+	: 	Compound(),
+		p0(min_corner),
+		p1(max_corner),
+		rb(bevel_radius),
+		bbox(p0, p1)
+{
+	
+	// edges
+	// since the cylinders have to be defined initially in the vertical direction, it's easiest to use -(...)/2, +(...)/2 for 
+	// y0 and y1 in the constructors, and then rotate them about their centers.
+	
+	// top edges  (+ve y)
+	
+	Instance* top_front_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// top front edge
+	top_front_edge->rotate_z(90);
+	top_front_edge->translate({(p0.x + p1.x) / 2, p1.y - rb, p1.z - rb});
+	top_front_edge->transform_texture(false);
+	objects.push_back(top_front_edge);
+	
+	
+	// top back (-ve z)
+	
+	Instance* top_back_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// top back edge
+	top_back_edge->rotate_z(90);
+	top_back_edge->translate({(p0.x + p1.x) / 2, p1.y - rb, p0.z + rb});
+	top_back_edge->transform_texture(false);
+	objects.push_back(top_back_edge);
+	
+	
+	// top right (+ve x)
+	
+	Instance* top_right_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // top right edge
+	top_right_edge->rotate_x(90);
+	top_right_edge->translate({p1.x - rb, p1.y - rb, (p0.z + p1.z) / 2});
+	top_right_edge->transform_texture(false);
+	objects.push_back(top_right_edge);
+	
+	
+	// top left (-ve x)
+	
+	Instance* top_left_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // top left edge
+	top_left_edge->rotate_x(90);
+	top_left_edge->translate({p0.x + rb, p1.y - rb, (p0.z + p1.z) / 2});
+	top_left_edge->transform_texture(false);
+	objects.push_back(top_left_edge);
+
+
+	
+	// bottom edges  (-ve y)
+	
+	// bottom front  (+ve z)
+	
+	Instance* bottom_front_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// bottom fromt edge
+	bottom_front_edge->rotate_z(90);
+	bottom_front_edge->translate({(p0.x + p1.x) / 2, p0.y + rb, p1.z - rb});
+	bottom_front_edge->transform_texture(false);
+	objects.push_back(bottom_front_edge);
+	
+	
+	// bottom back  (-ve z)
+	
+	Instance* bottom_back_edge = new Instance (make_shared<OpenCylinder>(-(p1.x - p0.x - 2 * rb) / 2, (p1.x - p0.x - 2 * rb) / 2, rb));	// bottom back edge
+	bottom_back_edge->rotate_z(90);
+	bottom_back_edge->translate({(p0.x + p1.x) / 2, p0.y + rb, p0.z + rb});
+	bottom_back_edge->transform_texture(false);
+	objects.push_back(bottom_back_edge);
+
+	
+	// bottom right (-ve x, -ve y)
+	
+	Instance* bottom_right_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // bottom right edge
+	bottom_right_edge->rotate_x(90);
+	bottom_right_edge->translate({p1.x - rb, p0.y + rb, (p0.z + p1.z) / 2});
+	bottom_right_edge->transform_texture(false);
+	objects.push_back(bottom_right_edge);
+	
+	// bottom left (-ve x, -ve y)
+	
+	Instance* bottom_left_edge = new Instance (make_shared<OpenCylinder>(-(p1.z - p0.z - 2 * rb) / 2, (p1.z - p0.z - 2 * rb) / 2, rb)); // bottom left edge
+	bottom_left_edge->rotate_x(90);
+	bottom_left_edge->translate({p0.x + rb, p0.y + rb, (p0.z + p1.z) / 2});
+	bottom_left_edge->transform_texture(false);
+	objects.push_back(bottom_left_edge);
+
+	
+	// vertical edges
+	
+	// vertical right front  (+ve x, +ve z)
+	
+	Instance* vertical_right_front_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_right_front_edge->translate({p1.x - rb, 0, p1.z - rb});
+	vertical_right_front_edge->transform_texture(false);
+	objects.push_back(vertical_right_front_edge);
+	
+	// vertical left front  (-ve x, +ve z)
+	
+	Instance* vertical_left_front_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_left_front_edge->translate({p0.x + rb, 0, p1.z - rb});
+	vertical_left_front_edge->transform_texture(false);
+	objects.push_back(vertical_left_front_edge);
+	
+	// vertical left back  (-ve x, -ve z)
+	
+	Instance* vertical_left_back_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_left_back_edge->translate({p0.x + rb, 0, p0.z + rb});
+	vertical_left_back_edge->transform_texture(false);
+	objects.push_back(vertical_left_back_edge);
+
+	
+	// vertical right back  (+ve x, -ve z)
+	
+	Instance* vertical_right_back_edge = new Instance (make_shared<OpenCylinder>(p0.y + rb, p1.y - rb, rb));
+	vertical_right_back_edge->translate({p1.x - rb, 0, p0.z + rb});
+	vertical_right_back_edge->transform_texture(false);
+	objects.push_back(vertical_right_back_edge);
+
+
+	
+	// corner spheres
+	
+	// top right front
+	
+	Sphere* top_right_front_corner = new Sphere(Point3D(p1.x - rb, p1.y - rb, p1.z - rb), rb);
+	objects.push_back(top_right_front_corner);
+	
+	// top left front  (-ve x)
+	
+	Sphere* top_left_front_corner = new Sphere(Point3D(p0.x + rb, p1.y - rb, p1.z - rb), rb);
+	objects.push_back(top_left_front_corner);
+	
+	// top left back
+	
+	Sphere* top_left_back_corner = new Sphere(Point3D(p0.x + rb, p1.y - rb, p0.z + rb), rb);
+	objects.push_back(top_left_back_corner);
+	
+	// top right back
+	
+	Sphere* top_right_back_corner = new Sphere(Point3D(p1.x - rb, p1.y - rb, p0.z + rb), rb);
+	objects.push_back(top_right_back_corner);
+		
+	// bottom right front
+	
+	Sphere* bottom_right_front_corner = new Sphere(Point3D(p1.x - rb, p0.y + rb, p1.z - rb), rb);
+	objects.push_back(bottom_right_front_corner);
+	
+	// bottom left front
+	
+	Sphere* bottom_left_front_corner = new Sphere(Point3D(p0.x + rb, p0.y + rb, p1.z - rb), rb);
+	objects.push_back(bottom_left_front_corner);
+	
+	// bottom left back
+	
+	Sphere* bottom_left_back_corner = new Sphere(Point3D(p0.x + rb, p0.y + rb, p0.z + rb), rb);
+	objects.push_back(bottom_left_back_corner);
+	
+	// bottom right back
+	
+	Sphere* bottom_right_back_corner = new Sphere(Point3D(p1.x - rb, p0.y + rb, p0.z + rb), rb);
+	objects.push_back(bottom_right_back_corner);
+	
+	
+	// the faces
+	
+	// bottom face: -ve y
+	
+	Rectangle* bottom_face	= new Rectangle(	Point3D(p0.x + rb, p0.y, p0.z + rb),
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0), 
+												Normal(0, -1, 0));
+	objects.push_back(bottom_face);
+	
+	
+	// bottom face: +ve y
+	
+	Rectangle* top_face 	= new Rectangle(	Point3D(p0.x + rb, p1.y, p0.z + rb), 
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0),
+												Normal(0, 1, 0));
+	objects.push_back(top_face);
+	
+	
+	// back face: -ve z
+	
+	Rectangle* back_face 	= new Rectangle(	Point3D(p0.x + rb, p0.y + rb, p0.z), 
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(0, 0 , -1));
+	objects.push_back(back_face);
+	
+	
+	// front face: +ve z
+	
+	Rectangle* front_face 	= new Rectangle(	Point3D(p0.x + rb, p0.y + rb, p1.z), 
+												Vector3D((p1.x - rb) - (p0.x + rb), 0, 0),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(0, 0 , 1));
+	objects.push_back(front_face);
+
+
+	// left face: -ve x
+	
+	Rectangle* left_face 	= new Rectangle(	Point3D(p0.x, p0.y + rb, p0.z + rb), 
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(-1, 0 , 0));
+	objects.push_back(left_face);
+	
+	
+	// right face: +ve x
+	
+	Rectangle* right_face 	= new Rectangle(	Point3D(p1.x, p0.y + rb, p0.z + rb), 
+												Vector3D(0, 0, (p1.z - rb) - (p0.z + rb)),
+												Vector3D(0, (p1.y - rb) - (p0.y + rb), 0),
+												Normal(1, 0 , 0));
+	objects.push_back(right_face);
+}
+
+// ------------------------------------------------------------------------------ copy constructor
+
+BeveledBox::BeveledBox (const BeveledBox& bb)  			
+			: 	Compound(bb),
+				p0(bb.p0), 
+				p1(bb.p1),
+				rb(bb.rb),
+				bbox(bb.bbox)
 {}
 
-
-// ---------------------------------------------------------------- clone
+// ------------------------------------------------------------------------------ clone
 
 BeveledBox* 
 BeveledBox::clone(void) const {
-	return (new BeveledBox(*this));
+	return(new BeveledBox(*this));
 }
 
 
-// ---------------------------------------------------------------- copy constructor
-
-BeveledBox::BeveledBox (const BeveledBox& c)
-	:	Compound(c),
-		p0(c.p0),
-		p1(c.p1),
-		br(c.br) {
-	
-		copy_objects(c.parts);					
-}
-
-
-
-// ---------------------------------------------------------------- assignment operator
+// ------------------------------------------------------------------------------ assignment operator
 
 BeveledBox& 
-BeveledBox::operator= (const BeveledBox& rhs) {
+BeveledBox::operator= (const BeveledBox& rhs) 		
+{
 	if (this == &rhs)
 		return (*this);
 
-	GeometricObject::operator= (rhs);						
+	Compound::operator=(rhs); 
 	
-	copy_objects(rhs.parts);
+	p0		= rhs.p0;
+	p1		= rhs.p1;
+	rb		= rhs.rb;
+	bbox	= rhs.bbox;
 
-	this->p0 = rhs.p0;
-	this->p1 = rhs.p1;
-	this->br = rhs.br;
-
-	return (*this);
+	return (*this) ;
 }
 
 
-// ---------------------------------------------------------------- destructor
+// ------------------------------------------------------------------------------ destructor
+ 
+BeveledBox::~BeveledBox (void) {}
 
-BeveledBox::~BeveledBox(void) {	
-	delete_objects();				
+
+
+BBox 
+BeveledBox::get_bounding_box(void) {
+	return(bbox);
 }
 
 
-//------------------------------------------------------------------ set_material
-// sets the same material on all objects
+// ------------------------------------------------------------------------------ shadow_hit
 
-void 
-BeveledBox::set_material(shared_ptr<Material> material_ptr) {
-	int num_objects = parts.size();
-	for (int j = 0; j < num_objects; j++)
-		parts[j]->set_material(material_ptr);
+bool
+BeveledBox::shadow_hit(const Ray& ray, double& tmin) const {
+	if (bbox.hit(ray))
+		return (Compound::shadow_hit(ray, tmin));
+	else
+		return (false);
 }
 
 
-//------------------------------------------------------------------ delete_objects
-// Deletes the objects in the objects array, and erases the array.
-// The array still exists, because it'ss an automatic variable, but it's empty 
-
-void
-BeveledBox::delete_objects(void) {
-	int num_objects = parts.size();
-	
-	for (int j = 0; j < num_objects; j++) {
-		delete parts[j];
-		parts[j] = NULL;
-	}	
-	
-	parts.erase(parts.begin(), parts.end());
-}
-
-
-//------------------------------------------------------------------ copy_objects
-
-void
-BeveledBox::copy_objects(const std::vector<Instance*>& rhs_ojects) {
-	delete_objects();    	
-	int num_objects = rhs_ojects.size();
-	
-	for (int j = 0; j < num_objects; j++)
-		parts.push_back(rhs_ojects[j]->clone());
-
-
-}
-
-
-//------------------------------------------------------------------ hit
-//This function has been modified since Listing 8.22
+// ------------------------------------------------------------------------------ hit
 
 bool 															 
-BeveledBox::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
+BeveledBox::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {	
 	if (bbox.hit(ray))
-	{
-		double		t; 
-		Normal		normal;
-		Point3D		local_hit_point;
-		bool		hit 		= false;
-					tmin 		= kHugeValue;
-		int 		num_objects	= parts.size();
-	
-		for (int j = 0; j < num_objects; j++)
-			if (parts[j]->hit(ray, t, sr) && (t < tmin)) {
-				hit				= true;
-				tmin 			= t;
-				parts[j]->get_material(material_ptr);  // sets material_ptr
-				normal			= sr.normal;
-				local_hit_point	= sr.local_hit_point;  
-			}
-	
-		if (hit) {
-			sr.t				= tmin;
-			sr.normal 			= normal;   
-			sr.local_hit_point 	= local_hit_point;  
-		}	
-		return (hit);
-	}
+		return (Compound::hit(ray, tmin, sr));
 	else
 		return (false);
 }
 
-// ------------------------------------------------- shadow hit
-//This function has been modified since Listing 8.22
 
-bool 																						 
-BeveledBox::shadow_hit(const Ray& ray, double & tmin) const
-{
-	if (bbox.hit(ray))
-	{
-		double		t = 100000;		// may be important too
-		Normal		normal;
-		Point3D		local_hit_point;
-		bool		hit 		= false;
-		int 		num_objects	= parts.size();
-	
-		for (int j = 0; j < num_objects; j++)
-			if (parts[j]->shadow_hit(ray, t) && (t < tmin)) {
-				hit				= true;
-				tmin 			= t;
-			}
-		return (hit);
-	}
-	else
-		return (false);
-}
+																			
+															
+																
