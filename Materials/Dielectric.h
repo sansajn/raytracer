@@ -7,7 +7,6 @@
 #pragma once
 
 #include "Phong.h"
-
 #include "FresnelReflector.h"
 #include "FresnelTransmitter.h"
 
