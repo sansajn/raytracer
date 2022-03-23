@@ -60,7 +60,7 @@ RGBColor SV_Matte::shade(ShadeRec & sr) const {
 			}
 
 			if (!in_shadow)
-				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * light->G(sr) * ndotwi;
+				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * light->G(sr) * ndotwi;  // TODO: MyTracer implementacia tu nepocita s G() a ani Matte implementacia
 		}
 	}
 

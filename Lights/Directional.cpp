@@ -54,6 +54,10 @@ Directional::L(ShadeRec& s) {
 	return (ls * color);
 }
 
+float Directional::G(ShadeRec const & sr) const {
+	return 1.0;  // just return default value there
+}
+
 bool Directional::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 	if (_shadows) {
 		for (GeometricObject * g : sr.w.objects) {

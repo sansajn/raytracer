@@ -5,52 +5,48 @@
 //	See the file COPYING.txt for the full license.
 
 #pragma once
-
+#include <memory>
 #include "Phong.h"
 #include "FresnelReflector.h"
 #include "FresnelTransmitter.h"
 
 class Dielectric: public Phong {	
-	public:
-		Dielectric();
-		Dielectric(const Dielectric& m);
-		Dielectric * clone() const override;
-
-		Dielectric& 
-		operator= (const Dielectric& rhs);							
-
-		~Dielectric(void);											
+public:
+	Dielectric();
 	
-//		virtual RGBColor area_light_shade(ShadeRec& sr);	// for chapter 18 page 1 image
-		// constructors, etc ...
+	//		virtual RGBColor area_light_shade(ShadeRec& sr);	// for chapter 18 page 1 image
+	// constructors, etc ...
 
-		virtual RGBColor										
-		shade(ShadeRec& sr);	
+	RGBColor	shade(ShadeRec& sr) const override;
 
-		void
-		set_eta_in(const double);
-		
-		void
-		set_eta_out(const double);
+	void
+	set_eta_in(const double);
 
-		void
-		set_cf_in(const RGBColor in);
+	void
+	set_eta_out(const double);
 
-		void
-		set_cf_out(const RGBColor out);
+	void
+	set_cf_in(const RGBColor in);
 
-		void
-		set_shadows(bool b);
-		
-	private:
-		
-		RGBColor 			cf_in;			// interior filter color 
-		RGBColor 			cf_out;			// exterior filter color
-		
-		FresnelReflector*	fresnel_brdf;  // TODO: make unique
-		FresnelTransmitter*	fresnel_btdf;  // TODO: make unique
+	void
+	set_cf_out(const RGBColor out);
 
-		bool shadows;
+	void
+	set_shadows(bool b);
+
+	// Copy API.
+	Dielectric * clone() const override;
+	Dielectric(const Dielectric& m);
+	Dielectric & operator=(const Dielectric& rhs);
+
+private:
+	RGBColor 			cf_in;			// interior filter color
+	RGBColor 			cf_out;			// exterior filter color
+
+	std::unique_ptr<FresnelReflector> fresnel_brdf;
+	std::unique_ptr<FresnelTransmitter> fresnel_btdf;
+
+	bool shadows;
 };
 
 

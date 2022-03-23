@@ -369,6 +369,16 @@ ch26 = [
 cpp.Alias('ch26', ch26)
 
 
+# chapter 28
+ch28path = 'build/chapter28/'
+
+ch28 = [
+	cpp.Program('fig28_05a', ['main.cpp', engine, ch28path + 'BuildFigure28_05a.cpp']),
+]
+
+cpp.Alias('ch28', ch28)
+
+
 # chapter 29
 ch29path = 'build/chapter29/'
 

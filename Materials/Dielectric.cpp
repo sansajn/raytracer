@@ -7,54 +7,33 @@
 #include "Dielectric.h"
 #include "World/World.h"
 
-// ---------------------------------------------------------------- default constructor
+using std::make_unique;
 
-Dielectric::Dielectric (void)
-	:	Phong(),
-		fresnel_brdf(new FresnelReflector),
-		fresnel_btdf(new FresnelTransmitter),
-		shadows(true)
+Dielectric::Dielectric()
+	: fresnel_brdf{make_unique<FresnelReflector>()}
+	, fresnel_btdf{make_unique<FresnelTransmitter>()}
+	, shadows{true}
 {}
-
-
-
-// ---------------------------------------------------------------- copy constructor
 
 Dielectric::Dielectric(const Dielectric& m)
 	: Phong{m}
+	, fresnel_brdf{m.fresnel_brdf->clone()}
+	, fresnel_btdf{m.fresnel_btdf->clone()}
 	, shadows{m.shadows}
-{
-	if(m.fresnel_brdf)
-		fresnel_brdf = m.fresnel_brdf->clone(); 
-	else  fresnel_brdf = NULL;
-
-	if(m.fresnel_btdf)
-		fresnel_btdf = m.fresnel_btdf->clone(); 
-	else  fresnel_btdf = NULL;
-}
-
-
-// ---------------------------------------------------------------- clone
+{}
 
 Dielectric * Dielectric::clone() const {
 	return (new Dielectric(*this));
 }	
 
-
-// ---------------------------------------------------------------- assignment operator
-
-Dielectric& 
-Dielectric::operator= (const Dielectric& rhs) {
+Dielectric & Dielectric::operator=(const Dielectric& rhs) {
 	if (this == &rhs)
 		return (*this);
 		
 	Phong::operator=(rhs);
 
-	if (rhs.fresnel_btdf)
-		this->fresnel_btdf = rhs.fresnel_btdf->clone();
-
-	if (rhs.fresnel_brdf)
-		this->fresnel_brdf = rhs.fresnel_brdf->clone();
+	fresnel_brdf.reset(rhs.fresnel_brdf->clone());
+	fresnel_btdf.reset(rhs.fresnel_btdf->clone());
 
 	shadows = rhs.shadows;
 
@@ -62,24 +41,9 @@ Dielectric::operator= (const Dielectric& rhs) {
 }
 
 
-// ---------------------------------------------------------------- destructor
-
-Dielectric::~Dielectric() {
-	if (fresnel_brdf) {
-		delete fresnel_brdf;
-		fresnel_brdf = NULL;
-	}
-
-	if (fresnel_btdf) {
-		delete fresnel_btdf;
-		fresnel_btdf = NULL;
-	}
-}
-
 // --------------------------------------------------
 
-RGBColor
-Dielectric::shade(ShadeRec& sr) {
+RGBColor Dielectric::shade(ShadeRec& sr) const {
 	RGBColor L(Phong::shade(sr));
 		
 	Vector3D 	wi;
