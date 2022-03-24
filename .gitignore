@@ -3,6 +3,9 @@
 /raytracer
 /raytracer.*
 
+# projects files
+.qtc_clangd/
+
 # generated images
 /out.png
 /image_*.png
