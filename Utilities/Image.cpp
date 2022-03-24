@@ -7,8 +7,8 @@
 
 
 #include <iostream>
-#include <stdio.h>
-
+#include <cstdio>
+#include <cassert>
 #include "Constants.h"   // defines red
 #include "Image.h"
 
@@ -149,6 +149,8 @@ Image::get_color(const int row, const int column) const {
 	int index = column + hres * (vres - row - 1);
 	int pixels_size = pixels.size();
 	
+	assert(index >= 0);
+
 	if (index < pixels_size)
 		return (pixels[index]);
 	else
