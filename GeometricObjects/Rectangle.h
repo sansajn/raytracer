@@ -12,7 +12,7 @@
 
 class Rectangle: public GeometricObject {	
 public:
-	Rectangle();
+	Rectangle();  //!< (-1,-1, 1, 1)
 	Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b);
 	Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b, const Normal& n);
 

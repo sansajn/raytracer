@@ -12,7 +12,7 @@ SV_Matte::SV_Matte(float ka, float kd, Texture const * t)
 {
 	set_ka(ka);
 	set_kd(kd);
-	set_cd(t);  // FIX: memory leak, SV_Lambertian doesn't own texture (SV_Mate should)
+	set_cd(t);  // FIXME: memory leak, SV_Lambertian doesn't own texture (SV_Mate should)
 }
 
 SV_Matte::SV_Matte(SV_Matte const & other)
@@ -52,7 +52,7 @@ RGBColor SV_Matte::shade(ShadeRec & sr) const {
 		float const ndotwi = sr.normal * wi,
 			ndotwo = sr.normal * wo;
 
-		if (ndotwi > 0.0 && ndotwo > 0) {
+		if (ndotwi > 0 && ndotwo > 0) {
 			bool in_shadow = false;
 			if (light->casts_shadows()) {
 				Ray shadow_ray{sr.hit_point, wi};
@@ -60,7 +60,7 @@ RGBColor SV_Matte::shade(ShadeRec & sr) const {
 			}
 
 			if (!in_shadow)
-				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * light->G(sr) * ndotwi;  // TODO: MyTracer implementacia tu nepocita s G() a ani Matte implementacia
+				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * light->G(sr) * ndotwi;
 		}
 	}
 

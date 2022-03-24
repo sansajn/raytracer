@@ -48,3 +48,4 @@ scene = cpp.Object('build/BuildShadedObjects.cpp')
 
 [Hadryan Salles](https://github.com/hadryansalles/ray-tracing-from-the-ground-up)
 [Jörn Dinkla](https://github.com/jdinkla/from-the-ground-up-ray-tracer)
+[Dr. Brad Hollister](https://github.com/behollister/raytracingfromgroundup.git)
