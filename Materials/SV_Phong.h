@@ -18,43 +18,26 @@ class SV_Phong: public Material {
 
 		SV_Phong(const SV_Phong& m);
 		
-		virtual Material*										
-		clone(void) const;									
+		Material * clone() const override;
 
 		SV_Phong& 
 		operator= (const SV_Phong& rhs);							
-
-		~SV_Phong(void);											
 		
-		void 													
-		set_ka(const float k);
-		
-		void 													
-		set_kd(const float k);
-		
-		void													
-		set_cd(Texture *c);
-
-		void
-		set_exp(const float c);
-
-		void																						
-		set_ks(const float c);
-
-		void
-		set_cs(Texture *c);
+		void set_ka(const float k);
+		void set_kd(const float k);
+		void set_cd(Texture *c);
+		void set_exp(const float c);
+		void set_ks(const float c);
+		void set_cs(Texture *c);
 	
-		virtual RGBColor									
-		shade(ShadeRec& s);	
+		RGBColor shade(ShadeRec& s) const override;
 
-		virtual void									
-		set_ce(const float r, const float g, const float b);
+		virtual void set_ce(const float r, const float g, const float b);
 		
-		virtual RGBColor
-		get_Le(ShadeRec& sr) const;	
-	
-		virtual RGBColor
-		area_light_shade(ShadeRec& sr);	
+		RGBColor get_Le(ShadeRec const & sr) const override;
+		RGBColor area_light_shade(ShadeRec& sr) const override;
+
+		~SV_Phong(void);
 	
 	protected:
 	

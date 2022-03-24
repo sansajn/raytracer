@@ -106,7 +106,7 @@ SV_Phong::~SV_Phong(void) {
 // ---------------------------------------------------------------- shade
 
 RGBColor
-SV_Phong::shade(ShadeRec& sr) {
+SV_Phong::shade(ShadeRec& sr) const {
 	/*Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
 	int 		num_lights	= sr.w.lights.size();
@@ -152,14 +152,12 @@ SV_Phong::set_ce(const float r, const float g, const float b)
 	return;
 }
 
-RGBColor
-SV_Phong::get_Le(ShadeRec& sr) const
-{
-	return RGBColor(1.0);
+RGBColor SV_Phong::get_Le(ShadeRec const & sr) const {
+	return RGBColor{1};
 }
 	
 RGBColor
-SV_Phong::area_light_shade(ShadeRec& sr)			//this is for chapter 18 page one image ad-hoc
+SV_Phong::area_light_shade(ShadeRec& sr) const			//this is for chapter 18 page one image ad-hoc
 {
 	Vector3D 	wo 			= -sr.ray.d;
 	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);

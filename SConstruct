@@ -389,6 +389,8 @@ ch29 = [
 	cpp.Program('fig29_06', ['main.cpp', engine, ch29path + 'BuildFigure29_06.cpp']),
 	cpp.Program('fig29_09a', ['main.cpp', engine, ch29path + 'BuildFigure29_09a.cpp']),
 	cpp.Program('fig29_09b', ['main.cpp', engine, ch29path + 'BuildFigure29_09b.cpp']),
+	cpp.Program('fig29_10b', ['main.cpp', engine, ch29path + 'BuildFigure29_10b.cpp']),
+	cpp.Program('fig29_11b', ['main.cpp', engine, ch29path + 'BuildFigure29_11b.cpp']),
 ]
 
 cpp.Alias('ch29', ch29)
