@@ -46,7 +46,7 @@ SV_Emissive::~SV_Emissive(void)
 // ---------------------------------------------------------------- shade
 
 RGBColor
-SV_Emissive::shade(ShadeRec& sr) {
+SV_Emissive::shade(ShadeRec& sr) const {
 	
 	/*
 	Vector3D 	wo 			= -sr.ray.d;
@@ -108,8 +108,7 @@ SV_Emissive::set_ce(Texture *t)
 	this->t = t;
 }
 		
-RGBColor
-SV_Emissive::get_Le(ShadeRec& sr) const
+RGBColor SV_Emissive::get_Le(ShadeRec const & sr) const
 {
 	/*
 	return ls * ce;		//here is added, this is very important to multiply ce with ls!!!!!!
@@ -117,8 +116,7 @@ SV_Emissive::get_Le(ShadeRec& sr) const
 	return ls * t->get_color(sr);
 }
 
-RGBColor
-SV_Emissive::area_light_shade(ShadeRec& sr)
+RGBColor SV_Emissive::area_light_shade(ShadeRec& sr) const
 {
 	return ls * t->get_color(sr);
 	/*
@@ -141,8 +139,7 @@ SV_Emissive::global_shade(ShadeRec& sr) {
 		return (black);*/
 }
 
-RGBColor
-SV_Emissive::path_shade(ShadeRec& sr) {		//this new path shade returns final result
+RGBColor SV_Emissive::path_shade(ShadeRec& sr) const {		//this new path shade returns final result
 	/*
 	if (sr.depth == 1)
 		return (black);
