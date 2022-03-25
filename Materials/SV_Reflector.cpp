@@ -73,8 +73,7 @@ SV_Reflector::~SV_Reflector(void) {
 
 // ------------------------------------------------------------------------------------ shade 
 
-RGBColor
-SV_Reflector::shade(ShadeRec& sr) {	
+RGBColor SV_Reflector::shade(ShadeRec& sr) const {
 	RGBColor L(Phong::shade(sr));  // direct illumination
 	
 	Vector3D wo = -sr.ray.d;
@@ -88,8 +87,7 @@ SV_Reflector::shade(ShadeRec& sr) {
 	return (L);
 }
 
-RGBColor
-SV_Reflector::area_light_shade(ShadeRec& sr) {
+RGBColor SV_Reflector::area_light_shade(ShadeRec& sr) const {
 
 	RGBColor L(Phong::shade(sr));  // direct illumination
 	
@@ -106,8 +104,7 @@ SV_Reflector::area_light_shade(ShadeRec& sr) {
 }
 //This function doesn't appear in book, but needed by 24.43
 
-RGBColor
-SV_Reflector::global_shade(ShadeRec& sr) {
+RGBColor SV_Reflector::global_shade(ShadeRec& sr) {
 	Vector3D 	wo = -sr.ray.d;
 	Vector3D 	wi;	
 	float 		pdf;
@@ -120,8 +117,7 @@ SV_Reflector::global_shade(ShadeRec& sr) {
 		return (fr * sr.w.tracer_ptr->trace_ray(reflected_ray, sr.depth + 1) * (sr.normal * wi) / pdf);
 }
 
-RGBColor
-SV_Reflector::path_shade(ShadeRec& sr) {		
+RGBColor SV_Reflector::path_shade(ShadeRec& sr) const {
 	Vector3D 	wo = -sr.ray.d;
 	Vector3D 	wi;	
 	float 		pdf;

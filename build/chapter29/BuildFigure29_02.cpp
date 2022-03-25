@@ -4,7 +4,7 @@
 //	See the file COPYING.txt for the full license.
 
 
-// This builds the scene for Figure 29.1
+// This builds the scene for Figure 29.2
 
 // Although this build function doesn't render the textures, it defines the textured materials
 // as well as the un-textured (plain) materials.
@@ -637,6 +637,7 @@ void World::build() {
 	int 	num_y_tiles			= 3;							// number of tiles in the y direction
 	
 	
+	// plain material
 	Grid* tiles_ptr = new Grid;
 	
 	for (int ix = 0; ix < num_x_tiles; ix++) {    	// across
@@ -657,7 +658,7 @@ void World::build() {
 	//		texture_ptr->set_max_value(1.0);   // original - now renders darker
 			texture_ptr->set_max_value(1.2);   // new value - lighter
 			
-			TInstance* scaled_texture_ptr = new TInstance(texture_ptr); 
+			TInstance* scaled_texture_ptr = new TInstance(texture_ptr);
 			scaled_texture_ptr->scale(0.5);
 			
 			// the material

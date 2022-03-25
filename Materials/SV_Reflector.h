@@ -12,43 +12,28 @@
 #include "SV_PerfectSpecular.h"
 
 class SV_Reflector: public Phong {	
-	public:
-	
-		SV_Reflector(void);										
+public:
+	SV_Reflector();
 
-		SV_Reflector(const SV_Reflector& rm);						
+	void set_kr(const float k);
+	void set_cr(Texture* t_ptr);
 
-		SV_Reflector& 
-		operator= (const SV_Reflector& rhs);						
+	RGBColor shade(ShadeRec& s) const override;
+	RGBColor area_light_shade(ShadeRec& sr) const override;		//This function doesn't appear in book, but needed by 24.43
+	RGBColor path_shade(ShadeRec& sr) const override;
 
-		virtual SV_Reflector*										
-		clone(void) const;				
+	virtual RGBColor global_shade(ShadeRec& sr);	 // FIXME: does not override
 
-		~SV_Reflector(void);										
-		
-		void
-		set_kr(const float k);
-				
-		void													
-		set_cr(Texture* t_ptr);
-		
-		virtual RGBColor										
-		shade(ShadeRec& s);
+	// Copy API.
+	SV_Reflector * clone() const override;
+	SV_Reflector(const SV_Reflector& rm);
+	SV_Reflector & operator= (const SV_Reflector& rhs);
 
-		virtual RGBColor
-		area_light_shade(ShadeRec& sr);		//This function doesn't appear in book, but needed by 24.43
-		
-		virtual RGBColor
-		global_shade(ShadeRec& sr);	//new for c26
+	~SV_Reflector();
 
-		virtual RGBColor
-		path_shade(ShadeRec& sr);	//new for c26
-
-	private:
-	
-		//PerfectSpecular* reflective_brdf;		
-		SV_PerfectSpecular* reflective_brdf;		
-		Texture *texture_ptr;
+private:
+	SV_PerfectSpecular* reflective_brdf;
+	Texture *texture_ptr;
 };
 
 

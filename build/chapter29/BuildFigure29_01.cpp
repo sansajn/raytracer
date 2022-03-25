@@ -683,27 +683,35 @@ void World::build() {
 			
 			// the noise
 			
+			/*
 			CubicNoise* noise_ptr = new CubicNoise;	
 			noise_ptr->set_num_octaves(4);
 			noise_ptr->set_gain(0.5);	
 			noise_ptr->set_lacunarity(2.0);
+			*/
 			
 			// the texture:
 
+			/*
 			TurbulenceTexture* texture_ptr = new TurbulenceTexture(noise_ptr);			
 			texture_ptr->set_color(0.75, 1.0, 0.85);		// green
 			texture_ptr->set_min_value(0.25);
 	//		texture_ptr->set_max_value(1.0);   // original - now renders darker
 			texture_ptr->set_max_value(1.2);   // new value - lighter
+			*/
 			
+			/*
 			TInstance* scaled_texture_ptr = new TInstance(texture_ptr); 
 			scaled_texture_ptr->scale(0.5);
+			*/
 			
 			// the material
 			
+			/*
 			SV_Reflector* reflector_ptr = new SV_Reflector;
 			reflector_ptr->set_kr(1.0);
 			reflector_ptr->set_cr(scaled_texture_ptr);
+			*/
 			
 			// the tiles
 						
