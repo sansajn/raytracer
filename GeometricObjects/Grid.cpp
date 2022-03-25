@@ -15,8 +15,8 @@
 #include "MeshTriangle.h"
 #include "FlatMeshTriangle.h"
 #include "SmoothMeshTriangle.h"
-//#include "FlatUVMeshTriangle.h"
-//#include "SmoothUVMeshTriangle.h"
+#include "FlatUVMeshTriangle.h"
+#include "SmoothUVMeshTriangle.h"
 #include "Triangle.h"
 #include "SmoothTriangle.h"
 #include "ply.h"
@@ -577,7 +577,7 @@ void Grid::read_uv_ply_file(char const * file_name, const int triangle_type) {
 
 	// open a PLY file for reading
 
-	ply = ply_open_for_reading(file_name, &nelems, &elist, &file_type, &version);
+	ply = ply_open_for_reading(const_cast<char *>(file_name), &nelems, &elist, &file_type, &version);
 
 	// print what we found out about the file
 

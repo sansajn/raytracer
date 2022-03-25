@@ -1,15 +1,11 @@
+/*! \file
+This file contains the declaration of the class ShadeRec. */
 #pragma once
-
-// this file contains the declaration of the class ShadeRec
-
-#include <vector>
 
 class Material;
 class World;
 
-// We need the following as #includes instead of forward class declarations,
-// because we have the objects themselves, not pointers or references
-
+#include <vector>
 #include "Point3D.h"
 #include "Normal.h"
 #include "Ray.h"
@@ -26,7 +22,7 @@ struct ShadeRec {
 	Vector3D dir;  // for area lights
 	World&				w;					// World reference
 	float	t;  //! ray parameter (from ray equation)
-	float u, v;  //!< uv mapping coordinates used by SmoothUVMeshTriangle
+	float u, v;  //!< uv mapping coordinates used by Flat|SmoothUVMeshTriangle
 
 	RGBColor color;  // only used in chapter 3
 
