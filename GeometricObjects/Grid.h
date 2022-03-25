@@ -41,7 +41,9 @@ public:
 	BBox get_bounding_box() override;
 
 	void read_flat_triangles(char const * file_name);
+	void read_flat_uv_triangles(char const * file_name);
 	void read_smooth_triangles(char const * file_name);
+	void read_smooth_uv_triangles(char const * file_name);
 	void tessellate_flat_sphere(const int horizontal_steps, const int vertical_steps);
 	void tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps);
 
@@ -66,8 +68,8 @@ private:
 	Point3D
 	find_max_bounds(void);
 
-	void
-	read_ply_file(char const * file_name, const int triangle_type);
+	void read_ply_file(char const * file_name, const int triangle_type);
+	void read_uv_ply_file(char const * file_name, const int triangle_type);
 
 	void
 	compute_mesh_normals(void);
