@@ -234,32 +234,27 @@ void World::build() {
 	
 	// ************************************************************************************************* Earth sphere
 
-/* not used in figure 29.1
 	// Earth image texture
 	Image* image_ptr2 = new Image;					
 //	image_ptr2->read_ppm_file("EarthLowRes.ppm");
-	image_ptr2->read_ppm_file("EarthHighRes.ppm");
+	image_ptr2->read_ppm_file("assets/EarthHighRes.ppm");
 	SphericalMap* spherical_map_ptr = new SphericalMap;   
 	ImageTexture* image_texture_ptr2 = new ImageTexture(image_ptr2); 
 	image_texture_ptr2->set_mapping(spherical_map_ptr);
-*/
 	
-//	SV_Matte* sv_matte_ptr3 = new SV_Matte;
-//	sv_matte_ptr3->set_ka(0.5);
-//	sv_matte_ptr3->set_kd(0.95);
-//	sv_matte_ptr3->set_cd(image_texture_ptr2);
+	auto sv_matte_ptr3 = make_shared<SV_Matte>();
+	sv_matte_ptr3->set_ka(0.5);
+	sv_matte_ptr3->set_kd(0.95);
+	sv_matte_ptr3->set_cd(image_texture_ptr2);
 	
 	auto sphere_ptr1 = make_shared<Sphere>();
-	sphere_ptr1->set_material(make_shared<Matte>(.5, .5, RGBColor{.2, .5, 1}));				// plain
-//	sphere_ptr1->set_material(sv_matte_ptr3);			// textured with Earth image
+	sphere_ptr1->set_material(sv_matte_ptr3);			// textured with Earth image
 		
 	Instance* sphere_ptr2 = new Instance(sphere_ptr1);
 	sphere_ptr2->rotate_y(75);
 	sphere_ptr2->scale(Vector3D{3});
 	sphere_ptr2->translate({-11, 8, 12});
 	add_object(sphere_ptr2);
-	
-
 
 	// ************************************************************************************************* picture on back wall
 	
@@ -276,31 +271,26 @@ void World::build() {
 	
 	// the image is applied to a rectangle
 	
-/* not used in figure 29.1
 	Image* image_ptr3 = new Image;					
-	image_ptr3->read_ppm_file("BlueGlass.ppm");
+	image_ptr3->read_ppm_file("assets/BlueGlass.ppm");
 	
-//	SquareMap* square_map_ptr = new SquareMap;
 	RectangularMap* square_map_ptr = new RectangularMap;
 	
 	ImageTexture* image_texture_ptr3 = new ImageTexture(image_ptr3); 
 	image_texture_ptr3->set_mapping(square_map_ptr);
-*/
 	
-//	SV_Matte* sv_matte_ptr4 = new SV_Matte;
-//	sv_matte_ptr4->set_ka(0.5);
-//	sv_matte_ptr4->set_kd(0.75);
-//	sv_matte_ptr4->set_cd(image_texture_ptr3);
+	auto sv_matte_ptr4 = make_shared<SV_Matte>();
+	sv_matte_ptr4->set_ka(0.5);
+	sv_matte_ptr4->set_kd(0.75);
+	sv_matte_ptr4->set_cd(image_texture_ptr3);
 	
 	// construct the picture
 	auto rectangle_ptr = make_shared<Rectangle>();
-	rectangle_ptr->set_material(make_shared<Matte>(.75, .5, RGBColor{.3, .65, .71}));  	// plain
-//	rectangle_ptr->set_material(sv_matte_ptr4);  // textured with Blue Glass
+	rectangle_ptr->set_material(sv_matte_ptr4);  // textured with Blue Glass
 	
 	Instance* picture_ptr = new Instance(rectangle_ptr);  
 	picture_ptr->scale({a, 1, b});
 
-	
 	// construct the frame
 	
 	// wood materials for the frame
@@ -647,12 +637,6 @@ void World::build() {
 	int 	num_y_tiles			= 3;							// number of tiles in the y direction
 	
 	
-	// plain material
-	
-	auto reflective_ptr = make_shared<Reflective>();
-	reflective_ptr->set_cr(0.75, 1.0, 0.85);
-	reflective_ptr->set_kr(1.0);
-		
 	Grid* tiles_ptr = new Grid;
 	
 	for (int ix = 0; ix < num_x_tiles; ix++) {    	// across
@@ -678,7 +662,7 @@ void World::build() {
 			
 			// the material
 			
-			SV_Reflector* reflector_ptr = new SV_Reflector;
+			auto reflector_ptr = make_shared<SV_Reflector>();
 			reflector_ptr->set_kr(1.0);
 			reflector_ptr->set_cr(scaled_texture_ptr);
 			
@@ -687,8 +671,7 @@ void World::build() {
 			Point3D p0(tiles_xmin + ix * (tile_size + grout_width), tiles_ymin + iy * (tile_size + grout_width), tiles_zmin);
 			Point3D p1(tiles_xmin + (ix + 1) * tile_size + ix * grout_width, tiles_ymin + (iy + 1) * tile_size + iy * grout_width, tiles_zmax);
 			BeveledBox* tile_ptr = new BeveledBox(p0, p1, tile_bevel_radius);
-			tile_ptr->set_material(reflective_ptr);  	// plain
-//			tile_ptr->set_material(reflector_ptr);		// textured
+			tile_ptr->set_material(reflector_ptr);		// textured
 			tiles_ptr->add_object(tile_ptr);
 		}
 	}
