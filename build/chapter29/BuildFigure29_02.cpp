@@ -183,30 +183,22 @@ void World::build() {
 	
 	// plain material 
 	
-	auto matte_ptr5 = make_shared<Matte>();
-	matte_ptr5->set_ka(0.25);
-	matte_ptr5->set_kd(0.95);
-	matte_ptr5->set_cd(RGBColor{0.1, 0.4, 0.15});
-
 	// textured material for the curved surface
 	// this is a checker image
 
-/*not used in figure 29.1
 	Image* image_ptr1 = new Image;					
-	image_ptr1->read_ppm_file("GreenAndYellow.ppm");
+	image_ptr1->read_ppm_file("assets/GreenAndYellow.ppm");
 	CylindricalMap* cylindrical_map_ptr = new CylindricalMap;   
 	ImageTexture* image_texture_ptr1 = new ImageTexture(image_ptr1); 
 	image_texture_ptr1->set_mapping(cylindrical_map_ptr);
 
-	SV_Matte* sv_matte_ptr1 = new SV_Matte;		
+	auto sv_matte_ptr1 = make_shared<SV_Matte>();
 	sv_matte_ptr1->set_ka(0.25);
 	sv_matte_ptr1->set_kd(0.95);
 	sv_matte_ptr1->set_cd(image_texture_ptr1);
-*/
 	
 	auto cylinder_ptr1 = make_shared<OpenCylinder>(-1.0, 1.0, 1.0);  // default
-	cylinder_ptr1->set_material(matte_ptr5);		// plain
-//	cylinder_ptr1->set_material(sv_matte_ptr1); 	// textured
+	cylinder_ptr1->set_material(sv_matte_ptr1); 	// textured
 	
 	Instance* cylinder_ptr2 = new Instance(cylinder_ptr1); 
 	cylinder_ptr2->translate(Vector3D(0, 1, 0));
@@ -233,8 +225,7 @@ void World::build() {
 	sv_matte_ptr2->set_cd(disk_checker_ptr);
 	
 	auto disk_ptr = make_shared<Disk>();					// default - center (0, 0, 0), radius 1
-	disk_ptr->set_material(matte_ptr5);			// plain
-//	disk_ptr->set_material(sv_matte_ptr2);		// textured
+	disk_ptr->set_material(sv_matte_ptr2);		// textured
 	Instance* cylinder_top_ptr = new Instance(disk_ptr);
 	cylinder_top_ptr->scale({2, 1, 2});
 	cylinder_top_ptr->translate({-11, 5, 12});
