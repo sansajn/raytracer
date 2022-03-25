@@ -127,15 +127,6 @@ void World::build() {
 	
 	// ************************************************************************************************* floor planks
 	
-	// plain material	
-	
-//	auto phong_ptr = make_shared<Phong>();
-//	phong_ptr->set_ka(0.5);
-//	phong_ptr->set_kd(1.0);
-//	phong_ptr->set_ks(0.2);
-//	phong_ptr->set_exp(20.0);
-//	phong_ptr->set_cd(RGBColor{0.5, 0.3, 0.1});
-			
 	// the floor is a simulation of wood planks using beveled boxes with random lengths in the x direction
 	
 	double 	x0 					= -15.0;				// planks start at x = x0
@@ -176,7 +167,6 @@ void World::build() {
 			Point3D p1(p0x + plank_length, y0 + plank_thickness, (iz + 1) * plank_width);
 		
 			BeveledBox* plank_ptr = new BeveledBox(p0, p1, plank_bevel);
-//			plank_ptr->set_material(phong_ptr);			// plain
 			plank_ptr->set_material(sv_phong_ptr);		// textured
 			planks_ptr->add_object(plank_ptr);
 			
@@ -435,7 +425,6 @@ void World::build() {
 	const char* fileName = "assets/Bunny16K.ply";   	// production
 	
 	auto grid_ptr = make_shared<Grid>(mesh_ptr);
-	grid_ptr->reverse_mesh_normals();  // see figure 17.12a build file
 	grid_ptr->read_smooth_triangles(fileName);
 	grid_ptr->set_material(make_shared<Matte>(.25, .75, RGBColor{.85}));			// plain
 //	grid_ptr->set_material(sv_matte_ptr7); 		// textured
