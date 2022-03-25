@@ -21,6 +21,7 @@ class Directional: public Light {
 		void set_direction(float dx, float dy, float dz);
 		
 		RGBColor	L(ShadeRec& sr) override;
+		float G(ShadeRec const & sr) const override;
 		Vector3D	get_direction(ShadeRec& sr) override;
 		bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
 

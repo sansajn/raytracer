@@ -1,6 +1,4 @@
-#ifndef __MATHS__
-#define __MATHS__
-
+#pragma once
 
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
@@ -75,4 +73,28 @@ T degrees(T const & val) {
 	return val * (180.0 * invPI<double>);
 }
 
-#endif
+
+// The following functions are required for the noise classes and the Wood class.
+
+// clamp, mod, mix_color, and smooth_step are RenderMan Shading Language functions
+// They are discussed in Peachey in Ebert et al. (2003), where the RenderMan name for mix_color is mix.
+
+// smooth_pulse and smooth_pulse_train are discussed in Apodaca and Gritz (2000).
+
+double
+mod(double a, const double b);
+
+double
+smooth_pulse(double e0, double e1, double e2, double e3, double x);
+
+double
+smooth_pulse_train(double e0, double e1, double e2, double e3, double period, double x);
+
+double
+smooth_step(double a, double b, double x);
+
+RGBColor
+mix_color(const RGBColor& c0, const RGBColor& c1, const double f);
+
+double
+mix_double(const double a, const double b, const double f);

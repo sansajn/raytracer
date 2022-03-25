@@ -49,6 +49,7 @@ class PointLight: public Light {
 		Vector3D get_direction(ShadeRec& sr) override;
 
 		RGBColor	L(ShadeRec& sr) override;
+		float G(ShadeRec const & sr) const override;
 		float pdf(ShadeRec const & sr) const override;
 
 		bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;

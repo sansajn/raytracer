@@ -29,7 +29,7 @@ engine = cpp.Object([
 	Glob('Lights/*.cpp'),
 	Glob('Mappings/*.cpp'),
 	Glob('Materials/*.cpp'),
-	Glob('Noises/*.cpp'),
+	Glob('Noise/*.cpp'),
 	Glob('Samplers/*.cpp'),
 	Glob('Textures/*.cpp'),
 	Glob('Tracers/*.cpp'),
@@ -49,15 +49,6 @@ fig4_8a = cpp.Object('build/BuildFigure4_8a.cpp')
 fig4_8b = cpp.Object('build/BuildFigure4_8b.cpp')
 fig5_13 = cpp.Object('build/BuildFigure5_13.cpp')
 ch6_title = cpp.Object('build/BuildCh06Title.cpp')  # chapter 6 title image
-fig8_16a = cpp.Object('build/BuildFigure8_16a.cpp')
-fig8_16b = cpp.Object('build/BuildFigure8_16b.cpp')
-fig8_16c = cpp.Object('build/BuildFigure8_16c.cpp')
-fig8_19a = cpp.Object('build/BuildFigure8_19a.cpp')
-fig8_19b = cpp.Object('build/BuildFigure8_19b.cpp')
-fig8_19c = cpp.Object('build/BuildFigure8_19c.cpp')
-fig8_21a = cpp.Object('build/BuildFigure8_21a.cpp')
-fig8_21b = cpp.Object('build/BuildFigure8_21b.cpp')
-fig8_21c = cpp.Object('build/BuildFigure8_21c.cpp')
 
 cpp.Program('fig3_18', ['main.cpp', engine, fig3_18])
 cpp.Program('fig3_20a', ['main.cpp', engine, fig3_20a])
@@ -68,26 +59,44 @@ cpp.Program('fig4_8a', ['main.cpp', engine, fig4_8a])
 cpp.Program('fig4_8b', ['main.cpp', engine, fig4_8b])
 cpp.Program('fig5_13', ['main.cpp', engine, fig5_13])
 cpp.Program('ch06_title', ['main.cpp', engine, ch6_title])
-cpp.Program('fig8_16a', ['main.cpp', engine, fig8_16a])
-cpp.Program('fig8_16b', ['main.cpp', engine, fig8_16b])
-cpp.Program('fig8_16c', ['main.cpp', engine, fig8_16c])
-cpp.Program('fig8_19a', ['main.cpp', engine, fig8_19a])
-cpp.Program('fig8_19b', ['main.cpp', engine, fig8_19b])
-cpp.Program('fig8_19c', ['main.cpp', engine, fig8_19c])
-cpp.Program('fig8_21a', ['main.cpp', engine, fig8_21a])
-cpp.Program('fig8_21b', ['main.cpp', engine, fig8_21b])
-cpp.Program('fig8_21c', ['main.cpp', engine, fig8_21c])
-#cpp.Program('fig8_22a', ['main.cpp', engine, 'build/BuildFigure8_22a.cpp'])
-cpp.Program('ch08_title', ['main.cpp', engine, 'build/BuildCh08Title.cpp'])
-cpp.Program('fig9_9a', ['main.cpp', engine, 'build/BuildFigure9_9a.cpp'])
-cpp.Program('fig9_9b', ['main.cpp', engine, 'build/BuildFigure9_9b.cpp'])
-cpp.Program('fig9_9c', ['main.cpp', engine, 'build/BuildFigure9_9c.cpp'])
-cpp.Program('fig9_10a', ['main.cpp', engine, 'build/BuildFigure9_10a.cpp'])
-cpp.Program('fig9_10b', ['main.cpp', engine, 'build/BuildFigure9_10b.cpp'])
-cpp.Program('fig9_10c', ['main.cpp', engine, 'build/BuildFigure9_10c.cpp'])
-cpp.Program('fig9_11a', ['main.cpp', engine, 'build/BuildFigure9_11a.cpp'])
-cpp.Program('fig9_11b', ['main.cpp', engine, 'build/BuildFigure9_11b.cpp'])
-cpp.Program('fig9_11c', ['main.cpp', engine, 'build/BuildFigure9_11c.cpp'])
+
+# chapter 8
+ch8path = 'build/chapter08/'
+
+ch8 = [
+	cpp.Program('fig8_16a', ['main.cpp', engine, ch8path + 'BuildFigure8_16a.cpp']),
+	cpp.Program('fig8_16b', ['main.cpp', engine, ch8path + 'BuildFigure8_16b.cpp']),
+	cpp.Program('fig8_16c', ['main.cpp', engine, ch8path + 'BuildFigure8_16c.cpp']),
+	cpp.Program('fig8_19a', ['main.cpp', engine, ch8path + 'BuildFigure8_19a.cpp']),
+	cpp.Program('fig8_19b', ['main.cpp', engine, ch8path + 'BuildFigure8_19b.cpp']),
+	cpp.Program('fig8_19c', ['main.cpp', engine, ch8path + 'BuildFigure8_19c.cpp']),
+	cpp.Program('fig8_21a', ['main.cpp', engine, ch8path + 'BuildFigure8_21a.cpp']),
+	cpp.Program('fig8_21b', ['main.cpp', engine, ch8path + 'BuildFigure8_21b.cpp']),
+	cpp.Program('fig8_21c', ['main.cpp', engine, ch8path + 'BuildFigure8_21c.cpp']),
+	#cpp.Program('fig8_22a', ['main.cpp', engine, ch8path + 'BuildFigure8_22a.cpp']),
+	cpp.Program('ch08_title', ['main.cpp', engine, ch8path + 'BuildCh08Title.cpp']),
+]
+
+cpp.Alias('ch8', ch8)
+
+
+# chapter 9
+ch9path = 'build/chapter09/'
+
+ch9 = [
+	cpp.Program('fig9_9a', ['main.cpp', engine, ch9path + 'BuildFigure9_9a.cpp']),
+	cpp.Program('fig9_9b', ['main.cpp', engine, ch9path + 'BuildFigure9_9b.cpp']),
+	cpp.Program('fig9_9c', ['main.cpp', engine, ch9path + 'BuildFigure9_9c.cpp']),
+	cpp.Program('fig9_10a', ['main.cpp', engine, ch9path + 'BuildFigure9_10a.cpp']),
+	cpp.Program('fig9_10b', ['main.cpp', engine, ch9path + 'BuildFigure9_10b.cpp']),
+	cpp.Program('fig9_10c', ['main.cpp', engine, ch9path + 'BuildFigure9_10c.cpp']),
+	cpp.Program('fig9_11a', ['main.cpp', engine, ch9path + 'BuildFigure9_11a.cpp']),
+	cpp.Program('fig9_11b', ['main.cpp', engine, ch9path + 'BuildFigure9_11b.cpp']),
+	cpp.Program('fig9_11c', ['main.cpp', engine, ch9path + 'BuildFigure9_11c.cpp']),
+]
+
+cpp.Alias('ch9', ch9)
+
 
 # chapter 10
 ch10path = 'build/chapter10/'
@@ -359,6 +368,41 @@ ch26 = [
 
 cpp.Alias('ch26', ch26)
 
+
+# chapter 28
+ch28path = 'build/chapter28/'
+
+ch28 = [
+	cpp.Program('fig28_05a', ['main.cpp', engine, ch28path + 'BuildFigure28_05a.cpp']),
+	cpp.Program('fig28_05b', ['main.cpp', engine, ch28path + 'BuildFigure28_05b.cpp']),
+]
+
+cpp.Alias('ch28', ch28)
+
+
+# chapter 29
+ch29path = 'build/chapter29/'
+
+ch29 = [
+	cpp.Program('fig29_01', ['main.cpp', engine, ch29path + 'BuildFigure29_01.cpp']),
+	cpp.Program('fig29_02', ['main.cpp', engine, ch29path + 'BuildFigure29_02.cpp']),
+	cpp.Program('fig29_04', ['main.cpp', engine, ch29path + 'BuildFigure29_04.cpp']),
+	cpp.Program('fig29_06', ['main.cpp', engine, ch29path + 'BuildFigure29_06.cpp']),
+	cpp.Program('fig29_09a', ['main.cpp', engine, ch29path + 'BuildFigure29_09a.cpp']),
+	cpp.Program('fig29_09b', ['main.cpp', engine, ch29path + 'BuildFigure29_09b.cpp']),
+	cpp.Program('fig29_10b', ['main.cpp', engine, ch29path + 'BuildFigure29_10b.cpp']),
+	cpp.Program('fig29_11b', ['main.cpp', engine, ch29path + 'BuildFigure29_11b.cpp']),
+	cpp.Program('fig29_12b', ['main.cpp', engine, ch29path + 'BuildFigure29_12b.cpp']),
+	cpp.Program('fig29_13', ['main.cpp', engine, ch29path + 'BuildFigure29_13.cpp']),
+	cpp.Program('fig29_16', ['main.cpp', engine, ch29path + 'BuildFigure29_16.cpp']),
+	cpp.Program('fig29_19a', ['main.cpp', engine, ch29path + 'BuildFigure29_19a.cpp']),
+	cpp.Program('fig29_19b', ['main.cpp', engine, ch29path + 'BuildFigure29_19b.cpp']),
+	cpp.Program('fig29_19c', ['main.cpp', engine, ch29path + 'BuildFigure29_19c.cpp']),
+	cpp.Program('fig29_22a', ['main.cpp', engine, ch29path + 'BuildFigure29_22a.cpp']),
+	cpp.Program('fig29_22b', ['main.cpp', engine, ch29path + 'BuildFigure29_22b.cpp']),
+]
+
+cpp.Alias('ch29', ch29)
 
 
 # other samples

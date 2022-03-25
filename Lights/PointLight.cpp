@@ -64,6 +64,10 @@ RGBColor PointLight::L(ShadeRec &) {
 	return (ls * color);
 }
 
+float PointLight::G(ShadeRec const & sr) const {
+	return 1.0;  // just return default value there
+}
+
 float PointLight::pdf(ShadeRec const & sr) const {
 	return 1.0;
 }

@@ -7,7 +7,6 @@
 class SV_Lambertian : public BRDF {
 public:
 	SV_Lambertian();
-	SV_Lambertian(SV_Lambertian const & lamb);
 	void set_ka(float const k);
 	void set_kd(float const k);
 	void set_cd(Texture const * t);
@@ -15,7 +14,9 @@ public:
 	RGBColor f(ShadeRec const & sr, Vector3D const & wo, Vector3D const & wi) const override;
 	RGBColor sample_f(ShadeRec const & sr, Vector3D const & wo, Vector3D & wi) const override;
 
-	BRDF * clone() const override;
+	//! Copy API.
+	SV_Lambertian(SV_Lambertian const & lamb);
+	SV_Lambertian * clone() const override;
 
 private:
 	float kd;

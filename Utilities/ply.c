@@ -728,8 +728,10 @@ PlyFile *ply_read(FILE *fp, int *nelems, char ***elem_names)
   /* read and parse the file's header */
 
   words = get_words (plyfile->fp, &nwords, &orig_line);
-  if (!words || !equal_strings (words[0], "ply"))
+  if (!words || !equal_strings (words[0], "ply")) {
+	 assert(!(words && !strncmp(words[0], "ply\r", 4)) && "we expect unix line endings");
     return (NULL);
+  }
 
   while (words) {
 

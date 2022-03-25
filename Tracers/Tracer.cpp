@@ -11,8 +11,15 @@ Tracer::Tracer(World* _worldPtr)
 
 RGBColor Tracer::trace_ray(Ray const &) const {
 	throw default_implementation{__PRETTY_FUNCTION__};
+//	return black;
 }
 
 RGBColor	Tracer::trace_ray(Ray const, int const) const {
 	throw default_implementation{__PRETTY_FUNCTION__};
+//	return black;
+}
+
+RGBColor Tracer::trace_ray(Ray const ray, double & t, const int depth) const {
+	throw default_implementation{__PRETTY_FUNCTION__};
+//return white;
 }
