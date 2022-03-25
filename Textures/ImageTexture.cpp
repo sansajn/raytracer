@@ -121,7 +121,7 @@ ImageTexture::get_color(const ShadeRec& sr) const {
 	else {
 		row 	= (int)(sr.v * (vres - 1));  	
 		column 	= (int)(sr.u * (hres - 1));
-		throw std::runtime_error{"sr.u|v always set to 0"};
+//		throw std::runtime_error{"sr.u|v always set to 0"};
 	}
 	
 	return (image_ptr->get_color(row, column));

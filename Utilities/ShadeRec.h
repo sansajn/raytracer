@@ -15,8 +15,7 @@ class World;
 #include "Ray.h"
 #include "RGBColor.h"
 
-class ShadeRec {
-public:
+struct ShadeRec {
 	bool				hit_an_object;		// Did the ray hit an object?
 	Material const * material_ptr;		// Pointer to the nearest object's material
 	Point3D 			hit_point;			// World coordinates of intersection
@@ -26,11 +25,11 @@ public:
 	int					depth;				// recursion depth
 	Vector3D dir;  // for area lights
 	World&				w;					// World reference
-	float				t;					// ray parameter
-	float u, v;  // uv mapping coordinates
+	float	t;  //! ray parameter (from ray equation)
+	float u, v;  //!< uv mapping coordinates used by SmoothUVMeshTriangle
 
-	RGBColor            color;  // only used in chapter 3
+	RGBColor color;  // only used in chapter 3
 
-	ShadeRec(World& wr);					// constructor
-	ShadeRec(const ShadeRec& sr);			// copy constructor
+	explicit ShadeRec(World & wr);
+	ShadeRec(ShadeRec const & sr);
 };

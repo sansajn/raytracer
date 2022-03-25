@@ -27,57 +27,50 @@
 //---------------------------------------------------------------------- class Grid
 
 class Grid: public Compound {										  	
-	public:
-		Grid();
-		Grid(Mesh* _mesh_ptr);    										
-		Grid * clone() const override;
-		Grid(Grid const & rg);
+public:
+	Grid();
+	Grid(Mesh* _mesh_ptr);
+	Grid * clone() const override;
+	Grid(Grid const & rg);
 
-		Grid& 								
-		operator= (const Grid& rhs);	
+	Grid&
+	operator= (const Grid& rhs);
 
-		virtual ~Grid();
+	virtual ~Grid();
 
-		BBox get_bounding_box() override;
+	BBox get_bounding_box() override;
 
-		void												
-		read_flat_triangles(char const * file_name);
+	void read_flat_triangles(char const * file_name);
+	void read_smooth_triangles(char const * file_name);
+	void tessellate_flat_sphere(const int horizontal_steps, const int vertical_steps);
+	void tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps);
 
-		void												
-		read_smooth_triangles(char const * file_name);
+	bool hit(Ray const & ray, double& tmin, ShadeRec& sr) const override;
+	bool shadow_hit(Ray const & ray, double & tmin) const override;
 
-		void												
-		tessellate_flat_sphere(const int horizontal_steps, const int vertical_steps);
+	void setup_cells();
+	void reverse_mesh_normals();
+	void store_material(std::shared_ptr<Material> material, const int index);
 
-		void												
-		tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps);
+private:
 
-		bool hit(Ray const & ray, double& tmin, ShadeRec& sr) const override;
-		bool shadow_hit(Ray const & ray, double & tmin) const override;
+	std::vector<GeometricObject*>	cells;			// grid of cells
+	int							nx, ny, nz;    	// number of cells in the x, y, and z directions
+	BBox						bbox;			// bounding box
+	Mesh*						mesh_ptr;		// holds triangle data
+	bool						reverse_normal;	// some PLY files have normals that point inwards
 
-		void setup_cells();
-		void reverse_mesh_normals();
-		void store_material(std::shared_ptr<Material> material, const int index);
+	Point3D
+	find_min_bounds(void);
 
-	private: 
+	Point3D
+	find_max_bounds(void);
 
-		std::vector<GeometricObject*>	cells;			// grid of cells
-		int							nx, ny, nz;    	// number of cells in the x, y, and z directions
-		BBox						bbox;			// bounding box
-		Mesh*						mesh_ptr;		// holds triangle data
-		bool						reverse_normal;	// some PLY files have normals that point inwards
+	void
+	read_ply_file(char const * file_name, const int triangle_type);
 
-		Point3D
-		find_min_bounds(void);
-
-		Point3D
-		find_max_bounds(void);
-
-		void
-		read_ply_file(char const * file_name, const int triangle_type);
-
-		void
-		compute_mesh_normals(void);	
+	void
+	compute_mesh_normals(void);
 };
 
 
