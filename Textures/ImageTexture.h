@@ -6,7 +6,7 @@
 //	This C++ code is licensed under the GNU General Public License Version 2.
 //	See the file COPYING.txt for the full license.
 
-
+#include <memory>
 #include "Image.h"
 #include "Mappings/Mapping.h"
 #include "Texture.h"
@@ -23,14 +23,12 @@ class ImageTexture: public Texture {
 		ImageTexture& 										
 		operator= (const ImageTexture& rhs);		
 
-		virtual ImageTexture*								
-		clone(void) const;				
+		ImageTexture *	clone(void) const override;
 
 		virtual
 		~ImageTexture(void) ;								
 		
-		virtual RGBColor																				
-		get_color(const ShadeRec& sr) const;
+		RGBColor	get_color(const ShadeRec& sr) const override;
 						
 		void
 		set_image(Image* _image_ptr);
