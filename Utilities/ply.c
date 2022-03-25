@@ -729,7 +729,7 @@ PlyFile *ply_read(FILE *fp, int *nelems, char ***elem_names)
 
   words = get_words (plyfile->fp, &nwords, &orig_line);
   if (!words || !equal_strings (words[0], "ply")) {
-	 assert(words && !equal_strings(words[0], "ply\r") && "use unix line endings");
+	 assert(!(words && !strncmp(words[0], "ply\r", 4)) && "we expect unix line endings");
     return (NULL);
   }
 

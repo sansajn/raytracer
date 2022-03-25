@@ -385,6 +385,7 @@ ch29path = 'build/chapter29/'
 
 ch29 = [
 	cpp.Program('fig29_01', ['main.cpp', engine, ch29path + 'BuildFigure29_01.cpp']),
+	cpp.Program('fig29_02', ['main.cpp', engine, ch29path + 'BuildFigure29_02.cpp']),
 	cpp.Program('fig29_04', ['main.cpp', engine, ch29path + 'BuildFigure29_04.cpp']),
 	cpp.Program('fig29_06', ['main.cpp', engine, ch29path + 'BuildFigure29_06.cpp']),
 	cpp.Program('fig29_09a', ['main.cpp', engine, ch29path + 'BuildFigure29_09a.cpp']),

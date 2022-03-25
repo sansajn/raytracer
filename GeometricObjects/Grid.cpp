@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <cassert>
 #include "Constants.h"
 #include "Vector3D.h"
 #include "Point3D.h"
@@ -383,6 +384,7 @@ Grid::read_ply_file(char const * file_name, const int triangle_type) {
   	// open a ply file for reading
   
 	ply = ply_open_for_reading(const_cast<char *>(file_name), &nelems, &elist, &file_type, &version);
+	assert(ply && "unable to read PLY file");
 	
   	// print what we found out about the file
   
