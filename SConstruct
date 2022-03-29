@@ -412,6 +412,11 @@ ch30 = [
 	cpp.Program('fig30_01b', ['main.cpp', engine, ch30path + 'BuildFigure30_01b.cpp']),
 	cpp.Program('fig30_01c', ['main.cpp', engine, ch30path + 'BuildFigure30_01c.cpp']),
 	cpp.Program('fig30_02', ['main.cpp', engine, ch30path + 'BuildFigure30_02.cpp']),
+	cpp.Program('fig30_04', ['main.cpp', engine, ch30path + 'BuildFigure30_04.cpp']),
+	cpp.Program('fig30_06a', ['main.cpp', engine, ch30path + 'BuildFigure30_06a.cpp']),
+	cpp.Program('fig30_06b', ['main.cpp', engine, ch30path + 'BuildFigure30_06b.cpp']),
+	cpp.Program('fig30_06c', ['main.cpp', engine, ch30path + 'BuildFigure30_06c.cpp']),
+	cpp.Program('fig30_06d', ['main.cpp', engine, ch30path + 'BuildFigure30_06d.cpp']),
 ]
 
 cpp.Alias('ch30', ch30)
