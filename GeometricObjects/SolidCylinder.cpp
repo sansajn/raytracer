@@ -2,6 +2,25 @@
 #include "SolidCylinder.h"
 #include "Disk.h"
 
+SolidCylinder::SolidCylinder() {
+	add_object(new Disk(	Point3D(0, -1, 0), 			// bottom
+									Normal(0, -1, 0),
+									1));
+
+	add_object(new Disk(	Point3D(0, 1, 0), 			// top
+									Normal(0, 1, 0),
+									1));
+
+	add_object(new OpenCylinder(-1, 1, 1));	// wall
+
+	bbox.x0 = -1;
+	bbox.y0 = -1;
+	bbox.z0 = -1;
+	bbox.x1 = 1;
+	bbox.y1 = 1;
+	bbox.z1 = 1;
+}
+
 SolidCylinder::SolidCylinder(const double bottom, const double top, const double radius)
 	: Compound() {
 
