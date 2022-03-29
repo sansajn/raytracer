@@ -2,15 +2,17 @@
 #include <iostream>
 #include "World/World.h"
 
-using std::cout, std::chrono::steady_clock, std::chrono::duration_cast, std::chrono::milliseconds;
+using std::cout, std::endl;
+using std::chrono::steady_clock, std::chrono::duration_cast, std::chrono::milliseconds;
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
+	cout << "create scene ..." << endl;
 	World w;
 	w.build();
 
 	auto t0 = steady_clock::now();
 
+	cout << "rendering ..." << endl;
 	w.camera()->render_scene(w);
 
 	auto dt = steady_clock::now() - t0;
