@@ -411,6 +411,7 @@ ch30 = [
 	cpp.Program('fig30_01a', ['main.cpp', engine, ch30path + 'BuildFigure30_01a.cpp']),
 	cpp.Program('fig30_01b', ['main.cpp', engine, ch30path + 'BuildFigure30_01b.cpp']),
 	cpp.Program('fig30_01c', ['main.cpp', engine, ch30path + 'BuildFigure30_01c.cpp']),
+	cpp.Program('fig30_02', ['main.cpp', engine, ch30path + 'BuildFigure30_02.cpp']),
 ]
 
 cpp.Alias('ch30', ch30)

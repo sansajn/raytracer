@@ -13,7 +13,7 @@ public:
 	GeometricObject();
 
 	virtual bool hit(Ray const & ray, double & tmin, ShadeRec & sr) const = 0;
-	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;
+	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;  // TODO: some code calculate shadows with floats, check book to verify this
 	virtual GeometricObject * clone() const = 0;
 
 	bool casts_shadows() const;
