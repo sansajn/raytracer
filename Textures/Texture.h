@@ -15,19 +15,15 @@
 #include "../Utilities/RGBColor.h"
 
 class Texture {
-  public:
-		Texture() = default;
+public:
+	Texture() = default;
 
-      Texture(const Texture& texture);
+	virtual RGBColor get_color(const ShadeRec& sr) const = 0;
 
-      virtual Texture*
-      clone(void) const = 0;
+	// Copy API.
+	Texture(const Texture& texture);
+	Texture & operator=(const Texture& rhs);
+	virtual Texture* clone(void) const = 0;
 
-      Texture&
-      operator= (const Texture& rhs);
-
-		virtual ~Texture() = default;
-
-      virtual RGBColor
-      get_color(const ShadeRec& sr) const = 0;
+	virtual ~Texture() = default;
 };

@@ -19,8 +19,7 @@ class TurbulenceTexture: public Texture {
 
 		TurbulenceTexture(LatticeNoise*);
 				
-		virtual TurbulenceTexture*									
-		clone(void) const;	
+		TurbulenceTexture * clone(void) const override;
 
 		virtual 											
 		~TurbulenceTexture(void);
@@ -37,8 +36,7 @@ class TurbulenceTexture: public Texture {
 		void set_max_value(float);
 		//
 	
-		virtual RGBColor 																			
-		get_color(const ShadeRec& sr) const;
+		RGBColor get_color(const ShadeRec& sr) const override;
 	
 	private:
 	
