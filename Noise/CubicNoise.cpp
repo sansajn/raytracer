@@ -75,9 +75,8 @@ float CubicNoise::value_noise(const Point3D& p) const {
 		zknots[k+1] = four_knot_spline(fy, yknots);
 	}
 
-	//    return (clamp(four_knot_spline(fz, zknots), -1.0, 1.0));
-	float f = four_knot_spline(fz, zknots);  // uncoment to render figure 31.18
-	return f;
+//	return four_knot_spline(fz, zknots);  // NOTE: uncoment to render figure 31.18
+	return (clamp(four_knot_spline(fz, zknots), -1.0f, 1.0f));
 }
 
 
