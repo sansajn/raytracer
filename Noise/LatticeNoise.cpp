@@ -269,23 +269,23 @@ LatticeNoise::value_turbulence(const Point3D& p) const {
 //---------------------------------------------------------------------------------------- value_fbm
 // this returns a value in the range [0, 1]
 
-float 							
-LatticeNoise::value_fbm(const Point3D& p) const {
-	float 	amplitude 	= 1.0;
-	float	frequency 	= 1.0;
-	float 	fbm		 	= 0.0;
+float LatticeNoise::value_fbm(const Point3D& p) const {
+	float amplitude = 1.0;
+	float	frequency = 1.0;
+	float fbm = 0.0;
 			
 	for (int j = 0; j < num_octaves; j++) {
-		fbm 		+= amplitude * value_noise(frequency * p); 
-		amplitude 	*= gain; 
-		frequency 	*= lacunarity;
+		fbm += amplitude * value_noise(frequency * p);
+		amplitude *= gain;
+		frequency *= lacunarity;
 	}
 	
 	// following only works for fbm \in [fbm_min, fbm_max]
 	assert(fbm >= fbm_min && fbm <= fbm_max);
 	fbm = (fbm - fbm_min) / (fbm_max - fbm_min);  // map to [0, 1]
 		
-	return (fbm);
+	assert(fbm >= .0f && fbm <= 1.0f);  // fbm not in [0,1] range
+	return fbm;
 }
 
 
