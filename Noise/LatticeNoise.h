@@ -73,7 +73,7 @@ public:
 	// turbulence (no vector version)
 	virtual float value_turbulence(const Point3D& p) const;
 
-	// fbm
+	// fbm (Fractional Brownian Motion)
 	virtual float value_fbm(const Point3D& p) const;
 	virtual Vector3D vector_fbm(const Point3D& p) const;
 

@@ -255,7 +255,7 @@ LatticeNoise::value_turbulence(const Point3D& p) const {
 		
 	for (int j = 0 ; j < num_octaves; j++) {
 		turbulence	+= amplitude * fabs(value_noise(frequency * p));
-//		turbulence	+= amplitude * sqrt(fabs(value_noise(frequency * p)));  // for the thin lines in Figure 30.6 (c) & (d)
+//		turbulence	+= amplitude * sqrt(fabs(value_noise(frequency * p)));  // NOTE: uncoment for the thin lines in Figure 30.6 (c) & (d)
 		amplitude 	*= 0.5;
 		frequency 	*= 2.0;
 	}

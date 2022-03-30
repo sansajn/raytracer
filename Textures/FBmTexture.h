@@ -9,6 +9,7 @@
 #include "Texture.h"
 #include "Noise/LatticeNoise.h"
 
+//! Fractional Brownian Motion texture.
 class FBmTexture: public Texture {			
 public:
 	FBmTexture() = default;
