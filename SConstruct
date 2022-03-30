@@ -435,6 +435,10 @@ ch31path = 'build/chapter31/'
 
 ch31 = [
 	cpp.Program('fig31_18', ['main.cpp', engine, ch31path + 'BuildFigure31_18.cpp']),
+	cpp.Program('fig31_21a', ['main.cpp', engine, ch31path + 'BuildFigure31_21a.cpp']),
+	cpp.Program('fig31_21b', ['main.cpp', engine, ch31path + 'BuildFigure31_21b.cpp']),
+	cpp.Program('fig31_21c', ['main.cpp', engine, ch31path + 'BuildFigure31_21c.cpp']),
+	cpp.Program('fig31_21d', ['main.cpp', engine, ch31path + 'BuildFigure31_21d.cpp']),
 ]
 
 cpp.Alias('ch31', ch31)

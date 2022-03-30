@@ -63,7 +63,7 @@ public:
 	LatticeNoise(int octaves, float lacunarity, float gain);
 
 	// noise
-	virtual float value_noise(const Point3D& p) const = 0;
+	virtual float value_noise(const Point3D& p) const = 0;  //!< \return returns values in [-1,1] range
 	virtual Vector3D vector_noise(const Point3D& p) const = 0;
 
 	// fractal sum

@@ -281,10 +281,10 @@ float LatticeNoise::value_fbm(const Point3D& p) const {
 	}
 	
 	// following only works for fbm \in [fbm_min, fbm_max]
-	assert(fbm >= fbm_min && fbm <= fbm_max);
+//	assert(fbm >= fbm_min && fbm <= fbm_max);
 	fbm = (fbm - fbm_min) / (fbm_max - fbm_min);  // map to [0, 1]
 		
-	assert(fbm >= .0f && fbm <= 1.0f);  // fbm not in [0,1] range
+//	assert(fbm >= .0f && fbm <= 1.0f);  // fbm not in [0,1] range
 	return fbm;
 }
 
