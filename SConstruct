@@ -430,6 +430,16 @@ ch30 = [
 cpp.Alias('ch30', ch30)
 
 
+# chapter 31
+ch31path = 'build/chapter31/'
+
+ch31 = [
+	cpp.Program('fig31_18', ['main.cpp', engine, ch31path + 'BuildFigure31_18.cpp']),
+]
+
+cpp.Alias('ch31', ch31)
+
+
 
 # other samples
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
