@@ -443,6 +443,12 @@ ch31 = [
 	cpp.Program('fig31_23b', ['main.cpp', engine, ch31path + 'BuildFigure31_23b.cpp']),
 	cpp.Program('fig31_23c', ['main.cpp', engine, ch31path + 'BuildFigure31_23c.cpp']),
 	cpp.Program('fig31_23d', ['main.cpp', engine, ch31path + 'BuildFigure31_23d.cpp']),
+	cpp.Program('fig31_25a', ['main.cpp', engine, ch31path + 'BuildFigure31_25a.cpp']),
+	cpp.Program('fig31_25b', ['main.cpp', engine, ch31path + 'BuildFigure31_25b.cpp']),
+	cpp.Program('fig31_25c', ['main.cpp', engine, ch31path + 'BuildFigure31_25c.cpp']),
+	cpp.Program('fig31_25d', ['main.cpp', engine, ch31path + 'BuildFigure31_25d.cpp']),
+	cpp.Program('fig31_25e', ['main.cpp', engine, ch31path + 'BuildFigure31_25e.cpp']),
+	cpp.Program('fig31_25f', ['main.cpp', engine, ch31path + 'BuildFigure31_25f.cpp']),
 ]
 
 cpp.Alias('ch31', ch31)
