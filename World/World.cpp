@@ -125,15 +125,11 @@ World::max_to_one(const RGBColor& c) const  {
 // ------------------------------------------------------------------ clamp_to_color
 // Set color to red if any component is greater than one
 
-RGBColor
-World::clamp_to_color(const RGBColor& raw_color) const {
-	RGBColor c(raw_color);
-
-	if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0) {
-		c.r = 1.0; c.g = 0.0; c.b = 0.0;
-	}
-
-	return (c);
+RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
+	if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0)
+		return red;
+	else
+		return raw_color;
 }
 
 
@@ -148,8 +144,7 @@ World::clamp_to_color(const RGBColor& raw_color) const {
 // the function SetCPixel is a Mac OS function
 
 
-void
-World::display_pixel(const int row, const int column, const RGBColor& raw_color) const {
+void World::display_pixel(const int row, const int column, const RGBColor& raw_color) const {
 	RGBColor mapped_color;
 
 	if (vp.show_out_of_gamut)

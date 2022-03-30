@@ -13,16 +13,6 @@ FBmTexture::FBmTexture(LatticeNoise* n) {
 }
 
 
-// ---------------------------------------------------------------- assignment operator
-
-Texture& 
-FBmTexture::operator= (const FBmTexture& rhs) {
-	if (this == &rhs)
-		return (*this);
-		
-	return (*this);
-}
-
 // ---------------------------------------------------------------- clone
 
 FBmTexture*										
@@ -32,9 +22,6 @@ FBmTexture::clone(void) const {
 
 
 // ---------------------------------------------------------------- destructor
-
-FBmTexture::~FBmTexture(void) {
-}
 
 RGBColor 														
 FBmTexture::get_color(const ShadeRec& sr) const {

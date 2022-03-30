@@ -10,33 +10,20 @@
 #include "Noise/LatticeNoise.h"
 
 class FBmTexture: public Texture {			
-	public:
-		FBmTexture() = default;
-		FBmTexture(LatticeNoise*);
-				
-		FBmTexture * clone() const override;
+public:
+	FBmTexture() = default;
+	FBmTexture(LatticeNoise*);
+	void set_color(RGBColor c);
+	void set_min_value(float);
+	void set_max_value(float);
+	RGBColor	get_color(const ShadeRec& sr) const override;
 
-		virtual 											
-		~FBmTexture(void);
+	FBmTexture * clone() const override;
 
-		Texture& 											
-		operator= (const FBmTexture& rhs);		
-		
-		void set_color(RGBColor c);  
-
-		void set_min_value(float);  
-		
-		void set_max_value(float);
-		//
-	
-		RGBColor
-		get_color(const ShadeRec& sr) const override;
-	
-	private:
-	
-		LatticeNoise*		noise_ptr;
-		RGBColor 	  		color;					
-		float		  		min_value, max_value;	// scaling factors
+private:
+	LatticeNoise*		noise_ptr;
+	RGBColor 	  		color;
+	float		  		min_value, max_value;	// scaling factors
 };
 
 inline void 
