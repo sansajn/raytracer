@@ -26,6 +26,7 @@ void World::build() {
 	vp.set_hres(600);     
 	vp.set_vres(600);    
 	vp.set_samples(num_samples);
+	vp.show_out_of_gamut = true;
 	
 	background_color = black;
 	tracer_ptr = new RayCast(this);

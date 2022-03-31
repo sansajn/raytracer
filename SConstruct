@@ -469,6 +469,7 @@ ch31 = [
 	cpp.Program('fig31_33a', ['main.cpp', engine, ch31path + 'BuildFigure31_33a.cpp']),
 	cpp.Program('fig31_33b', ['main.cpp', engine, ch31path + 'BuildFigure31_33b.cpp']),
 	cpp.Program('fig31_33c', ['main.cpp', engine, ch31path + 'BuildFigure31_33c.cpp']),
+	cpp.Program('fig31_38', ['main.cpp', engine, ch31path + 'BuildFigure31_38.cpp']),
 ]
 
 cpp.Alias('ch31', ch31)
