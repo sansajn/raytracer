@@ -25,14 +25,14 @@ void World::build() {
 
 	auto pinhole_ptr = make_unique<Pinhole>();
 		
-	pinhole_ptr->set_eye({0, 0, 10});       	// for Figure 8.22(a)
-	pinhole_ptr->set_view_distance(1687);
+//	pinhole_ptr->set_eye({0, 0, 10});       	// for Figure 8.22(a)
+//	pinhole_ptr->set_view_distance(1687);
 	
-//	pinhole_ptr->set_eye(0, 0, 5);       	// for Figure 8.22(b)
+//	pinhole_ptr->set_eye({0, 0, 5});       	// for Figure 8.22(b)
 //	pinhole_ptr->set_view_distance(750);
 	
-//	pinhole_ptr->set_eye({0, 0, 2.5});       	// for Figure 8.22(c)
-//	pinhole_ptr->set_view_distance(280);
+	pinhole_ptr->set_eye({0, 0, 2.5});       	// for Figure 8.22(c)
+	pinhole_ptr->set_view_distance(280);
 	
 	pinhole_ptr->set_lookat(Point3D{0});
 	pinhole_ptr->compute_uvw(); 

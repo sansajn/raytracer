@@ -101,7 +101,9 @@ ch8 = [
 	cpp.Program('fig8_21a', ['main.cpp', engine, ch8path + 'BuildFigure8_21a.cpp']),
 	cpp.Program('fig8_21b', ['main.cpp', engine, ch8path + 'BuildFigure8_21b.cpp']),
 	cpp.Program('fig8_21c', ['main.cpp', engine, ch8path + 'BuildFigure8_21c.cpp']),
-	#cpp.Program('fig8_22a', ['main.cpp', engine, ch8path + 'BuildFigure8_22a.cpp']),
+	cpp.Program('fig8_22a', ['main.cpp', engine, ch8path + 'BuildFigure8_22a.cpp']),
+	cpp.Program('fig8_22b', ['main.cpp', engine, ch8path + 'BuildFigure8_22b.cpp']),
+	cpp.Program('fig8_22c', ['main.cpp', engine, ch8path + 'BuildFigure8_22c.cpp']),
 	cpp.Program('ch08_title', ['main.cpp', engine, ch8path + 'BuildCh08Title.cpp']),
 ]
 
