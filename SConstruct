@@ -42,25 +42,51 @@ engine = cpp.Object([
 
 #shaded_objects = cpp.Object('build/BuildShadedObjects.cpp')
 
-fig3_18 = cpp.Object('build/BuildFigure3_18.cpp')
-fig3_20a = cpp.Object('build/BuildFigure3_20a.cpp')
-ch3_title = cpp.Object('build/BuildCh3Title.cpp')  # chapter 3 title image
-fig4_4a = cpp.Object('build/BuildFigure4_4a.cpp')
-fig4_4b = cpp.Object('build/BuildFigure4_4b.cpp')
-fig4_8a = cpp.Object('build/BuildFigure4_8a.cpp')
-fig4_8b = cpp.Object('build/BuildFigure4_8b.cpp')
-fig5_13 = cpp.Object('build/BuildFigure5_13.cpp')
-ch6_title = cpp.Object('build/BuildCh06Title.cpp')  # chapter 6 title image
 
-cpp.Program('fig3_18', ['main.cpp', engine, fig3_18])
-cpp.Program('fig3_20a', ['main.cpp', engine, fig3_20a])
-cpp.Program('ch3_title', ['main.cpp', engine, ch3_title])
-cpp.Program('fig4_4a', ['main.cpp', engine, fig4_4a])
-cpp.Program('fig4_4b', ['main.cpp', engine, fig4_4b])
-cpp.Program('fig4_8a', ['main.cpp', engine, fig4_8a])
-cpp.Program('fig4_8b', ['main.cpp', engine, fig4_8b])
-cpp.Program('fig5_13', ['main.cpp', engine, fig5_13])
-cpp.Program('ch06_title', ['main.cpp', engine, ch6_title])
+# chapter 3
+ch3path = 'build/chapter03/'
+
+ch3 = [
+	cpp.Program('fig3_18', ['main.cpp', engine, ch3path + 'BuildFigure3_18.cpp']),
+	cpp.Program('fig3_20a', ['main.cpp', engine, ch3path + 'BuildFigure3_20a.cpp']),
+	cpp.Program('ch3_title', ['main.cpp', engine, ch3path + 'BuildCh3Title.cpp']),
+]
+
+cpp.Alias('ch3', ch3)
+
+
+# chapter 4
+ch4path = 'build/chapter04/'
+
+ch4 = [
+	cpp.Program('fig4_4a', ['main.cpp', engine, ch4path + 'BuildFigure4_4a.cpp']),
+	cpp.Program('fig4_4b', ['main.cpp', engine, ch4path + 'BuildFigure4_4b.cpp']),
+	cpp.Program('fig4_8a', ['main.cpp', engine, ch4path + 'BuildFigure4_8a.cpp']),
+	cpp.Program('fig4_8b', ['main.cpp', engine, ch4path + 'BuildFigure4_8b.cpp']),
+]
+
+cpp.Alias('ch4', ch4)
+
+
+# chapter 5
+ch5path = 'build/chapter05/'
+
+ch5 = [
+	cpp.Program('fig5_13', ['main.cpp', engine, ch3path + 'BuildFigure5_13.cpp']),
+]
+
+cpp.Alias('ch5', ch5)
+
+
+# chapter 6
+ch6path = 'build/chapter06/'
+
+ch6 = [
+	cpp.Program('ch06_title', ['main.cpp', engine, ch6path + 'BuildCh06Title.cpp'])
+]
+
+cpp.Alias('ch6', ch6)
+
 
 # chapter 8
 ch8path = 'build/chapter08/'
