@@ -37,6 +37,7 @@ RGBColor const dark_purple(0.5, 0.0, 1.0);
 RGBColor const cyan{0,1,1};
 RGBColor const gray{.5};
 RGBColor const blue{0,0,1};
+RGBColor const light_blue{.5, .75, 1};
 RGBColor const pale_blue{.5, .75, 1};
 RGBColor const majenta{.75, 0, .75};
 

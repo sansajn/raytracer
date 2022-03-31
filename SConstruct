@@ -2,8 +2,10 @@
 
 # TODO: implement --with-ui to build against wxwidget as interface
 
+ccflags = ['-Wall', '-O0', '-ggdb3']
+
 cpp = Environment(
-	CCFLAGS=['-Wall', '-O0', '-ggdb3'],
+	CCFLAGS=ccflags,
 	CXXFLAGS=['--std=c++17'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
@@ -428,6 +430,49 @@ ch30 = [
 ]
 
 cpp.Alias('ch30', ch30)
+
+
+# chapter 31
+ch31path = 'build/chapter31/'
+
+ch31 = [
+	cpp.Program('fig31_18', ['main.cpp', engine, ch31path + 'BuildFigure31_18.cpp']),
+	cpp.Program('fig31_21a', ['main.cpp', engine, ch31path + 'BuildFigure31_21a.cpp']),
+	cpp.Program('fig31_21b', ['main.cpp', engine, ch31path + 'BuildFigure31_21b.cpp']),
+	cpp.Program('fig31_21c', ['main.cpp', engine, ch31path + 'BuildFigure31_21c.cpp']),
+	cpp.Program('fig31_21d', ['main.cpp', engine, ch31path + 'BuildFigure31_21d.cpp']),
+	cpp.Program('fig31_23a', ['main.cpp', engine, ch31path + 'BuildFigure31_23a.cpp']),
+	cpp.Program('fig31_23b', ['main.cpp', engine, ch31path + 'BuildFigure31_23b.cpp']),
+	cpp.Program('fig31_23c', ['main.cpp', engine, ch31path + 'BuildFigure31_23c.cpp']),
+	cpp.Program('fig31_23d', ['main.cpp', engine, ch31path + 'BuildFigure31_23d.cpp']),
+	cpp.Program('fig31_25a', ['main.cpp', engine, ch31path + 'BuildFigure31_25a.cpp']),
+	cpp.Program('fig31_25b', ['main.cpp', engine, ch31path + 'BuildFigure31_25b.cpp']),
+	cpp.Program('fig31_25c', ['main.cpp', engine, ch31path + 'BuildFigure31_25c.cpp']),
+	cpp.Program('fig31_25d', ['main.cpp', engine, ch31path + 'BuildFigure31_25d.cpp']),
+	cpp.Program('fig31_25e', ['main.cpp', engine, ch31path + 'BuildFigure31_25e.cpp']),
+	cpp.Program('fig31_25f', ['main.cpp', engine, ch31path + 'BuildFigure31_25f.cpp']),
+	cpp.Program('fig31_26a', ['main.cpp', engine, ch31path + 'BuildFigure31_26a.cpp']),
+	cpp.Program('fig31_26b', ['main.cpp', engine, ch31path + 'BuildFigure31_26b.cpp']),
+	cpp.Program('fig31_26c', ['main.cpp', engine, ch31path + 'BuildFigure31_26c.cpp']),
+	cpp.Program('fig31_26d', ['main.cpp', engine, ch31path + 'BuildFigure31_26d.cpp']),
+	cpp.Program('fig31_26e', ['main.cpp', engine, ch31path + 'BuildFigure31_26e.cpp']),
+	cpp.Program('fig31_27a', ['main.cpp', engine, ch31path + 'BuildFigure31_27a.cpp']),
+	cpp.Program('fig31_27b', ['main.cpp', engine, ch31path + 'BuildFigure31_27b.cpp']),
+	cpp.Program('fig31_27c', ['main.cpp', engine, ch31path + 'BuildFigure31_27c.cpp']),
+	cpp.Program('fig31_28a', ['main.cpp', engine, ch31path + 'BuildFigure31_28a.cpp']),
+	cpp.Program('fig31_28b', ['main.cpp', engine, ch31path + 'BuildFigure31_28b.cpp']),
+	cpp.Program('fig31_29a', ['main.cpp', engine, ch31path + 'BuildFigure31_29a.cpp']),
+	cpp.Program('fig31_29b', ['main.cpp', engine, ch31path + 'BuildFigure31_29b.cpp']),
+	cpp.Program('fig31_29c', ['main.cpp', engine, ch31path + 'BuildFigure31_29c.cpp']),
+	cpp.Program('fig31_32a', ['main.cpp', engine, ch31path + 'BuildFigure31_32a.cpp']),
+	cpp.Program('fig31_32b', ['main.cpp', engine, ch31path + 'BuildFigure31_32b.cpp']),
+	cpp.Program('fig31_33a', ['main.cpp', engine, ch31path + 'BuildFigure31_33a.cpp']),
+	cpp.Program('fig31_33b', ['main.cpp', engine, ch31path + 'BuildFigure31_33b.cpp']),
+	cpp.Program('fig31_33c', ['main.cpp', engine, ch31path + 'BuildFigure31_33c.cpp']),
+	cpp.Program('fig31_38', ['main.cpp', engine, ch31path + 'BuildFigure31_38.cpp']),
+]
+
+cpp.Alias('ch31', ch31)
 
 
 

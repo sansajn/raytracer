@@ -6,6 +6,7 @@
 
 // This file contains the definition of the class LatticeNoise
 
+#include <cassert>
 #include "Constants.h"
 #include "Maths.h"
 #include "LatticeNoise.h"
@@ -104,22 +105,15 @@ LatticeNoise::operator= (const LatticeNoise& rhs) {
 	return (*this);
 }
 
-
-//---------------------------------------------------------------------------------------- destructor										
-
-LatticeNoise::~LatticeNoise(void) {}
-
-
 //---------------------------------------------------------------------------------------- init_value_table
 
 // This initialises the integer lattice of PRN's. 
 // It's based on valueTabInit in Peachey (2003).	
 
-void
-LatticeNoise::init_value_table(int seed_value) {
-    set_rand_seed(seed_value);
-    for (int i = 0; i < kTableSize; i++)
-    	value_table[i] = 1.0 - 2.0 * rand_float();   // In the range [-1, +1]
+void LatticeNoise::init_value_table(int seed_value) {
+	set_rand_seed(seed_value);
+	for (int i = 0; i < kTableSize; i++)
+		value_table[i] = 1.0f - 2.0f * rand_float();   // In the range [-1, +1]
 }
 
 
@@ -155,7 +149,7 @@ LatticeNoise::init_vector_table(int seed_value) {
     	Point2D sample_point = sample_ptr->sample_one_set();  // on the unit square
     	r1 	= sample_point.x;
     	r2 	= sample_point.y;
-    	z 	= 1.0 - 2.0 * r1;
+		z 	= 1.0 - 2.0 * r1;  // FIXME: double aritmetics
     	r 	= sqrt(1.0 - z * z);
 		phi = TWO_PI<float> * r2;
     	x 	= r * cos(phi);
@@ -261,7 +255,7 @@ LatticeNoise::value_turbulence(const Point3D& p) const {
 		
 	for (int j = 0 ; j < num_octaves; j++) {
 		turbulence	+= amplitude * fabs(value_noise(frequency * p));
-//		turbulence	+= amplitude * sqrt(fabs(value_noise(frequency * p)));  // for the thin lines in Figure 30.6 (c) & (d)
+//		turbulence	+= amplitude * sqrt(fabs(value_noise(frequency * p)));  // NOTE: uncoment for the thin lines in Figure 30.6 (c) & (d)
 		amplitude 	*= 0.5;
 		frequency 	*= 2.0;
 	}
@@ -275,21 +269,23 @@ LatticeNoise::value_turbulence(const Point3D& p) const {
 //---------------------------------------------------------------------------------------- value_fbm
 // this returns a value in the range [0, 1]
 
-float 							
-LatticeNoise::value_fbm(const Point3D& p) const {
-	float 	amplitude 	= 1.0;
-	float	frequency 	= 1.0;
-	float 	fbm		 	= 0.0;
+float LatticeNoise::value_fbm(const Point3D& p) const {
+	float amplitude = 1.0;
+	float	frequency = 1.0;
+	float fbm = 0.0;
 			
 	for (int j = 0; j < num_octaves; j++) {
-		fbm 		+= amplitude * value_noise(frequency * p); 
-		amplitude 	*= gain; 
-		frequency 	*= lacunarity;
+		fbm += amplitude * value_noise(frequency * p);
+		amplitude *= gain;
+		frequency *= lacunarity;
 	}
 	
+	// following only works for fbm \in [fbm_min, fbm_max]
+//	assert(fbm >= fbm_min && fbm <= fbm_max);
 	fbm = (fbm - fbm_min) / (fbm_max - fbm_min);  // map to [0, 1]
 		
-	return (fbm);
+//	assert(fbm >= .0f && fbm <= 1.0f);  // fbm not in [0,1] range
+	return fbm;
 }
 
 
