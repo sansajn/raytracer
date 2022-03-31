@@ -2,8 +2,10 @@
 
 # TODO: implement --with-ui to build against wxwidget as interface
 
+ccflags = ['-Wall', '-O0', '-ggdb3']
+
 cpp = Environment(
-	CCFLAGS=['-Wall', '-O0', '-ggdb3'],
+	CCFLAGS=ccflags,
 	CXXFLAGS=['--std=c++17'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
@@ -462,6 +464,11 @@ ch31 = [
 	cpp.Program('fig31_29a', ['main.cpp', engine, ch31path + 'BuildFigure31_29a.cpp']),
 	cpp.Program('fig31_29b', ['main.cpp', engine, ch31path + 'BuildFigure31_29b.cpp']),
 	cpp.Program('fig31_29c', ['main.cpp', engine, ch31path + 'BuildFigure31_29c.cpp']),
+	cpp.Program('fig31_32a', ['main.cpp', engine, ch31path + 'BuildFigure31_32a.cpp']),
+	cpp.Program('fig31_32b', ['main.cpp', engine, ch31path + 'BuildFigure31_32b.cpp']),
+	cpp.Program('fig31_33a', ['main.cpp', engine, ch31path + 'BuildFigure31_33a.cpp']),
+	cpp.Program('fig31_33b', ['main.cpp', engine, ch31path + 'BuildFigure31_33b.cpp']),
+	cpp.Program('fig31_33c', ['main.cpp', engine, ch31path + 'BuildFigure31_33c.cpp']),
 ]
 
 cpp.Alias('ch31', ch31)
