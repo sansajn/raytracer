@@ -1,4 +1,4 @@
-# dependencies: libwxgtk3.0-gtk3-dev libmagick++-dev
+# dependencies: libwxgtk3.0-gtk3-dev libmagick++-dev libtbb-dev
 
 # TODO: implement --with-ui to build against wxwidget as interface
 
@@ -16,7 +16,7 @@ cpp = Environment(
 )
 
 cpp.ParseConfig('wx-config --cflags --libs')
-cpp.ParseConfig('pkg-config --cflags --libs Magick++')
+cpp.ParseConfig('pkg-config --cflags --libs Magick++ tbb')
 
 import os
 if 'TERM' in os.environ:
@@ -508,6 +508,7 @@ cpp.Alias('ch31', ch31)
 cpp.Program('instance', ['main.cpp', engine, 'build/instance.cpp'])
 cpp.Program('open_part_cylinder', ['main.cpp', engine, 'build/open_part_cylinder.cpp'])
 cpp.Program('smooth_triangle', ['main.cpp', engine, 'build/smooth_triangle.cpp'])
+cpp.Program('pinhole_mt', ['main.cpp', engine, 'build/pinhole_mt.cpp'])
 
 # tests
 cpp.Program('test/test', [

@@ -1,5 +1,6 @@
 // this file contains the definition of the World class
 
+#include <vector>
 #include <fstream>
 #include <ctime>
 #include <iomanip>
@@ -47,7 +48,7 @@
 
 //#include "BuildShadedObjects.cpp"
 
-using std::unique_ptr;
+using std::unique_ptr, std::vector;
 using namespace Magick;
 
 
@@ -145,15 +146,7 @@ RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
 
 
 void World::display_pixel(const int row, const int column, const RGBColor& raw_color) const {
-	RGBColor mapped_color;
-
-	if (vp.show_out_of_gamut)
-		mapped_color = clamp_to_color(raw_color);
-	else
-		mapped_color = max_to_one(raw_color);
-
-	if (vp.gamma != 1.0)
-		mapped_color = mapped_color.powc(vp.inv_gamma);
+	RGBColor mapped_color = map_to_pixel_color(raw_color);
 
 /*
 	//have to start from max y coordinate to convert to screen coordinates
@@ -164,9 +157,25 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
 									  (int)(mapped_color.g * 255),
 									  (int)(mapped_color.b * 255));
 */
-	pixels.push_back((int)(mapped_color.r * 255));
-	pixels.push_back((int)(mapped_color.g * 255));
-	pixels.push_back((int)(mapped_color.b * 255));
+
+//	pixels.push_back((int)(mapped_color.r * 255));
+//	pixels.push_back((int)(mapped_color.g * 255));
+//	pixels.push_back((int)(mapped_color.b * 255));
+	pixels[row * vp.hres + column] = mapped_color;
+}
+
+RGBColor World::map_to_pixel_color(RGBColor const & raw_color) const {
+	RGBColor mapped_color;
+
+	if (vp.show_out_of_gamut)
+		mapped_color = clamp_to_color(raw_color);
+	else
+		mapped_color = max_to_one(raw_color);
+
+	if (vp.gamma != 1.0)
+		mapped_color = mapped_color.powc(vp.inv_gamma);
+
+	return mapped_color;
 }
 
 // ----------------------------------------------------------------------------- hit_objects
@@ -217,46 +226,35 @@ World::hit_bare_bones_objects(const Ray &ray) {
 	return(sr);
 }
 
-
-//------------------------------------------------------------------ save_to_ppm
-
-void
-World::save_to_ppm(void) const {
-	std::time_t t = std::time(nullptr);
-	std::tm tm = *std::localtime(&t);
-	std::stringstream imageFile;
-	imageFile << "./image_" << std::put_time(&tm, "%Y%m%e%H%M%S") << ".ppm";
-
-	std::ofstream ofs;
-	ofs.open(imageFile.str().c_str(), std::ios::out | std::ios::binary);
-	ofs << "P6\n" << vp.hres << " " << vp.vres << "\n255\n";
-
-	// images are stored from top to bottom so flip pixels
-	for (int r = vp.vres-1; r >= 0; --r) {
-		int idx = r*vp.vres*3;
-		uint8_t * p = pixels.data() + idx;
-		for (int c = 0; c < vp.hres; ++c) {
-			ofs << *(p++);
-			ofs << *(p++);
-			ofs << *(p++);
-		}
-	}
-
-	ofs.close();
-}
-
 void World::save_to_png() const {
 	std::time_t t = std::time(nullptr);
 	std::tm tm = *std::localtime(&t);
 	std::stringstream fname;
 	fname << "./image_" << std::put_time(&tm, "%Y%m%e%H%M%S") << ".png";
 
-	Image im;
-	im.read(vp.hres, vp.vres, "RGB", StorageType::CharPixel, pixels.data());
-	im.flip();  // images are stored from top to bottom
-	im.write(fname.str().c_str());
-}
+	// first, convert RGBColor to RGB bytes
+	vector<uint8_t> bytes(size(pixels) * 3);
 
+	size_t const w = vp.hres,
+		h = vp.vres;
+
+	for (size_t r = 0; r < h; ++r) {  // TODO: we should use copy algorithm there (it can be optimized)
+		for (size_t c = 0; c < w; ++c) {
+			RGBColor const & rgb = pixels[c + (r*w)];
+			size_t x = c;
+			size_t y = h - r - 1;
+			size_t idx = x + (w*y);
+			uint8_t * p = &bytes[idx*3];
+			*p++ = uint8_t(rgb.r * 255);
+			*p++ = uint8_t(rgb.g * 255);
+			*p = uint8_t(rgb.b * 255);
+		}
+	}
+
+	Image im;
+	im.read(w, h, "RGB", StorageType::CharPixel, bytes.data());
+	im.write(fname.str());
+}
 
 //------------------------------------------------------------------ delete_objects
 

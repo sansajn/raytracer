@@ -37,7 +37,7 @@ class World {
 		std::vector<GeometricObject*>	objects;
 		std::vector<Light*> 				lights;
 		
-		mutable std::vector<uint8_t> pixels;
+		mutable std::vector<RGBColor> pixels;
 
 	public:
 		World();
@@ -61,10 +61,10 @@ class World {
 		RGBColor	max_to_one(const RGBColor& c) const;
 		RGBColor	clamp_to_color(const RGBColor& c) const;
 		void display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
+		RGBColor map_to_pixel_color(RGBColor const & raw_color) const;
 		ShadeRec	hit_objects(const Ray& ray);
 		ShadeRec	hit_bare_bones_objects(const Ray &ray);  //!< \note the function is only used in chapter 3
 
-		void save_to_ppm() const;
 		void save_to_png() const;
 						
 	private:

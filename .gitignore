@@ -1,5 +1,6 @@
 *.o
 /.sconsign.dblite
+/.qtc_clangd
 /raytracer
 /raytracer.*
 
@@ -45,4 +46,4 @@
 /fig31_*
 /open_part_cylinder
 /smooth_triangle
-
+/pinhole_mt

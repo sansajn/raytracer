@@ -11,12 +11,13 @@ public:
 	void set_view_distance(const float vpd);
 	void set_zoom(const float zoom_factor);
 	Vector3D	get_direction(const Point2D& p) const;
-
 	void render_scene(const World& w) override;
+	float view_plane_distance() const {return _d;}
+	float zoom() const {return _zoom;}
 
 	Pinhole * clone() const override;
 
 private:
-	float	d;		// view plane distance
-	float	zoom;	// zoom factor
+	float	_d;		// view plane distance
+	float	_zoom;	// zoom factor
 };
