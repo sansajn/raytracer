@@ -72,7 +72,7 @@ cpp.Alias('ch4', ch4)
 ch5path = 'build/chapter05/'
 
 ch5 = [
-	cpp.Program('fig5_13', ['main.cpp', engine, ch3path + 'BuildFigure5_13.cpp']),
+	cpp.Program('fig5_13', ['main.cpp', engine, ch5path + 'BuildFigure5_13.cpp']),
 ]
 
 cpp.Alias('ch5', ch5)
