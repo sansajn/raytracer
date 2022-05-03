@@ -31,8 +31,8 @@ using std::make_unique, std::make_shared, std::move;
 class AttenuatedPointLight : public PointLight {
 public:
 	RGBColor L(ShadeRec & sr) override {
-		double d = location.distance(sr.local_hit_point);
-		return ls*color * 1.0/(d*d);  // FIX: this doesn't work as expected ...
+		double d = location.distance(sr.hit_point);
+		return ls*color * 1.0/(d*d);
 	}
 };
 
@@ -53,15 +53,15 @@ void World::build(){
 	background_color = RGBColor(0.0, 0.3 * a, 0.25 * a);  // torquise
 			
 	auto pinhole_ptr = make_unique<Pinhole>();
-	pinhole_ptr->set_eye(75, 30, 100);
-	pinhole_ptr->set_lookat(-1, 3.7, 0); 
+	pinhole_ptr->set_eye({75, 30, 100});
+	pinhole_ptr->set_lookat({-1, 3.7, 0});
 	pinhole_ptr->set_view_distance(800); 
 	pinhole_ptr->compute_uvw(); 
 	set_camera(move(pinhole_ptr));
 	
-	AttenuatedPointLight * light_ptr1 = new AttenuatedPointLight;
-	light_ptr1->set_location(15, 15, 2.5); 
-	light_ptr1->scale_radiance(2.0);	
+	auto * light_ptr1 = new AttenuatedPointLight;
+	light_ptr1->set_location({15, 15, 2.5});
+	light_ptr1->scale_radiance(300*2.0);
 	add_light(light_ptr1);					// for Figure 14.11 (a) and (b)
 	
 	Directional* light_ptr2 = new Directional;

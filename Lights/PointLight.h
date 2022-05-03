@@ -95,12 +95,3 @@ inline void
 PointLight::set_location(const Point3D& p) {
 	location = p;
 }
-
-
-
-//inline void
-//PointLight::set_location(float x, float y, float z) {
-//	location.x = x;
-//	location.y = y;
-//	location.z = z;
-//}

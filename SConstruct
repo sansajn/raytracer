@@ -176,6 +176,7 @@ ch14 = [
 	cpp.Program('fig14_05', ['main.cpp', engine, ch14path + 'BuildFigure14_05.cpp']),
 	cpp.Program('fig14_07', ['main.cpp', engine, ch14path + 'BuildFigure14_07.cpp']),
 	cpp.Program('fig14_10', ['main.cpp', engine, ch14path + 'BuildFigure14_10.cpp']),
+	cpp.Program('fig14_11a', ['main.cpp', engine, ch14path + 'BuildFigure14_11a.cpp']),
 	cpp.Program('fig14_11b', ['main.cpp', engine, ch14path + 'BuildFigure14_11b.cpp']),
 	cpp.Program('fig14_11c', ['main.cpp', engine, ch14path + 'BuildFigure14_11c.cpp']),
 	cpp.Program('fig14_15', ['main.cpp', engine, ch14path + 'BuildFigure14_15.cpp']),
