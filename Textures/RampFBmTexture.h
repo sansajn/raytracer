@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include <cstddef>
 #include "Texture.h"
 #include "Image.h"
 #include "Noise/LatticeNoise.h"

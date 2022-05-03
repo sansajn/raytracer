@@ -34,11 +34,11 @@ void World::build() {
 	fisheye_ptr->set_eye(Point3D{0});
 	fisheye_ptr->set_lookat({0, 0, -100});
 	
-	fisheye_ptr->set_fov(180);			// For Figure 11.8(a)
+//	fisheye_ptr->set_fov(180);			// For Figure 11.8(a)
 //	fisheye_ptr->set_fov(360);	 		// For Figure 11.8(b)
 	
-//	fisheye_ptr->set_lookat(0, 100, 0);	// For Figure 11.8(c) - camera looks vertically up
-//	fisheye_ptr->set_fov(200);		
+	fisheye_ptr->set_lookat({0, 100, 0});	// For Figure 11.8(c) - camera looks vertically up
+	fisheye_ptr->set_fov(200);
 	
 	fisheye_ptr->compute_uvw(); 
 	set_camera(move(fisheye_ptr));

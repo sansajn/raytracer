@@ -11,8 +11,10 @@ Under *Ubuntu 20.04 LTS*
 - install dependencies with
 
 ```bash
-sudo apt install scons g++ libwxgtk3.0-gtk3-dev
+sudo apt install scons g++ pkg-conifg libwxgtk3.0-gtk3-dev libmagick++-dev libtbb-dev libboost-dev libboost-stacktrace-dev
 ```
+
+> for whole boost library just install `libboost-all-dev` package
 
 command, then
 

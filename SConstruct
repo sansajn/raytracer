@@ -157,6 +157,8 @@ ch11 = [
 	cpp.Program('fig11_7e', ['main.cpp', engine, ch11path + 'BuildFigure11_7e.cpp']),
 	cpp.Program('fig11_7f', ['main.cpp', engine, ch11path + 'BuildFigure11_7f.cpp']),
 	cpp.Program('fig11_08a', ['main.cpp', engine, ch11path + 'BuildFigure11_08a.cpp']),
+	cpp.Program('fig11_08b', ['main.cpp', engine, ch11path + 'BuildFigure11_08b.cpp']),
+	cpp.Program('fig11_08c', ['main.cpp', engine, ch11path + 'BuildFigure11_08c.cpp']),
 	cpp.Program('fig11_11a', ['main.cpp', engine, ch11path + 'BuildFigure11_11a.cpp']),
 	cpp.Program('fig11_11b', ['main.cpp', engine, ch11path + 'BuildFigure11_11b.cpp']),
 	cpp.Program('fig11_12a', ['main.cpp', engine, ch11path + 'BuildFigure11_12a.cpp']),
