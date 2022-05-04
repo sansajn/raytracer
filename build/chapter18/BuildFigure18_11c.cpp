@@ -63,9 +63,9 @@ void World::build(void) {
 	
 	constexpr float ka = 0.2,  // commom ambient reflection coefficient
 		ks = 1.0,  // commom specular reflection coefficient
-		exp = 10.0;  // for Figure 18.11(a)
-//	float exp = 50.0;   	// for Figure 18.11(b)
-//	float exp = 200.0;   	// for Figure 18.11(c)
+//		exp = 10.0;  // for Figure 18.11(a)
+//		exp = 50.0;   	// for Figure 18.11(b)
+		exp = 200.0;   	// for Figure 18.11(c)
 	RGBColor cs(1, 0, 0); 	// common specular color
 	
 	// large sphere

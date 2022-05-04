@@ -272,7 +272,10 @@ ch18 = [
 	cpp.Program('fig18_10a', ['main.cpp', engine, ch18path + 'BuildFigure18_10a.cpp']),
 	cpp.Program('fig18_10b', ['main.cpp', engine, ch18path + 'BuildFigure18_10b.cpp']),
 	cpp.Program('fig18_10c', ['main.cpp', engine, ch18path + 'BuildFigure18_10c.cpp']),
-	cpp.Program('fig18_10d', ['main.cpp', engine, ch18path + 'BuildFigure18_10d.cpp'])
+	cpp.Program('fig18_10d', ['main.cpp', engine, ch18path + 'BuildFigure18_10d.cpp']),
+	cpp.Program('fig18_11a', ['main.cpp', engine, ch18path + 'BuildFigure18_11a.cpp']),
+	cpp.Program('fig18_11b', ['main.cpp', engine, ch18path + 'BuildFigure18_11b.cpp']),
+	cpp.Program('fig18_11c', ['main.cpp', engine, ch18path + 'BuildFigure18_11c.cpp']),
 ]
 
 cpp.Alias('ch18', ch18)
