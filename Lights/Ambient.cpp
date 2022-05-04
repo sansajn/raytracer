@@ -42,12 +42,6 @@ Ambient::operator= (const Ambient& rhs) {
 	return (*this);
 }
 
-
-// ---------------------------------------------------------------------- destructor																			
-
-Ambient::~Ambient (void) {}
-
-
 // ---------------------------------------------------------------------- get_direction	
 
 Vector3D								

@@ -10,6 +10,8 @@
 #include "Cameras/Pinhole.h"
 #include "Lights/PointLight.h"
 #include "Materials/SV_Matte.h"
+#include "Textures/ConeChecker.h"
+#include "GeometricObjects/OpenCone.h"
 
 using std::make_unique, std::make_shared, std::move;
 
@@ -29,12 +31,12 @@ void World::build() {
 	set_camera(move(pinhole_ptr));
 		
 	PointLight* light_ptr = new PointLight;
-	light_ptr->set_location(10, 5, 20);		
+	light_ptr->set_location({10, 5, 20});
 	light_ptr->scale_radiance(3.0);
 	light_ptr->set_shadows(false);
 	add_light(light_ptr);
 	
-	ConeChecker* checker_ptr = new ConeChecker;  // TODO: implement ConeChecker
+	ConeChecker* checker_ptr = new ConeChecker;
 	checker_ptr->set_color1(0.85);
 	checker_ptr->set_color2(0.85);
 	checker_ptr->set_line_color(black);
@@ -43,12 +45,12 @@ void World::build() {
 	checker_ptr->set_num_vertical_checkers(10);
 	checker_ptr->set_num_horizontal_checkers(14);
 	
-	SV_Matte* sv_matte_ptr = new SV_Matte;		
+	auto sv_matte_ptr = make_shared<SV_Matte>();
 	sv_matte_ptr->set_ka(0.25);
 	sv_matte_ptr->set_kd(0.85); 
 	sv_matte_ptr->set_cd(checker_ptr);	
 	
-	OpenCone* cone_ptr = new OpenCone;  // TODO: implement OpenCone
+	OpenCone* cone_ptr = new OpenCone;
 	cone_ptr->set_material(sv_matte_ptr);
 	add_object(cone_ptr);
 }

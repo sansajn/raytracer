@@ -1,49 +1,29 @@
-#ifndef __AMBIENT__
-#define __AMBIENT__
-
+#pragma once
 #include "Light.h"
 
 class Ambient: public Light {
-	public:
-	
-		Ambient(void);   							
+public:
+	Ambient(void);
 
-		Ambient(const Ambient& a); 					 
+	void scale_radiance(const float b);
+	void set_color(const float c);
+	void set_color(const RGBColor& c);
+	void set_color(const float r, const float g, const float b);
+
+	Vector3D	get_direction(ShadeRec& s) override;
+	RGBColor L(ShadeRec& s) override;
+
+	// Copy API.
+	Light * clone(void) const override;
+	Ambient(const Ambient& a);
+	Ambient & operator=(const Ambient& rhs);
+
+	~Ambient() = default;
 	
-		virtual Light* 									
-		clone(void) const;	
-		
-		Ambient& 									
-		operator= (const Ambient& rhs);									
-		
-		virtual 									
-		~Ambient(void);
-				
-		void
-		scale_radiance(const float b);
-		
-		void
-		set_color(const float c);
-		
-		void
-		set_color(const RGBColor& c);
-		
-		void
-		set_color(const float r, const float g, const float b); 
-		
-		virtual Vector3D								
-		get_direction(ShadeRec& s); 
-		
-		virtual RGBColor
-		L(ShadeRec& s);
-	
-	private:
-	
-		float		ls;
-		RGBColor	color;
+private:
+	float		ls;
+	RGBColor	color;
 };
-
-
 
 
 // ------------------------------------------------------------------------------- scale_radiance
@@ -75,6 +55,3 @@ inline void
 Ambient::set_color(const float r, const float g, const float b) {
 	color.r = r; color.g = g; color.b = b;
 }
-
-
-#endif

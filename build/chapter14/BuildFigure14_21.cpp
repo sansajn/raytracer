@@ -29,14 +29,14 @@ void World::build() {
 	set_ambient_light(ambient_ptr);
 	
 	auto pinhole_ptr = make_unique<Pinhole>();
-	pinhole_ptr->set_eye(0, 0, 500);
-	pinhole_ptr->set_lookat(-5, 0, 0); 
+	pinhole_ptr->set_eye({0, 0, 500});
+	pinhole_ptr->set_lookat({-5, 0, 0});
 	pinhole_ptr->set_view_distance(850.0);
 	pinhole_ptr->compute_uvw();     
 	set_camera(move(pinhole_ptr));
 	
 	PointLight* light_ptr2 = new PointLight;
-	light_ptr2->set_location(100, 50, 150);
+	light_ptr2->set_location({100, 50, 150});
 	light_ptr2->scale_radiance(3.0); 
 	add_light(light_ptr2);
 

@@ -32,8 +32,8 @@ void World::build(){
 	background_color = RGBColor(0.0, 0.3 * a, 0.25 * a);  // torquise
 			
 	auto pinhole_ptr = make_unique<Pinhole>();
-	pinhole_ptr->set_eye(7.5, 4, 10); 
-	pinhole_ptr->set_lookat(-1, 3.7, 0);  
+	pinhole_ptr->set_eye({7.5, 4, 10});
+	pinhole_ptr->set_lookat({-1, 3.7, 0});
 	pinhole_ptr->set_view_distance(340);		
 	pinhole_ptr->compute_uvw(); 
 	set_camera(move(pinhole_ptr));
