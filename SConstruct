@@ -276,6 +276,7 @@ ch18 = [
 	cpp.Program('fig18_11a', ['main.cpp', engine, ch18path + 'BuildFigure18_11a.cpp']),
 	cpp.Program('fig18_11b', ['main.cpp', engine, ch18path + 'BuildFigure18_11b.cpp']),
 	cpp.Program('fig18_11c', ['main.cpp', engine, ch18path + 'BuildFigure18_11c.cpp']),
+	cpp.Program('fig18_title', ['main.cpp', engine, ch18path + 'BuildFigure18_title.cpp']),
 ]
 
 cpp.Alias('ch18', ch18)

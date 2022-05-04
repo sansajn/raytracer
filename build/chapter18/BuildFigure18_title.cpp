@@ -25,9 +25,11 @@
 #include "GeometricObjects/Sphere.h"
 #include "GeometricObjects/SolidCylinder.h"
 #include "GeometricObjects/ConcaveSphere.h"
+#include "GeometricObjects/ConcaveHemisphere.h"
 #include "Lights/AmbientOccluder.h"
 #include "Lights/EnvironmentLight.h"
 #include "Lights/Directional.h"
+#include "Lights/JitteredDirectional.h"
 #include "Utilities/Random.h"
 
 using std::make_unique, std::make_shared, std::move;
