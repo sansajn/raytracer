@@ -70,3 +70,7 @@ bool Directional::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 	else
 		return false;  // shadows off
 }
+
+float Directional::pdf(ShadeRec const & sr) const {
+	return 1.0f;
+}

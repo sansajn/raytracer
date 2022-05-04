@@ -14,6 +14,8 @@ public:
 	Vector3D get_direction(ShadeRec & sr) override;
 	bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
 	RGBColor L(ShadeRec & sr) override;
+	float G(ShadeRec const & sr) const override;
+	float pdf(ShadeRec const & sr) const override;
 
 	AmbientOccluder * clone() const override;
 	AmbientOccluder(AmbientOccluder const & rhs);

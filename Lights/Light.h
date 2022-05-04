@@ -8,7 +8,7 @@ class Light {
 public:
 	Light();
 
-	bool casts_shadows() const;
+	bool casts_shadows() const;  // TODO: rename to cast_shadows?
 	void set_shadows(bool shadows);
 	virtual RGBColor L(ShadeRec & sr);
 	virtual float G(ShadeRec const & sr) const;
@@ -16,8 +16,9 @@ public:
 	virtual Vector3D get_direction(ShadeRec& sr) = 0;
 	virtual float pdf(ShadeRec const & sr) const;  //!< Area shading support. \sa AreaLight
 
+	// Copy API.
 	virtual Light * clone() const = 0;
-	Light & operator=(const Light& rhs);
+	Light & operator=(Light const & rhs);
 
 	virtual ~Light() = default;
 

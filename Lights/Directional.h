@@ -10,29 +10,30 @@
 
 
 class Directional: public Light {
-	public:
-		Directional();
+public:
+	Directional();
 
-		void scale_radiance(const float b);
-		void set_color(const float c);
-		void set_color(const RGBColor& c);
-		void set_color(const float r, const float g, const float b);
-		void set_direction(Vector3D d);  //!< \param d [in] direction to light
-		void set_direction(float dx, float dy, float dz);
-		
-		RGBColor	L(ShadeRec& sr) override;
-		float G(ShadeRec const & sr) const override;
-		Vector3D	get_direction(ShadeRec& sr) override;
-		bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
+	void scale_radiance(const float b);
+	void set_color(const float c);
+	void set_color(const RGBColor& c);
+	void set_color(const float r, const float g, const float b);
+	void set_direction(Vector3D d);  //!< \param d [in] direction to light
+	void set_direction(float dx, float dy, float dz);
 
-		// Copy API.
-		Light * clone() const override;
-		Directional & operator=(Directional const & rhs);
+	RGBColor	L(ShadeRec& sr) override;
+	float G(ShadeRec const & sr) const override;
+	Vector3D	get_direction(ShadeRec& sr) override;
+	bool in_shadow(Ray const & ray, ShadeRec const & sr) const override;
+	float pdf(ShadeRec const & sr) const override;
 
-	private:
-		float		ls;			
-		RGBColor	color;
-		Vector3D	dir;		// direction the light comes from
+	// Copy API.
+	Light * clone() const override;
+	Directional & operator=(Directional const & rhs);
+
+private:
+	float		ls;
+	RGBColor	color;
+	Vector3D	dir;		// direction the light comes from
 };
 
 

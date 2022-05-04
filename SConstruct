@@ -268,7 +268,7 @@ ch18 = [
 	cpp.Program('fig18_07c', ['main.cpp', engine, ch18path + 'BuildFigure18_07c.cpp']),
 	cpp.Program('fig18_08a', ['main.cpp', engine, ch18path + 'BuildFigure18_08a.cpp']),
 	cpp.Program('fig18_08b', ['main.cpp', engine, ch18path + 'BuildFigure18_08b.cpp']),
-	#cpp.Program('fig18_09', ['main.cpp', engine, ch18path + 'BuildFigure18_09.cpp']),
+	cpp.Program('fig18_09', ['main.cpp', engine, ch18path + 'BuildFigure18_09.cpp']),
 	cpp.Program('fig18_10a', ['main.cpp', engine, ch18path + 'BuildFigure18_10a.cpp']),
 	cpp.Program('fig18_10b', ['main.cpp', engine, ch18path + 'BuildFigure18_10b.cpp']),
 	cpp.Program('fig18_10c', ['main.cpp', engine, ch18path + 'BuildFigure18_10c.cpp']),

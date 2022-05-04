@@ -57,6 +57,15 @@ RGBColor AmbientOccluder::L(ShadeRec & sr) {
 		return (ls * color);
 }
 
+float AmbientOccluder::G(ShadeRec const & sr) const {
+	return 1.0f;
+}
+
+float AmbientOccluder::pdf(ShadeRec const & sr) const {
+	return 1.0f;
+}
+
+
 AmbientOccluder * AmbientOccluder::clone() const {
 	return new AmbientOccluder{*this};
 }

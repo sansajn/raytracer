@@ -44,11 +44,11 @@ Light::L(ShadeRec &) {
 }
 
 float Light::G(ShadeRec const &) const {
-//	return 1.0;
+//	return 1.0f;
 	throw default_implementation{__PRETTY_FUNCTION__};
 }
 
 float Light::pdf(ShadeRec const &) const {
-//	return 1.0;
+//	return 1.0f;
 	throw default_implementation{__PRETTY_FUNCTION__};
 }

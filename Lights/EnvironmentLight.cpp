@@ -32,6 +32,10 @@ RGBColor EnvironmentLight::L(ShadeRec& sr) {
 	return _material->get_Le(sr);
 }
 
+float EnvironmentLight::G(ShadeRec const & sr) const {
+	return 1.0f;
+}
+
 bool EnvironmentLight::in_shadow(Ray const & ray, ShadeRec const & sr) const {
 	return any_of(begin(sr.w.objects), end(sr.w.objects),
 		[&ray](GeometricObject const * obj){
