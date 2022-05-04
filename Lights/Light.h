@@ -11,10 +11,10 @@ public:
 	bool casts_shadows() const;  // TODO: rename to cast_shadows?
 	void set_shadows(bool shadows);
 	virtual RGBColor L(ShadeRec & sr);
-	virtual float G(ShadeRec const & sr) const;
 	virtual bool in_shadow(Ray const & ray, ShadeRec const & sr) const;
 	virtual Vector3D get_direction(ShadeRec& sr) = 0;
 	virtual float pdf(ShadeRec const & sr) const;  //!< Area shading support. \sa AreaLight
+	virtual float G(ShadeRec const & sr) const;  //!< Area shading support. \sa AreaLight
 
 	// Copy API.
 	virtual Light * clone() const = 0;

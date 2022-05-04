@@ -59,8 +59,11 @@ RGBColor SV_Matte::shade(ShadeRec & sr) const {
 				in_shadow = light->in_shadow(shadow_ray, sr);
 			}
 
+			// listing 29.5 also calls light->G(sr) to produce final light L value, but I think that
+			// G() function should be called only in area_light_shade() to support area lights and
+			// not there.
 			if (!in_shadow)
-				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * light->G(sr) * ndotwi;
+				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * ndotwi;
 		}
 	}
 

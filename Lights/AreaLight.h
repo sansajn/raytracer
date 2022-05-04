@@ -20,10 +20,11 @@ public:
 	float G(const ShadeRec& sr) const override;
 	float pdf(const ShadeRec& sr) const override;
 
+	// Copy API.
 	AreaLight * clone() const override;
-
 	AreaLight(const AreaLight& al);
 	AreaLight &	operator=(const AreaLight& rhs);
+
 	~AreaLight() = default;
 
 private:

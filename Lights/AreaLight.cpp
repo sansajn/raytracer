@@ -102,12 +102,10 @@ AreaLight::in_shadow(const Ray& ray, const ShadeRec& sr) const {
 // ---------------------------------------------------------------- G
 // G is part of the geometric factor
 
-float
-AreaLight::G(const ShadeRec& sr) const {
+float AreaLight::G(const ShadeRec& sr) const {
 	float ndotd = -light_normal * wi;
-	float d2 	= sample_point.d_squared(sr.hit_point);
-		
-	return (ndotd / d2);
+	float d2 = sample_point.d_squared(sr.hit_point);
+	return ndotd / d2;
 }
 
 

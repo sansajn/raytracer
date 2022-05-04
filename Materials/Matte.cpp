@@ -59,7 +59,7 @@ RGBColor Matte::shade(ShadeRec & sr) const {
 			}
 
 			if (!in_shadow)
-				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * ndotwi;  // TODO: SV_Matte pocita aj s G(), preco tu nie?
+				L += diffuse_brdf->f(sr, wo, wi) * light->L(sr) * ndotwi;
 		}
 	}
 	
