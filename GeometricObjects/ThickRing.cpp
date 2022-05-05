@@ -88,29 +88,21 @@ ThickRing::shadow_hit(const Ray& ray, double & tmin) const
 		return (false);
 }
 
-void 
-ThickRing::set_bottom_material(shared_ptr<Material> material_ptr)
-{
+void ThickRing::set_bottom_material(shared_ptr<Material> material_ptr) {
 	objects[0]->set_material(material_ptr);
-}	//19.29
+}
 
-void 
-ThickRing::set_top_material(shared_ptr<Material> material_ptr)
-{
+void ThickRing::set_top_material(shared_ptr<Material> material_ptr) {
 	objects[1]->set_material(material_ptr);
-}	//19.29
+}
 
-void 
-ThickRing::set_inner_wall_material(shared_ptr<Material> material_ptr)
-{
+void ThickRing::set_inner_wall_material(shared_ptr<Material> material_ptr) {
 	objects[2]->set_material(material_ptr);
-}//19.29
+}
 
-void 
-ThickRing::set_outer_wall_material(shared_ptr<Material> material_ptr)
-{
+void ThickRing::set_outer_wall_material(shared_ptr<Material> material_ptr) {
 	objects[3]->set_material(material_ptr);
-}//19.29
+}
 
 BBox ThickRing::get_bounding_box() {
 	return bbox;
