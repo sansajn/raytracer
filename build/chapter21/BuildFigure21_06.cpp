@@ -10,17 +10,21 @@
 #include "Cameras/Pinhole.h"
 #include "Lights/PointLight.h"
 #include "Materials/Phong.h"
+#include "Materials/Matte.h"
 #include "GeometricObjects/Instance.h"
 #include "GeometricObjects/SolidCylinder.h"
+#include "GeometricObjects/ThickRing.h"
+#include "GeometricObjects/Box.h"
+#include "GeometricObjects/Plane.h"
 
 using std::make_unique, std::make_shared, std::move;
 
 void World::build() {
-	constexpr int num_samples = 1;
+	constexpr int num_samples = 16;
 	
 	vp.set_hres(600);	  		
 	vp.set_vres(280);
-	vp.set_samples(1);
+	vp.set_samples(num_samples);
 	
 	tracer_ptr = new RayCast(this);
 		
@@ -32,7 +36,7 @@ void World::build() {
 	set_camera(move(pinhole_ptr));
 		
 	PointLight* light_ptr1 = new PointLight;
-	light_ptr1->set_location(10, 15, 20);
+	light_ptr1->set_location({10, 15, 20});
 	light_ptr1->scale_radiance(3.0);
 	light_ptr1->set_shadows(true);
 	add_light(light_ptr1);
@@ -63,10 +67,10 @@ void World::build() {
 	float inner_radius = 0.75;
 	float outer_radius = 1.6;
 	
-	Instance* ring_ptr = new Instance(new ThickRing(y0, y1, inner_radius, outer_radius));
+	Instance* ring_ptr = new Instance(make_shared<ThickRing>(y0, y1, inner_radius, outer_radius));
 	ring_ptr->rotate_x(90);
 	ring_ptr->rotate_y(-30);
-	ring_ptr->translate(0.0, 0.85, 0.5);
+	ring_ptr->translate({0.0, 0.85, 0.5});
 	ring_ptr->set_material(phong_ptr);
 	add_object(ring_ptr);
 	
@@ -77,19 +81,19 @@ void World::build() {
 	Point3D p0(-0.75, -1.125, -0.75); 
 	Point3D p1(0.75, 1.125, 0.75);
 	
-	Instance* box_ptr = new Instance(new Box(p0, p1));
+	Instance* box_ptr = new Instance(make_shared<Box>(p0, p1));
 	box_ptr->rotate_y(-10);
-	box_ptr->translate(2.5, 0.38, -1);
+	box_ptr->translate({2.5, 0.38, -1});
 	box_ptr->set_material(phong_ptr);
 	add_object(box_ptr);
 	
 	
 	// ground plane
 	
-	Matte* matte_ptr = new Matte;
+	auto matte_ptr = make_shared<Matte>();
 	matte_ptr->set_ka(0.5);
 	matte_ptr->set_kd(0.85);
-	matte_ptr->set_cd(0.25);
+	matte_ptr->set_cd(RGBColor{0.25});
 	
 	Plane* plane_ptr = new Plane(Point3D(0, -0.75, 0), Normal(0, 1, 0));
 	plane_ptr->set_material(matte_ptr);
