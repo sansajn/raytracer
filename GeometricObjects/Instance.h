@@ -16,44 +16,44 @@
 #include "Matrix.h"
 
 class Instance: public GeometricObject {	
-	public:
-		
-		Instance();
-		Instance(std::shared_ptr<GeometricObject> obj_ptr);
-		
-		Instance * clone() const override;
-		Instance(const Instance& instance);
-		Instance & operator=(const Instance& rhs);
-				
-		void set_object(std::shared_ptr<GeometricObject> obj_ptr);
+public:
+	Instance();
+	Instance(std::shared_ptr<GeometricObject> obj_ptr);
 
-		Material const * get_material() const override;
-		void get_material(std::shared_ptr<Material> & m) const override;
-		void set_material(std::shared_ptr<Material> m) override;
-		
-		void transform_texture(const bool transform);
-			
-		virtual void compute_bounding_box();
-		virtual BBox get_bounding_box();
-											
-		bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
-		bool shadow_hit(const Ray& ray, double& tmin) const override;
-		
-		// affine tranformation functions
+	void set_object(std::shared_ptr<GeometricObject> obj_ptr);
 
-		void translate(const Vector3D& trans);
-		void scale(const Vector3D& s);
-		virtual void rotate_x(const double r);
-		virtual void rotate_y(const double r);
-		virtual void rotate_z(const double r);
-		void shear(const Matrix& m);
-		
-	private:
-		std::shared_ptr<GeometricObject> object_ptr;				// object to be transformed
-		Matrix				inv_matrix;		    	// inverse transformation matrix
-		static 	Matrix		forward_matrix; 		// transformation matrix
-		BBox				bbox;					// transformed object's bounding box
-		bool				transform_the_texture;	// do we transform the texture?
+	Material const * get_material() const override;
+	void get_material(std::shared_ptr<Material> & m) const override;
+	void set_material(std::shared_ptr<Material> m) override;
+
+	void transform_texture(const bool transform);
+
+	BBox get_bounding_box() override;
+	virtual void compute_bounding_box();
+
+	bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
+	bool shadow_hit(const Ray& ray, double& tmin) const override;
+
+	// affine tranformation functions
+
+	void translate(const Vector3D& trans);
+	void scale(const Vector3D& s);
+	virtual void rotate_x(const double r);
+	virtual void rotate_y(const double r);
+	virtual void rotate_z(const double r);
+	void shear(const Matrix& m);
+
+	// Copy API.
+	Instance * clone() const override;
+	Instance(const Instance& instance);
+	Instance & operator=(const Instance& rhs);
+
+private:
+	std::shared_ptr<GeometricObject> object_ptr;  //!< object to be transformed
+	Matrix				inv_matrix;		    	//!< inverse transformation matrix
+	static 	Matrix		forward_matrix; 		//!< transformation matrix
+	BBox				bbox;					//!< transformed object's bounding box
+	bool				transform_the_texture;	//!< do we transform the texture?
 };
 
 

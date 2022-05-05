@@ -14,7 +14,7 @@
 #include "Textures/ConeChecker.h"
 #include "Textures/Checker3D.h"
 #include "GeometricObjects/Plane.h"
-#include "GeometricObjects/FlatRimmedBowl.h"
+#include "GeometricObjects/RoundRimmedBowl.h"
 
 using std::make_unique, std::make_shared, std::move;
 
@@ -41,16 +41,16 @@ void World::build() {
 	add_light(light_ptr1);
 			
 	auto phong_ptr = make_shared<Phong>();
-	phong_ptr->set_ka(0.3);    
+	phong_ptr->set_ka(0.25);
 	phong_ptr->set_kd(0.5);
-	phong_ptr->set_cd({0.15, 0.75, 0.90});
+	phong_ptr->set_cd({0.53, 0.67, 0.34});
 	phong_ptr->set_ks(0.1);
-	phong_ptr->set_exp(20.0);
+	phong_ptr->set_exp(50.0);
 	
 	double inner_radius = 0.9;
 	double outer_radius = 1.0;
 
-	FlatRimmedBowl* bowl_ptr = new FlatRimmedBowl(inner_radius, outer_radius);
+	RoundRimmedBowl* bowl_ptr = new RoundRimmedBowl(inner_radius, outer_radius);
 	bowl_ptr->set_material(phong_ptr);
 	add_object(bowl_ptr);
 			

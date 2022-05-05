@@ -1,12 +1,10 @@
-# dependencies: libwxgtk3.0-gtk3-dev libmagick++-dev libtbb-dev
-
-# TODO: implement --with-ui to build against wxwidget as interface
+# dependencies: libwxgtk3.0-gtk3-dev libmagick++-dev libtbb-dev libboost-all-dev
 
 ccflags = ['-Wall', '-O0', '-ggdb3']
 
 cpp = Environment(
 	CCFLAGS=ccflags,
-	CXXFLAGS=['--std=c++17'],
+	CXXFLAGS=['--std=c++20'],
 	CPPPATH=['BRDFs', 'BTDFs', 'build', 'Cameras', 'GeometricObjects', 'Lights', 'Mappings', 
 		'Materials', 'Noises', 'Samplers', 'Textures', 'Tracers', 'UserInterface', 
 		'Utilities', 'World', '.'],
@@ -292,8 +290,8 @@ ch19 = [
 	cpp.Program('fig19_16c', ['main.cpp', engine, ch19path + 'BuildFigure19_16c.cpp']),
 	cpp.Program('fig19_23a', ['main.cpp', engine, ch19path + 'BuildFigure19_23a.cpp']),
 	cpp.Program('fig19_25b', ['main.cpp', engine, ch19path + 'BuildFigure19_25b.cpp']),
-	#cpp.Program('fig19_27a', ['main.cpp', engine, ch19path + 'BuildFigure19_27a.cpp']),
-	#cpp.Program('fig19_27b', ['main.cpp', engine, ch19path + 'BuildFigure19_27b.cpp']),
+	cpp.Program('fig19_27a', ['main.cpp', engine, ch19path + 'BuildFigure19_27a.cpp']),
+	cpp.Program('fig19_27b', ['main.cpp', engine, ch19path + 'BuildFigure19_27b.cpp']),
 	cpp.Program('fig19_29a', ['main.cpp', engine, ch19path + 'BuildFigure19_29a.cpp']),
 	#cpp.Program('fig19_29b', ['main.cpp', engine, ch19path + 'BuildFigure19_29b.cpp']),
 ]

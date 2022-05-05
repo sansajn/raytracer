@@ -14,7 +14,6 @@ public:
 
 	virtual bool hit(Ray const & ray, double & tmin, ShadeRec & sr) const = 0;
 	virtual bool shadow_hit(Ray const & ray, double & tmin) const = 0;  // FIX: the book calculates shadows with float (correct it)
-	virtual GeometricObject * clone() const = 0;
 
 	bool casts_shadows() const;
 	void set_shadows(bool shadows);
@@ -40,6 +39,8 @@ public:
 	virtual BBox get_bounding_box();  //!< \note Allows acceleration schema in Grid structure.
 	virtual void add_object(GeometricObject * object);  // allows compound objects
 	virtual Normal get_normal() const;  // smoothing triangles
+
+	virtual GeometricObject * clone() const = 0;
 
 	virtual ~GeometricObject() = default;
 
