@@ -12,8 +12,6 @@
 #include "Materials/Phong.h"
 #include "Materials/Matte.h"
 #include "GeometricObjects/Instance.h"
-//#include "GeometricObjects/SolidCylinder.h"
-//#include "GeometricObjects/ThickRing.h"
 #include "GeometricObjects/Box.h"
 #include "GeometricObjects/Plane.h"
 #include "GeometricObjects/BeveledCylinder.h"
