@@ -320,6 +320,8 @@ ch21 = [
 	cpp.Program('fig21_06', ['main.cpp', engine, ch21path + 'BuildFigure21_06.cpp']),
 	cpp.Program('fig21_07', ['main.cpp', engine, ch21path + 'BuildFigure21_07.cpp']),
 	cpp.Program('fig21_09a', ['main.cpp', engine, ch21path + 'BuildFigure21_09a.cpp']),
+	cpp.Program('fig21_11a', ['main.cpp', engine, ch21path + 'BuildFigure21_11a.cpp']),
+	cpp.Program('fig21_11b', ['main.cpp', engine, ch21path + 'BuildFigure21_11b.cpp']),
 	cpp.Program('fig21_12', ['main.cpp', engine, ch21path + 'BuildFigure21_12.cpp']),
 	cpp.Program('fig21_13', ['main.cpp', engine, ch21path + 'BuildFigure21_13.cpp']),
 	cpp.Program('fig21_15', ['main.cpp', engine, ch21path + 'BuildFigure21_15.cpp']),
