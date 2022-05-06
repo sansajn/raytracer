@@ -13,35 +13,17 @@
 //-------------------------------------------------------------------------------- class Rosette
 
 class Rosette: public Grid {
-	public:
-		
-		Rosette(void);   							
-				
-		Rosette(	int 		_num_rings,
-					const double	_hole_radius,
-					const double 	_ring_width,
-					const double 	_rb,
-					const double 	_y0,
-					const double 	_y1);
-						
-//		Rosette(const Rosette& bb);
-		
-		Rosette * clone() const override;
+public:
+	Rosette(	int 		_num_rings,
+				const double	_hole_radius,
+				const double 	_ring_width,
+				const double 	_rb,
+				const double 	_y0,
+				const double 	_y1);
 
-//		Rosette & operator= (const Rosette& rhs);
-		
-		void construct_rosette(void);
-		
-	private:
-	
-		double		num_rings;		// maximum of 6
-		double		hole_radius;
-		double		ring_width;
-		double		rb;				// bevel radius
-		double		y0, y1;			// y axis extents
-		
-		static const int num_wedges[6];  // number of wedges in each ring
+	Rosette * clone() const override;
 };
+
 /*
 #include "Grid.h"
 
