@@ -21,6 +21,7 @@
 #include "Textures/DiskChecker.h"
 #include "Textures/ConeChecker.h"
 #include "Textures/PlaneChecker.h"
+#include "Materials/Matte.h"
 #include "Materials/SV_Matte.h"
 #include "GeometricObjects/Box.h"
 #include "GeometricObjects/Plane.h"
@@ -55,7 +56,7 @@ void World::build() {
 	light_ptr1->set_direction(0, 0, 1);
 	light_ptr1->scale_radiance(1.5);
 	add_light(light_ptr1);
-	
+
 	// sphere
 	SphereChecker* sphere_checker_ptr = new SphereChecker;
 	sphere_checker_ptr->set_num_horizontal_checkers(16);
@@ -76,7 +77,6 @@ void World::build() {
 	sphere_ptr->scale(Vector3D{2.5});
 	sphere_ptr->translate({-9.5, -1, 0});
 	add_object(sphere_ptr);
-
 	
 	// cylinder
 	
@@ -134,7 +134,6 @@ void World::build() {
 	cylinder_ptr->translate({-3.5, 0.5, 0});
 	add_object(cylinder_ptr);
 	
-
 	// cone
 	ConeChecker* cone_checker_ptr = new ConeChecker;
 	cone_checker_ptr->set_num_horizontal_checkers(12);
@@ -244,7 +243,6 @@ void World::build() {
 	box_ptr->scale(Vector3D{2.0});
 	box_ptr->translate({9, 1, 0});
 	add_object(box_ptr);
-	
 	
 	// ground plane
 	PlaneChecker* plane_checker_ptr = new PlaneChecker;

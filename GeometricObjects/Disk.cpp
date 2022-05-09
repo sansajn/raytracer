@@ -2,9 +2,7 @@
 #include "Disk.h"
 
 Disk::Disk()
-	: _r{0}
-	, _r_squared{0}
-	, _inv_area{0}
+	: Disk{{0,0,0}, {0,1,0}, 1.0}
 {}
 
 Disk::Disk(Point3D const & center, Normal const & normal, double radius)
