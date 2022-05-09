@@ -365,6 +365,8 @@ ch23 = [
 	cpp.Program('fig23_07a', ['main.cpp', engine, ch23path + 'BuildFigure23_07a.cpp']),
 	cpp.Program('fig23_07b', ['main.cpp', engine, ch23path + 'BuildFigure23_07b.cpp']),
 	cpp.Program('fig23_09b', ['main.cpp', engine, ch23path + 'BuildFigure23_09b.cpp']),
+	cpp.Program('fig23_10a', ['main.cpp', engine, ch23path + 'BuildFigure23_10a.cpp']),
+	cpp.Program('fig23_10b', ['main.cpp', engine, ch23path + 'BuildFigure23_10b.cpp']),
 	cpp.Program('fig23_12a', ['main.cpp', engine, ch23path + 'BuildFigure23_12a.cpp']),
 	cpp.Program('fig23_13', ['main.cpp', engine, ch23path + 'BuildFigure23_13.cpp']),
 ]

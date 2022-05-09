@@ -34,7 +34,7 @@
 using std::make_unique, std::make_shared, std::move;
 
 void World::build() {
-	constexpr int num_samples = 16;
+	constexpr int num_samples = 1;
 
 	vp.set_hres(400);	  		
 	vp.set_vres(400);

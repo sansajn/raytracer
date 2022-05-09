@@ -30,7 +30,7 @@ void World::build() {
 	auto pinhole_ptr = make_unique<Pinhole>();
 	pinhole_ptr->set_eye({0.0, 0.0, 0.9});
 	pinhole_ptr->set_lookat({0, 0, -100});
-	pinhole_ptr->set_view_distance(150); 
+	pinhole_ptr->set_view_distance(150);
 	pinhole_ptr->compute_uvw();
 	set_camera(move(pinhole_ptr));
 	
@@ -41,7 +41,7 @@ void World::build() {
 	add_light(light_ptr);
 	
 	int num_spheres = 1000;
-	float volume = 0.1 / num_spheres;
+	float volume = 0.1f / num_spheres;
 	float radius = pow(0.75 * volume / 3.14159, 0.333333);
 	
 	set_rand_seed(15);
