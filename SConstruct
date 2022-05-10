@@ -394,6 +394,12 @@ ch25path = 'build/chapter25/'
 
 ch25 = [
 	cpp.Program('fig25_07', ['main.cpp', engine, ch25path + 'BuildFigure25_07.cpp']),
+	cpp.Program('fig25_08a', ['main.cpp', engine, ch25path + 'BuildFigure25_08a.cpp']),
+	cpp.Program('fig25_08b', ['main.cpp', engine, ch25path + 'BuildFigure25_08b.cpp']),
+	cpp.Program('fig25_08c', ['main.cpp', engine, ch25path + 'BuildFigure25_08c.cpp']),
+	cpp.Program('fig25_08d', ['main.cpp', engine, ch25path + 'BuildFigure25_08d.cpp']),
+	cpp.Program('fig25_08e', ['main.cpp', engine, ch25path + 'BuildFigure25_08e.cpp']),
+	cpp.Program('fig25_08f', ['main.cpp', engine, ch25path + 'BuildFigure25_08f.cpp']),
 	cpp.Program('fig25_09', ['main.cpp', engine, ch25path + 'BuildFigure25_09.cpp']),
 ]
 
