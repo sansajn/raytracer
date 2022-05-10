@@ -421,6 +421,11 @@ ch26 = [
 	cpp.Program('fig26_06a', ['main.cpp', engine, ch26path + 'BuildFigure26_06a.cpp']),
 	cpp.Program('fig26_06b', ['main.cpp', engine, ch26path + 'BuildFigure26_06b.cpp']),
 	cpp.Program('fig26_06c', ['main.cpp', engine, ch26path + 'BuildFigure26_06c.cpp']),
+	cpp.Program('fig26_07a', ['main.cpp', engine, ch26path + 'BuildFigure26_07a.cpp']),
+	cpp.Program('fig26_07b', ['main.cpp', engine, ch26path + 'BuildFigure26_07b.cpp']),
+	cpp.Program('fig26_07c', ['main.cpp', engine, ch26path + 'BuildFigure26_07c.cpp']),
+	cpp.Program('fig26_07d', ['main.cpp', engine, ch26path + 'BuildFigure26_07d.cpp']),
+	cpp.Program('fig26_08', ['main.cpp', engine, ch26path + 'BuildFigure26_08.cpp']),
 ]
 
 cpp.Alias('ch26', ch26)
