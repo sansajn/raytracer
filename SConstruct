@@ -404,6 +404,9 @@ ch25 = [
 	cpp.Program('fig25_10a', ['main.cpp', engine, ch25path + 'BuildFigure25_10a.cpp']),
 	cpp.Program('fig25_10b', ['main.cpp', engine, ch25path + 'BuildFigure25_10b.cpp']),
 	cpp.Program('fig25_12', ['main.cpp', engine, ch25path + 'BuildFigure25_12.cpp']),
+	cpp.Program('fig25_13a', ['main.cpp', engine, ch25path + 'BuildFigure25_13a.cpp']),
+	cpp.Program('fig25_13b', ['main.cpp', engine, ch25path + 'BuildFigure25_13b.cpp']),
+	cpp.Program('fig25_13c', ['main.cpp', engine, ch25path + 'BuildFigure25_13c.cpp']),
 ]
 
 cpp.Alias('ch25', ch25)
