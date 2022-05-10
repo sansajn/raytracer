@@ -37,7 +37,7 @@ class SV_Phong: public Material {
 		RGBColor get_Le(ShadeRec const & sr) const override;
 		RGBColor area_light_shade(ShadeRec& sr) const override;
 
-		~SV_Phong(void);
+		~SV_Phong();
 	
 	protected:
 	
